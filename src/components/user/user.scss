@@ -3,7 +3,90 @@
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: space-between;
+    align-items: center;
     position: relative;
-    width: 290px;
-    height: 52px;
+    box-sizing: border-box;
+    width: 310px;
+    height: 71px;
+    min-height: 71px;
+    padding: 0 10px;
+    border-top: 1px solid #EAEAEA;
+}
+
+.user__content {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    height: 48px;
+    width: 250px
+}
+
+.user__image {
+    width: 47px;
+    height: 47px;
+}
+
+.user__data {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    justify-content: space-between;
+    max-width: 190px;
+    height: 48px;
+}
+
+.user__name {
+    font-family: "Arial";
+    font-size: 13px;
+    font-weight: 700;
+    color: #1E1E1E;
+}
+
+.user__message {
+    height: 30px;;
+    font-family: "Arial";
+    font-size: 12px;
+    line-height: 14px;
+    font-weight: 500;
+    color: #999999;
+    overflow: hidden;
+}
+
+.user__status {
+    position: relative;
+    width: 25px;
+    height: 48px;
+}
+
+.user__message-time {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-family: "Arial";
+    font-size: 9px;
+    line-height: 16px;
+    color: #999999;
+}
+
+.user__unread {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 20px;
+    height: 20px;
+    background-color: #AB4DCC;
+    border-radius: 50%;
+}
+
+.user__unread-number {
+    font-family: "Arial";
+    color: #FFFFFF;
+    font-size: 11px;
 }
