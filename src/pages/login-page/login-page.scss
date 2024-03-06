@@ -1,0 +1,22 @@
+.login-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    box-sizing: border-box;
+    height: 100%;
+    padding-top: 50px;
+    padding-bottom: 30px;
+}
+
+.login-page__content {
+
+}
+
+.login-page__element.input-field {
+    width: 280px;
+}
+
+.login-page__element.button {
+    width: 280px;
+}
