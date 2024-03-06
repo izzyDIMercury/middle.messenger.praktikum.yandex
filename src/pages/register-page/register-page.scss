@@ -1,16 +1,16 @@
-.login-page {
+.register-page {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     position: relative;
     box-sizing: border-box;
     width: 280px;
-    height: 450px;
+    height: 615px;
     padding-top: 50px;
     padding-bottom: 30px;
 }
 
-.login-page__footer {
+.register-page__footer {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -19,10 +19,10 @@
     height: 62px;
 }
 
-.login-page__element.input-field {
+.register-page__element.input-field {
     width: 280px;
 }
 
-.login-page__button.button {
+.register-page__button.button {
     width: 280px;
 }

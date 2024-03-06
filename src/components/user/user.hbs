@@ -1,0 +1,20 @@
+{{!-- <div class="user">
+321
+</div> --}}
+
+<div class="user__content">
+    <img src="{{#if image }} {{ image }} {{else}} /assets/icons/profile-placeholder.png {{/if}}" alt="Фото пользователя" class="user__image">
+    <div class="user__data">
+        <p class="user__name">{{ name }}</p>
+        <p class="user__message">{{ message }} </p>
+    </div>
+</div>
+<div class="user__status">
+    <p class="user__message-time">{{ time }} </p>
+    {{#if unread }}
+    <div class="user__unread">
+        <p class="user__unread-number"></p>
+    </div>
+    {{/if}}
+</div>
+

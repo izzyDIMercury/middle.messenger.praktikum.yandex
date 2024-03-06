@@ -1,0 +1,28 @@
+.search {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    width: 250px;
+    height: 32px;
+    background-color: #EFEFEF;
+    border-radius: 5px;
+}
+
+.search__icon {
+    width: 20px;
+    height: 20px;
+    margin-left: 3px;
+}
+
+.search__input {
+    width: 220px;
+    border: none;
+    background-color: #EFEFEF;
+}
+
+.search__input:focus {
+    outline: none;
+}

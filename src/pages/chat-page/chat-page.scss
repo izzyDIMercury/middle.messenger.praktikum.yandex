@@ -1,0 +1,40 @@
+.chat-page {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.left-column {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    position: relative;
+    box-sizing: content-box;
+    border-right: 2px solid #EAEAEA;
+    width: 310px;
+    height: 100%;
+}
+
+.left-column__header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+    height: 74px;
+    box-sizing: border-box;
+}
+
+.left-column__header-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0 8px 0 14px;
+}
