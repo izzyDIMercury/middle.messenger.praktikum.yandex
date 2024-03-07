@@ -2,13 +2,15 @@
     <form class="register-page">
         <div class="register-page__content">
             {{> PageTitle className="register-page__title" title="Регистрация" }}
-            {{> InputField className="register-page__input" title="Почта" name="email" type="email" }}
-            {{> InputField className="register-page__input" title="Логин" name="login" type="text" }}
-            {{> InputField className="register-page__input" title="Имя" name="first-name" type="text" }}
-            {{> InputField className="register-page__input" title="Фамилия" name="last-name" type="text" }}
-            {{> InputField className="register-page__input" title="Телефон" name="tel" type="tel" }}
-            {{> InputField className="register-page__input" title="Пароль" name="password" type="password" }}
-            {{> InputField className="register-page__input" title="Пароль (еще раз)" name="password" type="password" }}
+            <ul class="register-page__input-elements">
+                {{> InputField className="register-page__input" title="Почта" name="email" type="email" }}
+                {{> InputField className="register-page__input" title="Логин" name="login" type="text" }}
+                {{> InputField className="register-page__input" title="Имя" name="first-name" type="text" }}
+                {{> InputField className="register-page__input" title="Фамилия" name="last-name" type="text" }}
+                {{> InputField className="register-page__input" title="Телефон" name="tel" type="tel" }}
+                {{> InputField className="register-page__input" title="Пароль" name="password" type="password" }}
+                {{> InputField className="register-page__input" title="Пароль (еще раз)" name="password" type="password" }}
+            </ul>
         </div>
         <div class="register-page__footer">
             {{> Button className="register-page__button" text="Зарегистрироваться" page="chat" }}

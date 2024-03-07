@@ -2,8 +2,10 @@
     <form class="login-page">
         <div class="login-page__content">
             {{> PageTitle className="login-page__title" title="Вход" }}
-            {{> InputField className="login-page__input" title="Логин" name="login" type="text" }}
-            {{> InputField className="login-page__input" title="Пароль" name="password" type="password" }}
+            <ul class="login-page__input-elements">
+                {{> InputField className="login-page__input" title="Логин" name="login" type="text" }}
+                {{> InputField className="login-page__input" title="Пароль" name="password" type="password" }}
+            </ul>
         </div>
         <div class="login-page__footer">
             {{> Button className="login-page__button" text="Авторизоваться" page="chat" }}

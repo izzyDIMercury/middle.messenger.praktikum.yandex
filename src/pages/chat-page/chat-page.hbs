@@ -1,16 +1,16 @@
 <div class="chat-page">
     <div class="left-column chat-page__left-column">
-        <div class="left-column__header">
+        <nav class="left-column__header">
             <div class="left-column__header-content">
                 {{> ProfileButton }}
                 {{> Search }}
             </div>
-        </div>
-        <div class="left-column__users">
+        </nav>
+        <ul class="left-column__users">
             {{#each (left-column-users)}}
                 {{> User}}
             {{/each}}
-        </div>
+        </ul>
     </div>
     <div class="middle-column chat-page__middle-column">
         <p class="middle-column__text">Выберите чат чтобы отправить сообщение</p>
