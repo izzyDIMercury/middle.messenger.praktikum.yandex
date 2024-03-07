@@ -6,7 +6,8 @@ const pages = {
     "chat": [ Pages.ChatPage ],
     "login": [ Pages.LoginPage ],
     "register": [ Pages.RegisterPage ],
-    "profile": [ Pages.ProfilePage ]
+    "profile": [ Pages.ProfilePage ],
+    "profile-change-data": [ Pages.ProfileChangeData ],
 };
 
 Object.entries(Components).forEach(([ name, component ]) => {
@@ -20,7 +21,7 @@ function navigate(page) {
     root.innerHTML = handlebarsFunct(args);
 }
 
-document.addEventListener("DOMContentLoaded", navigate("login"));
+document.addEventListener("DOMContentLoaded", navigate("profile"));
 
 document.addEventListener("click", e => {
     const page = e.target.getAttribute("page");

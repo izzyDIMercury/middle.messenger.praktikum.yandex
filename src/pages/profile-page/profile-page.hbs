@@ -1,19 +1,8 @@
-<div class="profile-page">
-    {{> ReturnButton }}
-    <div class="profile-page__content">
-        <form class="profile-page__form">
-            <img class="profile-page__image" src="/assets/profile-placeholder.png" alt="Аватар пользователя">
-            {{> PageTitle className="profile-page__title" title="Имя пользователя" }}
-            <ul class="profile-page__input-elements">
-                {{#each (profile-form-items)}}
-                    {{> InputField }}
-                {{/each}}
-            </ul>
-        </form>
-        <div class="profile-page__footer">
-            {{#each (profile-footer-buttons)}}
-                {{> ProfileFooterButton }}
-            {{/each}}
-        </div>
-    </div>
-</div>
+{{#> ProfilePageWrapper }}
+    <form class="profile-page__form">
+        <img class="profile-page__image" src="/assets/profile-placeholder.png" alt="Аватар пользователя">
+        {{> PageTitle className="profile-page__title" title="Имя пользователя" }}
+        {{> ProfileForm }}
+    </form>
+    {{> ProfileFooter }}
+{{/ ProfilePageWrapper }}

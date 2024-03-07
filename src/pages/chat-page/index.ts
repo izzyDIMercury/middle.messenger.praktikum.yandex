@@ -8,7 +8,7 @@ Handlebars.registerHelper("left-column-users", () => {
             name: "Илья", 
             message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", 
             unread: "2", 
-            image: "", 
+            image: "/assets/cat.jpg", 
             time: "10:49"
         },
         {
