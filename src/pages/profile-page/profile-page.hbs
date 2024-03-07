@@ -5,24 +5,15 @@
             <img class="profile-page__image" src="/assets/profile-placeholder.png" alt="Аватар пользователя">
             {{> PageTitle className="profile-page__title" title="Имя пользователя" }}
             <ul class="profile-page__input-elements">
-                {{> InputField className="profile-page__input" title="Почта" name="email" type="email" }}
-                {{> InputField className="profile-page__input" title="Логин" name="login" type="text" }}
-                {{> InputField className="profile-page__input" title="Имя" name="first-name" type="text" }}
-                {{> InputField className="profile-page__input" title="Фамилия" name="last-name" type="text" }}
-                {{> InputField className="profile-page__input" title="Имя в чате" name="chat-name" type="text" }}
-                {{> InputField className="profile-page__input" title="Телефон" name="tel" type="tel" }}
+                {{#each (profile-form-items)}}
+                    {{> InputField }}
+                {{/each}}
             </ul>
         </form>
         <div class="profile-page__footer">
-            <div class="profile-page__footer-element">
-                {{> Link className="profile-page__footer-button" page="profile" text="Изменить данные" }}
-            </div>
-            <div class="profile-page__footer-element">
-                {{> Link className="profile-page__footer-button" page="profile" text="Изменить пароль" }}
-            </div>
-            <div class="profile-page__footer-element">
-                {{> Link className="profile-page__footer-button_red" page="profile" text="Выйти" }}
-            </div>
+            {{#each (profile-footer-buttons)}}
+                {{> ProfileFooterButton }}
+            {{/each}}
         </div>
     </div>
 </div>

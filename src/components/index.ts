@@ -8,3 +8,4 @@ export { ProfileButton } from "./profile-button";
 export { Search } from "./search";
 export { User } from "./user";
 export { ReturnButton } from "./return-button";
+export { ProfileFooterButton } from "./profile-footer-button";
