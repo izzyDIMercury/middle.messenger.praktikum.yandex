@@ -9,105 +9,120 @@ Handlebars.registerHelper("left-column-users", () => {
             message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", 
             unread: "2", 
             image: "/assets/cat.jpg", 
-            time: "10:49"
+            time: "10:49",
+            selected: ""
         },
         {
             name: "Петр", 
             message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", 
             unread: "", 
             image: "", 
-            time: "Пн"
+            time: "Пн",
+            selected: "selected"
         },
         {
             name: "Пользователь", 
             message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", 
             unread: "", 
             image: "", 
-            time: "Пн"
+            time: "Пн",
+            selected: ""
         },
         {
             name: "Пользователь", 
             message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", 
             unread: "", 
             image: "", 
-            time: "Пн"
+            time: "Пн",
+            selected: ""
         },
         {
             name: "Пользователь", 
             message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", 
             unread: "", 
             image: "", 
-            time: "Пн"
+            time: "Пн",
+            selected: ""
         },
         {
             name: "Пользователь", 
             message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", 
             unread: "", 
             image: "", 
-            time: "Пн"
+            time: "Пн",
+            selected: ""
         },
         {
             name: "Пользователь", 
             message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", 
             unread: "", 
             image: "", 
-            time: "Пн"
+            time: "Пн",
+            selected: ""
         },
         {
             name: "Пользователь", 
             message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", 
             unread: "", 
             image: "", 
-            time: "Пн"
+            time: "Пн",
+            selected: ""
         },
         {
             name: "Пользователь", 
             message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", 
             unread: "", 
             image: "", 
-            time: "Пн"
+            time: "Пн",
+            selected: ""
         },
         {
             name: "Пользователь", 
             message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", 
             unread: "", 
             image: "", 
-            time: "Пн"
+            time: "Пн",
+            selected: ""
         },
         {
             name: "Пользователь", 
             message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", 
             unread: "", 
             image: "", 
-            time: "Пн"
+            time: "Пн",
+            selected: ""
         },
         {
             name: "Пользователь", 
             message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", 
             unread: "", 
             image: "", 
-            time: "Пн"
+            time: "Пн",
+            selected: ""
         },
         {
             name: "Пользователь", 
             message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", 
             unread: "", 
             image: "", 
-            time: "Пн"
+            time: "Пн",
+            selected: ""
         },
         {
             name: "Пользователь", 
             message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", 
             unread: "", 
             image: "", 
-            time: "Пн"
+            time: "Пн",
+            selected: ""
         },
         {
             name: "Пользователь", 
             message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", 
             unread: "", 
             image: "", 
-            time: "Пн"
+            time: "Пн",
+            selected: ""
         }
     ]
 })

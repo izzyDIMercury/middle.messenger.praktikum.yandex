@@ -1,4 +1,4 @@
-<li class="user">
+<li class="user {{#if selected}} {{ selected }} {{/if}}">
     <div class="user__content">
         <img src="{{#if image }} {{ image }} {{else}} /assets/icons/profile-placeholder.png {{/if}}" alt="Фото пользователя" class="user__image">
         <div class="user__data">

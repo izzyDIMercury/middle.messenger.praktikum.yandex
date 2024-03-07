@@ -11,6 +11,10 @@
     min-height: 71px;
     padding: 0 10px;
     border-top: 1px solid #EAEAEA;
+
+    &.selected {
+        background-color: rgba(171, 77, 204, 0.3);
+    }
 }
 
 .user__content {
