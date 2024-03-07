@@ -19,25 +19,25 @@ Handlebars.registerHelper("profile-form-items", () => {
         {
             className: "profile-form__input",
             title: "Имя",
-            name: "first-name",
+            name: "first_name",
             type: "text"
         },
         {
             className: "profile-form__input",
             title: "Фамилия",
-            name: "last-name",
+            name: "last_name",
             type: "text"
         },
         {
             className: "profile-form__input",
             title: "Имя в чате",
-            name: "chat-name",
+            name: "display_name",
             type: "text"
         },
         {
             className: "profile-form__input",
             title: "Телефон",
-            name: "tel",
+            name: "phone",
             type: "tel"
         }
     ]
@@ -48,19 +48,19 @@ Handlebars.registerHelper("profile-password-items", () => {
         {
             className: "profile-form__input",
             title: "Старый пароль",
-            name: "password",
+            name: "oldPassword",
             type: "password"
         },
         {
             className: "profile-form__input",
             title: "Новый пароль",
-            name: "password",
+            name: "newPassword",
             type: "password"
         },
         {
             className: "profile-form__input",
             title: "Повторите новый пароль",
-            name: "password",
+            name: "newPassword",
             type: "password"
         }
     ]

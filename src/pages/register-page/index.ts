@@ -19,19 +19,19 @@ Handlebars.registerHelper("register-fields", () => {
         {
             className: "register-page__input",
             title: "Имя",
-            name: "first-name",
+            name: "first_name",
             type: "text"
         },
         {
             className: "register-page__input",
             title: "Фамилия",
-            name: "last-name",
+            name: "second_name",
             type: "text"
         },
         {
             className: "register-page__input",
             title: "Телефон",
-            name: "tel",
+            name: "phone",
             type: "tel"
         },
         {

@@ -9,13 +9,15 @@ const pages = {
     "profile": [ Pages.ProfilePage ],
     "profile-change-data": [ Pages.ProfileChangeDataPage ],
     "profile-change-password": [ Pages.ProfileChangePasswordPage ],
+    "404": [ Pages.Page404 ],
+    "500": [ Pages.Page500 ],
 };
 
 Object.entries(Components).forEach(([ name, component ]) => {
     Handlebars.registerPartial(name, component);
 })
 
-function navigate(page) {
+function navigate(page: string) {
     const [ source, args ] = pages[page];
     const handlebarsFunct = Handlebars.compile(source);
     const root = document.querySelector("#app");

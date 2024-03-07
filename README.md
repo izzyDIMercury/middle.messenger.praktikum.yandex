@@ -1,3 +1,19 @@
+https://www.figma.com/file/kBmhZZH1mspG6oZnTJpfZQ/project1?type=design&node-id=0%3A1&mode=design&t=kTehVYPA1ofY6TXh-1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### Ветка, в которой делаете задания спринта, должна называться sprint_i, где i - номер спринта. Не переименовывайте её.
 
 ### Откройте pull request в ветку main из ветки, где вы разрабатывали проект, и добавьте ссылку на этот pr в README.md в ветке main. 

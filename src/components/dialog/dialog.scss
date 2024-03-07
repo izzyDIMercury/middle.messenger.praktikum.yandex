@@ -14,11 +14,33 @@
     align-items: center;
     position: relative;
     width: 340px;
-    // height: 450px;
     border: 3px solid #EAEAEA;
     border-radius: 12px;
     box-sizing: border-box;
     margin: auto;
-    // padding: 50px 30px 30px;
     padding: 0 30px;
+}
+
+.error-links {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    max-width: 160px;
+    height: 160px;
+
+    & .link__text {
+        font-size: 16px;
+        font-weight: 700;
+        text-align: center;
+    }
+}
+
+.error-links__text {
+    font-size: 16px;
+    font-family: "Inter", "Arial";
+    font-weight: 700;
 }
