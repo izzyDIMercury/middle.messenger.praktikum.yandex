@@ -12,7 +12,7 @@ Handlebars.registerHelper("profile-footer-buttons", () => {
         },
         {
             classModifier: "",
-            page: "profile",
+            page: "profile-change-password",
             text: "Изменить пароль"
         },
         {

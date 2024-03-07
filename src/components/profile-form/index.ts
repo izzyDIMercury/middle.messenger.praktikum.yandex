@@ -42,3 +42,26 @@ Handlebars.registerHelper("profile-form-items", () => {
         }
     ]
 })
+
+Handlebars.registerHelper("profile-password-items", () => {
+    return [
+        {
+            className: "profile-form__input",
+            title: "Старый пароль",
+            name: "password",
+            type: "password"
+        },
+        {
+            className: "profile-form__input",
+            title: "Новый пароль",
+            name: "password",
+            type: "password"
+        },
+        {
+            className: "profile-form__input",
+            title: "Повторите новый пароль",
+            name: "password",
+            type: "password"
+        }
+    ]
+})
