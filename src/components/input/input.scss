@@ -1,7 +1,14 @@
+.input {
+    position: relative;
+    width: 100%;
+}
+
 .input__element {
+    width: 100%;
     border: none;
     height: 13px;
     font-size: 13px;
+    text-align: left;
 }
 
 .input__element:focus {

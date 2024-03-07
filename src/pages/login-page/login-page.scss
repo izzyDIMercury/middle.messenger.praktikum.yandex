@@ -10,6 +10,10 @@
     padding-bottom: 30px;
 }
 
+.login-page__title {
+    padding-bottom: 24px;
+}
+
 .login-page__footer {
     display: flex;
     flex-direction: column;
@@ -19,7 +23,7 @@
     height: 62px;
 }
 
-.login-page__element.input-field {
+.login-page__input.input-field {
     width: 280px;
 }
 

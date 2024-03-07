@@ -10,6 +10,10 @@
     padding-bottom: 30px;
 }
 
+.register-page__title {
+    padding-bottom: 24px;
+}
+
 .register-page__footer {
     display: flex;
     flex-direction: column;
@@ -19,7 +23,7 @@
     height: 62px;
 }
 
-.register-page__element.input-field {
+.register-page__input.input-field {
     width: 280px;
 }
 
