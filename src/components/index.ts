@@ -12,3 +12,5 @@ export { ProfileFooterButton } from "./profile-footer-button";
 export { ProfilePageWrapper} from "./profile-page-wrapper";
 export { ProfileForm } from "./profile-form";
 export { ProfileFooter } from "./profile-footer";
+export { ChatProfile } from "./chat-profile";
+export { MessagePanel } from "./message-panel";
