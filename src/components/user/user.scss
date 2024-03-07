@@ -39,7 +39,8 @@
 }
 
 .user__name {
-    font-family: "Arial";
+    font-family: "Inter", "Arial";
+    font-weight: 400;
     font-size: 13px;
     font-weight: 700;
     color: #1E1E1E;
@@ -47,10 +48,10 @@
 
 .user__message {
     height: 30px;;
-    font-family: "Arial";
+    font-family: "Inter", "Arial";
     font-size: 12px;
     line-height: 14px;
-    font-weight: 500;
+    font-weight: 400;
     color: #999999;
     overflow: hidden;
 }
@@ -65,7 +66,8 @@
     position: absolute;
     top: 0;
     right: 0;
-    font-family: "Arial";
+    font-family: "Inter", "Arial";
+    font-weight: 400;
     font-size: 9px;
     line-height: 16px;
     color: #999999;
@@ -86,7 +88,8 @@
 }
 
 .user__unread-number {
-    font-family: "Arial";
+    font-family: "Inter", "Arial";
+    font-weight: 400;
     color: #FFFFFF;
     font-size: 11px;
 }
