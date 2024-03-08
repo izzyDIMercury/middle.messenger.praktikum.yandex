@@ -17,7 +17,7 @@ Object.entries(Components).forEach(([ name, component ]) => {
     Handlebars.registerPartial(name, component);
 })
 
-function navigate(page: string) {
+function navigate(page) {
     const [ source, args ] = pages[page];
     const handlebarsFunct = Handlebars.compile(source);
     const root = document.querySelector("#app");
