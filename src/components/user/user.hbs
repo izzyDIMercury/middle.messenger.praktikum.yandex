@@ -1,6 +1,6 @@
 <li class="user {{#if selected}} {{ selected }} {{/if}}">
     <div class="user__content">
-        <img src="{{#if image }} {{ image }} {{else}} /assets/icons/profile-placeholder.png {{/if}}" alt="Фото пользователя" class="user__image">
+        <img src="{{ userImagePlaceholder }}" alt="Фото пользователя" class="user__image">
         <div class="user__data">
             <p class="user__name">{{ name }}</p>
             <p class="user__message">{{ message }} </p>
