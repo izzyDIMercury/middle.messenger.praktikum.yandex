@@ -1,3 +1,5 @@
+@import "/variables.scss";
+
 .return-button {
     position: absolute;
     top: 20px;
@@ -9,7 +11,7 @@
     box-sizing: border-box;
     height: 38px;
     padding: 0 13px 0 15px;
-    background-color: #AB4DCC;
+    background-color: $purple;
     border-radius: 20px;
     border: none;
 }
@@ -27,7 +29,7 @@
 .return-button__text {
     font-family: "Inter", "Arial";
     font-weight: 400;
-    color: #FFFFFF;
+    color: $white;
     font-size: 13px;
     line-height: 13px;
 }

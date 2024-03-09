@@ -1,3 +1,5 @@
+@import "/variables.scss";
+
 .user {
     display: flex;
     flex-direction: row;
@@ -10,7 +12,7 @@
     height: 71px;
     min-height: 71px;
     padding: 0 10px;
-    border-top: 1px solid #EAEAEA;
+    border-top: 1px solid $light-grey;
 
     &.selected {
         background-color: rgba(171, 77, 204, 0.3);
@@ -48,7 +50,7 @@
     font-weight: 400;
     font-size: 13px;
     font-weight: 700;
-    color: #1E1E1E;
+    color: $black;
 }
 
 .user__message {
@@ -57,7 +59,7 @@
     font-size: 12px;
     line-height: 14px;
     font-weight: 400;
-    color: #999999;
+    color: $grey;;
     overflow: hidden;
 }
 
@@ -75,7 +77,7 @@
     font-weight: 400;
     font-size: 9px;
     line-height: 16px;
-    color: #999999;
+    color: $grey;
 }
 
 .user__unread {
@@ -88,13 +90,13 @@
     align-items: center;
     width: 20px;
     height: 20px;
-    background-color: #AB4DCC;
+    background-color: $purple;
     border-radius: 50%;
 }
 
 .user__unread-number {
     font-family: "Inter", "Arial";
     font-weight: 400;
-    color: #FFFFFF;
+    color: $white;
     font-size: 11px;
 }

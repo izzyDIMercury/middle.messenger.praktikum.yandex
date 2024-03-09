@@ -1,3 +1,5 @@
+@import "/variables.scss";
+
 .profile-form {
     position: relative;
     width: 100%;
@@ -12,7 +14,7 @@
     .input-field__title {
         font-weight: 500;
         font-size: 13px;
-        color: #1E1E1E;
+        color: $black;
     }
 
     .input {
@@ -23,7 +25,7 @@
 
         .input__element {
             text-align: right;
-            color: #999999;
+            color: $grey;
         }
     }
 }

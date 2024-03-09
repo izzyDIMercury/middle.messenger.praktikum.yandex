@@ -1,3 +1,5 @@
+@import "/variables.scss";
+
 .chat-profile {
     display: flex;
     flex-direction: row;
@@ -10,7 +12,7 @@
     height: 64px;
     padding: 0 15px;
     box-sizing: border-box;
-    background-color: #FFFFFF;
+    background-color: $white;
 }
 
 .chat-profile__user {

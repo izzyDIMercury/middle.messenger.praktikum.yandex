@@ -1,3 +1,5 @@
+@import "/variables.scss";
+
 .chat-page {
     display: flex;
     flex-direction: row;
@@ -13,7 +15,7 @@
     flex-direction: column;
     position: relative;
     box-sizing: content-box;
-    border-right: 2px solid #EAEAEA;
+    border-right: 2px solid $light-grey;
     width: 310px;
     height: 100%;
 }

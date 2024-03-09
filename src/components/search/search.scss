@@ -1,3 +1,5 @@
+@import "/variables.scss";
+
 .search {
     display: flex;
     flex-wrap: nowrap;
@@ -7,7 +9,7 @@
     position: relative;
     width: 250px;
     height: 32px;
-    background-color: #EFEFEF;
+    background-color: $search-field;
     border-radius: 5px;
 }
 
@@ -20,7 +22,7 @@
 .search__input {
     width: 220px;
     border: none;
-    background-color: #EFEFEF;
+    background-color: $search-field;
 }
 
 .search__input:focus {
