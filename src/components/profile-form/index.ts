@@ -25,7 +25,7 @@ Handlebars.registerHelper("profile-form-items", () => {
         {
             className: "profile-form__input",
             title: "Фамилия",
-            name: "last_name",
+            name: "second_name",
             type: "text"
         },
         {
