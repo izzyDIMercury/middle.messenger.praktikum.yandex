@@ -1,0 +1,35 @@
+@import "/variables.scss";
+
+.return-button {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    align-items: center;
+    box-sizing: border-box;
+    height: 38px;
+    padding: 0 13px 0 15px;
+    background-color: $purple;
+    border-radius: 20px;
+    border: none;
+}
+
+.return-button:hover {
+    cursor: pointer;
+}
+
+.return-button__arrow {
+    width: 16px;
+    height: 14px;
+    margin-right: 10px;
+}
+
+.return-button__text {
+    font-family: "Inter", "Arial";
+    font-weight: 400;
+    color: $white;
+    font-size: 13px;
+    line-height: 13px;
+}

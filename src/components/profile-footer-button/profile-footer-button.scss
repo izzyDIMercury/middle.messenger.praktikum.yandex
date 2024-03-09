@@ -1,0 +1,22 @@
+@import "/variables.scss";
+
+.profile-footer-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-sizing: border-box;
+    position: relative;
+    height: 33px;
+    border-bottom: 2px solid $light-grey;
+
+    .link__text {
+        font-size: 13px;
+    }
+}
+
+.profile-footer-button_red {
+    .link__text {
+        font-size: 13px;
+        color: $red;
+    }
+}

@@ -1,0 +1,21 @@
+@import "/variables.scss";
+
+.input-field {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    box-sizing: border-box;
+    height: 52px;
+    padding: 16px 0 3px;
+    border-bottom: 2px solid $light-grey;
+}
+
+.input-field__title {
+    font-family: "Inter", "Arial";
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 10px;
+    color: $grey;
+    padding: 0;
+}

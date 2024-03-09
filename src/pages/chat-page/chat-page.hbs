@@ -1,0 +1,19 @@
+<main class="chat-page">
+    <div class="left-column chat-page__left-column">
+        <nav class="left-column__header">
+            <div class="left-column__header-content">
+                {{> ProfileButton }}
+                {{> Search }}
+            </div>
+        </nav>
+        <ul class="left-column__users">
+            {{#each (left-column-users)}}
+                {{> User}}
+            {{/each}}
+        </ul>
+    </div>
+    <div class="middle-column chat-page__middle-column">
+        {{> ChatProfile }}
+        {{> MessagePanel }}
+    </div>  
+</main>

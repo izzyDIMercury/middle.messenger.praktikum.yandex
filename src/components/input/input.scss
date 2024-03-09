@@ -1,0 +1,19 @@
+@import "/variables.scss";
+
+.input {
+    position: relative;
+    width: 100%;
+}
+
+.input__element {
+    width: 100%;
+    border: none;
+    height: 13px;
+    font-size: 13px;
+    color: $black;
+    text-align: left;
+}
+
+.input__element:focus {
+    outline: none;
+}
