@@ -50,7 +50,7 @@ class Block {
     // Preparations:
 
     private registerEvents(eventBus: InstanceType<typeof EventBus>): void {
-        eventBus.on(Block.EVENTS.INIT, this.init.bind(this));
+        eventBus.on(Block.EVENTS.INIT, this._init.bind(this));
         eventBus.on(Block.EVENTS.FLOW_CDM, this.componentDidMount.bind(this));
         eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
         eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
@@ -94,9 +94,14 @@ class Block {
 
     // Initialization:
 
-    init(): void {
-        this.createResources();
+    _init(): void {
+        this.init();
         this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
+    }
+
+    init(): void {
+        // this.createResources();
+        // this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
     }
 
     private createResources(): void {

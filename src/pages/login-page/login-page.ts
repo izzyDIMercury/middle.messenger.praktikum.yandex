@@ -6,41 +6,48 @@ import Link from "../../components/link/link.ts";
 
 
 export default class LoginPage extends Block {
+
     constructor(props) {
         super("form", {
-            ...props,
-            className: "login-page",
-            PageTitle: new PageTitle({
-                className: "login-page__title",
-                title: "Вход"
-            }),
-            inputField1: new InputField({
-                className: "login-page__input",
-                title: "Логин",
-                name: "login",
-                type: "text"
-            }),
-            inputField2: new InputField({
-                className: "login-page__input",
-                title: "Пароль",
-                name: "password",
-                type: "password"
-            }),
-            button: new Button({
-                className: "login-page__button",
-                text: "Вход",
-                page: "chat"
-            }),
-            link: new Link({
-                className: "login-page__link",
-                text: "Нет аккаунта?",
-                page: "register"
-            })
+            ...props
         })
+    }
 
-        setTimeout(() => {
-            this.children.PageTitle.setProps({ title: "Поход" })
-        }, 1000);
+    init() {
+        const Title = new PageTitle({
+            className: "login-page__title",
+            title: "Вход"
+        });
+        const InputLogin = new InputField({
+            className: "login-page__input",
+            title: "Логин",
+            name: "login",
+            type: "text"
+        });
+        const InputPassword = new InputField({
+            className: "login-page__input",
+            title: "Пароль",
+            name: "password",
+            type: "password"
+        });
+        const LoginButton = new Button({
+            className: "login-page__button",
+            text: "Вход",
+            page: "chat"
+        });
+        const LoginLink = new Link({
+            className: "login-page__link",
+            text: "Нет аккаунта?",
+            page: "register"
+        });
+
+        this.children = {
+            Title,
+            InputLogin,
+            InputPassword,
+            LoginButton,
+            LoginLink
+        }
     }
 
 
@@ -48,17 +55,17 @@ export default class LoginPage extends Block {
         return (`
             <div class="dialog-wrapper">
                 <main class="dialog">
-                    <form class={{ className }}>
+                    <form class="login-page">
                         <div class="login-page__content">
-                            {{{ PageTitle }}}
+                            {{{ Title }}}
                             <ul class="login-page__input-elements">
-                                {{{ inputField1 }}}
-                                {{{ inputField2 }}}
+                                {{{ InputLogin }}}
+                                {{{ InputPassword }}}
                             </ul>
                         </div>
                         <div class="login-page__footer">
-                            {{{ button }}}
-                            {{{ link }}}
+                            {{{ LoginButton }}}
+                            {{{ LoginLink }}}
                         </div>
                     </form>
                 </main>
@@ -67,3 +74,71 @@ export default class LoginPage extends Block {
         )
     }
 }
+
+
+
+// super("form", {
+//     ...props,
+//     className: "login-page",
+//     PageTitle: new PageTitle({
+//         className: "login-page__title",
+//         title: "Вход"
+//     }),
+//     InputLogin: new InputField({
+//         className: "login-page__input",
+//         title: "Логин",
+//         name: "login",
+//         type: "text"
+//     }),
+//     InputPassword: new InputField({
+//         className: "login-page__input",
+//         title: "Пароль",
+//         name: "password",
+//         type: "password"
+//     }),
+//     Button: new Button({
+//         className: "login-page__button",
+//         text: "Вход",
+//         page: "chat"
+//     }),
+//     Link: new Link({
+//         className: "login-page__link",
+//         text: "Нет аккаунта?",
+//         page: "register"
+//     })
+// })
+
+
+
+// constructor() {
+
+//     super("form", {
+//         className: "login-page",
+//         PageTitle: new PageTitle({
+//             className: "login-page__title",
+//             title: "Вход"
+//         }),
+//         InputLogin: new InputField({
+//             className: "login-page__input",
+//             title: "Логин",
+//             name: "login",
+//             type: "text"
+//         }),
+//         InputPassword: new InputField({
+//             className: "login-page__input",
+//             title: "Пароль",
+//             name: "password",
+//             type: "password"
+//         }),
+//         Button: new Button({
+//             className: "login-page__button",
+//             text: "Вход",
+//             page: "chat"
+//         }),
+//         Link: new Link({
+//             className: "login-page__link",
+//             text: "Нет аккаунта?",
+//             page: "register"
+//         })
+//     })
+// }
