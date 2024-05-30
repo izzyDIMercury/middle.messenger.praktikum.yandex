@@ -14,6 +14,8 @@ export default class LoginPage extends Block {
     }
 
     init() {
+        const handleBlurBind = this.handleBlur.bind(this);
+
         const Title = new PageTitle({
             className: "login-page__title",
             title: "Вход"
@@ -22,7 +24,8 @@ export default class LoginPage extends Block {
             className: "login-page__input",
             title: "Логин",
             name: "login",
-            type: "text"
+            type: "text",
+            onBlur: handleBlurBind
         });
         const InputPassword = new InputField({
             className: "login-page__input",
@@ -50,6 +53,9 @@ export default class LoginPage extends Block {
         }
     }
 
+    handleBlur(event) {
+        console.log("event");
+    }
 
     render() {
         return (`

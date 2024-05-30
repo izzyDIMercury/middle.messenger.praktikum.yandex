@@ -165,6 +165,7 @@ class Block {
     addEvents(): void {
         const { events = {} } = this.props;
         Object.keys(events).forEach(eventName => {
+            console.log(this.element, eventName);
             this.element?.addEventListener(eventName, events[eventName as keyof typeof events]);
         })
     }

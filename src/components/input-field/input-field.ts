@@ -10,9 +10,7 @@ export default class InputField extends Block {
                 title: props.title,
                 type: props.type,
                 name: props.name,
-                events: {
-                    blur: props.onBlur || (() => {})
-                }
+                blur: props.onBlur
             })
         })
     }
