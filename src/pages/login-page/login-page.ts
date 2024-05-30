@@ -7,8 +7,9 @@ import Link from "../../components/link/link.ts";
 
 export default class LoginPage extends Block {
     constructor(props) {
-        super("div", {
+        super("form", {
             ...props,
+            className: "login-page",
             pageTitle: new PageTitle({
                 className: "login-page__title",
                 title: "Вход"
@@ -40,20 +41,19 @@ export default class LoginPage extends Block {
 
     render() {
         return (
-            `
-            <form class="login-page">
-                <div class="login-page__content">
-                    {{{ pageTitle }}}
-                    <ul class="login-page__input-elements">
-                        {{{ inputField1 }}}
-                        {{{ inputField2 }}}
-                    </ul>
-                </div>
-                <div class="login-page__footer">
-                    {{{ button }}}
-                    {{{ link }}}
-                </div>
-            </form>
+            `   <form class={{ className }}>
+                    <div class="login-page__content">
+                        {{{ pageTitle }}}
+                        <ul class="login-page__input-elements">
+                            {{{ inputField1 }}}
+                            {{{ inputField2 }}}
+                        </ul>
+                    </div>
+                    <div class="login-page__footer">
+                        {{{ button }}}
+                        {{{ link }}}
+                    </div>
+                </form>
             `
         )
     }

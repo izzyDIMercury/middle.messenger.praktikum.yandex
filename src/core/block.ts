@@ -143,7 +143,11 @@ class Block {
         const block = this.compile(this.props);
         // this._element.innerHTML = block;
         element.innerHTML = "";
-        element.appendChild(block);
+        // element.appendChild(block);
+        if (this.element) {
+            this.element.replaceWith(block);
+        }
+        this.element = block;
         this.addEvents();
     }
 
@@ -171,6 +175,9 @@ class Block {
 
     getContent(): Element {
         const element = this.element as Element;
+        //
+        // console.log(this.props, element);
+        //
         return element;
     }
 
@@ -185,13 +192,17 @@ class Block {
             propsAndStubs[key] = `<div data-id=${child.id}></div>`
         })
 
+        //
+        // console.log(this, propsAndStubs);
+        //
+
         const fragment = this.createDocumentElement("template");
         fragment.innerHTML = Handlebars.compile(this.render())(propsAndStubs);
 
         Object.values(this.children).forEach(child => {
             const stub = fragment.content.querySelector(`[data-id="${child.id}"]`);
             //
-            console.log(this, fragment.content, child.id);
+            console.log(this, fragment);
             //
             stub.replaceWith(child.getContent());
         })
