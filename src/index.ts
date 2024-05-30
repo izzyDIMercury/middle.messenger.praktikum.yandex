@@ -18,20 +18,34 @@ Object.entries(Components).forEach(([ name, component ]) => {
 })
 
 function navigate(page) {
-    const [ source, args ] = pages[page];
-    const handlebarsFunct = Handlebars.compile(source);
+    // const [ source, args ] = pages[page];
+    // const handlebarsFunct = Handlebars.compile(source);
+    // const root = document.querySelector("#app");
+    // root.innerHTML = handlebarsFunct(args);
+
+    const [ source, context ] = pages[page];
     const root = document.querySelector("#app");
-    root.innerHTML = handlebarsFunct(args);
+  // console.log(context);
+
+    if (source instanceof Object) {
+        const page = new source(context);
+        // console.log("w");
+        root.innerHTML = "";
+        root.append(page.getContent());
+        return;
+    }
+
+    root.innerHTM = Handlebars.compile(source)(context);
 }
 
 document.addEventListener("DOMContentLoaded", navigate("login"));
 
-document.addEventListener("click", e => {
-    const page = e.target.getAttribute("page");
-    if (page) {
-        navigate(page);
+// document.addEventListener("click", e => {
+//     const page = e.target.getAttribute("page");
+//     if (page) {
+//         navigate(page);
 
-        e.preventDefault();
-        e.stopImmediatePropagation();
-    }
-})
+//         e.preventDefault();
+//         e.stopImmediatePropagation();
+//     }
+// })

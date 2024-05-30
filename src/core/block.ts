@@ -43,6 +43,7 @@ class Block {
 
         this.props = this.makePropsProxy({ ...props, id: this.id });
 
+        // console.log(this.props);
         eventBus.emit(Block.EVENTS.INIT);
     }
 
@@ -189,6 +190,9 @@ class Block {
 
         Object.values(this.children).forEach(child => {
             const stub = fragment.content.querySelector(`[data-id="${child.id}"]`);
+            //
+            console.log(this, fragment.content, child.id);
+            //
             stub.replaceWith(child.getContent());
         })
 

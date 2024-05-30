@@ -6,3 +6,5 @@ declare module '*.hbs?raw' {
 declare module '*.jpg';
 
 declare module '*.png';
+
+declare module 'uuid';
