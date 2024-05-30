@@ -52,7 +52,7 @@ class Block {
     private registerEvents(eventBus: InstanceType<typeof EventBus>): void {
         eventBus.on(Block.EVENTS.INIT, this.init.bind(this));
         eventBus.on(Block.EVENTS.FLOW_CDM, this.componentDidMount.bind(this));
-        eventBus.on(Block.EVENTS.FLOW_CDM, this.componentDidUpdate.bind(this));
+        eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
         eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
     }
 
@@ -113,11 +113,13 @@ class Block {
 
     // CDM:
 
-    private componentDidMount(): boolean {
-        return true;
+    componentDidMount(oldProps: Props) {
+        Object.values(this.children).forEach(child => {
+            child.dispatchComponentDidMount();
+        });
     }
 
-    private dispatchComponentDidMount() {
+    private dispatchComponentDidMount(): void {
         this.eventBus().emit(Block.EVENTS.FLOW_CDM);
     }
 
@@ -138,16 +140,14 @@ class Block {
     // Render:
 
     _render(): void {
-        let element = this.element as Element
-        this.removeEvents();
-        const block = this.compile(this.props);
-        // this._element.innerHTML = block;
-        element.innerHTML = "";
-        // element.appendChild(block);
+        const { block, newElement } = this.compile(this.props);
+
         if (this.element) {
-            this.element.replaceWith(block);
+            this.element.replaceWith(newElement);
         }
-        this.element = block;
+    
+        this.element = newElement;
+
         this.addEvents();
     }
 
@@ -182,6 +182,10 @@ class Block {
     }
 
     setProps(newProps: Props): void {
+        if (!newProps) {
+            return;
+        }
+
         Object.assign(this.props, newProps);
     }
 
@@ -192,22 +196,16 @@ class Block {
             propsAndStubs[key] = `<div data-id=${child.id}></div>`
         })
 
-        //
-        // console.log(this, propsAndStubs);
-        //
-
         const fragment = this.createDocumentElement("template");
         fragment.innerHTML = Handlebars.compile(this.render())(propsAndStubs);
+        const newElement = fragment.content.firstElementChild;
 
         Object.values(this.children).forEach(child => {
             const stub = fragment.content.querySelector(`[data-id="${child.id}"]`);
-            //
-            console.log(this, fragment);
-            //
             stub.replaceWith(child.getContent());
         })
-
-        return fragment.content;
+        const block = fragment.content;
+        return { block, newElement };
     }
 
     show(): void {

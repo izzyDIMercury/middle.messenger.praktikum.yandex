@@ -10,7 +10,7 @@ export default class LoginPage extends Block {
         super("form", {
             ...props,
             className: "login-page",
-            pageTitle: new PageTitle({
+            PageTitle: new PageTitle({
                 className: "login-page__title",
                 title: "Вход"
             }),
@@ -37,23 +37,32 @@ export default class LoginPage extends Block {
                 page: "register"
             })
         })
+
+        setTimeout(() => {
+            this.children.PageTitle.setProps({ title: "Поход" })
+        }, 1000);
     }
 
+
     render() {
-        return (
-            `   <form class={{ className }}>
-                    <div class="login-page__content">
-                        {{{ pageTitle }}}
-                        <ul class="login-page__input-elements">
-                            {{{ inputField1 }}}
-                            {{{ inputField2 }}}
-                        </ul>
-                    </div>
-                    <div class="login-page__footer">
-                        {{{ button }}}
-                        {{{ link }}}
-                    </div>
-                </form>
+        return (`
+            <div class="dialog-wrapper">
+                <main class="dialog">
+                    <form class={{ className }}>
+                        <div class="login-page__content">
+                            {{{ PageTitle }}}
+                            <ul class="login-page__input-elements">
+                                {{{ inputField1 }}}
+                                {{{ inputField2 }}}
+                            </ul>
+                        </div>
+                        <div class="login-page__footer">
+                            {{{ button }}}
+                            {{{ link }}}
+                        </div>
+                    </form>
+                </main>
+            </div>  
             `
         )
     }
