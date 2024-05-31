@@ -9,8 +9,7 @@ export default class InputField extends Block {
                 className: "input-field__element",
                 title: props.title,
                 type: props.type,
-                name: props.name,
-                blur: props.onBlur
+                name: props.name
             })
         })
     }
@@ -26,3 +25,16 @@ export default class InputField extends Block {
         )
     }
 }
+
+// super("div", {
+//     ...props,
+//     Input: new Input({
+//         className: "input-field__element",
+//         title: props.title,
+//         type: props.type,
+//         name: props.name,
+//         blur: props.onBlur
+//     })
+// })
+
+// blur: props.onBlur

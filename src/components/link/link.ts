@@ -11,7 +11,7 @@ export default class Link extends Block {
         return (
             `
                 <div class="link{{#if className}} {{ className }} {{/if}}">
-                    <span class="link__text" page="{{ page }}">{{ text }}</span>
+                    <span class="{{ className }}" page="{{ page }}">{{ text }}</span>
                 </div>
             `
         )
