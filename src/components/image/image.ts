@@ -6,7 +6,6 @@ export default class Image extends Block {
         super("", {
             ...props
         })
-        console.log(this.props.page);
     }
 
 

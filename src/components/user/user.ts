@@ -8,12 +8,13 @@ export default class User extends Block {
         super("form", {
             ...props
         })
+        console.log(props);
     }
 
     init() {
         const UserImagePlaceholder = new Image({
             className: "user__image",
-            src: "/assets/icons/profile-placeholder.png",
+            src: this.props.image,
             alt: "Фото пользователя",
         })
 

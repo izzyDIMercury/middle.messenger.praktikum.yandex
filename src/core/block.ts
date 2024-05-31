@@ -43,7 +43,6 @@ class Block {
 
         this.props = this.makePropsProxy({ ...props, id: this.id });
 
-        // console.log(this.props);
         eventBus.emit(Block.EVENTS.INIT);
     }
 
@@ -100,8 +99,7 @@ class Block {
     }
 
     init(): void {
-        // this.createResources();
-        // this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
+
     }
 
     private createResources(): void {
@@ -165,7 +163,6 @@ class Block {
     addEvents(): void {
         const { events = {} } = this.props;
         Object.keys(events).forEach(eventName => {
-            // console.log(this.element, eventName);
             this.element?.addEventListener(eventName, events[eventName as keyof typeof events]);
         })
     }
@@ -181,9 +178,6 @@ class Block {
 
     getContent(): Element {
         const element = this.element as Element;
-        //
-        // console.log(this.props, element);
-        //
         return element;
     }
 
@@ -212,14 +206,6 @@ class Block {
         })
         const block = fragment.content;
         return { block, newElement };
-    }
-
-    show(): void {
-        this.getContent().style.display = "block";
-    }
-      
-    hide(): void {
-        this.getContent().style.display = "none";
     }
 }
 
