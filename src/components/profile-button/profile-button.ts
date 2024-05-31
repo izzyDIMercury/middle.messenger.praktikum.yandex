@@ -11,6 +11,7 @@ export default class ProfileButton extends Block {
 
     init() {
         const ProfileButtonIcon = new Image({
+            className: "profile-button__icon",
             src: "/assets/icons/profile.png",
             alt: "Профиль",
             page: "profile"

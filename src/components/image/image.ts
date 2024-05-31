@@ -12,7 +12,7 @@ export default class Image extends Block {
     render() {
         return (
                 `   
-                    <img src="{{ src }}" alt="{{ alt }}" page="{{ page }}">
+                    <img class={{ className }} src="{{ src }}" alt="{{ alt }}" {{#if props.page}} page="{{ page }} {{/if}}">
                             
                 `
         )

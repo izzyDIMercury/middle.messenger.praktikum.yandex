@@ -1,4 +1,5 @@
 import Block from "../../core/block.ts";
+import Image from "../image/image.ts";
 
 
 export default class User extends Block {
@@ -9,13 +10,25 @@ export default class User extends Block {
         })
     }
 
+    init() {
+        const UserImagePlaceholder = new Image({
+            className: "user__image",
+            src: "/assets/icons/profile-placeholder.png",
+            alt: "Фото пользователя",
+        })
+
+        this.children = {
+            UserImagePlaceholder
+        }
+    }
+
 
     render() {
         return (
                 `
                     <li class="user {{#if selected}} {{ selected }} {{/if}}">
                         <div class="user__content">
-                            <img src="{{ userImagePlaceholder }}" alt="Фото пользователя" class="user__image">
+                            {{{ UserImagePlaceholder }}}
                             <div class="user__data">
                                 <p class="user__name">{{ name }}</p>
                                 <p class="user__message">{{ message }} </p>

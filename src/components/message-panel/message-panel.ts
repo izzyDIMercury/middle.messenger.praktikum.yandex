@@ -1,5 +1,6 @@
 import Block from "../../core/block.ts";
 import Input from "../input/input.ts";
+import Image from "../image/image.ts";
 
 
 export default class MessagePanel extends Block {
@@ -10,7 +11,7 @@ export default class MessagePanel extends Block {
         })
     }
 
-    input() {
+    init() {
         const MessageInput = new Input({
             className: "message-panel__input",
             type: "text",
@@ -18,6 +19,16 @@ export default class MessagePanel extends Block {
             title: "message",
             value: "Сообщение"
         })
+        const ClipIcon = new Image({
+            className: "message-panel__attach-icon",
+            src: "/assets/icons/clip.png",
+            alt: "Прикрепить"
+        })
+
+        this.children = {
+            MessageInput,
+            ClipIcon
+        }
     }
 
 
@@ -26,7 +37,7 @@ export default class MessagePanel extends Block {
                 `
                     <div class="message-panel">
                         <div class="message-panel__attach-button">
-                            <img src="{{ clipIcon }}" alt="Прикрепить" class="message-panel__attach-icon">
+                            {{{ ClipIcon }}}
                         </div>
                         <form class="message-panel__message">
                             {{{ MessageInput }}}

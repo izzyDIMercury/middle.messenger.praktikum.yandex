@@ -1,4 +1,5 @@
 import Block from "../../core/block.ts";
+import Image from "../image/image.ts";
 
 
 export default class Search extends Block {
@@ -9,12 +10,24 @@ export default class Search extends Block {
         })
     }
 
+    init() {
+        const SearchIcon = new Image({
+            className: "search__icon",
+            src: "/assets/icons/search.png",
+            alt: "Иконка поиска"
+        })
+
+        this.children = {
+            SearchIcon
+        }
+    }
+
 
     render() {
         return (
                 `
                     <form class="search">
-                        <img class="search__icon" src="{{ searchIcon }}" alt="Иконка поиска">
+                        {{{ SearchIcon }}}
                         <input class="search__input" type="text">
                     </form>                
                 `
