@@ -1,14 +1,18 @@
 import "./chat-profile.scss";
-export { default as ChatProfile } from "./chat-profile.hbs?raw";
+import ChatProfile from "./chat-profile.ts";
+export { ChatProfile };
 
-import Handlebars from "handlebars";
-import Cat from "/assets/cat.jpg";
-import SettingsIcon from "/assets/icons/settings.png";
 
-Handlebars.registerHelper("cat", () => {
-    return Cat
-})
+// export { default as ChatProfile } from "./chat-profile.hbs?raw";
 
-Handlebars.registerHelper("settingsIcon", () => {
-    return SettingsIcon
-})
+// import Handlebars from "handlebars";
+// import Cat from "/assets/cat.jpg";
+// import SettingsIcon from "/assets/icons/settings.png";
+
+// Handlebars.registerHelper("cat", () => {
+//     return Cat
+// })
+
+// Handlebars.registerHelper("settingsIcon", () => {
+//     return SettingsIcon
+// })

@@ -1,9 +1,12 @@
 import "./message-panel.scss";
-export { default as MessagePanel } from "./message-panel.hbs?raw";
+import MessagePanel from "./message-panel.ts";
+export { MessagePanel };
 
-import Handlebars from "handlebars";
-import ClipIcon from "/assets/icons/clip.png";
+// export { default as MessagePanel } from "./message-panel.hbs?raw";
 
-Handlebars.registerHelper("clipIcon", () => {
-    return ClipIcon
-})
+// import Handlebars from "handlebars";
+// import ClipIcon from "/assets/icons/clip.png";
+
+// Handlebars.registerHelper("clipIcon", () => {
+//     return ClipIcon
+// })

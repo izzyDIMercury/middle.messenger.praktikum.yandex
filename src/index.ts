@@ -38,7 +38,7 @@ function navigate(page) {
     root.innerHTM = Handlebars.compile(source)(context);
 }
 
-document.addEventListener("DOMContentLoaded", navigate("login"));
+document.addEventListener("DOMContentLoaded", navigate("chat"));
 
 // document.addEventListener("click", e => {
 //     const page = e.target.getAttribute("page");

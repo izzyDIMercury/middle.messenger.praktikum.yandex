@@ -14,3 +14,4 @@ export { ProfileForm } from "./profile-form";
 export { ProfileFooter } from "./profile-footer";
 export { ChatProfile } from "./chat-profile";
 export { MessagePanel } from "./message-panel";
+export { Image } from "./image";
