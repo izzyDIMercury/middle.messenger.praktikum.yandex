@@ -5,9 +5,7 @@ import InputField from "../input-field/input-field.ts";
 export default class ProfileForm extends Block {
 
     constructor(props) {
-        const fields = props.data ? props.profileFormItems : props.profilePasswordItems;
-        
-        const formItems = fields.reduce((acc, current) => {
+        const formItems = props.formData.reduce((acc, current) => {
             const element = new InputField({className: current.className, title: current.title, name: current.name, type: current.type});
             acc[element.id] = element;
             return acc;

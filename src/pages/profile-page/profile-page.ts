@@ -1,11 +1,12 @@
 import Block from "../../core/block.ts";
+import PageTitle from "../../components/page-title/page-title.ts";
 import ReturnButton from "../../components/return-button/return-button.ts";
+import ProfileFooter from "../../components/profile-footer/profile-footer.ts";
 import ProfileForm from "../../components/profile-form/profile-form.ts";
-import Button from "../../components/button/button.ts";
 import Image from "../../components/image/image.ts";
 
 
-export default class ProfileChangeDataPage extends Block {
+export default class ProfilePage extends Block {
 
     constructor(props) {
         super("form", {
@@ -14,7 +15,35 @@ export default class ProfileChangeDataPage extends Block {
     }
 
     init() {
+        const Title = new PageTitle({
+            className: "profile-page__title",
+            title: "Имя пользователя"
+        });
         const ButtonBack = new ReturnButton();
+        const ProfileImage = new Image({
+            className: "profile-page__image",
+            src: "/assets/profile-placeholder.png",
+            alt: "Аватар пользователя"
+        });
+        const Footer = new ProfileFooter({
+            buttons: [
+                {
+                    classModifier: "",
+                    page: "profile-change-data",
+                    text: "Изменить данные"
+                },
+                {
+                    classModifier: "",
+                    page: "profile-change-password",
+                    text: "Изменить пароль"
+                },
+                {
+                    classModifier: "profile-footer-button_red",
+                    page: "profile",
+                    text: "Выйти"
+                }
+            ]
+        })
         const Form = new ProfileForm({
             formData: [
                 {
@@ -54,27 +83,16 @@ export default class ProfileChangeDataPage extends Block {
                     type: "tel"
                 }
             ]
-        });
-        const ProfileButton = new Button({
-            className: "profile-change-data-page",
-            page: "profile",
-            text: "Сохранить",
-        });
-        const ProfileImage = new Image({
-            className: "profile-change-data-page__image",
-            src: "/assets/profile-placeholder.png",
-            alt: "Аватар пользователя"
-
         })
 
         this.children = {
+            Title,
             ButtonBack,
-            Form,
-            ProfileButton,
-            ProfileImage
+            ProfileImage,
+            Footer,
+            Form
         }
     }
-
 
     render() {
         return (
@@ -82,14 +100,16 @@ export default class ProfileChangeDataPage extends Block {
                     <main class="profile-page">
                         {{{ ButtonBack }}}
                         <div class="profile-page__content">
-                            <form class="profile-change-data-page__form">
+                            <form class="profile-page__form">
                                 {{{ ProfileImage }}}
+                                {{{ Title }}}
                                 {{{ Form }}}
-                                {{{ ProfileButton }}}
                             </form>
+                            {{{ Footer }}}
                         </div>
                     </main>
                 `
         )
     }
 }
+

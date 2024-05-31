@@ -5,7 +5,7 @@ import Button from "../../components/button/button.ts";
 import Image from "../../components/image/image.ts";
 
 
-export default class ProfileChangeDataPage extends Block {
+export default class ProfileChangePasswordPage extends Block {
 
     constructor(props) {
         super("form", {
@@ -19,49 +19,31 @@ export default class ProfileChangeDataPage extends Block {
             formData: [
                 {
                     className: "profile-form__input",
-                    title: "Почта",
-                    name: "email",
-                    type: "email"
+                    title: "Старый пароль",
+                    name: "oldPassword",
+                    type: "password"
                 },
                 {
                     className: "profile-form__input",
-                    title: "Логин",
-                    name: "login",
-                    type: "text"
+                    title: "Новый пароль",
+                    name: "newPassword",
+                    type: "password"
                 },
                 {
                     className: "profile-form__input",
-                    title: "Имя",
-                    name: "first_name",
-                    type: "text"
-                },
-                {
-                    className: "profile-form__input",
-                    title: "Фамилия",
-                    name: "second_name",
-                    type: "text"
-                },
-                {
-                    className: "profile-form__input",
-                    title: "Имя в чате",
-                    name: "display_name",
-                    type: "text"
-                },
-                {
-                    className: "profile-form__input",
-                    title: "Телефон",
-                    name: "phone",
-                    type: "tel"
+                    title: "Повторите новый пароль",
+                    name: "newPassword",
+                    type: "password"
                 }
             ]
         });
         const ProfileButton = new Button({
-            className: "profile-change-data-page",
+            className: "profile-change-password-page",
             page: "profile",
             text: "Сохранить",
         });
         const ProfileImage = new Image({
-            className: "profile-change-data-page__image",
+            className: "profile-change-password-page__image",
             src: "/assets/profile-placeholder.png",
             alt: "Аватар пользователя"
 
@@ -82,7 +64,7 @@ export default class ProfileChangeDataPage extends Block {
                     <main class="profile-page">
                         {{{ ButtonBack }}}
                         <div class="profile-page__content">
-                            <form class="profile-change-data-page__form">
+                            <form class="profile-change-password-page__form">
                                 {{{ ProfileImage }}}
                                 {{{ Form }}}
                                 {{{ ProfileButton }}}
