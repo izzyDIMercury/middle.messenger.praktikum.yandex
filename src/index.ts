@@ -38,14 +38,14 @@ function navigate(page) {
     root.innerHTM = Handlebars.compile(source)(context);
 }
 
-document.addEventListener("DOMContentLoaded", navigate("500"));
+document.addEventListener("DOMContentLoaded", navigate("login"));
 
-// document.addEventListener("click", e => {
-//     const page = e.target.getAttribute("page");
-//     if (page) {
-//         navigate(page);
+document.addEventListener("click", e => {
+    const page = e.target.getAttribute("page");
+    if (page) {
+        navigate(page);
 
-//         e.preventDefault();
-//         e.stopImmediatePropagation();
-//     }
-// })
+        e.preventDefault();
+        e.stopImmediatePropagation();
+    }
+})

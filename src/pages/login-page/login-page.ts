@@ -43,13 +43,23 @@ export default class LoginPage extends Block {
             text: "Нет аккаунта?",
             page: "register"
         });
+        const Error404Link = new Link({
+            text: "404",
+            page: "404"
+        });
+        const Error500Link = new Link({
+            text: "500",
+            page: "500"
+        });
 
         this.children = {
             Title,
             InputLogin,
             InputPassword,
             LoginButton,
-            LoginLink
+            LoginLink,
+            Error404Link,
+            Error500Link
         }
     }
 
@@ -60,6 +70,11 @@ export default class LoginPage extends Block {
     render() {
         return (`
             <div class="dialog-wrapper">
+                <div class="error-links">
+                <p class="error-links__text">Ссылки на страницы 404 и 500</p>
+                {{{ Error404Link }}}
+                {{{ Error500Link }}}
+            </div>
                 <main class="dialog">
                     <form class="login-page">
                         <div class="login-page__content">
