@@ -30,7 +30,7 @@ export default class Page500 extends Block {
                         <div class="error-page__container">
                             <h1 class="error-page__title">500</h1>
                             <p class="error-page__text">Мы уже фиксим</p>
-                            {{{ Link }}}
+                            {{{ Error500Link }}}
                         </div>
                     </main>
                 `

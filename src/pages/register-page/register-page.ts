@@ -78,7 +78,8 @@ export default class RegisterPage extends Block {
         this.children = {
             Title,
             RegisterButton,
-            RegisterLink
+            RegisterLink,
+            RegisterList
         }
     }
     
@@ -92,9 +93,7 @@ export default class RegisterPage extends Block {
                                 <div class="register-page__content">
                                     {{{ Title }}}
                                     <ul class="register-page__input-elements">
-                                        {{#each (register-fields)}}
-                                            {{> InputField }}
-                                        {{/each}}
+                                        {{{ RegisterList }}}
                                     </ul>
                                 </div>
                                 <div class="register-page__footer">
@@ -113,8 +112,10 @@ class RegisterPageList extends Block {
 
     constructor(props) {
         const items = props.list.reduce((acc, current) => {
-            const item = new ProfileFooterButton({className: current.className, title: current.title, name: current.name, type: current.type});
-            acc[item.id] = items;
+            const item = new InputField({className: current.className, title: current.title, name: current.name, type: current.type});
+            console.log(item);
+            acc[item.id] = item;
+
             return acc;
         }, {});
 

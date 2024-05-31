@@ -30,7 +30,7 @@ export default class Page404 extends Block {
                         <div class="error-page__container">
                             <h1 class="error-page__title">404</h1>
                             <p class="error-page__text">Не туда попали</p>
-                            {{{ Link }}}
+                            {{{ Error404Link }}}
                         </div>
                     </main>
                 `

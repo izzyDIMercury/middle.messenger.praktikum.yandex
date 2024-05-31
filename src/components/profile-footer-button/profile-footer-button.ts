@@ -15,8 +15,8 @@ export default class ProfileFooterButton extends Block {
     init() {
         const FooterLink = new Link({
             className: "profile-footer-button__button",
-            title: "chat",
-            text: "Назад"
+            page: this.props.page,
+            text: this.props.text
         });
 
         this.children = {
