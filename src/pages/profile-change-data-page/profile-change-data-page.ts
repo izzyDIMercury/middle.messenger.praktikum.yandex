@@ -16,7 +16,65 @@ export default class ProfileChangeDataPage extends Block {
     init() {
         const ButtonBack = new ReturnButton();
         const Form = new ProfileForm({
-            data: true
+            data: true,
+            profileFormItems: [
+                {
+                    className: "profile-form__input",
+                    title: "Почта",
+                    name: "email",
+                    type: "email"
+                },
+                {
+                    className: "profile-form__input",
+                    title: "Логин",
+                    name: "login",
+                    type: "text"
+                },
+                {
+                    className: "profile-form__input",
+                    title: "Имя",
+                    name: "first_name",
+                    type: "text"
+                },
+                {
+                    className: "profile-form__input",
+                    title: "Фамилия",
+                    name: "second_name",
+                    type: "text"
+                },
+                {
+                    className: "profile-form__input",
+                    title: "Имя в чате",
+                    name: "display_name",
+                    type: "text"
+                },
+                {
+                    className: "profile-form__input",
+                    title: "Телефон",
+                    name: "phone",
+                    type: "tel"
+                }
+            ],
+            profilePasswordItems: [
+                {
+                    className: "profile-form__input",
+                    title: "Старый пароль",
+                    name: "oldPassword",
+                    type: "password"
+                },
+                {
+                    className: "profile-form__input",
+                    title: "Новый пароль",
+                    name: "newPassword",
+                    type: "password"
+                },
+                {
+                    className: "profile-form__input",
+                    title: "Повторите новый пароль",
+                    name: "newPassword",
+                    type: "password"
+                }
+            ]
         });
         const ProfileButton = new Button({
             className: "profile-change-data-page",

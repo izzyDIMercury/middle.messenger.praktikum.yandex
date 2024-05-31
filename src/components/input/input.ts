@@ -45,19 +45,3 @@ class InputString extends Block {
         )
     }
 }
-
-// render() {
-//     return (
-//         `
-//         <div class="input{{#if className}} {{className}} {{/if}}">
-//             <input 
-//                 class="input__element" 
-//                 type="{{type}}" 
-//                 name="{{name}}" 
-//                 title="{{title}}" 
-//                 value="{{value}}"
-//             >
-//         </div>
-//         `
-//     )
-// }
