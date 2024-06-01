@@ -57,11 +57,17 @@ export default class LoginPage extends Block {
         });
         const Error404Link = new Link({
             text: "404",
-            page: "404"
+            page: "404",
+            events: {
+                click: switchPage
+            }
         });
         const Error500Link = new Link({
             text: "500",
-            page: "500"
+            page: "500",
+            events: {
+                click: switchPage
+            }
         });
 
         this.children = {
@@ -87,7 +93,7 @@ export default class LoginPage extends Block {
             showErrorMessage(result, ".login-page__content", "login-page__error-text");
         } else {
             alert("Login successful!");
-            switchPage("chat");
+            switchPage(null, "chat");
         }
     }
 

@@ -1,5 +1,6 @@
 import Block from "../../core/block.ts";
 import Link from "../../components/link/link.ts";
+import { switchPage } from "../../core/utils.ts";
 
 
 export default class Page500 extends Block {
@@ -14,7 +15,10 @@ export default class Page500 extends Block {
         const Error500Link = new Link({
             className: "error-page__link",
             page: "login",
-            text: "Назад"
+            text: "Назад",
+            events: {
+                click: switchPage
+            }
         });
 
         this.children = {

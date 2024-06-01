@@ -3,6 +3,7 @@ import PageTitle from "../../components/page-title/page-title.ts";
 import Button from "../../components/button/button.ts";
 import Link from "../../components/link/link.ts";
 import InputField from "../../components/input-field/input-field.ts";
+import { switchPage, checkForErrors, showErrorMessage } from "../../core/utils.ts";
 
 
 export default class RegisterPage extends Block {
@@ -14,9 +15,12 @@ export default class RegisterPage extends Block {
     }
 
     init() {
+        const handleBlurBind = this.handleBlur.bind(this);
+        const handleSubmitBind = this.handleSubmit.bind(this);
+
         const Title = new PageTitle({
             className: "register-page__title",
-            title: "Имя Регистрация"
+            title: "Регистрация"
         });
         const RegisterButton = new Button({
             className: "register-page__button",
@@ -26,7 +30,10 @@ export default class RegisterPage extends Block {
         const RegisterLink = new Link({
             className: "register-page__link",
             text: "Войти",
-            page: "login"
+            page: "login",
+            events: {
+                click: switchPage
+            }
         })
         const RegisterList = new RegisterPageList({
             list: [
@@ -34,43 +41,57 @@ export default class RegisterPage extends Block {
                     className: "register-page__input",
                     title: "Почта",
                     name: "email",
-                    type: "email"
+                    type: "email",
+                    label: "email",
+                    onBlur: handleBlurBind
                 },
                 {
                     className: "register-page__input",
                     title: "Логин",
                     name: "login",
-                    type: "text"
+                    type: "text",
+                    label: "login",
+                    onBlur: handleBlurBind
                 },
                 {
                     className: "register-page__input",
                     title: "Имя",
                     name: "first_name",
-                    type: "text"
+                    type: "text",
+                    label: "first_name",
+                    onBlur: handleBlurBind
                 },
                 {
                     className: "register-page__input",
                     title: "Фамилия",
                     name: "second_name",
-                    type: "text"
+                    type: "text",
+                    label: "second_name",
+                    onBlur: handleBlurBind
                 },
                 {
                     className: "register-page__input",
                     title: "Телефон",
                     name: "phone",
-                    type: "tel"
+                    type: "tel",
+                    label: "tel",
+                    onBlur: handleBlurBind
                 },
                 {
                     className: "register-page__input",
                     title: "Пароль",
                     name: "password",
-                    type: "password"
+                    type: "password",
+                    label: "password",
+                    onBlur: handleBlurBind
                 },
                 {
                     className: "register-page__input",
                     title: "Пароль (еще раз)",
                     name: "password",
-                    type: "password"
+                    type: "password",
+                    label: "password",
+                    onBlur: handleBlurBind
                 }
             ]
         })
@@ -80,6 +101,22 @@ export default class RegisterPage extends Block {
             RegisterButton,
             RegisterLink,
             RegisterList
+        }
+    }
+
+    handleBlur(e) {
+        this.handleSubmit(e);
+    }
+
+    handleSubmit(e) {
+        e.preventDefault();
+        const result = checkForErrors(".register-page", "input");
+        if (result.hasErrors) {
+            console.log(this);
+            showErrorMessage(result, ".register-page__content", "login-page__error-text");
+        } else {
+            alert("Login successful!");
+            switchPage(null, "chat");
         }
     }
     
@@ -112,8 +149,8 @@ class RegisterPageList extends Block {
 
     constructor(props) {
         const items = props.list.reduce((acc, current) => {
-            const item = new InputField({className: current.className, title: current.title, name: current.name, type: current.type});
-            console.log(item);
+            const item = new InputField({className: current.className, title: current.title, name: current.name, type: current.type, onBlur: current.onBlur});
+            // console.log(item);
             acc[item.id] = item;
 
             return acc;

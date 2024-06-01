@@ -9,8 +9,8 @@ export default class FormSubmit {
                 return {type: "name", error: this.checkName(element.name)};
             } else if (element.name === "email") {
                 return {type: "email", error: this.checkEmail(element.value)};
-            } else if (element.name === "phone") {
-                return {type: "phone", error: this.checkPhone(element.value)};
+            } else if (element.name === "tel") {
+                return {type: "tel", error: this.checkTel(element.value)};
             } else if (element.name === "message") {
                 return {type: "message", error: this.checkMessage(element.value)};
             }
@@ -69,7 +69,7 @@ export default class FormSubmit {
 
     private checkName(name) {
 
-        if (!name.match(/[-a-zA-Zа-яА-ЯёЁ]/)) {
+        if (!name.match(/^[-a-zA-Zа-яА-ЯёЁ]+$/)) {
             return new Error("Допускаются только кирилица м латиница");
         }
 
@@ -77,7 +77,7 @@ export default class FormSubmit {
             return new Error("Первая буква должжна быть заглавной");
         }
 
-        return true;
+        return false;
     }
 
     private checkEmail(email) {
@@ -93,17 +93,17 @@ export default class FormSubmit {
         return true;
     }
 
-    private checkPhone(phone) {
+    private checkTel(tel) {
 
-        if (phone.length < 10 || phone.length > 15) {
+        if (tel.length < 10 || phone.length > 15) {
             return new Error("Неверная длина телефонного номера");
         }
 
-        if (!name.match(/[0-9]/)) {
+        if (!tel.match(/[0-9]/)) {
             return new Error("Телефонный номер должен состоять из цифр");
         }
 
-        if(phone[0] !== "+" && typeof Number(phone[0]) !== "number") {
+        if(tel[0] !== "+" && typeof Number(tel[0]) !== "number") {
             return new Error("Номер должен начинаться с цифры или символа +");
         } 
 

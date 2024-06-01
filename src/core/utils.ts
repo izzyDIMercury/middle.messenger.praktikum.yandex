@@ -1,9 +1,10 @@
 import FormSubmit from "./formSubmit.ts";
 
-export function switchPage(page) {
-    console.log("page");
+export function switchPage(event, page) {
+    const nextPage = page ? page : event?.target?.getAttribute("page");
+
     document.dispatchEvent(new CustomEvent("switchPage", { detail: {
-        page: page
+        page: nextPage
     }}));
 }
 
