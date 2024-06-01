@@ -94,7 +94,6 @@ class Users extends Block {
             usersKeys: Object.keys(users),
             ...users
         })
-        console.log(users)
     }
 
     render() {

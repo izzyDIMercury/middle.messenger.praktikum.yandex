@@ -17,7 +17,7 @@ Object.entries(Components).forEach(([ name, component ]) => {
     Handlebars.registerPartial(name, component);
 })
 
-function navigate(page) {
+export function navigate(page) {
     const [ source, context ] = pages[page];
     const root = document.querySelector("#app");
 
@@ -33,12 +33,19 @@ function navigate(page) {
 
 document.addEventListener("DOMContentLoaded", navigate("login"));
 
-document.addEventListener("click", e => {
-    const page = e.target.getAttribute("page");
-    if (page) {
-        navigate(page);
 
-        e.preventDefault();
-        e.stopImmediatePropagation();
-    }
-})
+// document.addEventListener("click", e => {
+//     const page = e.target.getAttribute("page");
+//     if (page) {
+//         navigate(page);
+
+//         e.preventDefault();
+//         e.stopImmediatePropagation();
+//     }
+// })
+
+// document.addEventListener("switchPage", event => {
+//     navigate(event.detail.page);
+// });
+
+// document.dispatchEvent(new CustomEvent("switchPage", { detail: "mydetail" }));

@@ -19,7 +19,8 @@ export default class ChatProfile extends Block {
         const SettingsIcon = new Image({
             className: "chat-profile__settings-icon",
             src: "/assets/icons/settings.png",
-            alt: "Аватар пользователся"
+            alt: "Аватар пользователся",
+            page: "login"
         })
 
         this.children = {
@@ -37,7 +38,7 @@ export default class ChatProfile extends Block {
                             {{{ Cat }}}
                             <p class="chat-profile__user-name">Илья</p>
                         </div>
-                        <div class="chat-profile__settings-button">
+                        <div class="chat-profile__settings-button" page="{{ login }}">
                             {{{ SettingsIcon }}}
                         </div>
                     </nav>

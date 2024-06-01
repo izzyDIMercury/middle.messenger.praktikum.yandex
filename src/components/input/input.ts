@@ -8,6 +8,7 @@ export default class Input extends Block {
                 title: props.title,
                 type: props.type,
                 name: props.name,
+                label: props.label,
                 events: {
                     blur: props.blur
                 }
@@ -35,7 +36,8 @@ class InputString extends Block {
         return (
             `
                 <input 
-                    class="input__element" 
+                    class="input__element"
+                    {{#if label}} id="{{label}}" {{/if}}
                     type="{{type}}" 
                     name="{{name}}" 
                     title="{{title}}" 

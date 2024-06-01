@@ -3,6 +3,7 @@ import PageTitle from "../../components/page-title/page-title.ts";
 import InputField from "../../components/input-field/input-field.ts";
 import Button from "../../components/button/button.ts";
 import Link from "../../components/link/link.ts";
+import FormSubmit from "../../core/formSubmit.ts";
 
 
 export default class LoginPage extends Block {
@@ -25,18 +26,23 @@ export default class LoginPage extends Block {
             title: "Логин",
             name: "login",
             type: "text",
+            label: "login",
             onBlur: handleBlurBind
         });
         const InputPassword = new InputField({
             className: "login-page__input",
             title: "Пароль",
             name: "password",
+            label: "password",
             type: "password"
         });
         const LoginButton = new Button({
             className: "login-page__button",
             text: "Вход",
-            page: "chat"
+            page: "chat",
+            events: {
+                click: this.handleSubmit
+            }
         });
         const LoginLink = new Link({
             className: "login-page__link",
@@ -64,8 +70,19 @@ export default class LoginPage extends Block {
     }
 
     handleBlur(event) {
-        console.log("event");
+        // document.dispatchEvent(new CustomEvent("switchPage", { detail: {
+        //     page: "chat"
+        // }}));
     }
+
+    handleSubmit(e) {
+        e.preventDefault();
+        const form = document.querySelector(".login-page");
+        const inputs = Object.values(form.querySelectorAll("input"));
+        // // console.log(inputs[0]);
+        const sub = new FormSubmit(inputs);    
+    }
+
 
     render() {
         return (`
@@ -96,3 +113,6 @@ export default class LoginPage extends Block {
     }
 }
 
+// document.dispatchEvent(new CustomEvent("switchPage", { detail: {
+//     page: "chat"
+// }}));

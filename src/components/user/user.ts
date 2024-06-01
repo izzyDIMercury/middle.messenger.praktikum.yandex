@@ -8,7 +8,6 @@ export default class User extends Block {
         super("form", {
             ...props
         })
-        console.log(props);
     }
 
     init() {

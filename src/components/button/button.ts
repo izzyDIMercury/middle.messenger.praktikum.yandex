@@ -10,10 +10,14 @@ export default class Button extends Block {
     render() {
         return (
             `
-                <button class="button{{#if className}} {{ className }} {{/if}}" page="{{ page }}" type="submit">
+                <button class="button{{#if className}} {{ className }} {{/if}}" page={{ page }} type="submit">
                     <p class="button__text" page="{{ page }}">{{ text }}</p>
-                </button>        
+                </button>     
             `
         )
     }
 }
+
+// <button class="button{{#if className}} {{ className }} {{/if}}" page="{{ page }}" type="submit">
+//     <p class="button__text" page="{{ page }}">{{ text }}</p>
+// </button>    

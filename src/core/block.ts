@@ -50,7 +50,7 @@ class Block {
 
     private registerEvents(eventBus: InstanceType<typeof EventBus>): void {
         eventBus.on(Block.EVENTS.INIT, this._init.bind(this));
-        eventBus.on(Block.EVENTS.FLOW_CDM, this.componentDidMount.bind(this));
+        eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
         eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
         eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
     }
@@ -116,11 +116,16 @@ class Block {
 
     // CDM:
 
-    componentDidMount(oldProps: Props) {
+    private _componentDidMount(): void {
+        this.componentDidMount();
+        // console.log('CDM');
+
         Object.values(this.children).forEach(child => {
             child.dispatchComponentDidMount();
         });
     }
+
+    componentDidMount(oldProps: Props) {}
 
     private dispatchComponentDidMount(): void {
         this.eventBus().emit(Block.EVENTS.FLOW_CDM);
@@ -152,6 +157,7 @@ class Block {
         this.element = newElement;
 
         this.addEvents();
+        this.dispatchComponentDidMount();
     }
 
     render() {

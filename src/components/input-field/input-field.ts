@@ -10,6 +10,7 @@ export default class InputField extends Block {
                 title: props.title,
                 type: props.type,
                 name: props.name,
+                label: props.label,
                 blur: props.onBlur
             })
         })
@@ -19,7 +20,7 @@ export default class InputField extends Block {
         return (
             `
                 <li class="input-field{{#if className}} {{ className }} {{/if}}">
-                    <label class="input-field__title">{{ title }}</label>
+                    <label class="input-field__title" {{#if label}} for="{{label}}" {{/if}}>{{ title }}</label>
                     {{{ Input }}}
                 </li>
             `
