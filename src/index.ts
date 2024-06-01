@@ -44,8 +44,8 @@ document.addEventListener("DOMContentLoaded", navigate("login"));
 //     }
 // })
 
-// document.addEventListener("switchPage", event => {
-//     navigate(event.detail.page);
-// });
+document.addEventListener("switchPage", event => {
+    navigate(event.detail.page);
+});
 
 // document.dispatchEvent(new CustomEvent("switchPage", { detail: "mydetail" }));

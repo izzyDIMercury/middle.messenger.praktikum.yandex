@@ -19,7 +19,7 @@ export default class InputField extends Block {
     render() {
         return (
             `
-                <li class="input-field{{#if className}} {{ className }} {{/if}}">
+                <li class="input-field{{#if className}} {{ className }} {{/if}} {{#if label}} {{className}}_{{label}} {{/if}}">
                     <label class="input-field__title" {{#if label}} for="{{label}}" {{/if}}>{{ title }}</label>
                     {{{ Input }}}
                 </li>

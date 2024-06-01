@@ -34,7 +34,8 @@ export default class LoginPage extends Block {
             title: "Пароль",
             name: "password",
             label: "password",
-            type: "password"
+            type: "password",
+            onBlur: handleBlurBind
         });
         const LoginButton = new Button({
             className: "login-page__button",
@@ -69,26 +70,39 @@ export default class LoginPage extends Block {
         }
     }
 
-    handleBlur(event) {
-        // document.dispatchEvent(new CustomEvent("switchPage", { detail: {
-        //     page: "chat"
-        // }}));
+    handleBlur(e) {
+        this.handleSubmit(e);
     }
 
     handleSubmit(e) {
         e.preventDefault();
         const form = document.querySelector(".login-page");
         const inputs = Object.values(form.querySelectorAll("input"));
-        // // console.log(inputs[0]);
-        const obj = new FormSubmit(inputs);
-        const result = obj.validate();
-        console.log(result);
-        // Object.keys(result).forEach(key => {
-        //     console.log(result);
-        //     if (result[key].value instanceof Error) {
-        //         console.log("MISTAKE: ", result[key].value.message);
-        //     }
-        // })  
+        const checks = new FormSubmit(inputs);
+        const result = checks.validate();
+        if (result.hasErrors) {
+            this.showErrorMessage(result);
+        } else {
+            alert("Logic successful!");
+            document.dispatchEvent(new CustomEvent("switchPage", { detail: {
+                page: "chat"
+            }}));
+        }
+    }
+
+    showErrorMessage(args) {
+        const { type, message } = args;
+        const parent = document.querySelector(".login-page__content");
+        const listElement = document.querySelector(".login-page__input-elements");
+        if (parent?.querySelector(".login-page__error-text")) {
+            const oldElement = parent?.querySelector(".login-page__error-text");
+            oldElement?.remove();
+        }
+        const element = document.createElement("p");
+        element.setAttribute("class", "login-page__error-text");
+        const text = document.createTextNode(message);
+        element.appendChild(text);
+        listElement.after(element);
     }
 
 
