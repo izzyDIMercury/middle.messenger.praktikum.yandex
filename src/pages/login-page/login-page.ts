@@ -4,6 +4,7 @@ import InputField from "../../components/input-field/input-field.ts";
 import Button from "../../components/button/button.ts";
 import Link from "../../components/link/link.ts";
 import FormSubmit from "../../core/formSubmit.ts";
+import { switchPage, checkForErrors, showErrorMessage } from "../../core/utils.ts";
 
 
 export default class LoginPage extends Block {
@@ -16,6 +17,7 @@ export default class LoginPage extends Block {
 
     init() {
         const handleBlurBind = this.handleBlur.bind(this);
+        const handleSubmitBind = this.handleSubmit.bind(this);
 
         const Title = new PageTitle({
             className: "login-page__title",
@@ -42,13 +44,16 @@ export default class LoginPage extends Block {
             text: "Вход",
             page: "chat",
             events: {
-                click: this.handleSubmit
+                click: handleSubmitBind
             }
         });
         const LoginLink = new Link({
             className: "login-page__link",
             text: "Нет аккаунта?",
-            page: "register"
+            page: "register",
+            events: {
+                click: switchPage
+            }
         });
         const Error404Link = new Link({
             text: "404",
@@ -76,33 +81,14 @@ export default class LoginPage extends Block {
 
     handleSubmit(e) {
         e.preventDefault();
-        const form = document.querySelector(".login-page");
-        const inputs = Object.values(form.querySelectorAll("input"));
-        const checks = new FormSubmit(inputs);
-        const result = checks.validate();
+        const result = checkForErrors(".login-page", "input");
         if (result.hasErrors) {
-            this.showErrorMessage(result);
+            console.log(this);
+            showErrorMessage(result, ".login-page__content", "login-page__error-text");
         } else {
-            alert("Logic successful!");
-            document.dispatchEvent(new CustomEvent("switchPage", { detail: {
-                page: "chat"
-            }}));
+            alert("Login successful!");
+            switchPage("chat");
         }
-    }
-
-    showErrorMessage(args) {
-        const { type, message } = args;
-        const parent = document.querySelector(".login-page__content");
-        const listElement = document.querySelector(".login-page__input-elements");
-        if (parent?.querySelector(".login-page__error-text")) {
-            const oldElement = parent?.querySelector(".login-page__error-text");
-            oldElement?.remove();
-        }
-        const element = document.createElement("p");
-        element.setAttribute("class", "login-page__error-text");
-        const text = document.createTextNode(message);
-        element.appendChild(text);
-        listElement.after(element);
     }
 
 
