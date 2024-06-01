@@ -1,4 +1,5 @@
 import Block from "../../core/block.ts";
+import { switchPage } from "../../core/utils.ts";
 import Image from "../image/image.ts";
 
 
@@ -20,7 +21,10 @@ export default class ChatProfile extends Block {
             className: "chat-profile__settings-icon",
             src: "/assets/icons/settings.png",
             alt: "Аватар пользователся",
-            page: "login"
+            page: "login",
+            events: {
+                click: switchPage
+            }
         })
 
         this.children = {

@@ -3,7 +3,6 @@ import PageTitle from "../../components/page-title/page-title.ts";
 import InputField from "../../components/input-field/input-field.ts";
 import Button from "../../components/button/button.ts";
 import Link from "../../components/link/link.ts";
-import FormSubmit from "../../core/formSubmit.ts";
 import { switchPage, checkForErrors, showErrorMessage } from "../../core/utils.ts";
 
 

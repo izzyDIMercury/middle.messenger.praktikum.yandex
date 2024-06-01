@@ -31,7 +31,7 @@ export function navigate(page) {
     root.innerHTM = Handlebars.compile(source)(context);
 }
 
-document.addEventListener("DOMContentLoaded", navigate("register"));
+document.addEventListener("DOMContentLoaded", navigate("chat"));
 
 
 // document.addEventListener("click", e => {
