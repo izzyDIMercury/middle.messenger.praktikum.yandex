@@ -80,7 +80,15 @@ export default class LoginPage extends Block {
         const form = document.querySelector(".login-page");
         const inputs = Object.values(form.querySelectorAll("input"));
         // // console.log(inputs[0]);
-        const sub = new FormSubmit(inputs);    
+        const obj = new FormSubmit(inputs);
+        const result = obj.validate();
+        console.log(result);
+        // Object.keys(result).forEach(key => {
+        //     console.log(result);
+        //     if (result[key].value instanceof Error) {
+        //         console.log("MISTAKE: ", result[key].value.message);
+        //     }
+        // })  
     }
 
 
