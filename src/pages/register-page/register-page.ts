@@ -25,7 +25,10 @@ export default class RegisterPage extends Block {
         const RegisterButton = new Button({
             className: "register-page__button",
             text: "Зарегистрироваться",
-            page: "chat"
+            page: "chat",
+            events: {
+                click: handleSubmitBind
+            }
         });
         const RegisterLink = new Link({
             className: "register-page__link",
@@ -72,7 +75,7 @@ export default class RegisterPage extends Block {
                 {
                     className: "register-page__input",
                     title: "Телефон",
-                    name: "phone",
+                    name: "tel",
                     type: "tel",
                     label: "tel",
                     onBlur: handleBlurBind
@@ -112,7 +115,7 @@ export default class RegisterPage extends Block {
         e.preventDefault();
         const result = checkForErrors(".register-page", "input");
         if (result.hasErrors) {
-            console.log(this);
+            // console.log(this);
             showErrorMessage(result, ".register-page__content", "login-page__error-text");
         } else {
             alert("Login successful!");

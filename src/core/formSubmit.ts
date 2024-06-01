@@ -4,9 +4,9 @@ export default class FormSubmit {
             if (element.name === "login") {
                 return {type: "login", error: this.checkLogin(element.value)};
             } else if (element.name === "password") {
-                return {type: "password", error: this.checkPassword(element.value)};
+                return {type: "password", error: this.checkPassword(element.value, props)};
             } else if (element.name === "first_name" || element.name === "second_name") {
-                return {type: "name", error: this.checkName(element.name)};
+                return {type: "name", error: this.checkName(element.value)};
             } else if (element.name === "email") {
                 return {type: "email", error: this.checkEmail(element.value)};
             } else if (element.name === "tel") {
@@ -28,8 +28,11 @@ export default class FormSubmit {
         return result;
     }
 
-    private checkLogin(login) {
-        console.log("works");
+    private checkLogin(login: string = "") {
+
+        if (login.length === 0) {
+            return new Error("Укажите логин.");
+        }
 
         if (login.length < 3 || login.length > 20) {
             return new Error("Длина логина должна быть не менее 3 и не более 20 символов.");
@@ -46,7 +49,11 @@ export default class FormSubmit {
 
     }
 
-    private checkPassword(password) {
+    private checkPassword(password, props) {
+
+        if (password.length === 0) {
+            return new Error("Укажите пароль.");
+        }
 
         if (password.length < 8 || password.length > 40) {
             return new Error("Длина пароля должна быть не менее 8 симолов и не более 40 символов.");
@@ -63,13 +70,26 @@ export default class FormSubmit {
             return new Error("Хотя бы одна буква должна быть заглавной.");
         }
 
+        const passwords = props.filter(prop => prop.name === "password").map(el => el.value);
+        if (passwords.length === 2 && passwords[0] !== passwords[1]) {
+            return new Error("Пароли должны совпадать.");
+        }
+
         
         return false;
     }
-
+ 
     private checkName(name) {
 
-        if (!name.match(/^[-a-zA-Zа-яА-ЯёЁ]+$/)) {
+        if (name.length === 0) {
+            return new Error("Укажите имя и фамилию.");
+        }
+
+        if (name.length === 0) {
+            return new Error("Укажите имя.");
+        }
+
+        if (!name.match(/[a-zA-Zа-яА-ЯёЁ]/)) {
             return new Error("Допускаются только кирилица м латиница");
         }
 
@@ -82,40 +102,50 @@ export default class FormSubmit {
 
     private checkEmail(email) {
 
-        if (!name.match(/[-_@.a-zA-Z0-9]/)) {
+        if (email.length === 0) {
+            return new Error("Укажите почту.");
+        }
+
+
+        if (!email.match(/^[-_@.a-zA-Z0-9]+$/)) {
             return new Error("Используются некорректные симолы");
         }
 
-        if (!name.match(/@[a-zA-Z]./)) {
+        const substring = email.split("@")[1].split(".")[0];
+        if (!substring.match(/[a-zA-Z]/)) {
             return new Error("Неправильно указана почта");
         }
 
-        return true;
+        return false;
     }
 
     private checkTel(tel) {
 
-        if (tel.length < 10 || phone.length > 15) {
+        if (tel.length === 0) {
+            return new Error("Укажите номер телефона.");
+        }
+
+        if (tel.length < 10 || tel.length > 15) {
             return new Error("Неверная длина телефонного номера");
         }
 
-        if (!tel.match(/[0-9]/)) {
+        if (!tel.match(/^[0-9]+$/)) {
             return new Error("Телефонный номер должен состоять из цифр");
         }
 
-        if(tel[0] !== "+" && typeof Number(tel[0]) !== "number") {
+        if  (tel[0] !== "+" && typeof Number(tel[0]) !== "number") {
             return new Error("Номер должен начинаться с цифры или символа +");
         } 
 
-        return true;
+        return false;
     }
 
-    private checkMessage(message) {
+    private checkMessage(message: string = "") {
 
         if (message.length === 0) {
             return new Error("Сообщение не должно быть пустым");
         }
 
-        return true;
+        return false;
     }
 }

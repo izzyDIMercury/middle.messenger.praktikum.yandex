@@ -27,7 +27,7 @@ export function showErrorMessage(args, parentQuery, errorClass) {
     const element = document.createElement("p");
     element.setAttribute("class", errorClass);
     const text = document.createTextNode(message);
-    console.log(element);
+    // console.log(element);
     element.appendChild(text);
     parent?.appendChild(element);
 }
