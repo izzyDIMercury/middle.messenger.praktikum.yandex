@@ -1,6 +1,7 @@
 import Block from "../../core/block.ts";
 import Input from "../input/input.ts";
 import Image from "../image/image.ts";
+import MessageButton from "./message-button.ts";
 import { checkForErrors } from "../../core/utils.ts";
 
 
@@ -22,6 +23,7 @@ export default class MessagePanel extends Block {
             name: "message",
             title: "message",
             label: "message",
+            enabled: true,
             blur: handleBlurBind
         })
         const ClipIcon = new Image({
@@ -29,7 +31,7 @@ export default class MessagePanel extends Block {
             src: "/assets/icons/clip.png",
             alt: "Прикрепить"
         })
-        const Send = new SendButton({
+        const Send = new MessageButton({
             events: {
                 click: handleSubmitBind
             }
@@ -75,33 +77,3 @@ export default class MessagePanel extends Block {
     }
 }
 
-class SendButton extends Block {
-
-    constructor(props) {
-        super("form", {
-            ...props
-        })
-    }
-
-    init() {
-        const SendIcon = new Image({
-            className: "message-panel__send-icon",
-            src: "/assets/icons/arrow-right.png",
-            alt: "Отправить"
-        })
-
-        this.children = {
-            SendIcon
-        }
-    }
-
-    render() {
-        return (
-            `
-                <button class="message-panel__send-button" type="submit">
-                    {{{ SendIcon }}}
-                </button>
-            `
-        )
-    }
-}

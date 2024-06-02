@@ -11,7 +11,8 @@ export default class InputField extends Block {
                 type: props.type,
                 name: props.name,
                 label: props.label,
-                blur: props.blur
+                blur: props.blur,
+                enabled: props.enabled
             })
         })
     }

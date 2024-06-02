@@ -28,6 +28,7 @@ export default class LoginPage extends Block {
             name: "login",
             type: "text",
             label: "login",
+            enabled: true,
             blur: handleBlurBind
         });
         const InputPassword = new InputField({
@@ -36,6 +37,7 @@ export default class LoginPage extends Block {
             name: "password",
             label: "password",
             type: "password",
+            enabled: true,
             blur: handleBlurBind
         });
         const LoginButton = new Button({
@@ -126,6 +128,4 @@ export default class LoginPage extends Block {
     }
 }
 
-// document.dispatchEvent(new CustomEvent("switchPage", { detail: {
-//     page: "chat"
-// }}));
+

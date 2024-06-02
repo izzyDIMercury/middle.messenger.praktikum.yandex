@@ -24,6 +24,7 @@ export default class ProfileChangePasswordPage extends Block {
             }
         });
         const Form = new ProfileForm({
+            formEnabled: true,
             formData: [
                 {
                     className: "profile-form__input",

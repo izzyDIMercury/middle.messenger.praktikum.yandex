@@ -2,7 +2,7 @@ import Block from "../../core/block.ts";
 import PageTitle from "../../components/page-title/page-title.ts";
 import Button from "../../components/button/button.ts";
 import Link from "../../components/link/link.ts";
-import InputField from "../../components/input-field/input-field.ts";
+import RegisterPageList from "../../components/register-page-list/register-page-list.ts";
 import { switchPage, checkForErrors, showErrorMessage } from "../../core/utils.ts";
 
 
@@ -148,31 +148,3 @@ export default class RegisterPage extends Block {
     }
 }
 
-class RegisterPageList extends Block {
-
-    constructor(props) {
-        const items = props.list.reduce((acc, current) => {
-            const item = new InputField({className: current.className, title: current.title, name: current.name, type: current.type, blur: current.blur});
-            // console.log(item);
-            acc[item.id] = item;
-
-            return acc;
-        }, {});
-
-        super("div", {
-            ...props,
-            itemsKeys: Object.keys(items),
-            ...items
-        })
-    }
-
-    render() {
-        return (
-            `
-                <ul class="register-page__input-elements">
-                    ${this.props.itemsKeys.map((key) => `{{{ ${key} }}}`).join('')}
-                </ul>
-            `
-        )
-    }
-}

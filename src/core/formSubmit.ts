@@ -78,7 +78,7 @@ export default class FormSubmit {
             return (character == character.toUpperCase()) && isNaN(character);
         });
         if (upperCaseLetters.length === 0) {
-            return new Error("Хотя бы одна буква должна быть заглавной.");
+            return new Error("Хотя бы одна буква в пароле должна быть заглавной.");
         }
 
         // const passwords = props.filter(prop => prop.name === "password").map(el => el.value);
@@ -93,19 +93,15 @@ export default class FormSubmit {
     private checkName(name) {
 
         if (name.length === 0) {
-            return new Error("Укажите имя и фамилию.");
-        }
-
-        if (name.length === 0) {
-            return new Error("Укажите имя.");
+            return new Error("Укажите имя/фамилию.");
         }
 
         if (!name.match(/[a-zA-Zа-яА-ЯёЁ]/)) {
-            return new Error("Допускаются только кирилица м латиница");
+            return new Error("В имени/фамилии допускаются только кирилица м латиница");
         }
 
         if (name[0] != name[0].toUpperCase()) {
-            return new Error("Первая буква должжна быть заглавной");
+            return new Error("Первая буква имени/фамилии должна быть заглавной");
         }
 
         return false;
@@ -121,11 +117,11 @@ export default class FormSubmit {
 
 
         if (!email.match(/^[-_@\.a-zA-Z0-9]+$/)) {
-            return new Error("Используются некорректные симолы");
+            return new Error("В почтовом адреме используются некорректные симолы");
         }
 
         if (!email.match(/[@]+[-_a-zA-Z0-9]+[\.]+/)) {
-            return new Error("Отсутствуют необходимые символы.");
+            return new Error("В почтовом адреме отсутствуют необходимые символы.");
         }
 
         const substring = email.split("@")[1].split(".")[0];
@@ -151,7 +147,7 @@ export default class FormSubmit {
         }
 
         if  (tel[0] !== "+" && typeof Number(tel[0]) !== "number") {
-            return new Error("Номер должен начинаться с цифры или символа +");
+            return new Error("Телефонный номер должен начинаться с цифры или символа +");
         } 
 
         return false;

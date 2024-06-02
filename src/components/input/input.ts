@@ -1,14 +1,16 @@
 import Block from "../../core/block.ts";
+import InputElement from "./input-element.ts";
 
 export default class Input extends Block {
     constructor(props) {
         super("div", {
             ...props,
-            Field: new InputString({
+            Field: new InputElement({
                 title: props.title,
                 type: props.type,
                 name: props.name,
                 label: props.label,
+                enabled: props.enabled,
                 events: {
                     blur: props.blur
                 }
@@ -27,22 +29,3 @@ export default class Input extends Block {
     }
 }
 
-class InputString extends Block {
-    constructor(props) {
-        super("", props)
-    }
-
-    render() {
-        return (
-            `
-                <input 
-                    class="input__element"
-                    type="{{type}}" 
-                    name="{{name}}" 
-                    title="{{title}}" 
-                    value="{{value}}"
-                >
-            `
-        )
-    }
-}

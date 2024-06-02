@@ -52,6 +52,7 @@ export default class ProfilePage extends Block {
             ]
         })
         const Form = new ProfileForm({
+            formEnabled: false,
             formData: [
                 {
                     className: "profile-form__input",

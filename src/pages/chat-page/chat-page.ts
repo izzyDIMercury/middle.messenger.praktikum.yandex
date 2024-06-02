@@ -1,7 +1,7 @@
 import Block from "../../core/block.ts";
 import ProfileButton from "../../components/profile-button/profile-button.ts";
 import Search from "../../components/search/search.ts";
-import User from "../../components/user/user.ts";
+import Users from "../../components/users/users.ts";
 import ChatProfile from "../../components/chat-profile/chat-profile.ts";
 import MessagePanel from "../../components/message-panel/message-panel.ts";
 import { switchPage } from "../../core/utils.ts";
@@ -86,28 +86,3 @@ export default class ChatPage extends Block {
     }
 }
 
-class Users extends Block {
-    constructor(props) {
-        const users = props.users.reduce((acc, current) => {
-            const user = new User({name: current.name, message: current.message, unread: current.unread, image: current.image, time: current.time, selected: current.selected});
-            acc[user.id] = user;
-            return acc;
-        }, {});
-
-        super("form", {
-            ...props,
-            usersKeys: Object.keys(users),
-            ...users
-        })
-    }
-
-    render() {
-        return (
-                `
-                    <ul class="left-column__users">
-                        ${this.props.usersKeys.map((key) => `{{{ ${key} }}}`).join('')}
-                    </ul>
-                `
-        )
-    }
-}
