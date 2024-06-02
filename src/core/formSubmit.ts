@@ -1,6 +1,5 @@
 export default class FormSubmit {
     constructor(props) {
-        console.log(props);
         this.checklist = props.map(element => {
             if (element.name === "login") {
                 return {type: "login", error: this.checkLogin(element.value)};
@@ -19,7 +18,14 @@ export default class FormSubmit {
             }
         });
 
-        console.log(this.checklist);
+        // form fields log:
+        const loggingObject = {};
+        props.forEach(el => {
+            // console.log(el.name + ": ", el.value);
+            loggingObject[el.name] = el.value;
+        })
+
+        console.log(loggingObject);
     }
 
     public validate() {
@@ -107,7 +113,7 @@ export default class FormSubmit {
 
     private checkEmail(email) {
 
-        console.log(email);
+        // console.log(email);
 
         if (email.length === 0) {
             return new Error("Укажите почту.");
@@ -166,7 +172,7 @@ export default class FormSubmit {
             return new Error("Укажите имя в чате.");
         }
 
-        if (name.length < 3 || login.length > 20) {
+        if (name.length < 3 || name.length > 20) {
             return new Error("Длина имени в чате должна быть не менее 3 и не более 20 символов.");
         }
 

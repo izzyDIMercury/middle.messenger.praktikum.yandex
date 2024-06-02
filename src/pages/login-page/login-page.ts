@@ -88,7 +88,7 @@ export default class LoginPage extends Block {
         e.preventDefault();
         const result = checkForErrors(".login-page", "input");
         if (result.hasErrors) {
-            console.log(this);
+            // console.log(this);
             showErrorMessage(result, ".login-page__content", "login-page__error-text");
         } else {
             alert("Login successful!");

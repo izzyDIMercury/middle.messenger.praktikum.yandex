@@ -106,10 +106,10 @@ export default class ProfileChangeDataPage extends Block {
         e.preventDefault();
         const result = checkForErrors(".profile-change-data-page__form", "input");
         if (result.hasErrors) {
-            console.log(this);
+            // console.log(this);
             showErrorMessage(result, ".profile-change-data-page__form-data", "profile-change-data-page__error-text");
         } else {
-            alert("Login successful!");
+            alert("Change successful!");
             switchPage(null, "profile");
         }
     }

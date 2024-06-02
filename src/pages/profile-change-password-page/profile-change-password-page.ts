@@ -85,7 +85,7 @@ export default class ProfileChangePasswordPage extends Block {
             console.log(this);
             showErrorMessage(result, ".profile-change-password-page__form-data", "profile-change-password-page__error-text");
         } else {
-            alert("Login successful!");
+            alert("Change successful!");
             switchPage(null, "profile");
         }
     }
