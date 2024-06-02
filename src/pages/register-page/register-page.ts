@@ -46,7 +46,7 @@ export default class RegisterPage extends Block {
                     name: "email",
                     type: "email",
                     label: "email",
-                    onBlur: handleBlurBind
+                    blur: handleBlurBind
                 },
                 {
                     className: "register-page__input",
@@ -54,7 +54,7 @@ export default class RegisterPage extends Block {
                     name: "login",
                     type: "text",
                     label: "login",
-                    onBlur: handleBlurBind
+                    blur: handleBlurBind
                 },
                 {
                     className: "register-page__input",
@@ -62,7 +62,7 @@ export default class RegisterPage extends Block {
                     name: "first_name",
                     type: "text",
                     label: "first_name",
-                    onBlur: handleBlurBind
+                    blur: handleBlurBind
                 },
                 {
                     className: "register-page__input",
@@ -70,7 +70,7 @@ export default class RegisterPage extends Block {
                     name: "second_name",
                     type: "text",
                     label: "second_name",
-                    onBlur: handleBlurBind
+                    blur: handleBlurBind
                 },
                 {
                     className: "register-page__input",
@@ -78,7 +78,7 @@ export default class RegisterPage extends Block {
                     name: "tel",
                     type: "tel",
                     label: "tel",
-                    onBlur: handleBlurBind
+                    blur: handleBlurBind
                 },
                 {
                     className: "register-page__input",
@@ -86,7 +86,7 @@ export default class RegisterPage extends Block {
                     name: "password",
                     type: "password",
                     label: "password",
-                    onBlur: handleBlurBind
+                    blur: handleBlurBind
                 },
                 {
                     className: "register-page__input",
@@ -94,7 +94,7 @@ export default class RegisterPage extends Block {
                     name: "password",
                     type: "password",
                     label: "password",
-                    onBlur: handleBlurBind
+                    blur: handleBlurBind
                 }
             ]
         })
@@ -152,7 +152,7 @@ class RegisterPageList extends Block {
 
     constructor(props) {
         const items = props.list.reduce((acc, current) => {
-            const item = new InputField({className: current.className, title: current.title, name: current.name, type: current.type, onBlur: current.onBlur});
+            const item = new InputField({className: current.className, title: current.title, name: current.name, type: current.type, blur: current.blur});
             // console.log(item);
             acc[item.id] = item;
 

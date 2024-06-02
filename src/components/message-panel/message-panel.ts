@@ -21,8 +21,8 @@ export default class MessagePanel extends Block {
             type: "text",
             name: "message",
             title: "message",
-            value: "Сообщение",
-            onBlur: handleBlurBind
+            label: "message",
+            blur: handleBlurBind
         })
         const ClipIcon = new Image({
             className: "message-panel__attach-icon",
@@ -43,6 +43,7 @@ export default class MessagePanel extends Block {
     }
 
     handleBlur(e) {
+        console.log("blur");
         this.handleSubmit(e);
     }
 

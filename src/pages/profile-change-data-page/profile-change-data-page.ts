@@ -31,7 +31,7 @@ export default class ProfileChangeDataPage extends Block {
                     name: "email",
                     type: "email",
                     label: "email",
-                    onBlur: handleBlurBind
+                    blur: handleBlurBind
                 },
                 {
                     className: "profile-form__input",
@@ -39,7 +39,7 @@ export default class ProfileChangeDataPage extends Block {
                     name: "login",
                     type: "text",
                     label: "login",
-                    onBlur: handleBlurBind
+                    blur: handleBlurBind
                 },
                 {
                     className: "profile-form__input",
@@ -47,7 +47,7 @@ export default class ProfileChangeDataPage extends Block {
                     name: "first_name",
                     type: "text",
                     label: "first_name",
-                    onBlur: handleBlurBind
+                    blur: handleBlurBind
                 },
                 {
                     className: "profile-form__input",
@@ -55,7 +55,7 @@ export default class ProfileChangeDataPage extends Block {
                     name: "second_name",
                     type: "text",
                     label: "second_name",
-                    onBlur: handleBlurBind
+                    blur: handleBlurBind
                 },
                 {
                     className: "profile-form__input",
@@ -63,7 +63,7 @@ export default class ProfileChangeDataPage extends Block {
                     name: "display_name",
                     type: "text",
                     label: "display_name",
-                    onBlur: handleBlurBind
+                    blur: handleBlurBind
                 },
                 {
                     className: "profile-form__input",
@@ -71,7 +71,7 @@ export default class ProfileChangeDataPage extends Block {
                     name: "tel",
                     type: "tel",
                     label: "tel",
-                    onBlur: handleBlurBind
+                    blur: handleBlurBind
                 }
             ]
         });

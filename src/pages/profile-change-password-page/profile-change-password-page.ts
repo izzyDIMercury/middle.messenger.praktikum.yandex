@@ -31,7 +31,7 @@ export default class ProfileChangePasswordPage extends Block {
                     name: "oldPassword",
                     type: "password",
                     label: "password",
-                    onBlur: handleBlurBind
+                    blur: handleBlurBind
                 },
                 {
                     className: "profile-form__input",
@@ -39,7 +39,7 @@ export default class ProfileChangePasswordPage extends Block {
                     name: "newPassword",
                     type: "password",
                     label: "password",
-                    onBlur: handleBlurBind
+                    blur: handleBlurBind
                 },
                 {
                     className: "profile-form__input",
@@ -47,7 +47,7 @@ export default class ProfileChangePasswordPage extends Block {
                     name: "newPassword",
                     type: "password",
                     label: "password",
-                    onBlur: handleBlurBind
+                    blur: handleBlurBind
                 }
             ]
         });

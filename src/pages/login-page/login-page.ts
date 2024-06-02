@@ -28,7 +28,7 @@ export default class LoginPage extends Block {
             name: "login",
             type: "text",
             label: "login",
-            onBlur: handleBlurBind
+            blur: handleBlurBind
         });
         const InputPassword = new InputField({
             className: "login-page__input",
@@ -36,7 +36,7 @@ export default class LoginPage extends Block {
             name: "password",
             label: "password",
             type: "password",
-            onBlur: handleBlurBind
+            blur: handleBlurBind
         });
         const LoginButton = new Button({
             className: "login-page__button",

@@ -31,7 +31,7 @@ export function navigate(page) {
     root.innerHTM = Handlebars.compile(source)(context);
 }
 
-document.addEventListener("DOMContentLoaded", navigate("profile-change-password"));
+document.addEventListener("DOMContentLoaded", navigate("login"));
 
 
 // document.addEventListener("click", e => {
