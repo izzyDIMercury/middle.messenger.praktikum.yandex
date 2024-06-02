@@ -6,7 +6,7 @@ export default class ProfileForm extends Block {
 
     constructor(props) {
         const formItems = props.formData.reduce((acc, current) => {
-            const element = new InputField({className: current.className, title: current.title, name: current.name, type: current.type});
+            const element = new InputField({className: current.className, title: current.title, name: current.name, type: current.type, label: current.label, onBlur: current.onBlur});
             acc[element.id] = element;
             return acc;
         }, {});

@@ -1,7 +1,7 @@
 import Block from "../../core/block.ts";
 import Input from "../input/input.ts";
 import Image from "../image/image.ts";
-import { switchPage, checkForErrors } from "../../core/utils.ts";
+import { checkForErrors } from "../../core/utils.ts";
 
 
 export default class MessagePanel extends Block {

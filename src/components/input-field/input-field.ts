@@ -20,7 +20,7 @@ export default class InputField extends Block {
         return (
             `
                 <li class="input-field{{#if className}} {{ className }} {{/if}} {{#if label}} {{className}}_{{label}} {{/if}}">
-                    <label class="input-field__title" {{#if label}} for="{{label}}" {{/if}}>{{ title }}</label>
+                    <label class="input-field__title">{{ title }}</label>
                     {{{ Input }}}
                 </li>
             `

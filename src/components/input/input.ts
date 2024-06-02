@@ -37,7 +37,6 @@ class InputString extends Block {
             `
                 <input 
                     class="input__element"
-                    {{#if label}} id="{{label}}" {{/if}}
                     type="{{type}}" 
                     name="{{name}}" 
                     title="{{title}}" 

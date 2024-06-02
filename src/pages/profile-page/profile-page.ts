@@ -4,6 +4,7 @@ import ReturnButton from "../../components/return-button/return-button.ts";
 import ProfileFooter from "../../components/profile-footer/profile-footer.ts";
 import ProfileForm from "../../components/profile-form/profile-form.ts";
 import Image from "../../components/image/image.ts";
+import { switchPage } from "../../core/utils.ts";
 
 
 export default class ProfilePage extends Block {
@@ -19,7 +20,11 @@ export default class ProfilePage extends Block {
             className: "profile-page__title",
             title: "Имя пользователя"
         });
-        const ButtonBack = new ReturnButton();
+        const ButtonBack = new ReturnButton({
+            events: {
+                click: switchPage
+            }
+        });
         const ProfileImage = new Image({
             className: "profile-page__image",
             src: "/assets/profile-placeholder.png",
@@ -30,12 +35,14 @@ export default class ProfilePage extends Block {
                 {
                     classModifier: "",
                     page: "profile-change-data",
-                    text: "Изменить данные"
+                    text: "Изменить данные",
+                    switchPage: switchPage
                 },
                 {
                     classModifier: "",
                     page: "profile-change-password",
-                    text: "Изменить пароль"
+                    text: "Изменить пароль",
+                    switchPage: switchPage
                 },
                 {
                     classModifier: "profile-footer-button_red",

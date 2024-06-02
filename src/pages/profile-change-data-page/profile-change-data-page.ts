@@ -3,6 +3,7 @@ import ReturnButton from "../../components/return-button/return-button.ts";
 import ProfileForm from "../../components/profile-form/profile-form.ts";
 import Button from "../../components/button/button.ts";
 import Image from "../../components/image/image.ts";
+import { switchPage, checkForErrors, showErrorMessage } from "../../core/utils.ts";
 
 
 export default class ProfileChangeDataPage extends Block {
@@ -14,44 +15,63 @@ export default class ProfileChangeDataPage extends Block {
     }
 
     init() {
-        const ButtonBack = new ReturnButton();
+        const handleBlurBind = this.handleBlur.bind(this);
+        const handleSubmitBind = this.handleSubmit.bind(this);
+
+        const ButtonBack = new ReturnButton({
+            events: {
+                click: switchPage
+            }
+        });
         const Form = new ProfileForm({
             formData: [
                 {
                     className: "profile-form__input",
                     title: "Почта",
                     name: "email",
-                    type: "email"
+                    type: "email",
+                    label: "email",
+                    onBlur: handleBlurBind
                 },
                 {
                     className: "profile-form__input",
                     title: "Логин",
                     name: "login",
-                    type: "text"
+                    type: "text",
+                    label: "login",
+                    onBlur: handleBlurBind
                 },
                 {
                     className: "profile-form__input",
                     title: "Имя",
                     name: "first_name",
-                    type: "text"
+                    type: "text",
+                    label: "first_name",
+                    onBlur: handleBlurBind
                 },
                 {
                     className: "profile-form__input",
                     title: "Фамилия",
                     name: "second_name",
-                    type: "text"
+                    type: "text",
+                    label: "second_name",
+                    onBlur: handleBlurBind
                 },
                 {
                     className: "profile-form__input",
                     title: "Имя в чате",
                     name: "display_name",
-                    type: "text"
+                    type: "text",
+                    label: "display_name",
+                    onBlur: handleBlurBind
                 },
                 {
                     className: "profile-form__input",
                     title: "Телефон",
-                    name: "phone",
-                    type: "tel"
+                    name: "tel",
+                    type: "tel",
+                    label: "tel",
+                    onBlur: handleBlurBind
                 }
             ]
         });
@@ -59,6 +79,9 @@ export default class ProfileChangeDataPage extends Block {
             className: "profile-change-data-page",
             page: "profile",
             text: "Сохранить",
+            events: {
+                click: handleSubmitBind
+            }
         });
         const ProfileImage = new Image({
             className: "profile-change-data-page__image",
@@ -75,6 +98,22 @@ export default class ProfileChangeDataPage extends Block {
         }
     }
 
+    handleBlur(e) {
+        this.handleSubmit(e);
+    }
+
+    handleSubmit(e) {
+        e.preventDefault();
+        const result = checkForErrors(".profile-change-data-page__form", "input");
+        if (result.hasErrors) {
+            console.log(this);
+            showErrorMessage(result, ".profile-change-data-page__form-data", "profile-change-data-page__error-text");
+        } else {
+            alert("Login successful!");
+            switchPage(null, "profile");
+        }
+    }
+
 
     render() {
         return (
@@ -83,8 +122,10 @@ export default class ProfileChangeDataPage extends Block {
                         {{{ ButtonBack }}}
                         <div class="profile-page__content">
                             <form class="profile-change-data-page__form">
-                                {{{ ProfileImage }}}
-                                {{{ Form }}}
+                                <div class="profile-change-data-page__form-data">
+                                    {{{ ProfileImage }}}
+                                    {{{ Form }}}
+                                </div>
                                 {{{ ProfileButton }}}
                             </form>
                         </div>

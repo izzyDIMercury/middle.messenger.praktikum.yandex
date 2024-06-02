@@ -1,10 +1,11 @@
 export default class FormSubmit {
     constructor(props) {
+        console.log(props);
         this.checklist = props.map(element => {
             if (element.name === "login") {
                 return {type: "login", error: this.checkLogin(element.value)};
-            } else if (element.name === "password") {
-                return {type: "password", error: this.checkPassword(element.value, props)};
+            } else if (element.type === "password") {
+                return {type: "password", error: this.checkPassword(element.value)};
             } else if (element.name === "first_name" || element.name === "second_name") {
                 return {type: "name", error: this.checkName(element.value)};
             } else if (element.name === "email") {
@@ -13,8 +14,12 @@ export default class FormSubmit {
                 return {type: "tel", error: this.checkTel(element.value)};
             } else if (element.name === "message") {
                 return {type: "message", error: this.checkMessage(element.value)};
+            } else if (element.name === "display_name") {
+                return {type: "display_name", error: this.checkDisplayName(element.value)};
             }
         });
+
+        console.log(this.checklist);
     }
 
     public validate() {
@@ -39,7 +44,7 @@ export default class FormSubmit {
         }
 
         if (!login.match(/^[\w-]+$/)) {
-            return new Error("Допускаются только латиница и цифры.");
+            return new Error("Для логина опускаются только латиница и цифры.");
         }
 
         if (!login.match(/[a-zA-Z]/)) {
@@ -49,7 +54,7 @@ export default class FormSubmit {
 
     }
 
-    private checkPassword(password, props) {
+    private checkPassword(password: string = "") {
 
         if (password.length === 0) {
             return new Error("Укажите пароль.");
@@ -70,10 +75,10 @@ export default class FormSubmit {
             return new Error("Хотя бы одна буква должна быть заглавной.");
         }
 
-        const passwords = props.filter(prop => prop.name === "password").map(el => el.value);
-        if (passwords.length === 2 && passwords[0] !== passwords[1]) {
-            return new Error("Пароли должны совпадать.");
-        }
+        // const passwords = props.filter(prop => prop.name === "password").map(el => el.value);
+        // if (passwords.length === 2 && passwords[0] !== passwords[1]) {
+        //     return new Error("Пароли должны совпадать.");
+        // }
 
         
         return false;
@@ -102,13 +107,19 @@ export default class FormSubmit {
 
     private checkEmail(email) {
 
+        console.log(email);
+
         if (email.length === 0) {
             return new Error("Укажите почту.");
         }
 
 
-        if (!email.match(/^[-_@.a-zA-Z0-9]+$/)) {
+        if (!email.match(/^[-_@\.a-zA-Z0-9]+$/)) {
             return new Error("Используются некорректные симолы");
+        }
+
+        if (!email.match(/[@]+[-_a-zA-Z0-9]+[\.]+/)) {
+            return new Error("Отсутствуют необходимые символы.");
         }
 
         const substring = email.split("@")[1].split(".")[0];
@@ -147,5 +158,20 @@ export default class FormSubmit {
         }
 
         return false;
+    }
+
+    private checkDisplayName(name) {
+
+        if (name.length === 0) {
+            return new Error("Укажите имя в чате.");
+        }
+
+        if (name.length < 3 || login.length > 20) {
+            return new Error("Длина имени в чате должна быть не менее 3 и не более 20 символов.");
+        }
+
+        if (!name.match(/^[\w-]+$/)) {
+            return new Error("Для имени в чате опускаются только латиница и цифры.");
+        }
     }
 }

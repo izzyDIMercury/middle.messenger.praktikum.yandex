@@ -4,6 +4,7 @@ import Search from "../../components/search/search.ts";
 import User from "../../components/user/user.ts";
 import ChatProfile from "../../components/chat-profile/chat-profile.ts";
 import MessagePanel from "../../components/message-panel/message-panel.ts";
+import { switchPage } from "../../core/utils.ts";
 
 
 export default class ChatPage extends Block {
@@ -15,7 +16,11 @@ export default class ChatPage extends Block {
     }
 
     init() {
-        const MenuButton = new ProfileButton();
+        const MenuButton = new ProfileButton({
+            events: {
+                click: switchPage
+            }
+        });
         const MenuSearch = new Search();
         const ChatUsers = new Users({
             users: [
