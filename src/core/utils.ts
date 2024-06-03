@@ -31,3 +31,8 @@ export function showErrorMessage(args, parentQuery, errorClass) {
     element.appendChild(text);
     parent?.appendChild(element);
 }
+
+export function hideErrorMessage(errorClass: string) {
+    const element = document.querySelector(`.${errorClass}`);
+    element?.remove();
+}

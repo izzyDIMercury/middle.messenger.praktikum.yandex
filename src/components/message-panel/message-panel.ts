@@ -53,9 +53,9 @@ export default class MessagePanel extends Block {
         e.preventDefault();
         const result = checkForErrors(".message-panel", "input");
         if (result.hasErrors) {
-            alert("Сообщение не должно быть пустым.");
+            console.log("Сообщение не должно быть пустым.");
         } else {
-            alert("Сообщение отправлено.");
+            console.log("Сообщение отправлено.");
         }
     }
 

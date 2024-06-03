@@ -18,13 +18,15 @@ export default class FormSubmit {
             }
         });
 
-        // form fields log:
+        this.data = props;
+        this.getData();
+    }
+
+    public getData() {
         const loggingObject = {};
-        props.forEach(el => {
-            // console.log(el.name + ": ", el.value);
+        this.data.forEach(el => {
             loggingObject[el.name] = el.value;
         })
-
         console.log(loggingObject);
     }
 

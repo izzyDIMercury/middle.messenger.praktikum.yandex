@@ -3,7 +3,7 @@ import ReturnButton from "../../components/return-button/return-button.ts";
 import ProfileForm from "../../components/profile-form/profile-form.ts";
 import Button from "../../components/button/button.ts";
 import Image from "../../components/image/image.ts";
-import { switchPage, checkForErrors, showErrorMessage } from "../../core/utils.ts";
+import { switchPage, checkForErrors, showErrorMessage, hideErrorMessage } from "../../core/utils.ts";
 
 
 export default class ProfileChangeDataPage extends Block {
@@ -107,11 +107,13 @@ export default class ProfileChangeDataPage extends Block {
         e.preventDefault();
         const result = checkForErrors(".profile-change-data-page__form", "input");
         if (result.hasErrors) {
-            // console.log(this);
             showErrorMessage(result, ".profile-change-data-page__form-data", "profile-change-data-page__error-text");
-        } else {
-            alert("Change successful!");
+        } else if (e.type === "click") {
+            console.log("Data change successful!");
             switchPage(null, "profile");
+        } else {
+            hideErrorMessage("profile-change-data-page__error-text");
+            console.log("Data change successful!");
         }
     }
 
