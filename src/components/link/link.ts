@@ -1,8 +1,13 @@
 import Block from "../../core/block.ts";
-import { Props } from "../../types.ts";
 
-export default class Link extends Block {
-    constructor(props: Props) {
+type LinkProps = {
+    className?: string,
+    page: string,
+    text: string
+}
+
+export default class Link extends Block<LinkProps> {
+    constructor(props: LinkProps) {
         super("div", {
             ...props
         })

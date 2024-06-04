@@ -6,10 +6,11 @@ import Link from "../../components/link/link.ts";
 import FormSubmit from "../../core/formSubmit.ts";
 import { switchPage } from "../../core/utils.ts";
 
+type Login = undefined
 
-export default class LoginPage extends Block {
+export default class LoginPage extends Block<Login> {
 
-    constructor(props) {
+    constructor(props: {}) {
         super("form", {
             ...props
         })

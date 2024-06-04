@@ -2,10 +2,10 @@ import Handlebars from "handlebars";
 import EventBus from "./eventBus.js";
 import {v4 as makeUUID} from 'uuid';
 
-type Props = Record<string, string | Function>;
+// type Props = Record<string, string | Function | boolean>;
 type Children = Record<string, InstanceType<any>>;
 
-class Block {
+class Block<Props> {
 
     children: Children;
     eventBus: Function;
@@ -125,7 +125,7 @@ class Block {
         });
     }
 
-    componentDidMount(oldProps: Props) {}
+    componentDidMount(oldProps?: Props) {}
 
     private dispatchComponentDidMount(): void {
         this.eventBus().emit(Block.EVENTS.FLOW_CDM);

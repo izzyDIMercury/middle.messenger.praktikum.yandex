@@ -1,10 +1,15 @@
 import Block from "../../core/block.ts";
 import Image from "../image/image.ts";
-import { Props } from "../../types.ts";
 
-export default class ProfileButton extends Block {
+type ProfileButtonProps = {
+    events: {
+        click: Function
+    }
+}
 
-    constructor(props: Props) {
+export default class ProfileButton extends Block<ProfileButtonProps> {
+
+    constructor(props: ProfileButtonProps) {
         super("form", {
             ...props
         })

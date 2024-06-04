@@ -1,6 +1,5 @@
 import Block from "../../core/block.ts";
 import InputElement from "./input-element.ts";
-import { Props } from "../../types.ts";
 
 type InputProps = {
     className: string,
@@ -12,29 +11,25 @@ type InputProps = {
     blur: (event: FocusEvent) => void
 }
 
-export default class Input extends Block {
+export default class Input extends Block<InputProps> {
+
+    // propsInput: InputProps
+
     constructor(props: InputProps) {
         super("div", {
-            ...props
+            ...props,
+            Field: new InputElement({
+                title: props.title,
+                type: props.type,
+                name: props.name,
+                label: props.label,
+                enabled: props.enabled,
+                events: {
+                    blur: props.blur
+                }
+            })
         });
     };
-
-    init() {
-        const Field = new InputElement({
-            title: this.props.title,
-            type: this.props.type,
-            name: this.props.name,
-            label: this.props.label,
-            enabled: this.props.enabled,
-            events: {
-                blur: this.props.blur
-            }
-        });
-
-        this.children = {
-            Field
-        }
-    }
 
     render() {
         return (
@@ -47,13 +42,4 @@ export default class Input extends Block {
     }
 }
 
-// Field: new InputElement({
-//     title: props.title,
-//     type: props.type,
-//     name: props.name,
-//     label: props.label,
-//     enabled: props.enabled,
-//     events: {
-//         blur: props.blur
-//     }
-// })
+

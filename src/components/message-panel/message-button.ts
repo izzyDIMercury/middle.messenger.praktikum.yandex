@@ -1,10 +1,15 @@
 import Block from "../../core/block.ts";
 import Image from "../image/image.ts";
-import { Props } from "../../types.ts";
 
-export default class MessageButton extends Block {
+type MessageButtonProps = {
+    events: {
+        click: Function
+    }
+}
 
-    constructor(props: Props) {
+export default class MessageButton extends Block<MessageButtonProps> {
+
+    constructor(props: MessageButtonProps) {
         super("form", {
             ...props
         })

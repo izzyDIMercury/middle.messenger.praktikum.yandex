@@ -1,8 +1,16 @@
 import Block from "../../core/block.ts";
-import { Props } from "../../types.ts";
 
-export default class Button extends Block {
-    constructor(props: Props) {
+type ButtonProps = {
+    className: string,
+    text: string,
+    page: string,
+    events: {
+        click: (event: MouseEvent) => void
+    }
+}
+
+export default class Button extends Block<ButtonProps> {
+    constructor(props: ButtonProps) {
         super("", {
             ...props
         })

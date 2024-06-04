@@ -1,14 +1,14 @@
 import Block from "../../core/block.ts";
 import { switchPage } from "../../core/utils.ts";
 import Image from "../image/image.ts";
-import { Props } from "../../types.ts";
 
+type ChatProfileProps = undefined;
 
-export default class ChatProfile extends Block {
+export default class ChatProfile extends Block<ChatProfileProps> {
 
-    constructor(props: Props) {
+    constructor(props: ChatProfileProps) {
         super("form", {
-            ...props
+            
         })
     }
 

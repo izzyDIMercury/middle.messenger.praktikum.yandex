@@ -3,14 +3,14 @@ import Input from "../input/input.ts";
 import Image from "../image/image.ts";
 import MessageButton from "./message-button.ts";
 import FormSubmit from "../../core/formSubmit.ts";
-import { Props } from "../../types.ts";
 
+type MessagePanelProps = undefined;
 
-export default class MessagePanel extends Block {
+export default class MessagePanel extends Block<MessagePanelProps> {
 
-    constructor(props: Props) {
+    constructor(props: MessagePanelProps) {
         super("form", {
-            ...props
+            
         })
     }
 

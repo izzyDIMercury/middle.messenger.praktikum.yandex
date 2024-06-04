@@ -5,8 +5,8 @@
 
 type UserData = Record<string, string>;
 
-type Props = {
+type ComponentProps = {
     [key: string]: string | { [key: string]: Function };
 }
 
-export type { Props, UserData }
+export type { ComponentProps, UserData }
