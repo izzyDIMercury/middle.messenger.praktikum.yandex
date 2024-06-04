@@ -5,11 +5,13 @@ import Users from "../../components/users/users.ts";
 import ChatProfile from "../../components/chat-profile/chat-profile.ts";
 import MessagePanel from "../../components/message-panel/message-panel.ts";
 import { switchPage } from "../../core/utils.ts";
+import { Props } from "../../types.ts";
 
+type UsersType = Record<string, string>[]
 
 export default class ChatPage extends Block {
 
-    constructor(props) {
+    constructor(props: Props) {
         super("form", {
             ...props
         })

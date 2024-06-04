@@ -1,11 +1,12 @@
 import Block from "../../core/block.ts";
 import Link from "../link/link.ts";
+import { Props } from "../../types.ts";
 
 
 
 export default class ProfileFooterButton extends Block {
 
-    constructor(props) {
+    constructor(props: Props) {
 
         super("form", {
             ...props

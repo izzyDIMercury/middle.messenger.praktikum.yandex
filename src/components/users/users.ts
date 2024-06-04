@@ -1,8 +1,9 @@
 import Block from "../../core/block.ts";
 import User from "../user/user.ts";
+import { Props } from "../../types.ts";
 
 export default class Users extends Block {
-    constructor(props) {
+    constructor(props: Props) {
         const users = props.users.reduce((acc, current) => {
             const user = new User({name: current.name, message: current.message, unread: current.unread, image: current.image, time: current.time, selected: current.selected});
             acc[user.id] = user;

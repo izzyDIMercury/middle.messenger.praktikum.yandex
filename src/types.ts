@@ -5,7 +5,7 @@
 // export type Props = Record<string, string | EventProp>;
 
 type PropsFunction = {
-    [key: string]: Function
+    [key: string]: () => void
 }
 
 type PropsFunction2 = {
@@ -13,8 +13,10 @@ type PropsFunction2 = {
 
 }
 
-type Props = {
-    [key: string]: string | Function | { [key: string]: Function }
+type FuncVoid = () => void;
+
+interface Props {
+    [key: string]: string | PropsFunction | boolean
 }
 
 type UserData = Record<string, string>;
