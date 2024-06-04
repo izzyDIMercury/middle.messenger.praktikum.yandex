@@ -3,7 +3,8 @@ import PageTitle from "../../components/page-title/page-title.ts";
 import Button from "../../components/button/button.ts";
 import Link from "../../components/link/link.ts";
 import RegisterPageList from "../../components/register-page-list/register-page-list.ts";
-import { switchPage, checkForErrors, showErrorMessage, hideErrorMessage } from "../../core/utils.ts";
+import FormSubmit from "../../core/formSubmit.ts";
+import { switchPage } from "../../core/utils.ts";
 
 
 export default class RegisterPage extends Block {
@@ -107,22 +108,21 @@ export default class RegisterPage extends Block {
         }
     }
 
-    handleBlur(e) {
-        this.handleSubmit(e);
+    handleBlur(event) {
+        this.handleSubmit(event);
     }
 
-    handleSubmit(e) {
-        e.preventDefault();
-        const result = checkForErrors(".register-page", "input");
-        if (result.hasErrors) {
-            // console.log(this);
-            showErrorMessage(result, ".register-page__content", "login-page__error-text");
-        } else if (e.type === "click") {
-            console.log("Regsitration successful!");
+    handleSubmit(event) {
+        event.preventDefault();
+
+        const submit = new FormSubmit({
+            formClass: "register-page",
+            parentClass: "register-page__content",
+            errorClass: "login-page__error-text"
+        });
+        if (submit.validated && event.type === "click") {
+            submit.sendData("https://chats", "get");
             switchPage(null, "chat");
-        } else {
-            hideErrorMessage("login-page__error-text");
-            console.log("Registration successful!");
         }
     }
     

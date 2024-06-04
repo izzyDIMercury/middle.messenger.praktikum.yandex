@@ -3,7 +3,8 @@ import ReturnButton from "../../components/return-button/return-button.ts";
 import ProfileForm from "../../components/profile-form/profile-form.ts";
 import Button from "../../components/button/button.ts";
 import Image from "../../components/image/image.ts";
-import { switchPage, checkForErrors, showErrorMessage, hideErrorMessage } from "../../core/utils.ts";
+import FormSubmit from "../../core/formSubmit.ts";
+import { switchPage } from "../../core/utils.ts";
 
 
 export default class ProfileChangePasswordPage extends Block {
@@ -81,16 +82,15 @@ export default class ProfileChangePasswordPage extends Block {
 
     handleSubmit(e) {
         e.preventDefault();
-        const result = checkForErrors(".profile-change-password-page__form", "input");
-        if (result.hasErrors) {
-            console.log(this);
-            showErrorMessage(result, ".profile-change-password-page__form-data", "profile-change-password-page__error-text");
-        } else if (e.type === "click") {
-            console.log("Password change successful!");
-            switchPage(null, "profile");
-        } else {
-            hideErrorMessage("profile-change-password-page__error-text");
-            console.log("Password change successful!");
+
+        const submit = new FormSubmit({
+            formClass: "profile-change-password-page__form",
+            parentClass: "profile-change-password-page__form-data",
+            errorClass: "profile-change-password-page__error-text"
+        });
+        if (submit.validated && event.type === "click") {
+            submit.sendData("https://chats", "get");
+            switchPage(null, "chat");
         }
     }
 

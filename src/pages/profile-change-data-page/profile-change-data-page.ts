@@ -3,7 +3,8 @@ import ReturnButton from "../../components/return-button/return-button.ts";
 import ProfileForm from "../../components/profile-form/profile-form.ts";
 import Button from "../../components/button/button.ts";
 import Image from "../../components/image/image.ts";
-import { switchPage, checkForErrors, showErrorMessage, hideErrorMessage } from "../../core/utils.ts";
+import FormSubmit from "../../core/formSubmit.ts";
+import { switchPage } from "../../core/utils.ts";
 
 
 export default class ProfileChangeDataPage extends Block {
@@ -99,21 +100,21 @@ export default class ProfileChangeDataPage extends Block {
         }
     }
 
-    handleBlur(e) {
-        this.handleSubmit(e);
+    handleBlur(event) {
+        this.handleSubmit(event);
     }
 
-    handleSubmit(e) {
-        e.preventDefault();
-        const result = checkForErrors(".profile-change-data-page__form", "input");
-        if (result.hasErrors) {
-            showErrorMessage(result, ".profile-change-data-page__form-data", "profile-change-data-page__error-text");
-        } else if (e.type === "click") {
-            console.log("Data change successful!");
-            switchPage(null, "profile");
-        } else {
-            hideErrorMessage("profile-change-data-page__error-text");
-            console.log("Data change successful!");
+    handleSubmit(event) {
+        event.preventDefault();
+
+        const submit = new FormSubmit({
+            formClass: "profile-change-data-page__form",
+            parentClass: "profile-change-data-page__form-data",
+            errorClass: "profile-change-data-page__error-text"
+        });
+        if (submit.validated && event.type === "click") {
+            submit.sendData("https://chats", "get");
+            switchPage(null, "chat");
         }
     }
 

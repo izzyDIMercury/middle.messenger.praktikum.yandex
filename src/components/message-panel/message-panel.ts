@@ -2,7 +2,7 @@ import Block from "../../core/block.ts";
 import Input from "../input/input.ts";
 import Image from "../image/image.ts";
 import MessageButton from "./message-button.ts";
-import { checkForErrors } from "../../core/utils.ts";
+import FormSubmit from "../../core/formSubmit.ts";
 
 
 export default class MessagePanel extends Block {
@@ -44,19 +44,19 @@ export default class MessagePanel extends Block {
         }
     }
 
-    handleBlur(e) {
-        console.log("blur");
-        this.handleSubmit(e);
+    handleBlur(event) {
+        this.handleSubmit(event);
     }
 
-    handleSubmit(e) {
-        e.preventDefault();
-        const result = checkForErrors(".message-panel", "input");
-        if (result.hasErrors) {
-            console.log("Сообщение не должно быть пустым.");
-        } else {
-            console.log("Сообщение отправлено.");
-        }
+    handleSubmit(event) {
+        event.preventDefault();
+
+        const submit = new FormSubmit({
+            formClass: "message-panel",
+            parentClass: "",
+            errorClass: "",
+            isMessage: true
+        })
     }
 
 

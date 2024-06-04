@@ -5,19 +5,24 @@ type UserData = Record<string, string> | null;
 export default class FormSubmit {
 
     public validated: boolean = false;
+    public isMessage: boolean = false;
     private userData: UserData = null;
 
-    constructor({ formClass, parentClass, errorClass }) {
+    constructor({ formClass, parentClass, errorClass, isMessage = false }) {
 
         const form = document.querySelector(`.${formClass}`);
         const inputs = Object.values(form.querySelectorAll("input"));
         const checkResult = this.checkForErrors(inputs);
 
         if (checkResult.hasErrors) {
-            this.showErrorMessage(checkResult, parentClass, errorClass);
+            if (isMessage) {
+                console.log("Сообщение не должно быть пустым!");
+            } else {
+                this.showErrorMessage(checkResult, parentClass, errorClass);
+            }
             this.validated = false;
         } else {
-            this.hideErrorMessage(errorClass);
+            !isMessage && this.hideErrorMessage(errorClass);
             this.validated = true; 
         }
 
@@ -29,7 +34,10 @@ export default class FormSubmit {
         inputs.forEach(el => {
             userData[el.name] = el.value;
         })
+
+        // Log user data object:
         console.log(userData);
+        //
         return userData;
     }
 
@@ -57,7 +65,6 @@ export default class FormSubmit {
             }
         });
         const result = this.validate(checks);
-        console.log(result);
         return result;
     }
 
