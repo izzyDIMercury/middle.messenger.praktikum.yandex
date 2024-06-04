@@ -22,7 +22,10 @@ export default class LoginPage extends Block {
         const Title = new PageTitle({
             className: "login-page__title",
             title: "Вход"
+
         });
+
+        // здесь
         const InputLogin = new InputField({
             className: "login-page__input",
             title: "Логин",
