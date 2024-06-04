@@ -25,7 +25,6 @@ export default class LoginPage extends Block {
 
         });
 
-        // здесь
         const InputLogin = new InputField({
             className: "login-page__input",
             title: "Логин",
