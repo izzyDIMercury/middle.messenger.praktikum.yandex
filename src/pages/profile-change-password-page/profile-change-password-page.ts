@@ -76,18 +76,14 @@ export default class ProfileChangePasswordPage extends Block {
         }
     }
 
-    handleBlur(e) {
-        this.handleSubmit(e);
+    handleBlur(event: FocusEvent) {
+        this.handleSubmit(event);
     }
 
-    handleSubmit(e) {
-        e.preventDefault();
+    handleSubmit(event: FocusEvent | MouseEvent) {
+        event.preventDefault();
 
-        const submit = new FormSubmit({
-            formClass: "profile-change-password-page__form",
-            parentClass: "profile-change-password-page__form-data",
-            errorClass: "profile-change-password-page__error-text"
-        });
+        const submit = new FormSubmit( "profile-change-password-page__form", "profile-change-password-page__form-data", "profile-change-password-page__error-text" );
         if (submit.validated && event.type === "click") {
             submit.sendData("https://chats", "get");
             switchPage(null, "chat");

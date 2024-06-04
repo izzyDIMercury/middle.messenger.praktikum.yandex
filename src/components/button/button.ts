@@ -1,8 +1,9 @@
 import Block from "../../core/block.ts";
+import { Props } from "../../types.ts";
 
 export default class Button extends Block {
-    constructor(props) {
-        super("div", {
+    constructor(props: Props) {
+        super("", {
             ...props
         })
     }

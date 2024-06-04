@@ -1,8 +1,9 @@
 import Block from "../../core/block.ts";
+import { Props } from "../../types.ts";
 
 export default class Image extends Block {
 
-    constructor(props) {
+    constructor(props: Props) {
         super("", {
             ...props
         })

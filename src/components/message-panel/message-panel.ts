@@ -3,11 +3,12 @@ import Input from "../input/input.ts";
 import Image from "../image/image.ts";
 import MessageButton from "./message-button.ts";
 import FormSubmit from "../../core/formSubmit.ts";
+import { Props } from "../../types.ts";
 
 
 export default class MessagePanel extends Block {
 
-    constructor(props) {
+    constructor(props: Props) {
         super("form", {
             ...props
         })
@@ -23,8 +24,9 @@ export default class MessagePanel extends Block {
             name: "message",
             title: "message",
             label: "message",
-            enabled: true,
-            blur: handleBlurBind
+            events: {
+                blur: handleBlurBind
+            }
         })
         const ClipIcon = new Image({
             className: "message-panel__attach-icon",
@@ -44,19 +46,14 @@ export default class MessagePanel extends Block {
         }
     }
 
-    handleBlur(event) {
+    handleBlur(event: FocusEvent): void {
         this.handleSubmit(event);
     }
 
-    handleSubmit(event) {
+    handleSubmit(event: FocusEvent | MouseEvent): void {
         event.preventDefault();
 
-        const submit = new FormSubmit({
-            formClass: "message-panel",
-            parentClass: "",
-            errorClass: "",
-            isMessage: true
-        })
+        new FormSubmit("message-panel", "", "", false);
     }
 
 

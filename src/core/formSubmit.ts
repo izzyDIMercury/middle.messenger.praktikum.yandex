@@ -1,24 +1,33 @@
 import HTTPTransport from "./request.ts";
+import type { UserData } from "../types.js";
 
-type UserData = Record<string, string> | null;
+// type Data = Record<string, string>;
+
+interface HTMLProps extends HTMLInputElement {
+    name: string,
+    value: string
+}
+
+type Check = { type: string, error: boolean | Error };
 
 export default class FormSubmit {
 
     public validated: boolean = false;
     public isMessage: boolean = false;
-    private userData: UserData = null;
+    private userData: UserData
 
-    constructor({ formClass, parentClass, errorClass, isMessage = false }) {
 
-        const form = document.querySelector(`.${formClass}`);
-        const inputs = Object.values(form.querySelectorAll("input"));
-        const checkResult = this.checkForErrors(inputs);
+    constructor(formClass: string, parentClass: string, errorClass: string, isMessage?: boolean) {
+
+        const form: HTMLElement | null = document.querySelector(`.${formClass}`);
+        const inputs: HTMLInputElement[] = Object.values(form ? form.querySelectorAll("input") : {});
+        const checkResult: { type: string, message: string, hasErrors: boolean } = this.checkForErrors(inputs);
 
         if (checkResult.hasErrors) {
             if (isMessage) {
                 console.log("Сообщение не должно быть пустым!");
             } else {
-                this.showErrorMessage(checkResult, parentClass, errorClass);
+                this.showErrorMessage(checkResult.type, checkResult.message, parentClass, errorClass);
             }
             this.validated = false;
         } else {
@@ -29,10 +38,10 @@ export default class FormSubmit {
         this.userData = this.getData(inputs);
     }
 
-    private getData(inputs) {
-        const userData = {};
-        inputs.forEach(el => {
-            userData[el.name] = el.value;
+    private getData(inputs: HTMLInputElement[]) {
+        const userData: Record<string, string> = {};
+        inputs.forEach((value: HTMLProps) => {
+            userData[value.name] = value.value;
         })
 
         // Log user data object:
@@ -41,11 +50,25 @@ export default class FormSubmit {
         return userData;
     }
 
-    public sendData(url, method) {
-        new HTTPTransport()[`${method}`](url, { data: this.userData });
+    public sendData(url: string, method: string) {
+        const userData = {data: this.userData};
+        switch (method) {
+            case "post":
+                new HTTPTransport().post(url, { data: this.userData });
+                break;
+            case "delete":
+                new HTTPTransport().delete(url, { data: this.userData });
+                break;
+            case "put":
+                new HTTPTransport().put(url, { data: this.userData });
+                break;
+            default:
+                new HTTPTransport().get(url, { data: this.userData });
+                break;
+        }
     }
 
-    private checkForErrors(inputs) {
+    private checkForErrors(inputs: HTMLInputElement[]) {
 
         const checks = inputs.map(element => {
             if (element.name === "login") {
@@ -64,12 +87,12 @@ export default class FormSubmit {
                 return {type: "display_name", error: this.checkDisplayName(element.value)};
             }
         });
-        const result = this.validate(checks);
+        const result = this.validate(checks as Check[]);
         return result;
     }
 
-    private showErrorMessage(checkResult, parentClass, errorClass) {
-        const { type, message } = checkResult;
+    private showErrorMessage(type: string, message: string, parentClass: string, errorClass: string) {
+        // const { type, message } = checkResult;
         const parent = document.querySelector(`.${parentClass}`);
         if (parent?.querySelector(`.${errorClass}`)) {
             const oldElement = parent?.querySelector(`.${errorClass}`);
@@ -82,16 +105,16 @@ export default class FormSubmit {
         parent?.appendChild(element);
     }
 
-    private hideErrorMessage(errorClass) {
+    private hideErrorMessage(errorClass: string) {
         const element = document.querySelector(`.${errorClass}`);
         element?.remove();
     }
 
-    public validate(checks) {
-        let result = { hasErrors: false }
-        for (let i = 0; i < checks.length; i++) {
+    public validate(checks: Check[]) {
+        let result = { hasErrors: false, type: "", message: "" }
+        for (let i = 0; i < Number(checks.length); i++) {
             if (checks[i].error) {
-                result = { type: checks[i].type, hasErrors: true, message: checks[i].error.message};
+                result = { type: checks[i].type, hasErrors: true, message: checks[i].error.message };
                 break;
             }
         }

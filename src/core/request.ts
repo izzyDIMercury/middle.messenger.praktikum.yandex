@@ -1,4 +1,14 @@
-// type UserData = Record<string, string>
+import type { UserData } from "../types.js";
+
+type Options = {
+    headers?: {
+      [key: string]: string
+    },
+    method?: string,
+    timeout?: number,
+    data: UserData
+
+}
 
 export default class HTTPTransport {
 
@@ -8,7 +18,7 @@ export default class HTTPTransport {
     static readonly DELETE = "DELETE";
 
 
-    private stringify(userData) {
+    private stringify(userData: UserData) {
         if (typeof userData !== "object") {
           throw new Error("Data must be object!");
         }
@@ -19,23 +29,23 @@ export default class HTTPTransport {
         }, '?');
     }
 
-    public get(url, options = {}) { 
+    public get(url: string, options: Options) { 
         return this.request(url, {...options, method: HTTPTransport.GET}, options.timeout);
     };
     
-    public post(url, options = {}) {
+    public post(url: string, options: Options) {
       return this.request(url, {...options, method: HTTPTransport.POST}, options.timeout);
     };
     
-    public put(url, options = {}) {
+    public put(url: string, options: Options) {
       return this.request(url, {...options, method: HTTPTransport.PUT}, options.timeout);
     };
     
-    public delete(url, options = {}) { 
+    public delete(url: string, options: Options) { 
       return this.request(url, {...options, method: HTTPTransport.DELETE}, options.timeout);
     };
     
-    public request(url, options = {}, timeout = 3000) {
+    public request(url: string, options: Options, timeout = 3000) {
         const {headers = {}, method, data} = options;
         const self = this;
       
@@ -46,7 +56,7 @@ export default class HTTPTransport {
           }
       
           const xhr = new XMLHttpRequest();
-          const isGet = method === self.GET;
+          const isGet = method === HTTPTransport.GET;
       
           xhr.open(
             method, 
@@ -72,7 +82,7 @@ export default class HTTPTransport {
           if (isGet || !data) {
             xhr.send();
           } else {
-            xhr.send(data);
+            xhr.send(JSON.stringify(data));
           }
         });
     };

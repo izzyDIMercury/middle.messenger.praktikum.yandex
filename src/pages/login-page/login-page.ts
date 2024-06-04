@@ -83,17 +83,13 @@ export default class LoginPage extends Block {
         }
     }
 
-    handleBlur(event) {
+    handleBlur(event: FocusEvent) {
         this.handleSubmit(event);
     }
 
-    handleSubmit(event) {
+    handleSubmit(event: FocusEvent | MouseEvent) {
         event.preventDefault();
-        const submit = new FormSubmit({
-            formClass: "login-page",
-            parentClass: "login-page__content",
-            errorClass: "login-page__error-text"
-        });
+        const submit = new FormSubmit("login-page", "login-page__content", "login-page__error-text");
         if (submit.validated && event.type === "click") {
             submit.sendData("https://chats", "get");
             switchPage(null, "chat");

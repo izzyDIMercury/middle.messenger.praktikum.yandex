@@ -1,7 +1,8 @@
 import Block from "../../core/block.ts";
+import { Props } from "../../types.ts";
 
 export default class InputElement extends Block {
-    constructor(props) {
+    constructor(props: Props) {
         super("", props)
     }
 

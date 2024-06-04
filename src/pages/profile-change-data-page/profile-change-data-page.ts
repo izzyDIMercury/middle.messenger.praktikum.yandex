@@ -100,18 +100,14 @@ export default class ProfileChangeDataPage extends Block {
         }
     }
 
-    handleBlur(event) {
+    handleBlur(event: FocusEvent) {
         this.handleSubmit(event);
     }
 
-    handleSubmit(event) {
+    handleSubmit(event: FocusEvent | MouseEvent) {
         event.preventDefault();
 
-        const submit = new FormSubmit({
-            formClass: "profile-change-data-page__form",
-            parentClass: "profile-change-data-page__form-data",
-            errorClass: "profile-change-data-page__error-text"
-        });
+        const submit = new FormSubmit( "profile-change-data-page__form", "profile-change-data-page__form-data", "profile-change-data-page__error-text" );
         if (submit.validated && event.type === "click") {
             submit.sendData("https://chats", "get");
             switchPage(null, "chat");

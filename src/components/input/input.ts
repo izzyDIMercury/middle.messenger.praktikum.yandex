@@ -1,8 +1,9 @@
 import Block from "../../core/block.ts";
 import InputElement from "./input-element.ts";
+import { Props } from "../../types.ts";
 
 export default class Input extends Block {
-    constructor(props) {
+    constructor(props: Props) {
         super("div", {
             ...props,
             Field: new InputElement({

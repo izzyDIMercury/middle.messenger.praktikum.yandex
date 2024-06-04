@@ -1,11 +1,12 @@
 import Block from "../../core/block.ts";
 import ProfileFooterButton from "../profile-footer-button/profile-footer-button.ts";
 import { switchPage } from "../../core/utils.ts";
+import { Props } from "../../types.ts";
 
 
 export default class ProfileFooter extends Block {
 
-    constructor(props) {
+    constructor(props: Props) {
 
         const buttons = props.buttons.reduce((acc, current) => {
             const button = new ProfileFooterButton({classModifier: current.classModifier, page: current.page, text: current.text, events: { click: switchPage }});

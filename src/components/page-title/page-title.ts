@@ -1,7 +1,9 @@
 import Block from "../../core/block.ts";
+import { Props } from "../../types.ts";
+
 
 export default class PageTitle extends Block {
-    constructor(props) {
+    constructor(props: Props) {
         super("div", {
             ...props
         })
