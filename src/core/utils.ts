@@ -19,7 +19,6 @@ export function checkForErrors(formQuery = "form", inputQuery = "input") {
 export function showErrorMessage(args, parentQuery, errorClass) {
     const { type, message } = args;
     const parent = document.querySelector(parentQuery);
-    // const listElement = document.querySelector(".login-page__input-elements");
     if (parent?.querySelector(`.${errorClass}`)) {
         const oldElement = parent?.querySelector(`.${errorClass}`);
         oldElement?.remove();
@@ -27,7 +26,6 @@ export function showErrorMessage(args, parentQuery, errorClass) {
     const element = document.createElement("p");
     element.setAttribute("class", errorClass);
     const text = document.createTextNode(message);
-    // console.log(element);
     element.appendChild(text);
     parent?.appendChild(element);
 }

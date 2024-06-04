@@ -1,6 +1,45 @@
+import HTTPTransport from "./request.ts";
+
+type UserData = Record<string, string> | null;
+
 export default class FormSubmit {
-    constructor(props) {
-        this.checklist = props.map(element => {
+
+    public validated: boolean = false;
+    private userData: UserData = null;
+
+    constructor({ formClass, parentClass, errorClass }) {
+
+        const form = document.querySelector(`.${formClass}`);
+        const inputs = Object.values(form.querySelectorAll("input"));
+        const checkResult = this.checkForErrors(inputs);
+
+        if (checkResult.hasErrors) {
+            this.showErrorMessage(checkResult, parentClass, errorClass);
+            this.validated = false;
+        } else {
+            this.hideErrorMessage(errorClass);
+            this.validated = true; 
+        }
+
+        this.userData = this.getData(inputs);
+    }
+
+    private getData(inputs) {
+        const userData = {};
+        inputs.forEach(el => {
+            userData[el.name] = el.value;
+        })
+        console.log(userData);
+        return userData;
+    }
+
+    public sendData(url, method) {
+        new HTTPTransport()[`${method}`](url, { data: this.userData });
+    }
+
+    private checkForErrors(inputs) {
+
+        const checks = inputs.map(element => {
             if (element.name === "login") {
                 return {type: "login", error: this.checkLogin(element.value)};
             } else if (element.type === "password") {
@@ -17,24 +56,35 @@ export default class FormSubmit {
                 return {type: "display_name", error: this.checkDisplayName(element.value)};
             }
         });
-
-        this.data = props;
-        this.getData();
+        const result = this.validate(checks);
+        console.log(result);
+        return result;
     }
 
-    public getData() {
-        const loggingObject = {};
-        this.data.forEach(el => {
-            loggingObject[el.name] = el.value;
-        })
-        console.log(loggingObject);
+    private showErrorMessage(checkResult, parentClass, errorClass) {
+        const { type, message } = checkResult;
+        const parent = document.querySelector(`.${parentClass}`);
+        if (parent?.querySelector(`.${errorClass}`)) {
+            const oldElement = parent?.querySelector(`.${errorClass}`);
+            oldElement?.remove();
+        }
+        const element = document.createElement("p");
+        element.setAttribute("class", errorClass);
+        const text = document.createTextNode(message);
+        element.appendChild(text);
+        parent?.appendChild(element);
     }
 
-    public validate() {
+    private hideErrorMessage(errorClass) {
+        const element = document.querySelector(`.${errorClass}`);
+        element?.remove();
+    }
+
+    public validate(checks) {
         let result = { hasErrors: false }
-        for (let i = 0; i < this.checklist.length; i++) {
-            if (this.checklist[i].error) {
-                result = { type: this.checklist[i].type, hasErrors: true, message: this.checklist[i].error.message};
+        for (let i = 0; i < checks.length; i++) {
+            if (checks[i].error) {
+                result = { type: checks[i].type, hasErrors: true, message: checks[i].error.message};
                 break;
             }
         }

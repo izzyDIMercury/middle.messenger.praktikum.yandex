@@ -3,7 +3,8 @@ import PageTitle from "../../components/page-title/page-title.ts";
 import InputField from "../../components/input-field/input-field.ts";
 import Button from "../../components/button/button.ts";
 import Link from "../../components/link/link.ts";
-import { switchPage, checkForErrors, showErrorMessage, hideErrorMessage } from "../../core/utils.ts";
+import FormSubmit from "../../core/formSubmit.ts";
+import { switchPage } from "../../core/utils.ts";
 
 
 export default class LoginPage extends Block {
@@ -82,22 +83,20 @@ export default class LoginPage extends Block {
         }
     }
 
-    handleBlur(e) {
-        this.handleSubmit(e);
+    handleBlur(event) {
+        this.handleSubmit(event);
     }
 
-    handleSubmit(e) {
-        e.preventDefault();
-        const result = checkForErrors(".login-page", "input");
-        if (result.hasErrors) {
-            // console.log(this);
-            showErrorMessage(result, ".login-page__content", "login-page__error-text");
-        } else if (e.type === "click") {
-            console.log("Login successful!");
+    handleSubmit(event) {
+        event.preventDefault();
+        const submit = new FormSubmit({
+            formClass: "login-page",
+            parentClass: "login-page__content",
+            errorClass: "login-page__error-text"
+        });
+        if (submit.validated && event.type === "click") {
+            submit.sendData("https://chats", "get");
             switchPage(null, "chat");
-        } else {
-            hideErrorMessage("login-page__error-text");
-            console.log("Login successful!");
         }
     }
 
