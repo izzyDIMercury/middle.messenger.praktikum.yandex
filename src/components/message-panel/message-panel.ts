@@ -24,9 +24,8 @@ export default class MessagePanel extends Block {
             name: "message",
             title: "message",
             label: "message",
-            events: {
-                blur: handleBlurBind
-            }
+            enabled: true,
+            blur: handleBlurBind
         })
         const ClipIcon = new Image({
             className: "message-panel__attach-icon",
@@ -53,7 +52,7 @@ export default class MessagePanel extends Block {
     handleSubmit(event: FocusEvent | MouseEvent): void {
         event.preventDefault();
 
-        new FormSubmit("message-panel", "", "", false);
+        new FormSubmit("message-panel", "", "", true);
     }
 
 

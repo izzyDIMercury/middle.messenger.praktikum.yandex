@@ -8,7 +8,7 @@ interface HTMLProps extends HTMLInputElement {
     value: string
 }
 
-type Check = { type: string, error: boolean | Error };
+type Check = { type: string, hasErrors: boolean, error: Error };
 
 export default class FormSubmit {
 
@@ -70,21 +70,30 @@ export default class FormSubmit {
 
     private checkForErrors(inputs: HTMLInputElement[]) {
 
+        type ChecksData = Array<{  }>
+
         const checks = inputs.map(element => {
             if (element.name === "login") {
-                return {type: "login", error: this.checkLogin(element.value)};
+                const { hasErrors, error } = this.checkLogin(element.value);
+                return {type: "login", hasErrors: hasErrors, error: error};
             } else if (element.type === "password") {
-                return {type: "password", error: this.checkPassword(element.value)};
+                const { hasErrors, error } = this.checkPassword(element.value);
+                return {type: "password", hasErrors: hasErrors, error: error};
             } else if (element.name === "first_name" || element.name === "second_name") {
-                return {type: "name", error: this.checkName(element.value)};
+                const { hasErrors, error } = this.checkName(element.value);
+                return {type: "name", hasErrors: hasErrors, error: error};
             } else if (element.name === "email") {
-                return {type: "email", error: this.checkEmail(element.value)};
+                const { hasErrors, error } = this.checkEmail(element.value);
+                return {type: "email", hasErrors: hasErrors, error: error};
             } else if (element.name === "tel") {
-                return {type: "tel", error: this.checkTel(element.value)};
+                const { hasErrors, error } = this.checkTel(element.value);
+                return {type: "tel", hasErrors: hasErrors, error: error};
             } else if (element.name === "message") {
-                return {type: "message", error: this.checkMessage(element.value)};
+                const { hasErrors, error } = this.checkMessage(element.value);
+                return {type: "message", hasErrors: hasErrors, error: error};
             } else if (element.name === "display_name") {
-                return {type: "display_name", error: this.checkDisplayName(element.value)};
+                const { hasErrors, error } = this.checkDisplayName(element.value);
+                return {type: "display_name", hasErrors: hasErrors, error: error};
             }
         });
         const result = this.validate(checks as Check[]);
@@ -113,7 +122,7 @@ export default class FormSubmit {
     public validate(checks: Check[]) {
         let result = { hasErrors: false, type: "", message: "" }
         for (let i = 0; i < Number(checks.length); i++) {
-            if (checks[i].error) {
+            if (checks[i].hasErrors) {
                 result = { type: checks[i].type, hasErrors: true, message: checks[i].error.message };
                 break;
             }
@@ -124,43 +133,43 @@ export default class FormSubmit {
     private checkLogin(login: string = "") {
 
         if (login.length === 0) {
-            return new Error("Укажите логин.");
+            return { hasErrors: true, error: new Error("Укажите логин.")};
         }
 
         if (login.length < 3 || login.length > 20) {
-            return new Error("Длина логина должна быть не менее 3 и не более 20 символов.");
+            return { hasErrors: true, error: new Error("Длина логина должна быть не менее 3 и не более 20 символов.")};
         }
 
         if (!login.match(/^[\w-]+$/)) {
-            return new Error("Для логина опускаются только латиница и цифры.");
+            return { hasErrors: true, error: new Error("Для логина опускаются только латиница и цифры.")}
         }
 
         if (!login.match(/[a-zA-Z]/)) {
-            return new Error("Логин не должен состоять только из цифр.");
+            return { hasErrors: true, error: new Error("Логин не должен состоять только из цифр.")};
         }
-        return false;
+        return { hasErrors: false, error: new Error() };
 
     }
 
     private checkPassword(password: string = "") {
 
         if (password.length === 0) {
-            return new Error("Укажите пароль.");
+            return { hasErrors: true, error: new Error("Укажите пароль.")};
         }
 
         if (password.length < 8 || password.length > 40) {
-            return new Error("Длина пароля должна быть не менее 8 симолов и не более 40 символов.");
+            return { hasErrors: true, error: new Error("Длина пароля должна быть не менее 8 симолов и не более 40 символов.")};
         }
 
         if (!password.match(/[0-9]/)) {
-            return new Error("Пароль должен содержать хотя бы одну цифру.")
+            return { hasErrors: true, error: new Error("Пароль должен содержать хотя бы одну цифру.")};
         }
         
         const upperCaseLetters = password.split("").filter(character => {
-            return (character == character.toUpperCase()) && isNaN(character);
+            return (character == character.toUpperCase()) && !Number.isNaN(Number(character));
         });
         if (upperCaseLetters.length === 0) {
-            return new Error("Хотя бы одна буква в пароле должна быть заглавной.");
+            return { hasErrors: true, error: new Error("Хотя бы одна буква в пароле должна быть заглавной.")};
         }
 
         // const passwords = props.filter(prop => prop.name === "password").map(el => el.value);
@@ -169,93 +178,92 @@ export default class FormSubmit {
         // }
 
         
-        return false;
+        return { hasErrors: false, error: new Error() };
     }
  
-    private checkName(name) {
+    private checkName(name: string) {
 
         if (name.length === 0) {
-            return new Error("Укажите имя/фамилию.");
+            return { hasErrors: true, error: new Error("Укажите имя/фамилию.")};
         }
 
         if (!name.match(/[a-zA-Zа-яА-ЯёЁ]/)) {
-            return new Error("В имени/фамилии допускаются только кирилица м латиница");
+            return { hasErrors: true, error: new Error("В имени/фамилии допускаются только кирилица м латиница")};
         }
 
         if (name[0] != name[0].toUpperCase()) {
-            return new Error("Первая буква имени/фамилии должна быть заглавной");
+            return { hasErrors: true, error: new Error("Первая буква имени/фамилии должна быть заглавной")};
         }
 
-        return false;
+        return { hasErrors: false, error: new Error() };
     }
 
-    private checkEmail(email) {
-
-        // console.log(email);
+    private checkEmail(email: string) {
 
         if (email.length === 0) {
-            return new Error("Укажите почту.");
+            return { hasErrors: true, error: new Error("Укажите почту.")};
         }
 
-
         if (!email.match(/^[-_@\.a-zA-Z0-9]+$/)) {
-            return new Error("В почтовом адреме используются некорректные симолы");
+            return { hasErrors: true, error: new Error("В почтовом адреме используются некорректные симолы")};
         }
 
         if (!email.match(/[@]+[-_a-zA-Z0-9]+[\.]+/)) {
-            return new Error("В почтовом адреме отсутствуют необходимые символы.");
+            return { hasErrors: true, error: new Error("В почтовом адреме отсутствуют необходимые символы.")};
         }
 
         const substring = email.split("@")[1].split(".")[0];
         if (!substring.match(/[a-zA-Z]/)) {
-            return new Error("Неправильно указана почта");
+            return { hasErrors: true, error: new Error("Неправильно указана почта")};
         }
 
-        return false;
+        return { hasErrors: false, error: new Error() };
     }
 
-    private checkTel(tel) {
+    private checkTel(tel: string) {
 
         if (tel.length === 0) {
-            return new Error("Укажите номер телефона.");
+            return { hasErrors: true, error: new Error("Укажите номер телефона.")};
         }
 
         if (tel.length < 10 || tel.length > 15) {
-            return new Error("Неверная длина телефонного номера");
+            return { hasErrors: true, error: new Error("Неверная длина телефонного номера")};
         }
 
         if (!tel.match(/^[0-9]+$/)) {
-            return new Error("Телефонный номер должен состоять из цифр");
+            return { hasErrors: true, error: new Error("Телефонный номер должен состоять из цифр")};
         }
 
         if  (tel[0] !== "+" && typeof Number(tel[0]) !== "number") {
-            return new Error("Телефонный номер должен начинаться с цифры или символа +");
+            return { hasErrors: true, error: new Error("Телефонный номер должен начинаться с цифры или символа +")};
         } 
 
-        return false;
+        return { hasErrors: false, error: new Error() };
     }
 
     private checkMessage(message: string = "") {
 
         if (message.length === 0) {
-            return new Error("Сообщение не должно быть пустым");
+            return { hasErrors: true, error: new Error("Сообщение не должно быть пустым")};
         }
 
-        return false;
+        return { hasErrors: false, error: new Error() };
     }
 
-    private checkDisplayName(name) {
+    private checkDisplayName(name: string) {
 
         if (name.length === 0) {
-            return new Error("Укажите имя в чате.");
+            return { hasErrors: true, error: new Error("Укажите имя в чате.")};
         }
 
         if (name.length < 3 || name.length > 20) {
-            return new Error("Длина имени в чате должна быть не менее 3 и не более 20 символов.");
+            return { hasErrors: true, error: new Error("Длина имени в чате должна быть не менее 3 и не более 20 символов.")};
         }
 
         if (!name.match(/^[\w-]+$/)) {
-            return new Error("Для имени в чате опускаются только латиница и цифры.");
+            return { hasErrors: true, error: new Error("Для имени в чате опускаются только латиница и цифры.")};
         }
+
+        return { hasErrors: false, error: new Error() };
     }
 }
