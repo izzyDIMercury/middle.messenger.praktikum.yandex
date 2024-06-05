@@ -1,11 +1,20 @@
 {
-    "extends": "airbnb-base",
+    "extends": [
+        "airbnb-base",
+        "airbnb-typescript"
+    ],
+    "parserOptions": {
+        "project": "./tsconfig.json"
+    },
     "rules": {
-        "ident": [
-            "error", 4
-        ],
         "quotes": [
             "error", "double"
+        ],
+        "ident": [
+            "error", 6
+        ],
+        "linebreak-style": [
+            "error", "windows"
         ]
     }
 }
