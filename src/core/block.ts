@@ -8,12 +8,17 @@ import {v4 as makeUUID} from 'uuid';
 // type Empty = {};
 // type propsAndChildren = Record<string, any>;
 
+// type BlockChildren = {[key: string]: any} | {};
+// type BlockProps = {[key: string]: any} | {};
+// type DefinedProps = {[key: string]: any};
+// type DefinedChildren = {[key: string]: any}
+
 
 class Block<Props> {
 
-    children: any;
+    children: Partial<Props>;
     eventBus: Function;
-    props: any;
+    props: Partial<Props>;
 
     static EVENTS = {
         INIT: "init",
@@ -23,11 +28,11 @@ class Block<Props> {
     }
 
     private element: Element | null = null;
-    private meta: { tagName: string, props: keyof Props } | null = null;
+    private meta: { tagName: string, props: {} } | null = null;
     id: number | string;
      // private id: number | string | null = null;
 
-    constructor(tagName: string = "div", propsAndChildren: any) {
+    constructor(tagName: string = "div", propsAndChildren: Props) {
 
         const { children, props } = this.getChildren(propsAndChildren);
         this.children = children;
@@ -61,7 +66,7 @@ class Block<Props> {
         eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
     }
 
-    private getChildren(propsAndChildren: any): { children: any, props: any } {
+    private getChildren(propsAndChildren: Props): { children: Partial<Props>, props: Partial<Props> } {
         const children: Props | {} = {};
         const props: Props | {} = {};
 
@@ -76,7 +81,7 @@ class Block<Props> {
         return { children, props };
     }
 
-    private makePropsProxy(props: Props): any {
+    private makePropsProxy(props: BlockProps): any {
         const self = this;
         const eventBus = this.eventBus();
         const proxy = new Proxy<any>(props, {
