@@ -2,14 +2,18 @@ import Handlebars from "handlebars";
 import EventBus from "./eventBus.js";
 import {v4 as makeUUID} from 'uuid';
 
-// type Props = Record<string, string | Function | boolean>;
-type Children = Record<string, InstanceType<any>>;
+
+// interface Prop {[key: string]: any};
+// interface Child {[key: string]: any};
+// type Empty = {};
+// type propsAndChildren = Record<string, any>;
+
 
 class Block<Props> {
 
-    children: Children;
+    children: any;
     eventBus: Function;
-    props: Props;
+    props: any;
 
     static EVENTS = {
         INIT: "init",
@@ -19,13 +23,15 @@ class Block<Props> {
     }
 
     private element: Element | null = null;
-    private meta: { tagName: string, props: Props } | null = null;
-    private id: number | string | null = null;
+    private meta: { tagName: string, props: keyof Props } | null = null;
+    id: number | string;
+     // private id: number | string | null = null;
 
-    constructor(tagName: string = "div", propsAndChildren: Props | Children) {
+    constructor(tagName: string = "div", propsAndChildren: any) {
 
         const { children, props } = this.getChildren(propsAndChildren);
         this.children = children;
+        console.log(propsAndChildren);
 
         const eventBus = new EventBus();
         
@@ -48,16 +54,16 @@ class Block<Props> {
 
     // Preparations:
 
-    private registerEvents(eventBus: InstanceType<typeof EventBus>): void {
+    private registerEvents(eventBus: InstanceType<any>): void {
         eventBus.on(Block.EVENTS.INIT, this._init.bind(this));
         eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
         eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
         eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
     }
 
-    private getChildren(propsAndChildren: Props | Children): { children: Children, props: Props } {
-        const children: Children = {};
-        const props: Props = {};
+    private getChildren(propsAndChildren: any): { children: any, props: any } {
+        const children: Props | {} = {};
+        const props: Props | {} = {};
 
         Object.entries(propsAndChildren).forEach(([key, value]) => {
             if (value instanceof Block) {
@@ -73,12 +79,12 @@ class Block<Props> {
     private makePropsProxy(props: Props): any {
         const self = this;
         const eventBus = this.eventBus();
-        const proxy = new Proxy(props, {
-            get(target: Props, prop: string) {
+        const proxy = new Proxy<any>(props, {
+            get(target: {[key: string]: any}, prop: string) {
                 const value = target[prop];
                 return typeof value === "function" ? value.bind(target) : value;
             },
-            set(target: Props, prop: string, value: string) {
+            set(target: {[key: string]: any}, prop: string, value: string) {
                 const oldTarget = {...target}
                 target[prop] = value;
                 self.eventBus().emit(Block.EVENTS.FLOW_CDU, oldTarget, target);
@@ -148,7 +154,7 @@ class Block<Props> {
     // Render:
 
     _render(): void {
-        const { block, newElement } = this.compile(this.props);
+        const { block, newElement } = this.compile(this.props) as {[key: string]: any};
 
         if (this.element) {
             this.element.replaceWith(newElement);
@@ -167,14 +173,14 @@ class Block<Props> {
     // Events:
 
     addEvents(): void {
-        const { events = {} } = this.props;
+        const { events = {} } = this.props as any;
         Object.keys(events).forEach(eventName => {
             this.element?.addEventListener(eventName, events[eventName as keyof typeof events]);
         })
     }
 
     removeEvents(): void {
-        const { events = {} } = this.props;
+        const { events = {} } = this.props as any;
         Object.keys(events).forEach(eventName => {
             this.element?.removeEventListener(eventName, events[eventName as keyof typeof events]);
         })
@@ -192,23 +198,25 @@ class Block<Props> {
             return;
         }
 
+        // console.log(this.props);
+
         Object.assign(this.props, newProps);
     }
 
     compile(props: Props) {
-        const propsAndStubs = { ...props };
+        const propsAndStubs: {[key: string]: any} = { ...props };
 
         Object.entries(this.children).forEach(([key, child]) => {
             propsAndStubs[key] = `<div data-id=${child.id}></div>`
         })
 
-        const fragment = this.createDocumentElement("template");
+        const fragment = this.createDocumentElement("template") as HTMLTemplateElement;
         fragment.innerHTML = Handlebars.compile(this.render())(propsAndStubs);
         const newElement = fragment.content.firstElementChild;
 
         Object.values(this.children).forEach(child => {
             const stub = fragment.content.querySelector(`[data-id="${child.id}"]`);
-            stub.replaceWith(child.getContent());
+            stub?.replaceWith(child.getContent());
         })
         const block = fragment.content;
         return { block, newElement };

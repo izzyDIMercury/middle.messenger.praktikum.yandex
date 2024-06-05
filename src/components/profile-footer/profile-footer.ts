@@ -26,9 +26,7 @@ export default class ProfileFooter extends Block<ProfileFooterProps> {
             acc[button.id] = button;
             return acc;
         }, {});
-
-        console.log(props);
-
+        
         super("div", {
             ...props,
             buttonsKeys: Object.keys(buttons),
