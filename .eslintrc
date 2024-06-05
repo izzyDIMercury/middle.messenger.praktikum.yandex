@@ -1,0 +1,11 @@
+{
+    "extends": "airbnb-base",
+    "rules": {
+        "ident": [
+            "error", 4
+        ],
+        "quotes": [
+            "error", "double"
+        ]
+    }
+}

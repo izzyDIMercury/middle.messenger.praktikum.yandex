@@ -4,7 +4,7 @@ import Image from "../image/image.ts";
 import MessageButton from "./message-button.ts";
 import FormSubmit from "../../core/formSubmit.ts";
 
-type MessagePanelProps = undefined;
+type MessagePanelProps = {};
 
 export default class MessagePanel extends Block<MessagePanelProps> {
 

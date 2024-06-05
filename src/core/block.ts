@@ -3,22 +3,12 @@ import EventBus from "./eventBus.js";
 import {v4 as makeUUID} from 'uuid';
 
 
-// interface Prop {[key: string]: any};
-// interface Child {[key: string]: any};
-// type Empty = {};
-// type propsAndChildren = Record<string, any>;
-
-// type BlockChildren = {[key: string]: any} | {};
-// type BlockProps = {[key: string]: any} | {};
-// type DefinedProps = {[key: string]: any};
-// type DefinedChildren = {[key: string]: any}
-
 
 class Block<Props> {
 
-    children: Partial<Props>;
+    children: Partial<Props> | {};
     eventBus: Function;
-    props: Partial<Props>;
+    props: Partial<Props> | {};
 
     static EVENTS = {
         INIT: "init",
@@ -28,7 +18,7 @@ class Block<Props> {
     }
 
     private element: Element | null = null;
-    private meta: { tagName: string, props: {} } | null = null;
+    private meta: { tagName: string, props: Partial<Props> } | null = null;
     id: number | string;
      // private id: number | string | null = null;
 
@@ -36,7 +26,6 @@ class Block<Props> {
 
         const { children, props } = this.getChildren(propsAndChildren);
         this.children = children;
-        console.log(propsAndChildren);
 
         const eventBus = new EventBus();
         
@@ -59,16 +48,18 @@ class Block<Props> {
 
     // Preparations:
 
-    private registerEvents(eventBus: InstanceType<any>): void {
+    private registerEvents(eventBus: InstanceType<typeof EventBus>): void {
         eventBus.on(Block.EVENTS.INIT, this._init.bind(this));
         eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
         eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
         eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
     }
 
-    private getChildren(propsAndChildren: Props): { children: Partial<Props>, props: Partial<Props> } {
-        const children: Props | {} = {};
-        const props: Props | {} = {};
+    private getChildren(propsAndChildren: any): { children: Partial<Props>, props: Partial<Props> } {
+
+        const children: Record<string, any> = {};
+        const props: Record<string, any> = {};
+        // any используется, так как у пропсов и чилдренов может быть значение любого типа
 
         Object.entries(propsAndChildren).forEach(([key, value]) => {
             if (value instanceof Block) {
@@ -78,18 +69,19 @@ class Block<Props> {
             }
         })
 
-        return { children, props };
+        return { children: children as Partial<Props>, props: props as Partial<Props> };
     }
 
-    private makePropsProxy(props: BlockProps): any {
+    private makePropsProxy(props: Partial<Props>): any {
+        // any используется для Proxy объекта, не нашел вариант, как иначе задать типы для Proxy 
         const self = this;
         const eventBus = this.eventBus();
         const proxy = new Proxy<any>(props, {
-            get(target: {[key: string]: any}, prop: string) {
+            get(target, prop) {
                 const value = target[prop];
                 return typeof value === "function" ? value.bind(target) : value;
             },
-            set(target: {[key: string]: any}, prop: string, value: string) {
+            set(target, prop, value) {
                 const oldTarget = {...target}
                 target[prop] = value;
                 self.eventBus().emit(Block.EVENTS.FLOW_CDU, oldTarget, target);
@@ -129,10 +121,12 @@ class Block<Props> {
 
     private _componentDidMount(): void {
         this.componentDidMount();
-        // console.log('CDM');
+        // console.log(this.children);
+
 
         Object.values(this.children).forEach(child => {
-            child.dispatchComponentDidMount();
+            let value = child as InstanceType<typeof Block>;
+            value.dispatchComponentDidMount();
         });
     }
 
@@ -159,7 +153,9 @@ class Block<Props> {
     // Render:
 
     _render(): void {
-        const { block, newElement } = this.compile(this.props) as {[key: string]: any};
+        // const { block, newElement } = this.compile(this.props);
+        const newElement = this.compile(this.props) as HTMLElement;
+        // console.log(newElement);
 
         if (this.element) {
             this.element.replaceWith(newElement);
@@ -178,14 +174,15 @@ class Block<Props> {
     // Events:
 
     addEvents(): void {
-        const { events = {} } = this.props as any;
+        const { events = {} } = this.props as { events: string } | undefined;
+        // console.log(this.props);
         Object.keys(events).forEach(eventName => {
             this.element?.addEventListener(eventName, events[eventName as keyof typeof events]);
         })
     }
 
     removeEvents(): void {
-        const { events = {} } = this.props as any;
+        const { events = {} } = this.props;
         Object.keys(events).forEach(eventName => {
             this.element?.removeEventListener(eventName, events[eventName as keyof typeof events]);
         })
@@ -203,16 +200,15 @@ class Block<Props> {
             return;
         }
 
-        // console.log(this.props);
-
         Object.assign(this.props, newProps);
     }
 
-    compile(props: Props) {
-        const propsAndStubs: {[key: string]: any} = { ...props };
+    compile(props: Partial<Props>) {
+        const propsAndStubs: Record<string, any> = { ...props };
 
         Object.entries(this.children).forEach(([key, child]) => {
-            propsAndStubs[key] = `<div data-id=${child.id}></div>`
+            let value = child;
+            propsAndStubs[key] = `<div data-id=${value.id}></div>`
         })
 
         const fragment = this.createDocumentElement("template") as HTMLTemplateElement;
@@ -220,11 +216,14 @@ class Block<Props> {
         const newElement = fragment.content.firstElementChild;
 
         Object.values(this.children).forEach(child => {
-            const stub = fragment.content.querySelector(`[data-id="${child.id}"]`);
-            stub?.replaceWith(child.getContent());
+            let value: InstanceType<typeof Block> = child;
+            console.log(value);
+            const stub = fragment.content.querySelector(`[data-id="${value.id}"]`);
+            stub?.replaceWith(value.getContent());
         })
-        const block = fragment.content;
-        return { block, newElement };
+        // const block = fragment.content;
+        return newElement;
+        // return { block, newElement };
     }
 }
 
