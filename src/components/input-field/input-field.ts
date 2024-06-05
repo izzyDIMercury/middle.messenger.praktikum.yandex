@@ -8,11 +8,11 @@ type InputFieldProps = {
     name: string,
     label: string,
     enabled: boolean,
-    blur: (event: FocusEvent) => void
-}
+    blur: (event: FocusEvent) => void,
+    InputBlock?: InstanceType<typeof Block>
+};
 
 export default class InputField extends Block<InputFieldProps> {
-
     // propsData: InputFieldProps
 
     constructor(props: InputFieldProps) {
@@ -25,9 +25,9 @@ export default class InputField extends Block<InputFieldProps> {
                 name: props.name,
                 label: props.label,
                 blur: props.blur,
-                enabled: props.enabled
-            })
-        })
+                enabled: props.enabled,
+            }),
+        });
     }
 
     render() {
@@ -38,7 +38,6 @@ export default class InputField extends Block<InputFieldProps> {
                     {{{ InputBlock }}}
                 </li>
             `
-        )
+        );
     }
 }
-

@@ -1,8 +1,11 @@
 import Handlebars from "handlebars";
 import * as Components from "./components";
 import * as Pages from "./pages";
+import Block from "./core/block.ts";
 
-const pages = {
+type PagesType = Record<string, any>;
+
+const pages: PagesType = {
     "chat": [ Pages.ChatPage ],
     "login": [ Pages.LoginPage ],
     "register": [ Pages.RegisterPage ],
@@ -13,22 +16,25 @@ const pages = {
     "500": [ Pages.Page500 ],
 };
 
+
 Object.entries(Components).forEach(([ name, component ]) => {
-    Handlebars.registerPartial(name, component);
+    Handlebars.registerPartial(name, component as any);
 })
 
-export function navigate(page) {
+export function navigate(page: string): void {
     const [ source, context ] = pages[page];
-    const root = document.querySelector("#app");
+    const root = document.querySelector<HTMLElement>("#app");
 
-    if (source instanceof Object) {
+    if (source instanceof Object && root !== null) {
         const page = new source(context);
         root.innerHTML = "";
         root.append(page.getContent());
         return;
     }
 
-    root.innerHTM = Handlebars.compile(source)(context);
+    if (root !== null) {
+        root.innerHTML = Handlebars.compile(source)(context);
+    }
 }
 
 document.addEventListener("DOMContentLoaded", navigate("profile"));

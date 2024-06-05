@@ -1,14 +1,17 @@
 import Block from "../../core/block.ts";
 import Image from "../image/image.ts";
-import { Props } from "../../types.ts";
 
+type ReturnButtonProps = {
+    events: {
+        click: Function
+    }
+}
 
-export default class ReturnButton extends Block {
-
-    constructor(props: Props) {
+export default class ReturnButton extends Block<ReturnButtonProps> {
+    constructor(props: ReturnButtonProps) {
         super("form", {
-            ...props
-        })
+            ...props,
+        });
     }
 
     init() {
@@ -16,23 +19,22 @@ export default class ReturnButton extends Block {
             className: "return-button__arrow",
             src: "/assets/icons/arrow-left.png",
             alt: "Стрелка",
-            page: "chat"
+            page: "chat",
         });
 
         this.children = {
-            ArrowLeft
-        }
+            ArrowLeft,
+        };
     }
-
 
     render() {
         return (
-                `
+            `
                     <button class="return-button" page="chat">
                         {{{ ArrowLeft }}}
                         <p class="return-button__text" page="chat">Вернуться</p>
                     </button>
                 `
-        )
+        );
     }
 }

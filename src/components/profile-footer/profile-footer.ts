@@ -6,42 +6,45 @@ type ProfileData = {
     classModifier: string,
     page: string,
     text: string,
-    events: {
-        switchPage: Function
-    }
-}
+    switchPage: Function | null
+};
+
+// events: {
+//     switchPage: Function
+// }
 
 type ProfileFooterProps = {
     buttons: Array<ProfileData>,
-}
-
+    buttonsKeys: string[]
+};
 
 
 export default class ProfileFooter extends Block<ProfileFooterProps> {
-
     constructor(props: ProfileFooterProps) {
-
-        const buttons = props.buttons.reduce((acc, current) => {
-            const button = new ProfileFooterButton({classModifier: current.classModifier, page: current.page, text: current.text, events: { click: switchPage }});
+        const buttons = props.buttons.reduce((acc: { [key: string]: InstanceType<typeof Block> }, current) => {
+            const button = new ProfileFooterButton({
+                classModifier: current.classModifier, page: current.page, text: current.text, events: { click: switchPage },
+            });
             acc[button.id] = button;
             return acc;
         }, {});
-        
+
         super("div", {
             ...props,
             buttonsKeys: Object.keys(buttons),
-            ...buttons
-        })
+            ...buttons,
+        });
     }
-
 
     render() {
+        const container = this.props as ProfileFooterProps;
         return (
-                `
+            `
                 <div class="profile-footer">
-                    ${this.props.buttonsKeys.map((key) => `{{{ ${key} }}}`).join('')}
+                    ${container.buttonsKeys.map((key) => `{{{ ${key} }}}`).join("")}
                 </div>
                 `
-        )
+        );
     }
 }
+

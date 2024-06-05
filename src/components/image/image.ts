@@ -8,23 +8,21 @@ type ImageProps = {
     events?: {
         click: Function
     }
-}
+};
 
 export default class Image extends Block<ImageProps> {
-
     constructor(props: ImageProps) {
         super("", {
-            ...props
-        })
+            ...props,
+        });
     }
-
 
     render() {
         return (
-                `   
+            `   
                     <img class={{ className }} src="{{ src }}" alt="{{ alt }}" {{#if page}} page="{{ page }}" {{/if}}">
                             
                 `
-        )
+        );
     }
 }

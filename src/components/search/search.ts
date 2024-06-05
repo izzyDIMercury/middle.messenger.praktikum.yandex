@@ -1,37 +1,35 @@
 import Block from "../../core/block.ts";
 import Image from "../image/image.ts";
-import { Props } from "../../types.ts";
 
+type SearchProps = {};
 
-export default class Search extends Block {
-
-    constructor(props: Props) {
+export default class Search extends Block<SearchProps> {
+    constructor(props: SearchProps) {
         super("form", {
-            ...props
-        })
+            ...props,
+        });
     }
 
     init() {
         const SearchIcon = new Image({
             className: "search__icon",
             src: "/assets/icons/search.png",
-            alt: "Иконка поиска"
-        })
+            alt: "Иконка поиска",
+        });
 
         this.children = {
-            SearchIcon
-        }
+            SearchIcon,
+        };
     }
-
 
     render() {
         return (
-                `
+            `
                     <form class="search">
                         {{{ SearchIcon }}}
                         <input class="search__input" type="text">
                     </form>                
                 `
-        )
+        );
     }
 }

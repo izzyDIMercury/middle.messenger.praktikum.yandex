@@ -1,20 +1,37 @@
 {
+    "root": true,
     "extends": [
-        "airbnb-base",
-        "airbnb-typescript"
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended"
     ],
+    "parser": "@typescript-eslint/parser",
     "parserOptions": {
-        "project": "./tsconfig.json"
+        "project": ["./tsconfig.json"]
     },
+    "plugins": [
+        "@typescript-eslint"
+    ],
     "rules": {
-        "quotes": [
+        "@typescript-eslint/quotes": [
             "error", "double"
         ],
-        "ident": [
-            "error", 6
+        "@typescript-eslint/indent": [
+            "error", 4
         ],
         "linebreak-style": [
             "error", "windows"
-        ]
+        ],
+        "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/ban-types": "off",
+        "@typescript-eslint/no-unused-vars": [
+            "error",
+            {
+                "argsIgnorePattern": "Props$"
+            }
+        ],
+        "@typescript-eslint/no-this-alias": "off"
     }
 }
+
+// "airbnb-base",
+// "airbnb-typescript"

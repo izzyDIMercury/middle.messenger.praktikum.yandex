@@ -22,6 +22,6 @@
     "strictNullChecks": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src"],
-  "exclude": ["src/index.ts"]
+  "include": ["src"]
 }
+

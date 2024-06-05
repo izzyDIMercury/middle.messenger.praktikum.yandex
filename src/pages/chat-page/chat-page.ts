@@ -5,69 +5,69 @@ import Users from "../../components/users/users.ts";
 import ChatProfile from "../../components/chat-profile/chat-profile.ts";
 import MessagePanel from "../../components/message-panel/message-panel.ts";
 import { switchPage } from "../../core/utils.ts";
-import { Props } from "../../types.ts";
 
-type UsersType = Record<string, string>[]
+type ChatPageProps = {};
 
-export default class ChatPage extends Block {
-
-    constructor(props: Props) {
+export default class ChatPage extends Block<ChatPageProps> {
+    constructor(props: ChatPageProps) {
         super("form", {
-            ...props
-        })
+            ...props,
+        });
+
+        console.log(props);
     }
 
     init() {
         const MenuButton = new ProfileButton({
             events: {
-                click: switchPage
-            }
+                click: switchPage,
+            },
         });
-        const MenuSearch = new Search();
+        const MenuSearch = new Search({});
         const ChatUsers = new Users({
+            usersKeys: [],
             users: [
                 {
-                    name: "Илья", 
-                    message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", 
-                    unread: "2", 
-                    image: "/assets/cat.jpg", 
+                    name: "Илья",
+                    message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                    unread: "2",
+                    image: "/assets/cat.jpg",
                     time: "10:49",
                     selected: ""
                 },
                 {
-                    name: "Петр", 
-                    message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", 
-                    unread: "", 
-                    image: "/assets/icons/profile-placeholder.png", 
+                    name: "Петр",
+                    message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                    unread: "",
+                    image: "/assets/icons/profile-placeholder.png",
                     time: "Пн",
                     selected: "selected"
                 },
                 {
-                    name: "Пользователь", 
-                    message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", 
-                    unread: "", 
-                    image: "/assets/icons/profile-placeholder.png", 
+                    name: "Пользователь",
+                    message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                    unread: "",
+                    image: "/assets/icons/profile-placeholder.png",
                     time: "Пн",
                     selected: ""
-                }
-            ]
+                },
+            ],
         });
-        const Profile = new ChatProfile();
-        const MessageBlock = new MessagePanel();
+        const Profile = new ChatProfile({});
+        const MessageBlock = new MessagePanel({});
 
         this.children = {
             MenuButton,
             MenuSearch,
             ChatUsers,
             Profile,
-            MessageBlock
-        }
+            MessageBlock,
+        };
     }
-
 
     render() {
         return (
-                `
+            `
                     <main class="chat-page">
                         <div class="left-column chat-page__left-column">
                             <nav class="left-column__header">
@@ -84,7 +84,6 @@ export default class ChatPage extends Block {
                         </div>  
                     </main>
                 `
-        )
+        );
     }
 }
-

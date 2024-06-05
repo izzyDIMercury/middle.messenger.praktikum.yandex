@@ -7,13 +7,13 @@ type ButtonProps = {
     events: {
         click: (event: MouseEvent) => void
     }
-}
+};
 
 export default class Button extends Block<ButtonProps> {
     constructor(props: ButtonProps) {
         super("", {
-            ...props
-        })
+            ...props,
+        });
     }
 
     render() {
@@ -23,6 +23,6 @@ export default class Button extends Block<ButtonProps> {
                     <p class="button__text" page="{{ page }}">{{ text }}</p>
                 </button>     
             `
-        )
+        );
     }
 }

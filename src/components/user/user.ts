@@ -1,32 +1,38 @@
 import Block from "../../core/block.ts";
 import Image from "../image/image.ts";
-import { Props } from "../../types.ts";
 
+type UserProps = {
+    name: string,
+    message: string,
+    unread: string,
+    time: string,
+    selected: string,
+    image: string
+}
 
-export default class User extends Block {
-
-    constructor(props: Props) {
+export default class User extends Block<UserProps> {
+    constructor(props: UserProps) {
         super("form", {
-            ...props
-        })
+            ...props,
+        });
     }
 
     init() {
+        const userData = this.props as UserProps;
         const UserImagePlaceholder = new Image({
             className: "user__image",
-            src: this.props.image,
+            src: userData.image,
             alt: "Фото пользователя",
-        })
+        });
 
         this.children = {
-            UserImagePlaceholder
-        }
+            UserImagePlaceholder,
+        };
     }
-
 
     render() {
         return (
-                `
+            `
                     <li class="user {{#if selected}} {{ selected }} {{/if}}">
                         <div class="user__content">
                             {{{ UserImagePlaceholder }}}
@@ -45,6 +51,6 @@ export default class User extends Block {
                         </div>
                     </li>            
                 `
-        )
+        );
     }
 }

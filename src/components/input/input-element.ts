@@ -9,11 +9,11 @@ type InputElementProps = {
     events: {
         [key: string]: (event: FocusEvent) => void
     }
-}
+};
 
 export default class InputElement extends Block<InputElementProps> {
     constructor(props: InputElementProps) {
-        super("", props)
+        super("", props);
     }
 
     render() {
@@ -31,6 +31,6 @@ export default class InputElement extends Block<InputElementProps> {
                 <div></div>
                 {{/if}}
             `
-        )
+        );
     }
 }

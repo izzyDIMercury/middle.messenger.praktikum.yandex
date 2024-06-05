@@ -7,11 +7,10 @@ import FormSubmit from "../../core/formSubmit.ts";
 type MessagePanelProps = {};
 
 export default class MessagePanel extends Block<MessagePanelProps> {
-
     constructor(props: MessagePanelProps) {
         super("form", {
-            
-        })
+            props
+        });
     }
 
     init() {
@@ -25,24 +24,24 @@ export default class MessagePanel extends Block<MessagePanelProps> {
             title: "message",
             label: "message",
             enabled: true,
-            blur: handleBlurBind
-        })
+            blur: handleBlurBind,
+        });
         const ClipIcon = new Image({
             className: "message-panel__attach-icon",
             src: "/assets/icons/clip.png",
-            alt: "Прикрепить"
-        })
+            alt: "Прикрепить",
+        });
         const Send = new MessageButton({
             events: {
-                click: handleSubmitBind
-            }
-        })
+                click: handleSubmitBind,
+            },
+        });
 
         this.children = {
             MessageInput,
             ClipIcon,
-            Send
-        }
+            Send,
+        };
     }
 
     handleBlur(event: FocusEvent): void {
@@ -55,10 +54,9 @@ export default class MessagePanel extends Block<MessagePanelProps> {
         new FormSubmit("message-panel", "", "", true);
     }
 
-
     render() {
         return (
-                `
+            `
                     <form class="message-panel">
                         <div class="message-panel__attach-button">
                             {{{ ClipIcon }}}
@@ -69,7 +67,6 @@ export default class MessagePanel extends Block<MessagePanelProps> {
                         {{{ Send }}}
                     </form>
                 `
-        )
+        );
     }
 }
-

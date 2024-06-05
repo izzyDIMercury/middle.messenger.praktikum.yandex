@@ -2,13 +2,13 @@ import Block from "../../core/block.ts";
 import Link from "../../components/link/link.ts";
 import { switchPage } from "../../core/utils.ts";
 
+type Page404Props = {};
 
-export default class Page404 extends Block {
-
-    constructor(props) {
+export default class Page404 extends Block<Page404Props> {
+    constructor(props: Page404Props) {
         super("form", {
-            ...props
-        })
+            ...props,
+        });
     }
 
     init() {
@@ -17,19 +17,18 @@ export default class Page404 extends Block {
             page: "login",
             text: "Назад",
             events: {
-                click: switchPage
-            }
+                click: switchPage,
+            },
         });
 
         this.children = {
-            Error404Link
-        }
+            Error404Link,
+        };
     }
-
 
     render() {
         return (
-                `
+            `
                     <main class="error-page">
                         <div class="error-page__container">
                             <h1 class="error-page__title">404</h1>
@@ -38,6 +37,6 @@ export default class Page404 extends Block {
                         </div>
                     </main>
                 `
-        )
+        );
     }
 }

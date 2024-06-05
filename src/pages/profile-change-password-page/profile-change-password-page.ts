@@ -6,13 +6,13 @@ import Image from "../../components/image/image.ts";
 import FormSubmit from "../../core/formSubmit.ts";
 import { switchPage } from "../../core/utils.ts";
 
+type ChangePasswordPageProps = {};
 
-export default class ProfileChangePasswordPage extends Block {
-
-    constructor(props) {
+export default class ProfileChangePasswordPage extends Block<ChangePasswordPageProps> {
+    constructor(props: ChangePasswordPageProps) {
         super("form", {
-            ...props
-        })
+            ...props,
+        });
     }
 
     init() {
@@ -21,10 +21,11 @@ export default class ProfileChangePasswordPage extends Block {
 
         const ButtonBack = new ReturnButton({
             events: {
-                click: switchPage
-            }
+                click: switchPage,
+            },
         });
         const Form = new ProfileForm({
+            formItemsKeys: [],
             formEnabled: true,
             formData: [
                 {
@@ -33,7 +34,7 @@ export default class ProfileChangePasswordPage extends Block {
                     name: "oldPassword",
                     type: "password",
                     label: "password",
-                    blur: handleBlurBind
+                    blur: handleBlurBind,
                 },
                 {
                     className: "profile-form__input",
@@ -41,7 +42,7 @@ export default class ProfileChangePasswordPage extends Block {
                     name: "newPassword",
                     type: "password",
                     label: "password",
-                    blur: handleBlurBind
+                    blur: handleBlurBind,
                 },
                 {
                     className: "profile-form__input",
@@ -49,31 +50,31 @@ export default class ProfileChangePasswordPage extends Block {
                     name: "newPassword",
                     type: "password",
                     label: "password",
-                    blur: handleBlurBind
-                }
-            ]
+                    blur: handleBlurBind,
+                },
+            ],
         });
         const ProfileButton = new Button({
             className: "profile-change-password-page",
             page: "profile",
             text: "Сохранить",
             events: {
-                click: handleSubmitBind
-            }
+                click: handleSubmitBind,
+            },
         });
         const ProfileImage = new Image({
             className: "profile-change-password-page__image",
             src: "/assets/profile-placeholder.png",
-            alt: "Аватар пользователя"
+            alt: "Аватар пользователя",
 
-        })
+        });
 
         this.children = {
             ButtonBack,
             Form,
             ProfileButton,
-            ProfileImage
-        }
+            ProfileImage,
+        };
     }
 
     handleBlur(event: FocusEvent) {
@@ -83,17 +84,16 @@ export default class ProfileChangePasswordPage extends Block {
     handleSubmit(event: FocusEvent | MouseEvent) {
         event.preventDefault();
 
-        const submit = new FormSubmit( "profile-change-password-page__form", "profile-change-password-page__form-data", "profile-change-password-page__error-text" );
+        const submit = new FormSubmit("profile-change-password-page__form", "profile-change-password-page__form-data", "profile-change-password-page__error-text");
         if (submit.validated && event.type === "click") {
             submit.sendData("https://chats", "get");
             switchPage(null, "chat");
         }
     }
 
-
     render() {
         return (
-                `
+            `
                     <main class="profile-page">
                         {{{ ButtonBack }}}
                         <div class="profile-page__content">
@@ -107,6 +107,6 @@ export default class ProfileChangePasswordPage extends Block {
                         </div>
                     </main>
                 `
-        )
+        );
     }
 }

@@ -4,15 +4,15 @@ import Button from "../../components/button/button.ts";
 import Link from "../../components/link/link.ts";
 import RegisterPageList from "../../components/register-page-list/register-page-list.ts";
 import FormSubmit from "../../core/formSubmit.ts";
-import { switchPage } from "../../core/utils.ts";
+import { switchPage } from "..//../core/utils.ts";
 
+type RegisterPageProps = {};
 
-export default class RegisterPage extends Block {
-
-    constructor(props) {
+export default class RegisterPage extends Block<RegisterPageProps> {
+    constructor(props: RegisterPageProps) {
         super("form", {
-            ...props
-        })
+            ...props,
+        });
     }
 
     init() {
@@ -21,25 +21,26 @@ export default class RegisterPage extends Block {
 
         const Title = new PageTitle({
             className: "register-page__title",
-            title: "Регистрация"
+            title: "Регистрация",
         });
         const RegisterButton = new Button({
             className: "register-page__button",
             text: "Зарегистрироваться",
             page: "chat",
             events: {
-                click: handleSubmitBind
-            }
+                click: handleSubmitBind,
+            },
         });
         const RegisterLink = new Link({
             className: "register-page__link",
             text: "Войти",
             page: "login",
             events: {
-                click: switchPage
-            }
-        })
+                click: switchPage,
+            },
+        });
         const RegisterList = new RegisterPageList({
+            itemsKeys: [],
             list: [
                 {
                     className: "register-page__input",
@@ -47,7 +48,7 @@ export default class RegisterPage extends Block {
                     name: "email",
                     type: "email",
                     label: "email",
-                    blur: handleBlurBind
+                    blur: handleBlurBind,
                 },
                 {
                     className: "register-page__input",
@@ -55,7 +56,7 @@ export default class RegisterPage extends Block {
                     name: "login",
                     type: "text",
                     label: "login",
-                    blur: handleBlurBind
+                    blur: handleBlurBind,
                 },
                 {
                     className: "register-page__input",
@@ -63,7 +64,7 @@ export default class RegisterPage extends Block {
                     name: "first_name",
                     type: "text",
                     label: "first_name",
-                    blur: handleBlurBind
+                    blur: handleBlurBind,
                 },
                 {
                     className: "register-page__input",
@@ -71,7 +72,7 @@ export default class RegisterPage extends Block {
                     name: "second_name",
                     type: "text",
                     label: "second_name",
-                    blur: handleBlurBind
+                    blur: handleBlurBind,
                 },
                 {
                     className: "register-page__input",
@@ -79,7 +80,7 @@ export default class RegisterPage extends Block {
                     name: "tel",
                     type: "tel",
                     label: "tel",
-                    blur: handleBlurBind
+                    blur: handleBlurBind,
                 },
                 {
                     className: "register-page__input",
@@ -87,7 +88,7 @@ export default class RegisterPage extends Block {
                     name: "password",
                     type: "password",
                     label: "password",
-                    blur: handleBlurBind
+                    blur: handleBlurBind,
                 },
                 {
                     className: "register-page__input",
@@ -95,37 +96,36 @@ export default class RegisterPage extends Block {
                     name: "password",
                     type: "password",
                     label: "password",
-                    blur: handleBlurBind
-                }
-            ]
-        })
+                    blur: handleBlurBind,
+                },
+            ],
+        });
 
         this.children = {
             Title,
             RegisterButton,
             RegisterLink,
-            RegisterList
-        }
+            RegisterList,
+        };
     }
 
-    handleBlur(event) {
+    handleBlur(event: FocusEvent) {
         this.handleSubmit(event);
     }
 
-    handleSubmit(event) {
+    handleSubmit(event: FocusEvent) {
         event.preventDefault();
 
-        const submit = new FormSubmit( "register-page", "register-page__content", "login-page__error-text" );
+        const submit = new FormSubmit("register-page", "register-page__content", "login-page__error-text");
         if (submit.validated && event.type === "click") {
             submit.sendData("https://chats", "get");
             switchPage(null, "chat");
         }
     }
-    
 
     render() {
         return (
-                `
+            `
                     <div class="dialog-wrapper">
                         <main class="dialog">
                             <form class="register-page">
@@ -143,7 +143,6 @@ export default class RegisterPage extends Block {
                         </main>
                     </div>    
                 `
-        )
+        );
     }
 }
-

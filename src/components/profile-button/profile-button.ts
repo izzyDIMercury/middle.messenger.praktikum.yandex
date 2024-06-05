@@ -5,14 +5,13 @@ type ProfileButtonProps = {
     events: {
         click: Function
     }
-}
+};
 
 export default class ProfileButton extends Block<ProfileButtonProps> {
-
     constructor(props: ProfileButtonProps) {
         super("form", {
-            ...props
-        })
+            ...props,
+        });
     }
 
     init() {
@@ -20,22 +19,21 @@ export default class ProfileButton extends Block<ProfileButtonProps> {
             className: "profile-button__icon",
             src: "/assets/icons/profile.png",
             alt: "Профиль",
-            page: "profile"
+            page: "profile",
         });
 
         this.children = {
-            ProfileButtonIcon
-        }
+            ProfileButtonIcon,
+        };
     }
-
 
     render() {
         return (
-                `
+            `
                     <div class="profile-button" page="profile">
                         {{{ ProfileButtonIcon }}}
                     </div>            
                 `
-        )
+        );
     }
 }
