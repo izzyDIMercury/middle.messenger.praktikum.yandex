@@ -11,7 +11,7 @@ type ChatPageProps = {};
 export default class ChatPage extends Block<ChatPageProps> {
     constructor(props: ChatPageProps) {
         super("form", {
-            ...props,
+            ...props
         });
 
         console.log(props);
@@ -20,8 +20,8 @@ export default class ChatPage extends Block<ChatPageProps> {
     init() {
         const MenuButton = new ProfileButton({
             events: {
-                click: switchPage,
-            },
+                click: switchPage
+            }
         });
         const MenuSearch = new Search({});
         const ChatUsers = new Users({
@@ -50,8 +50,8 @@ export default class ChatPage extends Block<ChatPageProps> {
                     image: "/assets/icons/profile-placeholder.png",
                     time: "Пн",
                     selected: ""
-                },
-            ],
+                }
+            ]
         });
         const Profile = new ChatProfile({});
         const MessageBlock = new MessagePanel({});
@@ -61,7 +61,7 @@ export default class ChatPage extends Block<ChatPageProps> {
             MenuSearch,
             ChatUsers,
             Profile,
-            MessageBlock,
+            MessageBlock
         };
     }
 

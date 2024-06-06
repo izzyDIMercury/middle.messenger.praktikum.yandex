@@ -13,7 +13,7 @@ type ImageProps = {
 export default class Image extends Block<ImageProps> {
     constructor(props: ImageProps) {
         super("", {
-            ...props,
+            ...props
         });
     }
 

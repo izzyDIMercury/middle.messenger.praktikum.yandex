@@ -21,7 +21,7 @@ export default class ProfileForm extends Block<ProfileFormProps> {
     constructor(props: ProfileFormProps) {
         const formItems = props.formData.reduce((acc: { [key: string]: InstanceType<typeof Block> }, current) => {
             const element = new InputField({
-                className: current.className, title: current.title, name: current.name, type: current.type, label: current.label, blur: current.blur, enabled: props.formEnabled,
+                className: current.className, title: current.title, name: current.name, type: current.type, label: current.label, blur: current.blur, enabled: props.formEnabled
             });
             acc[element.id] = element;
             return acc;
@@ -30,7 +30,7 @@ export default class ProfileForm extends Block<ProfileFormProps> {
         super("form", {
             ...props,
             formItemsKeys: Object.keys(formItems),
-            ...formItems,
+            ...formItems
         });
     }
 

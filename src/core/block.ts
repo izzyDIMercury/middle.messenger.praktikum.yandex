@@ -13,7 +13,7 @@ class Block<Props> {
         INIT: "init",
         FLOW_CDM: "flow:component-did-mount",
         FLOW_CDU: "flow:component-did-update",
-        FLOW_RENDER: "flow:render",
+        FLOW_RENDER: "flow:render"
     };
 
     private element: Element | null = null;
@@ -31,7 +31,7 @@ class Block<Props> {
 
         this.meta = {
             tagName,
-            props,
+            props
         };
 
         const createdId = makeUUID();
@@ -87,7 +87,7 @@ class Block<Props> {
             },
             deleteProperty() {
                 throw new Error("Нет доступа");
-            },
+            }
         });
         return proxy;
     }

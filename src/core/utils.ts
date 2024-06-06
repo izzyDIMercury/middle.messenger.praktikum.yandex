@@ -8,14 +8,14 @@ export function switchPage(event: MouseEvent | null, page: string) {
 
         document.dispatchEvent(new CustomEvent("switchPage", {
             detail: {
-                page: nextPage,
-            },
+                page: nextPage
+            }
         }));
     } else {
         document.dispatchEvent(new CustomEvent("switchPage", {
             detail: {
-                page: page,
-            },
+                page: page
+            }
         }));
     }
 }

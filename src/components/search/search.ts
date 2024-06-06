@@ -6,7 +6,7 @@ type SearchProps = {};
 export default class Search extends Block<SearchProps> {
     constructor(props: SearchProps) {
         super("form", {
-            ...props,
+            ...props
         });
     }
 
@@ -14,11 +14,11 @@ export default class Search extends Block<SearchProps> {
         const SearchIcon = new Image({
             className: "search__icon",
             src: "/assets/icons/search.png",
-            alt: "Иконка поиска",
+            alt: "Иконка поиска"
         });
 
         this.children = {
-            SearchIcon,
+            SearchIcon
         };
     }
 

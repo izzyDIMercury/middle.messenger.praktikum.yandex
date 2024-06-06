@@ -10,7 +10,7 @@ type MessageButtonProps = {
 export default class MessageButton extends Block<MessageButtonProps> {
     constructor(props: MessageButtonProps) {
         super("form", {
-            ...props,
+            ...props
         });
     }
 
@@ -18,11 +18,11 @@ export default class MessageButton extends Block<MessageButtonProps> {
         const SendIcon = new Image({
             className: "message-panel__send-icon",
             src: "/assets/icons/arrow-right.png",
-            alt: "Отправить",
+            alt: "Отправить"
         });
 
         this.children = {
-            SendIcon,
+            SendIcon
         };
     }
 

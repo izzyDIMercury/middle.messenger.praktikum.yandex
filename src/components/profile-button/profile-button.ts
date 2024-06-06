@@ -10,7 +10,7 @@ type ProfileButtonProps = {
 export default class ProfileButton extends Block<ProfileButtonProps> {
     constructor(props: ProfileButtonProps) {
         super("form", {
-            ...props,
+            ...props
         });
     }
 
@@ -19,11 +19,11 @@ export default class ProfileButton extends Block<ProfileButtonProps> {
             className: "profile-button__icon",
             src: "/assets/icons/profile.png",
             alt: "Профиль",
-            page: "profile",
+            page: "profile"
         });
 
         this.children = {
-            ProfileButtonIcon,
+            ProfileButtonIcon
         };
     }
 

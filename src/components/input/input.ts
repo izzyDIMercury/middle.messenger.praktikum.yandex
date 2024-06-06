@@ -25,9 +25,9 @@ export default class Input extends Block<InputProps> {
                 label: props.label,
                 enabled: props.enabled,
                 events: {
-                    blur: props.blur,
-                },
-            }),
+                    blur: props.blur
+                }
+            })
         });
     }
 

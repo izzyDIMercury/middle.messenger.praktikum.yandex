@@ -61,7 +61,7 @@ export default class HTTPTransport {
                 method,
                 isGet && !!data
                     ? `${url}${self.stringify(data)}`
-                    : url,
+                    : url
             );
 
             Object.keys(headers).forEach((key) => {

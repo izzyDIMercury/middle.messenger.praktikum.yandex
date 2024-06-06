@@ -11,7 +11,7 @@ type RegisterPageProps = {};
 export default class RegisterPage extends Block<RegisterPageProps> {
     constructor(props: RegisterPageProps) {
         super("form", {
-            ...props,
+            ...props
         });
     }
 
@@ -21,23 +21,23 @@ export default class RegisterPage extends Block<RegisterPageProps> {
 
         const Title = new PageTitle({
             className: "register-page__title",
-            title: "Регистрация",
+            title: "Регистрация"
         });
         const RegisterButton = new Button({
             className: "register-page__button",
             text: "Зарегистрироваться",
             page: "chat",
             events: {
-                click: handleSubmitBind,
-            },
+                click: handleSubmitBind
+            }
         });
         const RegisterLink = new Link({
             className: "register-page__link",
             text: "Войти",
             page: "login",
             events: {
-                click: switchPage,
-            },
+                click: switchPage
+            }
         });
         const RegisterList = new RegisterPageList({
             itemsKeys: [],
@@ -48,7 +48,7 @@ export default class RegisterPage extends Block<RegisterPageProps> {
                     name: "email",
                     type: "email",
                     label: "email",
-                    blur: handleBlurBind,
+                    blur: handleBlurBind
                 },
                 {
                     className: "register-page__input",
@@ -56,7 +56,7 @@ export default class RegisterPage extends Block<RegisterPageProps> {
                     name: "login",
                     type: "text",
                     label: "login",
-                    blur: handleBlurBind,
+                    blur: handleBlurBind
                 },
                 {
                     className: "register-page__input",
@@ -64,7 +64,7 @@ export default class RegisterPage extends Block<RegisterPageProps> {
                     name: "first_name",
                     type: "text",
                     label: "first_name",
-                    blur: handleBlurBind,
+                    blur: handleBlurBind
                 },
                 {
                     className: "register-page__input",
@@ -72,7 +72,7 @@ export default class RegisterPage extends Block<RegisterPageProps> {
                     name: "second_name",
                     type: "text",
                     label: "second_name",
-                    blur: handleBlurBind,
+                    blur: handleBlurBind
                 },
                 {
                     className: "register-page__input",
@@ -80,7 +80,7 @@ export default class RegisterPage extends Block<RegisterPageProps> {
                     name: "tel",
                     type: "tel",
                     label: "tel",
-                    blur: handleBlurBind,
+                    blur: handleBlurBind
                 },
                 {
                     className: "register-page__input",
@@ -88,7 +88,7 @@ export default class RegisterPage extends Block<RegisterPageProps> {
                     name: "password",
                     type: "password",
                     label: "password",
-                    blur: handleBlurBind,
+                    blur: handleBlurBind
                 },
                 {
                     className: "register-page__input",
@@ -96,16 +96,16 @@ export default class RegisterPage extends Block<RegisterPageProps> {
                     name: "password",
                     type: "password",
                     label: "password",
-                    blur: handleBlurBind,
-                },
-            ],
+                    blur: handleBlurBind
+                }
+            ]
         });
 
         this.children = {
             Title,
             RegisterButton,
             RegisterLink,
-            RegisterList,
+            RegisterList
         };
     }
 

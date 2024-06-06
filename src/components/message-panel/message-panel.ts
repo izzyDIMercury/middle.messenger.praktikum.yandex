@@ -24,23 +24,23 @@ export default class MessagePanel extends Block<MessagePanelProps> {
             title: "message",
             label: "message",
             enabled: true,
-            blur: handleBlurBind,
+            blur: handleBlurBind
         });
         const ClipIcon = new Image({
             className: "message-panel__attach-icon",
             src: "/assets/icons/clip.png",
-            alt: "Прикрепить",
+            alt: "Прикрепить"
         });
         const Send = new MessageButton({
             events: {
-                click: handleSubmitBind,
-            },
+                click: handleSubmitBind
+            }
         });
 
         this.children = {
             MessageInput,
             ClipIcon,
-            Send,
+            Send
         };
     }
 

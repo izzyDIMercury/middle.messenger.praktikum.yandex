@@ -10,7 +10,7 @@ type ReturnButtonProps = {
 export default class ReturnButton extends Block<ReturnButtonProps> {
     constructor(props: ReturnButtonProps) {
         super("form", {
-            ...props,
+            ...props
         });
     }
 
@@ -19,11 +19,11 @@ export default class ReturnButton extends Block<ReturnButtonProps> {
             className: "return-button__arrow",
             src: "/assets/icons/arrow-left.png",
             alt: "Стрелка",
-            page: "chat",
+            page: "chat"
         });
 
         this.children = {
-            ArrowLeft,
+            ArrowLeft
         };
     }
 

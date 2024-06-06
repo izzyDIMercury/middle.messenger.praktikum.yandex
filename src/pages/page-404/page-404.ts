@@ -7,7 +7,7 @@ type Page404Props = {};
 export default class Page404 extends Block<Page404Props> {
     constructor(props: Page404Props) {
         super("form", {
-            ...props,
+            ...props
         });
     }
 
@@ -17,12 +17,12 @@ export default class Page404 extends Block<Page404Props> {
             page: "login",
             text: "Назад",
             events: {
-                click: switchPage,
-            },
+                click: switchPage
+            }
         });
 
         this.children = {
-            Error404Link,
+            Error404Link
         };
     }
 

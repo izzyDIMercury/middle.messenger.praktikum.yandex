@@ -20,7 +20,7 @@ export default class RegisterPageList extends Block<RegisterListProps> {
     constructor(props: RegisterListProps) {
         const items = props.list.reduce((acc: { [key: string]: InstanceType<typeof Block> }, current) => {
             const item = new InputField({
-                className: current.className, title: current.title, name: current.name, type: current.type, blur: current.blur, label: current.label, enabled: true,
+                className: current.className, title: current.title, name: current.name, type: current.type, blur: current.blur, label: current.label, enabled: true
             });
             // console.log(item);
             acc[item.id] = item;
@@ -33,7 +33,7 @@ export default class RegisterPageList extends Block<RegisterListProps> {
         super("div", {
             ...props,
             itemsKeys: Object.keys(items),
-            ...items,
+            ...items
         });
     }
 

@@ -18,7 +18,7 @@ type ProfileFooterButtonProps = {
 export default class ProfileFooterButton extends Block<ProfileFooterButtonProps> {
     constructor(props: ProfileFooterButtonProps) {
         super("form", {
-            ...props,
+            ...props
         });
     }
 
@@ -34,7 +34,7 @@ export default class ProfileFooterButton extends Block<ProfileFooterButtonProps>
         });
 
         this.children = {
-            FooterLink,
+            FooterLink
         };
     }
 

@@ -11,24 +11,24 @@ type ProfilePageProps = {};
 export default class ProfilePage extends Block<ProfilePageProps> {
     constructor(props: ProfilePageProps) {
         super("form", {
-            ...props,
+            ...props
         });
     }
 
     init() {
         const Title = new PageTitle({
             className: "profile-page__title",
-            title: "Имя пользователя",
+            title: "Имя пользователя"
         });
         const ButtonBack = new ReturnButton({
             events: {
-                click: switchPage,
-            },
+                click: switchPage
+            }
         });
         const ProfileImage = new Image({
             className: "profile-page__image",
             src: "/assets/profile-placeholder.png",
-            alt: "Аватар пользователя",
+            alt: "Аватар пользователя"
         });
         const Footer = new ProfileFooter({
             buttonsKeys: [],
@@ -37,21 +37,21 @@ export default class ProfilePage extends Block<ProfilePageProps> {
                     classModifier: "",
                     page: "profile-change-data",
                     text: "Изменить данные",
-                    switchPage: switchPage,
+                    switchPage: switchPage
                 },
                 {
                     classModifier: "",
                     page: "profile-change-password",
                     text: "Изменить пароль",
-                    switchPage: switchPage,
+                    switchPage: switchPage
                 },
                 {
                     classModifier: "profile-footer-button_red",
                     page: "profile",
                     text: "Выйти",
                     switchPage: null
-                },
-            ],
+                }
+            ]
         });
         const handleBlurBind = this.handleBlur.bind(this);
         const Form = new ProfileForm({
@@ -105,8 +105,8 @@ export default class ProfilePage extends Block<ProfilePageProps> {
                     type: "tel",
                     label: "",
                     blur: handleBlurBind
-                },
-            ],
+                }
+            ]
         });
 
         this.children = {
@@ -114,7 +114,7 @@ export default class ProfilePage extends Block<ProfilePageProps> {
             ButtonBack,
             ProfileImage,
             Footer,
-            Form,
+            Form
         };
     }
 

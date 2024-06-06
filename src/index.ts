@@ -12,7 +12,7 @@ const pages: PagesType = {
     "profile-change-data": [ Pages.ProfileChangeDataPage ],
     "profile-change-password": [ Pages.ProfileChangePasswordPage ],
     "404": [ Pages.Page404 ],
-    "500": [ Pages.Page500 ],
+    "500": [ Pages.Page500 ]
 };
 
 
@@ -67,7 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // здесь можно задать начальную страницу:
         detail: {
-            page: "login",
+            page: "login"
         }
     }));
 })

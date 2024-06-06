@@ -1,13 +1,13 @@
 .register-page {
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    position: relative;
-    box-sizing: border-box;
-    width: 280px;
-    height: 615px;
     padding-top: 50px;
     padding-bottom: 30px;
+    width: 280px;
+    height: 615px;
+    box-sizing: border-box;
 }
 
 .register-page__title {
@@ -15,11 +15,11 @@
 }
 
 .register-page__footer {
+    position: relative;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     align-items: center;
-    position: relative;
+    justify-content: space-between;
     height: 62px;
 }
 

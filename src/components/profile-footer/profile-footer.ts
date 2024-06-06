@@ -20,7 +20,7 @@ export default class ProfileFooter extends Block<ProfileFooterProps> {
     constructor(props: ProfileFooterProps) {
         const buttons = props.buttons.reduce((acc: { [key: string]: InstanceType<typeof Block> }, current) => {
             const button = new ProfileFooterButton({
-                classModifier: current.classModifier, page: current.page, text: current.text, events: { click: switchPage },
+                classModifier: current.classModifier, page: current.page, text: current.text, events: { click: switchPage }
             });
             acc[button.id] = button;
             return acc;
@@ -29,7 +29,7 @@ export default class ProfileFooter extends Block<ProfileFooterProps> {
         super("div", {
             ...props,
             buttonsKeys: Object.keys(buttons),
-            ...buttons,
+            ...buttons
         });
     }
 

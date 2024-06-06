@@ -13,7 +13,7 @@ type UserProps = {
 export default class User extends Block<UserProps> {
     constructor(props: UserProps) {
         super("form", {
-            ...props,
+            ...props
         });
     }
 
@@ -22,11 +22,11 @@ export default class User extends Block<UserProps> {
         const UserImagePlaceholder = new Image({
             className: "user__image",
             src: userData.image,
-            alt: "Фото пользователя",
+            alt: "Фото пользователя"
         });
 
         this.children = {
-            UserImagePlaceholder,
+            UserImagePlaceholder
         };
     }
 

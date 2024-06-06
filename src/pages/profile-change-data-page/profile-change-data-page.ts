@@ -11,7 +11,7 @@ type ChangeDataPageProps = {};
 export default class ProfileChangeDataPage extends Block<ChangeDataPageProps> {
     constructor(props: ChangeDataPageProps) {
         super("form", {
-            ...props,
+            ...props
         });
     }
 
@@ -21,8 +21,8 @@ export default class ProfileChangeDataPage extends Block<ChangeDataPageProps> {
 
         const ButtonBack = new ReturnButton({
             events: {
-                click: switchPage,
-            },
+                click: switchPage
+            }
         });
         const Form = new ProfileForm({
             formItemsKeys: [],
@@ -34,7 +34,7 @@ export default class ProfileChangeDataPage extends Block<ChangeDataPageProps> {
                     name: "email",
                     type: "email",
                     label: "email",
-                    blur: handleBlurBind,
+                    blur: handleBlurBind
                 },
                 {
                     className: "profile-form__input",
@@ -42,7 +42,7 @@ export default class ProfileChangeDataPage extends Block<ChangeDataPageProps> {
                     name: "login",
                     type: "text",
                     label: "login",
-                    blur: handleBlurBind,
+                    blur: handleBlurBind
                 },
                 {
                     className: "profile-form__input",
@@ -50,7 +50,7 @@ export default class ProfileChangeDataPage extends Block<ChangeDataPageProps> {
                     name: "first_name",
                     type: "text",
                     label: "first_name",
-                    blur: handleBlurBind,
+                    blur: handleBlurBind
                 },
                 {
                     className: "profile-form__input",
@@ -58,7 +58,7 @@ export default class ProfileChangeDataPage extends Block<ChangeDataPageProps> {
                     name: "second_name",
                     type: "text",
                     label: "second_name",
-                    blur: handleBlurBind,
+                    blur: handleBlurBind
                 },
                 {
                     className: "profile-form__input",
@@ -66,7 +66,7 @@ export default class ProfileChangeDataPage extends Block<ChangeDataPageProps> {
                     name: "display_name",
                     type: "text",
                     label: "display_name",
-                    blur: handleBlurBind,
+                    blur: handleBlurBind
                 },
                 {
                     className: "profile-form__input",
@@ -74,22 +74,22 @@ export default class ProfileChangeDataPage extends Block<ChangeDataPageProps> {
                     name: "tel",
                     type: "tel",
                     label: "tel",
-                    blur: handleBlurBind,
-                },
-            ],
+                    blur: handleBlurBind
+                }
+            ]
         });
         const ProfileButton = new Button({
             className: "profile-change-data-page",
             page: "profile",
             text: "Сохранить",
             events: {
-                click: handleSubmitBind,
-            },
+                click: handleSubmitBind
+            }
         });
         const ProfileImage = new Image({
             className: "profile-change-data-page__image",
             src: "/assets/profile-placeholder.png",
-            alt: "Аватар пользователя",
+            alt: "Аватар пользователя"
 
         });
 
@@ -97,7 +97,7 @@ export default class ProfileChangeDataPage extends Block<ChangeDataPageProps> {
             ButtonBack,
             Form,
             ProfileButton,
-            ProfileImage,
+            ProfileImage
         };
     }
 

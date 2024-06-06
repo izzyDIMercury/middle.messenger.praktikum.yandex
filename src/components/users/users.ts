@@ -19,7 +19,7 @@ export default class Users extends Block<UsersArray> {
     constructor(props: UsersArray) {
         const users = props.users.reduce((acc: { [key: string]: InstanceType<typeof Block> }, current) => {
             const user = new User({
-                name: current.name, message: current.message, unread: current.unread, image: current.image, time: current.time, selected: current.selected,
+                name: current.name, message: current.message, unread: current.unread, image: current.image, time: current.time, selected: current.selected
             });
             acc[user.id] = user;
             return acc;
@@ -28,7 +28,7 @@ export default class Users extends Block<UsersArray> {
         super("form", {
             ...props,
             usersKeys: Object.keys(users),
-            ...users,
+            ...users
         });
     }
 

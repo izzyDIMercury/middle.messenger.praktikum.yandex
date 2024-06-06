@@ -1,19 +1,18 @@
-@import "/variables.scss";
+@import "/variables";
 
 .return-button {
     position: absolute;
-    top: 20px;
     left: 20px;
+    top: 20px;
     display: flex;
-    flex-wrap: nowrap;
-    flex-direction: row;
+    flex-flow: row nowrap;
     align-items: center;
-    box-sizing: border-box;
-    height: 38px;
-    padding: 0 13px 0 15px;
-    background-color: $purple;
-    border-radius: 20px;
     border: none;
+    border-radius: 20px;
+    padding: 0 13px 0 15px;
+    height: 38px;
+    box-sizing: border-box;
+    background-color: $purple;
 }
 
 .return-button:hover {
@@ -21,15 +20,15 @@
 }
 
 .return-button__arrow {
+    margin-right: 10px;
     width: 16px;
     height: 14px;
-    margin-right: 10px;
 }
 
 .return-button__text {
-    font-family: "Inter", "Arial";
+    font-family: Inter, serif;
     font-weight: 400;
-    color: $white;
     font-size: 13px;
     line-height: 13px;
+    color: $white;
 }

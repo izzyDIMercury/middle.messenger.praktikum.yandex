@@ -11,7 +11,7 @@ type ChangePasswordPageProps = {};
 export default class ProfileChangePasswordPage extends Block<ChangePasswordPageProps> {
     constructor(props: ChangePasswordPageProps) {
         super("form", {
-            ...props,
+            ...props
         });
     }
 
@@ -21,8 +21,8 @@ export default class ProfileChangePasswordPage extends Block<ChangePasswordPageP
 
         const ButtonBack = new ReturnButton({
             events: {
-                click: switchPage,
-            },
+                click: switchPage
+            }
         });
         const Form = new ProfileForm({
             formItemsKeys: [],
@@ -34,7 +34,7 @@ export default class ProfileChangePasswordPage extends Block<ChangePasswordPageP
                     name: "oldPassword",
                     type: "password",
                     label: "password",
-                    blur: handleBlurBind,
+                    blur: handleBlurBind
                 },
                 {
                     className: "profile-form__input",
@@ -42,7 +42,7 @@ export default class ProfileChangePasswordPage extends Block<ChangePasswordPageP
                     name: "newPassword",
                     type: "password",
                     label: "password",
-                    blur: handleBlurBind,
+                    blur: handleBlurBind
                 },
                 {
                     className: "profile-form__input",
@@ -50,22 +50,22 @@ export default class ProfileChangePasswordPage extends Block<ChangePasswordPageP
                     name: "newPassword",
                     type: "password",
                     label: "password",
-                    blur: handleBlurBind,
-                },
-            ],
+                    blur: handleBlurBind
+                }
+            ]
         });
         const ProfileButton = new Button({
             className: "profile-change-password-page",
             page: "profile",
             text: "Сохранить",
             events: {
-                click: handleSubmitBind,
-            },
+                click: handleSubmitBind
+            }
         });
         const ProfileImage = new Image({
             className: "profile-change-password-page__image",
             src: "/assets/profile-placeholder.png",
-            alt: "Аватар пользователя",
+            alt: "Аватар пользователя"
 
         });
 
@@ -73,7 +73,7 @@ export default class ProfileChangePasswordPage extends Block<ChangePasswordPageP
             ButtonBack,
             Form,
             ProfileButton,
-            ProfileImage,
+            ProfileImage
         };
     }
 

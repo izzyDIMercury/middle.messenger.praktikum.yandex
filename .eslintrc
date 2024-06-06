@@ -29,7 +29,9 @@
                 "argsIgnorePattern": "Props$"
             }
         ],
-        "@typescript-eslint/no-this-alias": "off"
+        "@typescript-eslint/no-this-alias": "off",
+        "@typescript-eslint/comma-dangle": "error",
+        "@typescript-eslint/keyword-spacing": "error"
     }
 }
 

@@ -12,7 +12,7 @@ type LinkProps = {
 export default class Link extends Block<LinkProps> {
     constructor(props: LinkProps) {
         super("div", {
-            ...props,
+            ...props
         });
     }
 

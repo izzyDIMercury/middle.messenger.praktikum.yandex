@@ -7,7 +7,7 @@ type Page500Props = {};
 export default class Page500 extends Block<Page500Props> {
     constructor(props: Page500Props) {
         super("form", {
-            ...props,
+            ...props
         });
     }
 
@@ -17,12 +17,12 @@ export default class Page500 extends Block<Page500Props> {
             page: "login",
             text: "Назад",
             events: {
-                click: switchPage,
-            },
+                click: switchPage
+            }
         });
 
         this.children = {
-            Error500Link,
+            Error500Link
         };
     }
 
