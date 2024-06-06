@@ -19,7 +19,8 @@ export default class ProfileButton extends Block<ProfileButtonProps> {
             className: "profile-button__icon",
             src: "/assets/icons/profile.png",
             alt: "Профиль",
-            page: "profile"
+            page: "profile",
+            path: ""
         });
 
         this.children = {

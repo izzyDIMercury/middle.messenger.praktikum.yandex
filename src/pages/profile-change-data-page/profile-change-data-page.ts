@@ -89,8 +89,8 @@ export default class ProfileChangeDataPage extends Block<ChangeDataPageProps> {
         const ProfileImage = new Image({
             className: "profile-change-data-page__image",
             src: "/assets/profile-placeholder.png",
-            alt: "Аватар пользователя"
-
+            alt: "Аватар пользователя",
+            path: ""
         });
 
         this.children = {
@@ -111,7 +111,7 @@ export default class ProfileChangeDataPage extends Block<ChangeDataPageProps> {
         const submit = new FormSubmit("profile-change-data-page__form", "profile-change-data-page__form-data", "profile-change-data-page__error-text");
         if (submit.validated && event.type === "click") {
             submit.sendData("https://chats", "get");
-            switchPage(null, "chat");
+            switchPage(null, "profile");
         }
     }
 

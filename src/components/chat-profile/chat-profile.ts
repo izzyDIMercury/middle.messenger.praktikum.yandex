@@ -15,7 +15,8 @@ export default class ChatProfile extends Block<ChatProfileProps> {
         const Cat = new Image({
             className: "chat-profile__user-image",
             src: "/assets/cat.jpg",
-            alt: "Аватар пользователся"
+            alt: "Аватар пользователся",
+            path: ""
         });
         const SettingsIcon = new Image({
             className: "chat-profile__settings-icon",
@@ -24,7 +25,8 @@ export default class ChatProfile extends Block<ChatProfileProps> {
             page: "login",
             events: {
                 click: switchPage
-            }
+            },
+            path: ""
         });
 
         this.children = {

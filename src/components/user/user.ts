@@ -22,7 +22,8 @@ export default class User extends Block<UserProps> {
         const UserImagePlaceholder = new Image({
             className: "user__image",
             src: userData.image,
-            alt: "Фото пользователя"
+            alt: "Фото пользователя",
+            path: ""
         });
 
         this.children = {

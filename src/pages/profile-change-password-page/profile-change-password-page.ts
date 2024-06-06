@@ -65,8 +65,8 @@ export default class ProfileChangePasswordPage extends Block<ChangePasswordPageP
         const ProfileImage = new Image({
             className: "profile-change-password-page__image",
             src: "/assets/profile-placeholder.png",
-            alt: "Аватар пользователя"
-
+            alt: "Аватар пользователя",
+            path: ""
         });
 
         this.children = {
@@ -87,7 +87,7 @@ export default class ProfileChangePasswordPage extends Block<ChangePasswordPageP
         const submit = new FormSubmit("profile-change-password-page__form", "profile-change-password-page__form-data", "profile-change-password-page__error-text");
         if (submit.validated && event.type === "click") {
             submit.sendData("https://chats", "get");
-            switchPage(null, "chat");
+            switchPage(null, "profile");
         }
     }
 

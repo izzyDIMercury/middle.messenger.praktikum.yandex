@@ -37,7 +37,7 @@ export default class ChatPage extends Block<ChatPageProps> {
                     name: "Петр",
                     message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
                     unread: "",
-                    image: "/assets/icons/profile-placeholder.png",
+                    image: "/assets/icons/profile-placeholder-small.png",
                     time: "Пн",
                     selected: "selected"
                 },
@@ -45,7 +45,7 @@ export default class ChatPage extends Block<ChatPageProps> {
                     name: "Пользователь",
                     message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
                     unread: "",
-                    image: "/assets/icons/profile-placeholder.png",
+                    image: "/assets/icons/profile-placeholder-small.png",
                     time: "Пн",
                     selected: ""
                 }

@@ -28,7 +28,8 @@ export default class ProfilePage extends Block<ProfilePageProps> {
         const ProfileImage = new Image({
             className: "profile-page__image",
             src: "/assets/profile-placeholder.png",
-            alt: "Аватар пользователя"
+            alt: "Аватар пользователя",
+            path: ""
         });
         const Footer = new ProfileFooter({
             buttonsKeys: [],

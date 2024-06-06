@@ -37,19 +37,6 @@ export function navigate(page: string) {
 }
 
 
-
-// document.addEventListener("DOMContentLoaded", navigate("profile"));
-
-// document.addEventListener("click", e => {
-//     const page = e.target.getAttribute("page");
-//     if (page) {
-//         navigate(page);
-
-//         e.preventDefault();
-//         e.stopImmediatePropagation();
-//     }
-// })
-
 interface PageCustomEvent extends CustomEvent {
     detail: {
         page: string
@@ -77,3 +64,18 @@ document.addEventListener("switchPage", event => {
     const page = eventDetail.detail.page as string;
     navigate(page);
 });
+
+
+
+
+// document.addEventListener("DOMContentLoaded", navigate("profile"));
+
+// document.addEventListener("click", e => {
+//     const page = e.target.getAttribute("page");
+//     if (page) {
+//         navigate(page);
+
+//         e.preventDefault();
+//         e.stopImmediatePropagation();
+//     }
+// })

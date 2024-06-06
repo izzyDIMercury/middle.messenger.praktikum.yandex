@@ -14,7 +14,8 @@ export default class Search extends Block<SearchProps> {
         const SearchIcon = new Image({
             className: "search__icon",
             src: "/assets/icons/search.png",
-            alt: "Иконка поиска"
+            alt: "Иконка поиска",
+            path: ""
         });
 
         this.children = {

@@ -11,10 +11,6 @@ type ProfileFooterButtonProps = {
     }
 }
 
-// type ProfileFooterButtonProps = {
-//     [key: string]: string | number | { click: Function };
-// };
-
 export default class ProfileFooterButton extends Block<ProfileFooterButtonProps> {
     constructor(props: ProfileFooterButtonProps) {
         super({

@@ -18,7 +18,8 @@ export default class MessageButton extends Block<MessageButtonProps> {
         const SendIcon = new Image({
             className: "message-panel__send-icon",
             src: "/assets/icons/arrow-right.png",
-            alt: "Отправить"
+            alt: "Отправить",
+            path: ""
         });
 
         this.children = {

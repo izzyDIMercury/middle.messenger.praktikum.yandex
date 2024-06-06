@@ -29,7 +29,8 @@ export default class MessagePanel extends Block<MessagePanelProps> {
         const ClipIcon = new Image({
             className: "message-panel__attach-icon",
             src: "/assets/icons/clip.png",
-            alt: "Прикрепить"
+            alt: "Прикрепить",
+            path: ""
         });
         const Send = new MessageButton({
             events: {

@@ -8,7 +8,7 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "lint": "eslint ./src --ext .ts & stylelint src/**/*.scss",
-    "start": "npm run build & node server.cjs & vite preview --port 3000"
+    "start": "npm run build & node server.cjs & vite preview --port 3000 --open"
   },
   "devDependencies": {
     "@stylistic/eslint-plugin": "^2.1.0",
