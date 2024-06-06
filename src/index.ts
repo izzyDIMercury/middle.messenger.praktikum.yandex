@@ -1,7 +1,6 @@
 import Handlebars from "handlebars";
 import * as Components from "./components";
 import * as Pages from "./pages";
-import Block from "./core/block.ts";
 
 type PagesType = Record<string, any>;
 
@@ -21,7 +20,7 @@ Object.entries(Components).forEach(([ name, component ]) => {
     Handlebars.registerPartial(name, component as any);
 })
 
-export function navigate(page: string): void {
+export function navigate(page: string) {
     const [ source, context ] = pages[page];
     const root = document.querySelector<HTMLElement>("#app");
 
@@ -37,8 +36,9 @@ export function navigate(page: string): void {
     }
 }
 
-document.addEventListener("DOMContentLoaded", navigate("profile"));
 
+
+// document.addEventListener("DOMContentLoaded", navigate("profile"));
 
 // document.addEventListener("click", e => {
 //     const page = e.target.getAttribute("page");
@@ -50,8 +50,30 @@ document.addEventListener("DOMContentLoaded", navigate("profile"));
 //     }
 // })
 
-document.addEventListener("switchPage", event => {
-    navigate(event.detail.page);
-});
+interface PageCustomEvent extends CustomEvent {
+    detail: {
+        page: string
+    }
+}
 
-// document.dispatchEvent(new CustomEvent("switchPage", { detail: "mydetail" }));
+document.addEventListener("onContentLoad", event => {
+    const eventDetail = event as PageCustomEvent;
+    const page = eventDetail.detail.page as string;
+    navigate(page);
+})
+
+document.addEventListener("DOMContentLoaded", () => {
+    document.dispatchEvent(new CustomEvent("onContentLoad", {
+
+        // здесь можно задать начальную страницу:
+        detail: {
+            page: "login",
+        }
+    }));
+})
+
+document.addEventListener("switchPage", event => {
+    const eventDetail = event as PageCustomEvent;
+    const page = eventDetail.detail.page as string;
+    navigate(page);
+});

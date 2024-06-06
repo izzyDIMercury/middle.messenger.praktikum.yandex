@@ -1,5 +1,6 @@
 import Block from "../../core/block.ts";
 import Link from "../link/link.ts";
+import { switchPage } from "../../core/utils.ts";
 
 type ProfileFooterButtonProps = {
     classModifier?: string,
@@ -27,6 +28,9 @@ export default class ProfileFooterButton extends Block<ProfileFooterButtonProps>
             className: "profile-footer-button__button",
             page: exprectedProps.page,
             text: exprectedProps.text,
+            events: {
+                click: switchPage
+            }
         });
 
         this.children = {

@@ -9,9 +9,6 @@ type ProfileData = {
     switchPage: Function | null
 };
 
-// events: {
-//     switchPage: Function
-// }
 
 type ProfileFooterProps = {
     buttons: Array<ProfileData>,
