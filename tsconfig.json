@@ -19,6 +19,6 @@
     "noFallthroughCasesInSwitch": true
   },
   "include": ["./src"],
-  "exclude": ["vite.config.js"]
+  "exclude": ["./vite.config.ts"]
 }
 
