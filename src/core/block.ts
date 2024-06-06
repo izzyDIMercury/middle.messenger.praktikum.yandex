@@ -103,10 +103,10 @@ class Block<Props> {
 
     }
 
-    private createResources(): void {
-        const tagName = this.meta?.tagName;
-        this.element = this.createDocumentElement(tagName as string);
-    }
+    // private createResources(): void {
+    //     const tagName = this.meta?.tagName;
+    //     this.element = this.createDocumentElement(tagName as string);
+    // }
 
     private createDocumentElement(tagName: string): Element {
         const id = this.id as string;
@@ -127,7 +127,7 @@ class Block<Props> {
         });
     }
 
-    componentDidMount(oldProps?: Props) {}
+    componentDidMount() {}
 
     private dispatchComponentDidMount(): void {
         this.eventBus().emit(Block.EVENTS.FLOW_CDM);
@@ -135,15 +135,15 @@ class Block<Props> {
 
     // CDU:
 
-    _componentDidUpdate(oldProps: Props, newProps: Props) {
-        const response = this.componentDidUpdate(oldProps, newProps);
+    _componentDidUpdate() {
+        const response = this.componentDidUpdate();
         if (!response) {
             return;
         }
         this._render();
     }
 
-    componentDidUpdate(oldProps: Props, newProps: Props) {
+    componentDidUpdate() {
         return true;
     }
 

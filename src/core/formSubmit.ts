@@ -26,7 +26,7 @@ export default class FormSubmit {
             if (isMessage) {
                 console.log("Сообщение не должно быть пустым!");
             } else {
-                this.showErrorMessage(checkResult.type, checkResult.message, parentClass, errorClass);
+                this.showErrorMessage(checkResult.message, parentClass, errorClass);
             }
             this.validated = false;
         } else {
@@ -98,7 +98,7 @@ export default class FormSubmit {
         return result;
     }
 
-    private showErrorMessage(type: string, message: string, parentClass: string, errorClass: string) {
+    private showErrorMessage(message: string, parentClass: string, errorClass: string) {
         // const { type, message } = checkResult;
         const parent = document.querySelector(`.${parentClass}`);
         if (parent?.querySelector(`.${errorClass}`)) {
