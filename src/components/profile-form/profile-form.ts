@@ -27,7 +27,7 @@ export default class ProfileForm extends Block<ProfileFormProps> {
             return acc;
         }, {});
 
-        super("form", {
+        super({
             ...props,
             formItemsKeys: Object.keys(formItems),
             ...formItems

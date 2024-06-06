@@ -5,7 +5,7 @@ type SearchProps = {};
 
 export default class Search extends Block<SearchProps> {
     constructor(props: SearchProps) {
-        super("form", {
+        super({
             ...props
         });
     }

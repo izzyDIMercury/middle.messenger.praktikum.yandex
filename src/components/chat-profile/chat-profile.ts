@@ -6,7 +6,7 @@ type ChatProfileProps = object;
 
 export default class ChatProfile extends Block<ChatProfileProps> {
     constructor(props: ChatProfileProps) {
-        super("form", {
+        super({
             ...props
         });
     }

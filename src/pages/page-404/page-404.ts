@@ -6,7 +6,7 @@ type Page404Props = {};
 
 export default class Page404 extends Block<Page404Props> {
     constructor(props: Page404Props) {
-        super("form", {
+        super({
             ...props
         });
     }

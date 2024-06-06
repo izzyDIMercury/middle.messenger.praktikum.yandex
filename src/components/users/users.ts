@@ -25,7 +25,7 @@ export default class Users extends Block<UsersArray> {
             return acc;
         }, {});
 
-        super("form", {
+        super({
             ...props,
             usersKeys: Object.keys(users),
             ...users

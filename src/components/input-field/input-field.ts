@@ -16,7 +16,7 @@ export default class InputField extends Block<InputFieldProps> {
     // propsData: InputFieldProps
 
     constructor(props: InputFieldProps) {
-        super("div", {
+        super({
             ...props,
             InputBlock: new Input({
                 className: props.className,

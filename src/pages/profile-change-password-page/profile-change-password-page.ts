@@ -10,7 +10,7 @@ type ChangePasswordPageProps = {};
 
 export default class ProfileChangePasswordPage extends Block<ChangePasswordPageProps> {
     constructor(props: ChangePasswordPageProps) {
-        super("form", {
+        super({
             ...props
         });
     }

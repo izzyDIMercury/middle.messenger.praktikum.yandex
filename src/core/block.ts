@@ -18,21 +18,13 @@ class Block<Props> {
 
     private element: Element | null = null;
 
-    private meta: { tagName: string, props: Partial<Props> } | null = null;
-
     id: number | string;
-    // private id: number | string | null = null;
 
-    constructor(tagName: string = "div", propsAndChildren: Props) {
+    constructor(propsAndChildren: Props) {
         const { children, props } = this.getChildren(propsAndChildren);
         this.children = children;
 
         const eventBus = new EventBus();
-
-        this.meta = {
-            tagName,
-            props
-        };
 
         const createdId = makeUUID();
         this.id = createdId as string;
@@ -103,11 +95,6 @@ class Block<Props> {
 
     }
 
-    // private createResources(): void {
-    //     const tagName = this.meta?.tagName;
-    //     this.element = this.createDocumentElement(tagName as string);
-    // }
-
     private createDocumentElement(tagName: string): Element {
         const id = this.id as string;
         const element = document.createElement(tagName);
@@ -119,7 +106,6 @@ class Block<Props> {
 
     private _componentDidMount(): void {
         this.componentDidMount();
-        // console.log(this.children);
 
         Object.values(this.children).forEach((child) => {
             const value = child as InstanceType<typeof Block>;
@@ -150,9 +136,7 @@ class Block<Props> {
     // Render:
 
     _render(): void {
-    // const { block, newElement } = this.compile(this.props);
         const newElement = this.compile(this.props) as HTMLElement;
-        // console.log(newElement);
 
         if (this.element) {
             this.element.replaceWith(newElement);
@@ -172,7 +156,6 @@ class Block<Props> {
 
     addEvents(): void {
         const { events = {} } = this.props as unknown as { events: { [key: string]: any } };
-        // console.log(this.props);
         Object.keys(events).forEach((eventName) => {
             this.element?.addEventListener(eventName, events[eventName as keyof typeof events]);
         });
@@ -217,9 +200,7 @@ class Block<Props> {
             const stub = fragment.content.querySelector(`[data-id="${value.id}"]`);
             stub?.replaceWith(value.getContent());
         });
-        // const block = fragment.content;
         return newElement;
-    // return { block, newElement };
     }
 }
 

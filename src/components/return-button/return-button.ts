@@ -9,7 +9,7 @@ type ReturnButtonProps = {
 
 export default class ReturnButton extends Block<ReturnButtonProps> {
     constructor(props: ReturnButtonProps) {
-        super("form", {
+        super({
             ...props
         });
     }

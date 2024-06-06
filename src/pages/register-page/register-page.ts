@@ -10,7 +10,7 @@ type RegisterPageProps = {};
 
 export default class RegisterPage extends Block<RegisterPageProps> {
     constructor(props: RegisterPageProps) {
-        super("form", {
+        super({
             ...props
         });
     }

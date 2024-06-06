@@ -17,7 +17,7 @@ type ProfileFooterButtonProps = {
 
 export default class ProfileFooterButton extends Block<ProfileFooterButtonProps> {
     constructor(props: ProfileFooterButtonProps) {
-        super("form", {
+        super({
             ...props
         });
     }

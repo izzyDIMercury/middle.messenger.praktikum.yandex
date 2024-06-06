@@ -9,7 +9,7 @@ type MessageButtonProps = {
 
 export default class MessageButton extends Block<MessageButtonProps> {
     constructor(props: MessageButtonProps) {
-        super("form", {
+        super({
             ...props
         });
     }

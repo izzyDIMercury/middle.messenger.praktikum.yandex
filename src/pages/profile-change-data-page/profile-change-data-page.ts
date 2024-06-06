@@ -10,7 +10,7 @@ type ChangeDataPageProps = {};
 
 export default class ProfileChangeDataPage extends Block<ChangeDataPageProps> {
     constructor(props: ChangeDataPageProps) {
-        super("form", {
+        super({
             ...props
         });
     }

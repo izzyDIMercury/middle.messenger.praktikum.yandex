@@ -12,7 +12,7 @@ type UserProps = {
 
 export default class User extends Block<UserProps> {
     constructor(props: UserProps) {
-        super("form", {
+        super({
             ...props
         });
     }

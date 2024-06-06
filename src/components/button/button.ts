@@ -11,7 +11,7 @@ type ButtonProps = {
 
 export default class Button extends Block<ButtonProps> {
     constructor(props: ButtonProps) {
-        super("", {
+        super({
             ...props
         });
     }

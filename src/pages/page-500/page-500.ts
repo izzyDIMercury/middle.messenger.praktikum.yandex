@@ -6,7 +6,7 @@ type Page500Props = {};
 
 export default class Page500 extends Block<Page500Props> {
     constructor(props: Page500Props) {
-        super("form", {
+        super({
             ...props
         });
     }

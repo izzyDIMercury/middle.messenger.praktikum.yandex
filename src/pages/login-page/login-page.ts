@@ -10,7 +10,7 @@ type LoginPageProps = {};
 
 export default class LoginPage extends Block<LoginPageProps> {
     constructor(props: LoginPageProps) {
-        super("form", {
+        super({
             ...props
         });
     }

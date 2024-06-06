@@ -30,7 +30,7 @@ export default class RegisterPageList extends Block<RegisterListProps> {
 
         // console.log(props);
 
-        super("div", {
+        super({
             ...props,
             itemsKeys: Object.keys(items),
             ...items

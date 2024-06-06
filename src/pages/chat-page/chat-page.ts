@@ -10,11 +10,9 @@ type ChatPageProps = {};
 
 export default class ChatPage extends Block<ChatPageProps> {
     constructor(props: ChatPageProps) {
-        super("form", {
+        super({
             ...props
         });
-
-        console.log(props);
     }
 
     init() {

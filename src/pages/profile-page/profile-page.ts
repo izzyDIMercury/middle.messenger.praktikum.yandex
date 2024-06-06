@@ -10,7 +10,7 @@ type ProfilePageProps = {};
 
 export default class ProfilePage extends Block<ProfilePageProps> {
     constructor(props: ProfilePageProps) {
-        super("form", {
+        super({
             ...props
         });
     }

@@ -7,7 +7,7 @@ type PageTitleProps = {
 
 export default class PageTitle extends Block<PageTitleProps> {
     constructor(props: PageTitleProps) {
-        super("div", {
+        super({
             ...props
         });
     }

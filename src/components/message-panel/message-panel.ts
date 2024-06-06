@@ -8,7 +8,7 @@ type MessagePanelProps = {};
 
 export default class MessagePanel extends Block<MessagePanelProps> {
     constructor(props: MessagePanelProps) {
-        super("form", {
+        super({
             props
         });
     }
