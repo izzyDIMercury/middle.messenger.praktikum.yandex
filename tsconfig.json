@@ -18,7 +18,7 @@
     "strictNullChecks": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src"],
-  "exclude": ["vite.config.ts"]
+  "include": ["./src"],
+  "exclude": ["./vite.config.ts"]
 }
 
