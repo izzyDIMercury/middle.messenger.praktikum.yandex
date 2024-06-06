@@ -1,0 +1,13 @@
+@import "/variables.scss";
+
+.link:hover {
+    cursor: pointer;
+}
+
+.link__text {
+    display: inline;
+    color: $purple;
+    font-family: "Inter", "Arial";
+    font-weight: 400;
+    font-size: 11px;
+}

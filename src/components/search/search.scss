@@ -1,0 +1,30 @@
+@import "/variables.scss";
+
+.search {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    width: 250px;
+    height: 32px;
+    background-color: $search-field;
+    border-radius: 5px;
+}
+
+.search__icon {
+    width: 20px;
+    height: 20px;
+    margin-left: 3px;
+}
+
+.search__input {
+    width: 220px;
+    border: none;
+    background-color: $search-field;
+}
+
+.search__input:focus {
+    outline: none;
+}

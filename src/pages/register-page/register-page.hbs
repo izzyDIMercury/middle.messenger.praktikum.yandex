@@ -1,0 +1,16 @@
+{{#> Dialog }}
+    <form class="register-page">
+        <div class="register-page__content">
+            {{> PageTitle className="register-page__title" title="Регистрация" }}
+            <ul class="register-page__input-elements">
+                {{#each (register-fields)}}
+                    {{> InputField }}
+                {{/each}}
+            </ul>
+        </div>
+        <div class="register-page__footer">
+            {{> Button className="register-page__button" text="Зарегистрироваться" page="chat" }}
+            {{> Link className="register-page__link" text="Войти" page="login" }}
+        </div>
+    </form>
+{{/ Dialog}}

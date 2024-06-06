@@ -1,0 +1,11 @@
+<ul class="profile-form">
+    {{#if data }}
+        {{#each (profile-form-items)}}
+            {{> InputField }}
+        {{/each}}
+    {{else}}
+        {{#each (profile-password-items)}}
+            {{> InputField }}
+        {{/each}}
+    {{/if}}
+</ul>
