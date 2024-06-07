@@ -98,6 +98,8 @@ export default class LoginPage extends Block<LoginPageProps> {
         }
     }
 
+    // smth
+
     render() {
         return (`
             <div class="dialog-wrapper">
