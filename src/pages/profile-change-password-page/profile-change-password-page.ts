@@ -84,7 +84,7 @@ export default class ProfileChangePasswordPage extends Block<ChangePasswordPageP
     handleSubmit(event: FocusEvent | MouseEvent) {
         event.preventDefault();
 
-        const submit = new FormSubmit("profile-change-password-page__form", "profile-change-password-page__form-data", "profile-change-password-page__error-text", false, event.type);
+        const submit = new FormSubmit("profile-change-password-page__form", "profile-change-password-page__error-text", false, event.type);
         if (submit.validated && event.type === "click") {
             submit.sendData("https://chats", "get");
             switchPage(null, "profile");

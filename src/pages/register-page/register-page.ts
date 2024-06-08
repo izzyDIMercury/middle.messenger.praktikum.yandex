@@ -116,7 +116,7 @@ export default class RegisterPage extends Block<RegisterPageProps> {
     handleSubmit(event: FocusEvent) {
         event.preventDefault();
 
-        const submit = new FormSubmit("register-page", "register-page__content", "login-page__error-text", false, event.type);
+        const submit = new FormSubmit("register-page", "login-page__error-text", false, event.type);
         if (submit.validated && event.type === "click") {
             submit.sendData("https://chats", "get");
             switchPage(null, "chat");

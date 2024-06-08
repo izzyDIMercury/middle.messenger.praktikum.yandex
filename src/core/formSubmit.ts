@@ -3,12 +3,13 @@ import type { UserData } from "../types.js";
 
 // type Data = Record<string, string>;
 
-interface HTMLProps extends HTMLInputElement {
-    name: string,
-    value: string
-}
+// interface HTMLProps extends HTMLInputElement {
+//     name: string,
+//     value: string
+// }
 
-type Check = { type: string, hasErrors: boolean, error: Error, eventType: string };
+type Check = { label: string, hasErrors: boolean, error: Error, isEmpty: boolean, element: HTMLInputElement };
+type DataItem = { hasErrors: boolean, name: string, value: string };
 
 export default class FormSubmit {
     public validated: boolean = false;
@@ -17,14 +18,14 @@ export default class FormSubmit {
 
     private userData: UserData = {};
 
-    constructor(formClass: string, parentClass: string, errorClass: string, isMessage?: boolean, eventType?: string) {
+    constructor(formClass: string, errorClass: string, isMessage?: boolean, eventType?: string) {
         const form: HTMLElement | null = document.querySelector(`.${formClass}`);
         const inputs: HTMLInputElement[] = Object.values(form ? form.querySelectorAll("input") : {});
         const checksResult = this.checkForErrors(inputs);
 
         const data = checksResult.map(check => {
             if (!isMessage) {
-                return this.handleErrorMessages(check, errorClass, eventType);
+                return this.handleErrorMessages(check, errorClass, eventType as string);
             } else if (isMessage && check.isEmpty) {
                 console.log("Сообщение не должно быть пустым!");
                 return { hasErrors: true, name: check?.element.name, value: check?.element.value };
@@ -32,11 +33,12 @@ export default class FormSubmit {
                 return { hasErrors: false, name: check?.element.name, value: check?.element.value };
             }
         })
-        
-        const anyErrors = data.filter(item => item.hasErrors);
 
-        data.forEach(item => {
-            const name = item.name;       
+        const result = data as DataItem[];
+        
+        const anyErrors = result.filter(item => item.hasErrors);
+
+        result.forEach(item => {      
             this.userData[item.name] = item.value;
             console.log(this.userData);
         })
@@ -46,9 +48,9 @@ export default class FormSubmit {
         }
     }
 
-    private checkFocused(element) {
-        const container = element.closest("li");
-        const updatedElement = container.querySelector(`#${element.id}`);
+    private checkFocused(element: HTMLInputElement) {
+        const container = element.closest("li") as HTMLElement;
+        const updatedElement = container.querySelector(`#${element.id}`) as HTMLElement;
         const result = updatedElement.getAttribute("was_focused");
         if (result === "true") {
             return true;
@@ -57,7 +59,7 @@ export default class FormSubmit {
         }
     }
 
-    private handleErrorMessages(check, errorClass, eventType) {
+    private handleErrorMessages(check: Check, errorClass: string, eventType: string) {
         if ((check.hasErrors && eventType === "blur" && !check.isEmpty) 
             || (check.hasErrors && eventType === "click")
             || (check.hasErrors && eventType === "blur" && this.checkFocused(check?.element))) {
@@ -68,11 +70,11 @@ export default class FormSubmit {
         return { hasErrors: check?.hasErrors, name: check?.element.name, value: check?.element.value };
     }
 
-    private showErrorMessage(check, errorClass) {
-        const container = check.element.closest("li");
+    private showErrorMessage(check: Check, errorClass: string) {
+        const container = check.element.closest("li") as HTMLElement;
         if (container.querySelector("p")) {
             this.hideErrorMessage(check, errorClass);
-        };
+        }
         const element = document.createElement("p");
         element.setAttribute("class", errorClass);
         const text = document.createTextNode(check.error.message);
@@ -80,8 +82,8 @@ export default class FormSubmit {
         container.appendChild(element);
     }
 
-    private hideErrorMessage(check, errorClass) {
-        const container = check.element.closest("li");
+    private hideErrorMessage(check: Check, errorClass: string) {
+        const container = check.element.closest("li") as HTMLElement;
         const errorMessage = container.querySelector(`.${errorClass}`);
         errorMessage?.remove();
     }
@@ -113,7 +115,7 @@ export default class FormSubmit {
             }
         });
 
-        return checks;
+        return checks as Check[];
         // const result = this.validate(checks as Check[]);
         // return result;
     }
@@ -304,19 +306,3 @@ export default class FormSubmit {
         }
     }
 }
-
-
-
-        // if (checkResult.hasErrors) {
-        //     if (isMessage) {
-        //         console.log("Сообщение не должно быть пустым!");
-        //     } else {
-        //         this.showErrorMessage(checkResult.message, parentClass, errorClass);
-        //     }
-        //     this.validated = false;
-        // } else {
-        //     !isMessage && this.hideErrorMessage(errorClass);
-        //     this.validated = true;
-        // }
-
-        // this.userData = this.getData(inputs);

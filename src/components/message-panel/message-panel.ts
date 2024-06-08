@@ -52,7 +52,7 @@ export default class MessagePanel extends Block<MessagePanelProps> {
     handleSubmit(event: FocusEvent | MouseEvent): void {
         event.preventDefault();
 
-        new FormSubmit("message-panel", "", "", true, event.type);
+        new FormSubmit("message-panel", "", true, event.type);
     }
 
     render() {

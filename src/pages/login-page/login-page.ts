@@ -91,7 +91,7 @@ export default class LoginPage extends Block<LoginPageProps> {
 
     handleSubmit(event: FocusEvent | MouseEvent) {
         event.preventDefault();
-        const submit = new FormSubmit("login-page", "login-page__content", "login-page__error-text", false, event.type);
+        const submit = new FormSubmit("login-page", "login-page__error-text", false, event.type);
         if (submit.validated && event.type === "click") {
             submit.sendData("https://chats", "get");
             switchPage(null, "chat");
