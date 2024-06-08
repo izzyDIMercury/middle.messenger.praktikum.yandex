@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // здесь можно задать начальную страницу:
         detail: {
-            page: "register"
+            page: "login"
         }
     }));
 })

@@ -40,8 +40,9 @@ export default class FormSubmit {
 
         result.forEach(item => {      
             this.userData[item.name] = item.value;
-            console.log(this.userData);
         })
+
+        console.log(this.userData);
 
         if (anyErrors.length === 0) {
             this.validated = true;
@@ -161,7 +162,7 @@ export default class FormSubmit {
         }
 
         if (login.length < 3 || login.length > 20) {
-            return { isEmpty: false, hasErrors: true, error: new Error("Длина логина должна быть не менее 3 и не более 20 символов.") };
+            return { isEmpty: false, hasErrors: true, error: new Error("Длина логина должна быть от 3 до 20 символов.") };
         }
 
         if (!login.match(/^[\w-]+$/)) {
@@ -180,14 +181,14 @@ export default class FormSubmit {
         }
 
         if (password.length < 8 || password.length > 40) {
-            return { isEmpty: false, hasErrors: true, error: new Error("Длина пароля должна быть не менее 8 симолов и не более 40 символов.") };
+            return { isEmpty: false, hasErrors: true, error: new Error("Длина пароля должна быть от 8 до 40 символов.") };
         }
 
         if (!password.match(/[0-9]/)) {
             return { isEmpty: false, hasErrors: true, error: new Error("Пароль должен содержать хотя бы одну цифру.") };
         }
 
-        const upperCaseLetters = password.split("").filter((character) => (character == character.toUpperCase()) && !Number.isNaN(Number(character)));
+        const upperCaseLetters = password.split("").filter((character) => (character == character.toUpperCase()) && Number.isNaN(Number(character)));
         if (upperCaseLetters.length === 0) {
             return { isEmpty: false, hasErrors: true, error: new Error("Хотя бы одна буква в пароле должна быть заглавной.") };
         }
@@ -266,7 +267,7 @@ export default class FormSubmit {
         }
 
         if (name.length < 3 || name.length > 20) {
-            return { isEmpty: false, hasErrors: true, error: new Error("Длина имени в чате должна быть не менее 3 и не более 20 символов.") };
+            return { isEmpty: false, hasErrors: true, error: new Error("Длина имени в чате должна быть от 3 до 20 символов.") };
         }
 
         if (!name.match(/^[\w-]+$/)) {
