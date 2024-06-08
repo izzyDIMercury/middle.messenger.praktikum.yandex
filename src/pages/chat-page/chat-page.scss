@@ -1,51 +1,48 @@
-@import "/variables.scss";
+@import "/variables";
 
 .chat-page {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
     position: relative;
+    display: flex;
+    flex-flow: row nowrap;
     width: 100%;
     height: 100%;
 }
 
 .left-column {
-    display: flex;
-    flex-wrap: nowrap;
-    flex-direction: column;
     position: relative;
-    box-sizing: content-box;
+    display: flex;
+    flex-flow: column nowrap;
     border-right: 2px solid $light-grey;
     width: 310px;
     height: 100%;
+    box-sizing: content-box;
 }
 
 .left-column__header {
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    position: relative;
     width: 100%;
     height: 74px;
     box-sizing: border-box;
 }
 
 .left-column__header-content {
+    position: relative;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
     align-items: center;
-    position: relative;
-    box-sizing: border-box;
-    width: 100%;
+    justify-content: space-between;
     padding: 0 8px 0 14px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .left-column__users {
     position: relative;
     display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
+    flex-flow: column nowrap;
     overflow-y: scroll;
 }
 
@@ -57,8 +54,8 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    justify-content: end;
     align-items: center;
+    justify-content: end;
     width: 969px;
     background-image: url("/assets/background.jpg");
     background-position: center;

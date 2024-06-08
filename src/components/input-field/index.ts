@@ -1,2 +1,4 @@
+import InputField from "./input-field.ts";
 import "./input-field.scss";
-export { default as InputField } from "./input-field.hbs?raw";
+
+export { InputField };

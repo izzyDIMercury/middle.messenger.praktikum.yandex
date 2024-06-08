@@ -7,6 +7,7 @@ https://www.figma.com/file/kBmhZZH1mspG6oZnTJpfZQ/project1?type=design&node-id=0
 npm run dev `- запуск dev-сервера,`
 npm run build `- сборка прокета,`
 npm run start `- запуск локального Express-сервера с раздачей статики.`
+npm run lint `- запуск линтеров eslint и stylelint`
 
 ### Ссылка на домен в Netlify:
 

@@ -1,66 +1,62 @@
-@import "/variables.scss";
+@import "/variables";
 
 .user {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    align-items: center;
     position: relative;
-    box-sizing: border-box;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid $light-grey;
+    padding: 0 10px;
     width: 310px;
     height: 71px;
     min-height: 71px;
-    padding: 0 10px;
-    border-top: 1px solid $light-grey;
+    box-sizing: border-box;
 
     &.selected {
-        background-color: rgba(171, 77, 204, 0.3);
+        background-color: rgb(171 77 204 / 30%);
     }
 }
 
 .user__content {
-    display: flex;
-    flex-wrap: nowrap;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
     position: relative;
-    height: 48px;
-    width: 250px
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-between;
+    width: 250px;
+    height: 48px
 }
 
 .user__image {
+    border-radius: 50%;
     width: 47px;
     height: 47px;
-    border-radius: 50%;
 }
 
 .user__data {
     display: flex;
-    flex-wrap: nowrap;
-    flex-direction: column;
+    flex-flow: column nowrap;
     justify-content: space-between;
-    max-width: 190px;
     height: 48px;
+    max-width: 190px;
 }
 
 .user__name {
-    font-family: "Inter", "Arial";
-    font-weight: 400;
-    font-size: 13px;
+    font-family: Inter, serif;
     font-weight: 700;
+    font-size: 13px;
     color: $black;
 }
 
 .user__message {
+    overflow: hidden;
     height: 30px;;
-    font-family: "Inter", "Arial";
+    font-family: Inter, serif;
+    font-weight: 400;
     font-size: 12px;
     line-height: 14px;
-    font-weight: 400;
-    color: $grey;;
-    overflow: hidden;
+    color: $grey;
 }
 
 .user__status {
@@ -71,9 +67,9 @@
 
 .user__message-time {
     position: absolute;
-    top: 0;
     right: 0;
-    font-family: "Inter", "Arial";
+    top: 0;
+    font-family: Inter, serif;
     font-weight: 400;
     font-size: 9px;
     line-height: 16px;
@@ -82,21 +78,21 @@
 
 .user__unread {
     position: absolute;
-    bottom: 0;
     right: 0;
+    bottom: 0;
     display: flex;
     flex-direction: row;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    border-radius: 50%;
     width: 20px;
     height: 20px;
     background-color: $purple;
-    border-radius: 50%;
 }
 
 .user__unread-number {
-    font-family: "Inter", "Arial";
+    font-family: Inter, serif;
     font-weight: 400;
-    color: $white;
     font-size: 11px;
+    color: $white;
 }

@@ -7,15 +7,26 @@
     "dev": "vite --port 3000 --open",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "start": "npm run build & node server.cjs & vite preview --port 3000"
+    "lint": "eslint ./src --ext .ts & stylelint src/**/*.scss",
+    "start": "npm run build & node server.cjs & vite preview --port 3000 --open"
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^7.12.0",
+    "@typescript-eslint/parser": "^7.12.0",
+    "eslint": "^8.57.0",
+    "globals": "^15.3.0",
     "sass": "^1.71.1",
+    "stylelint": "^16.6.1",
+    "stylelint-config-standard-scss": "^13.1.0",
+    "stylelint-order": "^6.0.4",
+    "stylelint-scss": "^6.3.1",
     "typescript": "^5.2.2",
+    "typescript-eslint": "^7.12.0",
     "vite": "^5.1.4"
   },
   "dependencies": {
+    "express": "^4.18.3",
     "handlebars": "^4.7.8",
-    "express": "^4.18.3"
+    "uuid": "^9.0.1"
   }
 }
