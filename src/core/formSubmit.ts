@@ -15,7 +15,7 @@ export default class FormSubmit {
 
     public isMessage: boolean = false;
 
-    private userData: UserData;
+    private userData: UserData = {};
 
     constructor(formClass: string, parentClass: string, errorClass: string, isMessage?: boolean, eventType?: string) {
         const form: HTMLElement | null = document.querySelector(`.${formClass}`);
@@ -33,7 +33,16 @@ export default class FormSubmit {
             return { hasErrors: check?.hasErrors, name: check?.element.name, value: check?.element.value };
         })
 
-        console.log(data);
+        const anyErrors = data.filter(item => item.hasErrors);
+
+        if (anyErrors.length === 0) {
+            data.forEach(item => {
+                const name = item.name;       
+                this.userData[item.name] = item.value;
+            })
+            this.validated = true;
+            console.log(this.userData);
+        }
     }
 
     private checkFocused(element) {
@@ -49,7 +58,9 @@ export default class FormSubmit {
 
     private showErrorMessage(check, errorClass) {
         const container = check.element.closest("li");
-        if (container.querySelector("p")) return;
+        if (container.querySelector("p")) {
+            this.hideErrorMessage(check, errorClass);
+        };
         const element = document.createElement("p");
         element.setAttribute("class", errorClass);
         const text = document.createTextNode(check.error.message);
@@ -251,17 +262,17 @@ export default class FormSubmit {
         return { isEmpty: false, hasErrors: false, error: new Error() };
     }
 
-    private getData(inputs: HTMLInputElement[]) {
-        const userData: Record<string, string> = {};
-        inputs.forEach((value: HTMLProps) => {
-            userData[value.name] = value.value;
-        });
+    // private getData(inputs: HTMLInputElement[]) {
+    //     const userData: Record<string, string> = {};
+    //     inputs.forEach((value: HTMLProps) => {
+    //         userData[value.name] = value.value;
+    //     });
 
-        // Log user data object:
-        console.log(userData);
-        //
-        return userData;
-    }
+    //     // Log user data object:
+    //     console.log(userData);
+    //     //
+    //     return userData;
+    // }
 
     public sendData(url: string, method: string) {
         // const userData = { data: this.userData };
