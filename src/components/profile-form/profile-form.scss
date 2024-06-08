@@ -8,15 +8,15 @@
 .profile-form__input.input-field {
     position: relative;
     flex-direction: row;
-    padding: 10px 0 3px;
     margin-bottom: 12px;
+    padding: 10px 0 3px;
     width: 100%;
     height: 33px;
 
     p {
         position: absolute;
-        bottom: -14px;
         left: 0;
+        bottom: -14px;
         padding-top: 12px;
         font-family: Inter, serif;
         font-weight: 400;
