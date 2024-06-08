@@ -108,7 +108,7 @@ export default class ProfileChangeDataPage extends Block<ChangeDataPageProps> {
     handleSubmit(event: FocusEvent | MouseEvent) {
         event.preventDefault();
 
-        const submit = new FormSubmit("profile-change-data-page__form", "profile-change-data-page__form-data", "profile-change-data-page__error-text");
+        const submit = new FormSubmit("profile-change-data-page__form", "profile-change-data-page__form-data", "profile-change-data-page__error-text", false, event.type);
         if (submit.validated && event.type === "click") {
             submit.sendData("https://chats", "get");
             switchPage(null, "profile");

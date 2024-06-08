@@ -23,25 +23,26 @@ export default class FormSubmit {
         const checksResult = this.checkForErrors(inputs);
 
         const data = checksResult.map(check => {
-            if ((check.hasErrors && eventType === "blur" && !check.isEmpty) 
-                || (check.hasErrors && eventType === "click")
-                || (check.hasErrors && eventType === "blur" && this.checkFocused(check?.element))) {
-                this.showErrorMessage(check, errorClass);
-            } else if (!check.hasErrors) {
-                this.hideErrorMessage(check, errorClass);
+            if (!isMessage) {
+                return this.handleErrorMessages(check, errorClass, eventType);
+            } else if (isMessage && check.isEmpty) {
+                console.log("Сообщение не должно быть пустым!");
+                return { hasErrors: true, name: check?.element.name, value: check?.element.value };
+            } else if (isMessage && !check.isEmpty) {
+                return { hasErrors: false, name: check?.element.name, value: check?.element.value };
             }
-            return { hasErrors: check?.hasErrors, name: check?.element.name, value: check?.element.value };
         })
-
+        
         const anyErrors = data.filter(item => item.hasErrors);
 
-        if (anyErrors.length === 0) {
-            data.forEach(item => {
-                const name = item.name;       
-                this.userData[item.name] = item.value;
-            })
-            this.validated = true;
+        data.forEach(item => {
+            const name = item.name;       
+            this.userData[item.name] = item.value;
             console.log(this.userData);
+        })
+
+        if (anyErrors.length === 0) {
+            this.validated = true;
         }
     }
 
@@ -54,6 +55,17 @@ export default class FormSubmit {
         } else if (result === "false") {
             return false;
         }
+    }
+
+    private handleErrorMessages(check, errorClass, eventType) {
+        if ((check.hasErrors && eventType === "blur" && !check.isEmpty) 
+            || (check.hasErrors && eventType === "click")
+            || (check.hasErrors && eventType === "blur" && this.checkFocused(check?.element))) {
+            this.showErrorMessage(check, errorClass);
+        } else if (!check.hasErrors) {
+            this.hideErrorMessage(check, errorClass);
+        }
+        return { hasErrors: check?.hasErrors, name: check?.element.name, value: check?.element.value };
     }
 
     private showErrorMessage(check, errorClass) {
