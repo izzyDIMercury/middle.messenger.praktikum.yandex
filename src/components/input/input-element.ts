@@ -1,11 +1,12 @@
 import Block from "../../core/block.ts";
 
-type InputElementProps = {
+export type InputElementProps = {
     title: string,
     type: string,
     name: string,
     label: string,
     enabled: boolean,
+    was_focused: boolean,
     events: {
         [key: string]: (event: FocusEvent) => void
     }
@@ -20,12 +21,14 @@ export default class InputElement extends Block<InputElementProps> {
         return (
             `
                 {{#if enabled}}
-                <input 
+                <input
+                    id={{label}}
                     class="input__element"
                     type="{{type}}" 
                     name="{{name}}" 
                     title="{{title}}" 
                     value="{{value}}"
+                    was_focused="{{was_focused}}"
                 >
                 {{else}}
                 <div></div>

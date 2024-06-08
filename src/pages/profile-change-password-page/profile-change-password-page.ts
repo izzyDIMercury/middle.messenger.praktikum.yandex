@@ -33,7 +33,7 @@ export default class ProfileChangePasswordPage extends Block<ChangePasswordPageP
                     title: "Старый пароль",
                     name: "oldPassword",
                     type: "password",
-                    label: "password",
+                    label: "old_password",
                     blur: handleBlurBind
                 },
                 {
@@ -41,7 +41,7 @@ export default class ProfileChangePasswordPage extends Block<ChangePasswordPageP
                     title: "Новый пароль",
                     name: "newPassword",
                     type: "password",
-                    label: "password",
+                    label: "new_password",
                     blur: handleBlurBind
                 },
                 {
@@ -49,7 +49,7 @@ export default class ProfileChangePasswordPage extends Block<ChangePasswordPageP
                     title: "Повторите новый пароль",
                     name: "newPassword",
                     type: "password",
-                    label: "password",
+                    label: "confirm_password",
                     blur: handleBlurBind
                 }
             ]
