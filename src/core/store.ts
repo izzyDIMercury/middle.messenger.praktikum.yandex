@@ -30,7 +30,7 @@ function set(state: Indexed | unknown, path: string, value: unknown): Indexed | 
         return state;
     }
 
-    const newProp: Partial<Indexed> = {};
+    const newProp: Indexed = {};
     const paths: string[] = path.split(".");
 
     paths.reduce((source: any, cur: any) => {
@@ -43,8 +43,8 @@ function set(state: Indexed | unknown, path: string, value: unknown): Indexed | 
 }
 
 function merge(state: Indexed, newProp: Indexed): Indexed {
-    const propCopy: Partial<Indexed> = newProp;
-    for (const p in propCopy) {
+    const propCopy: Indexed = newProp;
+    for (const p in propCopy as Indexed) {
         if (propCopy[p].constructor === Object) {
             propCopy[p] = merge(state[p] as Indexed, newProp[p] as Indexed);
         } else {
