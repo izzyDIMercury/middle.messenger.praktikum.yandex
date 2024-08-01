@@ -1,22 +1,20 @@
+import Block from "./block";
+
 export default class Router {
 
-    private routes: any[];
-    private history: unknown;
-    private currentRoute: null;
+    private routes!: Array<Route>;
+    private history!: History;
+    private currentRoute!: null | Route;
+    public rootQuery: string;
 
     constructor(rootQuery: string) {
-        if (Router.__intance) {
-            return Router.__intance;
-        }
         this.routes = [];
         this.history = window.history;
         this.currentRoute = null;
         this.rootQuery = rootQuery;
-
-        Router.__intance = this;
     }
 
-    public use(pathname: string, block: unknown) {
+    public use(pathname: string, block: typeof Block) {
         const route = new Route(pathname, block, {rootQuery: this.rootQuery});
         this.routes.push(route);
         return this;
@@ -24,28 +22,27 @@ export default class Router {
 
     public start() {
         window.onpopstate = (event: Event) => {
-            this.onRoute(event.currentTarget.location.pathname);
+            const target = event.currentTarget as Window;
+            if (target !== null) {
+                this.onRoute(target.location.pathname);
+            }
         }
 
         this.onRoute(window.location.pathname);
     }
 
     private onRoute(pathname: string) {
-        const route = this.getRoute(pathname);
-        // console.log(this.currentRoute);
+        const route = this.getRoute(pathname) as Route;
 
         if (this.currentRoute) {
-            // this.currentRoute.leave();
             this.currentRoute = null;
         }
 
         this.currentRoute = route;
-        // route.render(route, pathname);
         route.render();
     }
 
     private getRoute(pathname: string) {
-        console.log(pathname);
         return this.routes.find(route => route.match(pathname));
     }
 
@@ -63,11 +60,12 @@ export default class Router {
     }
 } 
 
+
 class Route {
 
-    private block: unknown
+    private block: any | null;
 
-    constructor(private pathname: unknown, private blockClass: unknown, private props: unknown) {
+    constructor(private pathname: string, private blockClass: typeof Block, private props: {rootQuery: string}) {
         this.pathname = pathname;
         this.blockClass = blockClass;
         this.block = null;
@@ -80,24 +78,17 @@ class Route {
             this.render();
         }
     }
-
-    // public leave(): void {
-    //     if (this.block) {
-    //         this.block.hide();
-    //     }
-    // }
     
-    private match(pathname: string): boolean {
+    public match(pathname: string): boolean {
         return this.isEqual(pathname, this.pathname);
     }
 
-    private render() {
-        // console.log(this.block)
+    public render() {
         if (!this.block) {
-            this.block = new this.blockClass();
+            this.block = new this.blockClass("");
         }
 
-        const root = document.querySelector<HTMLElement>("#app");
+        const root = document.querySelector<HTMLElement>("#app") as HTMLElement;
         root.innerHTML = "";
         root.append(this.block.getContent());
         return;
