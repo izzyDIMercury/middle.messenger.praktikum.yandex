@@ -46,7 +46,7 @@ export default class LoginPage extends Block<LoginPageProps> {
         const LoginButton = new Button({
             className: "login-page__button",
             text: "Вход",
-            page: "chat",
+            page: "messenger",
             events: {
                 click: handleSubmitBind
             }
@@ -54,7 +54,7 @@ export default class LoginPage extends Block<LoginPageProps> {
         const LoginLink = new Link({
             className: "login-page__link",
             text: "Нет аккаунта?",
-            page: "register",
+            page: "sing-up",
             events: {
                 click: switchPage
             }
@@ -94,7 +94,7 @@ export default class LoginPage extends Block<LoginPageProps> {
         const submit = new FormSubmit("login-page", "login-page__error-text", false, event.type);
         if (submit.validated && event.type === "click") {
             submit.sendData("https://chats", "get");
-            switchPage(null, "chat");
+            switchPage(null, "messenger");
         }
     }
 

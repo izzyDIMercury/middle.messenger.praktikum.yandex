@@ -26,7 +26,7 @@ export default class RegisterPage extends Block<RegisterPageProps> {
         const RegisterButton = new Button({
             className: "register-page__button",
             text: "Зарегистрироваться",
-            page: "chat",
+            page: "messenger",
             events: {
                 click: handleSubmitBind
             }
@@ -119,7 +119,7 @@ export default class RegisterPage extends Block<RegisterPageProps> {
         const submit = new FormSubmit("register-page", "login-page__error-text", false, event.type);
         if (submit.validated && event.type === "click") {
             submit.sendData("https://chats", "get");
-            switchPage(null, "chat");
+            switchPage(null, "messenger");
         }
     }
 

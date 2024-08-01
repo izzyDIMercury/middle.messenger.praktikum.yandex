@@ -48,7 +48,7 @@ export default class ProfilePage extends Block<ProfilePageProps> {
                 },
                 {
                     classModifier: "profile-footer-button_red",
-                    page: "profile",
+                    page: "settings",
                     text: "Выйти",
                     switchPage: null
                 }

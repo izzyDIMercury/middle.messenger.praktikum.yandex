@@ -19,7 +19,7 @@ export default class ProfileButton extends Block<ProfileButtonProps> {
             className: "profile-button__icon",
             src: "/assets/icons/profile.png",
             alt: "Профиль",
-            page: "profile",
+            page: "settings",
             path: ""
         });
 
@@ -31,7 +31,7 @@ export default class ProfileButton extends Block<ProfileButtonProps> {
     render() {
         return (
             `
-                    <div class="profile-button" page="profile">
+                    <div class="profile-button" page="settings">
                         {{{ ProfileButtonIcon }}}
                     </div>            
                 `

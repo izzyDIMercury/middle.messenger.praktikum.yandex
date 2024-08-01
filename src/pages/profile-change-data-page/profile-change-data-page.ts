@@ -80,7 +80,7 @@ export default class ProfileChangeDataPage extends Block<ChangeDataPageProps> {
         });
         const ProfileButton = new Button({
             className: "profile-change-data-page",
-            page: "profile",
+            page: "settings",
             text: "Сохранить",
             events: {
                 click: handleSubmitBind
@@ -111,7 +111,7 @@ export default class ProfileChangeDataPage extends Block<ChangeDataPageProps> {
         const submit = new FormSubmit("profile-change-data-page__form", "profile-change-data-page__error-text", false, event.type);
         if (submit.validated && event.type === "click") {
             submit.sendData("https://chats", "get");
-            switchPage(null, "profile");
+            switchPage(null, "settings");
         }
     }
 

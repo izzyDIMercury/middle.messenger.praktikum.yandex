@@ -56,7 +56,7 @@ export default class ProfileChangePasswordPage extends Block<ChangePasswordPageP
         });
         const ProfileButton = new Button({
             className: "profile-change-password-page",
-            page: "profile",
+            page: "settings",
             text: "Сохранить",
             events: {
                 click: handleSubmitBind
@@ -87,7 +87,7 @@ export default class ProfileChangePasswordPage extends Block<ChangePasswordPageP
         const submit = new FormSubmit("profile-change-password-page__form", "profile-change-password-page__error-text", false, event.type);
         if (submit.validated && event.type === "click") {
             submit.sendData("https://chats", "get");
-            switchPage(null, "profile");
+            switchPage(null, "settings");
         }
     }
 

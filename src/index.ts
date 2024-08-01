@@ -40,9 +40,9 @@ export function navigate(page: string) {
 
 const router = new Router("#app");
 router.use("/", Pages.LoginPage);
-router.use("/chat", Pages.ChatPage);
-router.use("/register", Pages.RegisterPage);
-router.use("/profile", Pages.ProfilePage);
+router.use("/messenger", Pages.ChatPage);
+router.use("/sing-up", Pages.RegisterPage);
+router.use("/settings", Pages.ProfilePage);
 router.use("/profile-change-data", Pages.ProfileChangeDataPage);
 router.use("/profile-change-password", Pages.ProfileChangePasswordPage);
 router.use("/404", Pages.Page404);
@@ -75,7 +75,10 @@ document.addEventListener("onContentLoad", event => {
 
 document.addEventListener("switchPage", event => {
     const eventDetail = event as PageCustomEvent;
-    const page = eventDetail.detail.page as string;
+    let page = eventDetail.detail.page as string || "";
+    if (page === "login") {
+        page = "";
+    }
     router.go(`/${page}`);
     // navigate(page);
 });

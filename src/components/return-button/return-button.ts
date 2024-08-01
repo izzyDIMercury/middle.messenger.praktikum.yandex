@@ -19,7 +19,7 @@ export default class ReturnButton extends Block<ReturnButtonProps> {
             className: "return-button__arrow",
             src: "/assets/icons/arrow-left.png",
             alt: "Стрелка",
-            page: "chat",
+            page: "messenger",
             path: ""
         });
 
@@ -31,9 +31,9 @@ export default class ReturnButton extends Block<ReturnButtonProps> {
     render() {
         return (
             `
-                    <button class="return-button" page="chat">
+                    <button class="return-button" page="messenger">
                         {{{ ArrowLeft }}}
-                        <p class="return-button__text" page="chat">Вернуться</p>
+                        <p class="return-button__text" page="messenger">Вернуться</p>
                     </button>
                 `
         );
