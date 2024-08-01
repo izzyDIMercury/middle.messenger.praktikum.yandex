@@ -13,8 +13,6 @@ export default class ChatPage extends Block<ChatPageProps> {
         super({
             ...props
         });
-
-        console.log(window.history);
     }
 
     init() {

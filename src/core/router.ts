@@ -4,7 +4,7 @@ export default class Router {
     private history: unknown;
     private currentRoute: null;
 
-    constructor(rootQuery) {
+    constructor(rootQuery: string) {
         if (Router.__intance) {
             return Router.__intance;
         }
@@ -32,16 +32,20 @@ export default class Router {
 
     private onRoute(pathname: string) {
         const route = this.getRoute(pathname);
+        // console.log(this.currentRoute);
 
         if (this.currentRoute) {
-            this.currentRoute.leave();
+            // this.currentRoute.leave();
+            this.currentRoute = null;
         }
 
         this.currentRoute = route;
-        route.render(route, pathname);
+        // route.render(route, pathname);
+        route.render();
     }
 
     private getRoute(pathname: string) {
+        console.log(pathname);
         return this.routes.find(route => route.match(pathname));
     }
 
@@ -77,21 +81,26 @@ class Route {
         }
     }
 
-    public leave(): void {
-        if (this.block) {
-            this.block.hide();
-        }
-    }
+    // public leave(): void {
+    //     if (this.block) {
+    //         this.block.hide();
+    //     }
+    // }
     
     private match(pathname: string): boolean {
         return this.isEqual(pathname, this.pathname);
     }
 
     private render() {
+        // console.log(this.block)
         if (!this.block) {
             this.block = new this.blockClass();
-            render(this.props.rootQuery, this.block);
         }
+
+        const root = document.querySelector<HTMLElement>("#app");
+        root.innerHTML = "";
+        root.append(this.block.getContent());
+        return;
     }
 
     private isEqual(path1: string, path2: string) {

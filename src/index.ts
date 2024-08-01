@@ -1,6 +1,7 @@
 import Handlebars from "handlebars";
 import * as Components from "./components";
 import * as Pages from "./pages";
+import Router from "./core/router.ts";
 
 type PagesType = Record<string, any>;
 
@@ -25,16 +26,29 @@ export function navigate(page: string) {
     const root = document.querySelector<HTMLElement>("#app");
 
     if (source instanceof Object && root !== null) {
-        const page = new source(context);
+        // const page = new source(context);
+        const page = new source();
         root.innerHTML = "";
         root.append(page.getContent());
         return;
     }
 
-    if (root !== null) {
-        root.innerHTML = Handlebars.compile(source)(context);
-    }
+    // if (root !== null) {
+    //     root.innerHTML = Handlebars.compile(source)(context);
+    // }
 }
+
+const router = new Router("#app");
+router.use("/", Pages.LoginPage);
+router.use("/chat", Pages.ChatPage);
+router.use("/register", Pages.RegisterPage);
+router.use("/profile", Pages.ProfilePage);
+router.use("/profile-change-data", Pages.ProfileChangeDataPage);
+router.use("/profile-change-password", Pages.ProfileChangePasswordPage);
+router.use("/404", Pages.Page404);
+router.use("/500", Pages.Page500);
+router.start();
+// console.log(router);
 
 
 interface PageCustomEvent extends CustomEvent {
@@ -49,20 +63,21 @@ document.addEventListener("onContentLoad", event => {
     navigate(page);
 })
 
-document.addEventListener("DOMContentLoaded", () => {
-    document.dispatchEvent(new CustomEvent("onContentLoad", {
+// document.addEventListener("DOMContentLoaded", () => {
+//     document.dispatchEvent(new CustomEvent("onContentLoad", {
 
-        // здесь можно задать начальную страницу:
-        detail: {
-            page: "login"
-        }
-    }));
-})
+//         // здесь можно задать начальную страницу:
+//         detail: {
+//             page: "login"
+//         }
+//     }));
+// })
 
 document.addEventListener("switchPage", event => {
     const eventDetail = event as PageCustomEvent;
     const page = eventDetail.detail.page as string;
-    navigate(page);
+    router.go(`/${page}`);
+    // navigate(page);
 });
 
 

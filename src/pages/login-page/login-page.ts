@@ -5,7 +5,6 @@ import Button from "../../components/button/button.ts";
 import Link from "../../components/link/link.ts";
 import FormSubmit from "../../core/formSubmit.ts";
 import { switchPage } from "../../core/utils.ts";
-import Router from "../../core/router.ts";
 
 type LoginPageProps = {};
 
@@ -14,8 +13,6 @@ export default class LoginPage extends Block<LoginPageProps> {
         super({
             ...props
         });
-
-        console.log(window.history);
     }
 
     init() {
