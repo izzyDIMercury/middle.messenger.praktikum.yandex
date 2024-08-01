@@ -2,6 +2,11 @@ import Handlebars from "handlebars";
 import * as Components from "./components";
 import * as Pages from "./pages";
 import Router from "./core/router.ts";
+import Store from "./core/store.ts";
+
+const store = new Store();
+store.setState("platforms.pc", 2018);
+// console.log(store.getState());
 
 
 Object.entries(Components).forEach(([ name, component ]) => {
