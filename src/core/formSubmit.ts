@@ -16,7 +16,7 @@ export default class FormSubmit {
 
     public isMessage: boolean = false;
 
-    private userData: UserData = {};
+    public userData: UserData = {};
 
     constructor(formClass: string, errorClass: string, isMessage?: boolean, eventType?: string) {
         const form: HTMLElement | null = document.querySelector(`.${formClass}`);
@@ -104,7 +104,7 @@ export default class FormSubmit {
             } if (element.name === "email") {
                 const { hasErrors, error, isEmpty } = this.checkEmail(element.value);
                 return { label: element.id, hasErrors, error, isEmpty, element };
-            } if (element.name === "tel") {
+            } if (element.name === "phone") {
                 const { hasErrors, error, isEmpty } = this.checkTel(element.value);
                 return { label: element.id, hasErrors, error, isEmpty, element };
             } if (element.name === "message") {
@@ -233,20 +233,20 @@ export default class FormSubmit {
         return { isEmpty: false, hasErrors: false, error: new Error() };
     }
 
-    private checkTel(tel: string) {
-        if (tel.length === 0) {
+    private checkTel(phone: string) {
+        if (phone.length === 0) {
             return { isEmpty: true, hasErrors: true, error: new Error("Укажите номер телефона.") };
         }
 
-        if (tel.length < 10 || tel.length > 15) {
+        if (phone.length < 10 || phone.length > 15) {
             return { isEmpty: false, hasErrors: true, error: new Error("Неверная длина телефонного номера") };
         }
 
-        if (!tel.match(/^[0-9]+$/)) {
+        if (!phone.match(/^[0-9]+$/)) {
             return { isEmpty: false, hasErrors: true, error: new Error("Телефонный номер должен состоять из цифр") };
         }
 
-        if (tel[0] !== "+" && typeof Number(tel[0]) !== "number") {
+        if (phone[0] !== "+" && typeof Number(phone[0]) !== "number") {
             return { isEmpty: false, hasErrors: true, error: new Error("Телефонный номер должен начинаться с цифры или символа +") };
         }
 

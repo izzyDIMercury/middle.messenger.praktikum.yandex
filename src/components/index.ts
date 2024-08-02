@@ -15,3 +15,4 @@ export { ChatProfile } from "./chat-profile";
 export { MessagePanel } from "./message-panel";
 export { Image } from "./image";
 export { RegisterPageList } from "./register-page-list";
+export { Loading } from "./loading";

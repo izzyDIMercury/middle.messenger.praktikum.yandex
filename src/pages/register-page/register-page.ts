@@ -5,6 +5,8 @@ import Link from "../../components/link/link.ts";
 import RegisterPageList from "../../components/register-page-list/register-page-list.ts";
 import FormSubmit from "../../core/formSubmit.ts";
 import { switchPage } from "..//../core/utils.ts";
+import { connect } from "../../core/connect.ts";
+import RegisterController from "../../controllers/register.ts";
 
 type RegisterPageProps = {};
 
@@ -77,9 +79,9 @@ export default class RegisterPage extends Block<RegisterPageProps> {
                 {
                     className: "register-page__input",
                     title: "Телефон",
-                    name: "tel",
-                    type: "tel",
-                    label: "tel",
+                    name: "phone",
+                    type: "phone",
+                    label: "phone",
                     blur: handleBlurBind
                 },
                 {
@@ -115,12 +117,12 @@ export default class RegisterPage extends Block<RegisterPageProps> {
 
     handleSubmit(event: FocusEvent) {
         event.preventDefault();
-
-        const submit = new FormSubmit("register-page", "login-page__error-text", false, event.type);
-        if (submit.validated && event.type === "click") {
-            submit.sendData("https://chats", "get");
-            switchPage(null, "messenger");
-        }
+        const controller = new RegisterController();
+        controller.register([ "register-page", "login-page__error-text", false, event.type ], event.type);
+        
+        // slash
+        // Mas42er92s
+        // id\":1627
     }
 
     render() {

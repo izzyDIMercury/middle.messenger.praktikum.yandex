@@ -3,9 +3,10 @@ import PageTitle from "../../components/page-title/page-title.ts";
 import InputField from "../../components/input-field/input-field.ts";
 import Button from "../../components/button/button.ts";
 import Link from "../../components/link/link.ts";
-import FormSubmit from "../../core/formSubmit.ts";
+import Loading from "../../components/loading/loading.ts";
 import { switchPage } from "../../core/utils.ts";
 import { connect } from "../../core/connect.ts";
+import LoginController from "../../controllers/login.ts";
 
 type LoginPageProps = {};
 
@@ -75,6 +76,8 @@ class LoginPage extends Block<LoginPageProps> {
             }
         });
 
+        const LoadingWindow = new Loading()
+
         this.children = {
             Title,
             InputLogin,
@@ -82,30 +85,19 @@ class LoginPage extends Block<LoginPageProps> {
             LoginButton,
             LoginLink,
             Error404Link,
-            Error500Link
+            Error500Link,
+            LoadingWindow
         };
     }
 
     handleBlur(event: FocusEvent) {
-        window.store.setState({ isLoading: true });
-        // console.log(this.props);
-        // setInterval(() => {
-        //     console.log(this.props.isLoading);
-        // }, 100)
-        setTimeout(() => {
-            this.handleSubmit(event);
-        }, 1000);
-        // this.handleSubmit(event);
+        this.handleSubmit(event);
     }
 
     handleSubmit(event: FocusEvent | MouseEvent) {
         event.preventDefault();
-        const submit = new FormSubmit("login-page", "login-page__error-text", false, event.type);
-        if (submit.validated && event.type === "click") {
-            submit.sendData("https://chats", "get");
-            switchPage(null, "messenger");
-        }
-        window.store.setState({ isLoading: false });
+        const controller = new LoginController();
+        controller.login([ "login-page", "login-page__error-text", false, event.type ], event.type);
     }
 
     render() {
@@ -131,7 +123,7 @@ class LoginPage extends Block<LoginPageProps> {
                         </div>
                     </form>
                     {{#if isLoading}}
-                        <h1>Loading</h1>
+                        {{{ LoadingWindow }}}
                     {{/if}}
                 </main>
             </div>  

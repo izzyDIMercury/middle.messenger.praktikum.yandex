@@ -56,6 +56,7 @@ export default class HTTPTransport {
 
             const xhr = new XMLHttpRequest();
             const isGet = method === HTTPTransport.GET;
+            xhr.withCredentials = true;
 
             xhr.open(
                 method,
@@ -78,7 +79,9 @@ export default class HTTPTransport {
             xhr.timeout = timeout;
             xhr.ontimeout = reject;
 
-            if (isGet || !data) {
+            // isGet || 
+
+            if (!data) {
                 xhr.send();
             } else {
                 xhr.send(JSON.stringify(data));
