@@ -1,55 +1,65 @@
-export default class Store {
-    private state: Object = {
-        game: "halo 2",
-        platforms: {
-            xbox: 2004,
-            pc: 2007
-        }
-    };
+import EventBus from "./eventBus";
+
+export enum StoreEvents {
+    Updated = "Updated"
+}
+export class Store extends EventBus {
+    private state: Object;
+
+    constructor(defaultState, ...props) {
+        super(...props);
+        this.state = defaultState;
+    }
 
     public getState() {
         return this.state;
     }
 
-    public setState(path: string, value: unknown) {
-        set(this.state, path, value);
+    public setState(nextState) {
+        const prevState = { ...this.state };
+        this.state = { ...this.state, ...nextState };
+        this.emit(StoreEvents.Updated, prevState, nextState);
     }
 }
 
-type Indexed<T = unknown> = {
-    [key in string]: T;
-}
+// public setState(path: string, value: unknown) {
+//     set(this.state, path, value);
+// }
 
-function set(state: Indexed | unknown, path: string, value: unknown): Indexed | unknown {
-    if (typeof path !== "string") {
-        throw new Error("Путь должен быть строкой!");
-    }
+// type Indexed<T = unknown> = {
+//     [key in string]: T;
+// }
 
-    const stateCopy = state as Indexed;
-    if (stateCopy.constructor !== Object) {
-        return state;
-    }
+// function set(state: Indexed | unknown, path: string, value: unknown): Indexed | unknown {
+//     if (typeof path !== "string") {
+//         throw new Error("Путь должен быть строкой!");
+//     }
 
-    const newProp: Indexed = {};
-    const paths: string[] = path.split(".");
+//     const stateCopy = state as Indexed;
+//     if (stateCopy.constructor !== Object) {
+//         return state;
+//     }
 
-    paths.reduce((source: any, cur: any) => {
-        return cur === paths[paths.length - 1] ? (source[cur] = value) : (source[cur] = {});
-    }, newProp);
+//     const newProp: Indexed = {};
+//     const paths: string[] = path.split(".");
 
-    console.log(state, newProp)
-    merge(stateCopy, newProp);
-    return stateCopy;
-}
+//     paths.reduce((source: any, cur: any) => {
+//         return cur === paths[paths.length - 1] ? (source[cur] = value) : (source[cur] = {});
+//     }, newProp);
 
-function merge(state: Indexed, newProp: Indexed): Indexed {
-    const propCopy: Indexed = newProp;
-    for (const p in propCopy as Indexed) {
-        if (propCopy[p].constructor === Object) {
-            propCopy[p] = merge(state[p] as Indexed, newProp[p] as Indexed);
-        } else {
-            state[p] = propCopy[p];
-        }
-    }
-    return state;
-}
+//     console.log(state, newProp)
+//     merge(stateCopy, newProp);
+//     return stateCopy;
+// }
+
+// function merge(state: Indexed, newProp: Indexed): Indexed {
+//     const propCopy: Indexed = newProp;
+//     for (const p in propCopy as Indexed) {
+//         if (propCopy[p].constructor === Object) {
+//             propCopy[p] = merge(state[p] as Indexed, newProp[p] as Indexed);
+//         } else {
+//             state[p] = propCopy[p];
+//         }
+//     }
+//     return state;
+// }

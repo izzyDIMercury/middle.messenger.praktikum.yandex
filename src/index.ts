@@ -2,11 +2,13 @@ import Handlebars from "handlebars";
 import * as Components from "./components";
 import * as Pages from "./pages";
 import Router from "./core/router.ts";
-import Store from "./core/store.ts";
+import { Store } from "./core/store.ts";
 
-const store = new Store();
-store.setState("platforms.pc", 2018);
-// console.log(store.getState());
+const store = new Store({
+    isLoading: false,
+    isError: false
+});
+window.store = store;
 
 
 Object.entries(Components).forEach(([ name, component ]) => {
@@ -15,6 +17,8 @@ Object.entries(Components).forEach(([ name, component ]) => {
 
 
 const router = new Router("#app");
+window.router = router;
+
 router.use("/", Pages.LoginPage);
 router.use("/messenger", Pages.ChatPage);
 router.use("/sing-up", Pages.RegisterPage);

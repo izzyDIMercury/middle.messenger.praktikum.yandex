@@ -181,6 +181,7 @@ class Block<Props> {
         }
 
         Object.assign(this.props, newProps);
+        console.log(newProps);
     }
 
     compile(props: Partial<Props>) {

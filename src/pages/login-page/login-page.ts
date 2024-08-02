@@ -5,10 +5,11 @@ import Button from "../../components/button/button.ts";
 import Link from "../../components/link/link.ts";
 import FormSubmit from "../../core/formSubmit.ts";
 import { switchPage } from "../../core/utils.ts";
+import { connect } from "../../core/connect.ts";
 
 type LoginPageProps = {};
 
-export default class LoginPage extends Block<LoginPageProps> {
+class LoginPage extends Block<LoginPageProps> {
     constructor(props: LoginPageProps) {
         super({
             ...props
@@ -86,7 +87,15 @@ export default class LoginPage extends Block<LoginPageProps> {
     }
 
     handleBlur(event: FocusEvent) {
-        this.handleSubmit(event);
+        window.store.setState({ isLoading: true });
+        // console.log(this.props);
+        // setInterval(() => {
+        //     console.log(this.props.isLoading);
+        // }, 100)
+        setTimeout(() => {
+            this.handleSubmit(event);
+        }, 1000);
+        // this.handleSubmit(event);
     }
 
     handleSubmit(event: FocusEvent | MouseEvent) {
@@ -96,6 +105,7 @@ export default class LoginPage extends Block<LoginPageProps> {
             submit.sendData("https://chats", "get");
             switchPage(null, "messenger");
         }
+        window.store.setState({ isLoading: false });
     }
 
     render() {
@@ -120,9 +130,19 @@ export default class LoginPage extends Block<LoginPageProps> {
                             {{{ LoginLink }}}
                         </div>
                     </form>
+                    {{#if isLoading}}
+                        <h1>Loading</h1>
+                    {{/if}}
                 </main>
             </div>  
             `
         );
     }
 }
+
+
+const mapStateToPropsShort = ({ isLoading }): object => {
+    return { isLoading }
+}
+
+export default connect(mapStateToPropsShort)(LoginPage);
