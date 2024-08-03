@@ -82,11 +82,15 @@ export default class HTTPTransport {
 
             if (!data) {
                 xhr.send();
-            } else if (headers["Content-Type"] === "multipart/form-data") {
-                xhr.send(data as unknown as FormData);
+            } else if (data instanceof FormData) {
+                xhr.send(data);
             } else {
                 xhr.send(JSON.stringify(data));
             }
         });
     }
 }
+
+// headers["Content-Type"] === "multipart/form-data"
+// xhr.send(data as unknown as FormData);
+// xhr.send(JSON.stringify(data));

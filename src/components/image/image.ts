@@ -26,7 +26,7 @@ class Image extends Block<ImageProps> {
             path: path
         });
 
-        console.log(this.props);
+        // console.log(this.props);
     }
 
     render() {

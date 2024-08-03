@@ -20,19 +20,13 @@ export default class UsersApi {
 
     public async changeUserPassword(userData) {
         return this.HTTP.put(`${this.host}/user/password`, {
-            data: userData,
-            headers: {
-                "Content-Type": "application/json"
-            }
+            data: userData
         })
     }
 
     public async setUserAvatar(avatar) {
         return this.HTTP.put(`${this.host}/user/profile/avatar`, {
-            data: avatar,
-            headers: {
-                "Content-Type": "multipart/form-data"
-            }
+            data: avatar
         });
     }
 
@@ -40,3 +34,7 @@ export default class UsersApi {
         return this.HTTP.get(`${this.host}/auth/user`, {});
     }
 }
+
+// headers: {
+//     "Content-Type": "multipart/form-data"
+// }

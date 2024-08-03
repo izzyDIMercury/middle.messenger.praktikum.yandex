@@ -161,6 +161,7 @@ class ProfilePage extends Block<ProfilePageProps> {
     handleFile(event) {
         event.preventDefault();
         const form = new FormData(event.target);
+        console.log(event);
         const controller = new SettingsController();
         controller.setAvatar(form);
     }

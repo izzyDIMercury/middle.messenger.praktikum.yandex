@@ -65,8 +65,9 @@ export default class SettingsController {
 
     public async setAvatar(avatar) {
         const api = new UsersApi();
-        const res = await api.userInfo();
-        console.log(res.responseText);
+        const res = await api.setUserAvatar(avatar);
+        console.log(avatar instanceof FormData);
+        console.log(res.response);
     }
 
     public async getUserInfo() {

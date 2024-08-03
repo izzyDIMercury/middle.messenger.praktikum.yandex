@@ -10,6 +10,7 @@ export default class LoginController {
         const submit = new FormSubmit(...dataToValidate);
         const api = new AuthApi();
         // const out = await api.logout();
+        // console.log(out);
         // const info = await api.userInfo();
         // console.log("LOGIN: ", submit.validated, eventType);
 
