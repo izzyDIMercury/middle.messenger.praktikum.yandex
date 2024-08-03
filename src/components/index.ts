@@ -18,3 +18,4 @@ export { RegisterPageList } from "./register-page-list";
 export { Loading } from "./loading";
 export { LoginForm } from "./login-form";
 export { FileSelector } from "./file-selector";
+export { ProfileImage } from "./profile-image";

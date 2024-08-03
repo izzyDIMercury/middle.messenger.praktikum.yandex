@@ -4,6 +4,7 @@ import ReturnButton from "../../components/return-button/return-button.ts";
 import ProfileFooter from "../../components/profile-footer/profile-footer.ts";
 import ProfileForm from "../../components/profile-form/profile-form.ts";
 import Image from "../../components/image/image.ts";
+import ProfileImage from "../../components/profile-image/profile-image.ts";
 import { switchPage } from "../../core/utils.ts";
 import { connect } from "../../core/connect.ts";
 import SettingsController from "../../controllers/settings.ts";
@@ -31,7 +32,7 @@ class ProfilePage extends Block<ProfilePageProps> {
                 click: switchPage
             }
         });
-        const ProfileImage = new Image({
+        const Avatar = new ProfileImage({
             className: "profile-page__image",
             src: "/assets/profile-placeholder.png",
             alt: "Аватар пользователя",
@@ -127,7 +128,7 @@ class ProfilePage extends Block<ProfilePageProps> {
         this.children = {
             Title,
             ButtonBack,
-            ProfileImage,
+            Avatar,
             Footer,
             Form,
             File
@@ -184,7 +185,7 @@ class ProfilePage extends Block<ProfilePageProps> {
                         <div class="profile-page__content">
                             {{{ File }}}
                             <form class="profile-page__form">
-                                {{{ ProfileImage }}}
+                                {{{ Avatar }}}
                                 {{{ Title }}}
                                 {{{ Form }}}
                             </form>

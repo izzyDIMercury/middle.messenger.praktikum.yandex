@@ -3,19 +3,15 @@ import Handlebars from "handlebars";
 import { connect } from "../../core/connect.ts";
 import { images } from "../../core/images.ts";
 
-type ImageProps = {
+type ProfileImageProps = {
     className: string,
     src: string,
     alt?: string,
-    page?: string,
-    events?: {
-        click: Function
-    },
     path: string
 };
 
-class Image extends Block<ImageProps> {
-    constructor(props: ImageProps) {
+class ProfileImage extends Block<ProfileImageProps> {
+    constructor(props: ProfileImageProps) {
 
         const name = props.src.split(".").reverse()[1].split("/").reverse()[0];
         const path = images[name];
@@ -32,7 +28,7 @@ class Image extends Block<ImageProps> {
     render() {
         return (
             `    
-                <img class={{ className }} src="{{{ path }}}" alt="{{ alt }}" {{#if page}} page="{{ page }}" {{/if}}">
+                <img class={{ className }} src="{{#if imageLink}} {{{ imageLink }}} {{else}} {{{ path }}} {{/if}}" alt="{{ alt }}" {{#if page}} page="{{ page }}" {{/if}}">
                                             
                 ` 
         );
@@ -43,6 +39,4 @@ const mapStateToPropsShort = ({ imageLink }): object => {
     return { imageLink }
 }
 
-export default connect(mapStateToPropsShort)(Image);
-
-// <img class={{ className }} src="{{ src }}" alt="{{ alt }}" {{#if page}} page="{{ page }}" {{/if}}">
+export default connect(mapStateToPropsShort)(ProfileImage);
