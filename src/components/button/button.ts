@@ -5,7 +5,8 @@ type ButtonProps = {
     text: string,
     page: string,
     events: {
-        click: (event: MouseEvent) => void
+        click?: (event: MouseEvent) => void
+        mouseover?: (event: MouseEvent) => void
     }
 };
 

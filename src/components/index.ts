@@ -16,3 +16,4 @@ export { MessagePanel } from "./message-panel";
 export { Image } from "./image";
 export { RegisterPageList } from "./register-page-list";
 export { Loading } from "./loading";
+export { LoginForm } from "./login-form";

@@ -1,14 +1,16 @@
 import Block from "../../core/block.ts";
 import Image from "../image/image.ts";
 
-type LoadingProps = {
-    className?: string,
-    page: string,
-    text: string,
-    events: {
-        click: Function
-    }
-};
+// type LoadingProps = {
+//     className?: string,
+//     page: string,
+//     text: string,
+//     events: {
+//         click: Function
+//     }
+// };
+
+type LoadingProps = any;
 
 export default class Loading extends Block<LoadingProps> {
     constructor(props: LoadingProps) {
