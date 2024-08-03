@@ -21,6 +21,8 @@ class ProfileChangeDataPage extends Block<ChangeDataPageProps> {
     init() {
         const handleBlurBind = this.handleBlur.bind(this);
         const handleSubmitBind = this.handleSubmit.bind(this);
+        const handleMouseOverBind = this.handleMouseOver.bind(this);
+
 
         const ButtonBack = new ReturnButton({
             events: {
@@ -86,7 +88,8 @@ class ProfileChangeDataPage extends Block<ChangeDataPageProps> {
             page: "settings",
             text: "Сохранить",
             events: {
-                click: handleSubmitBind
+                click: handleSubmitBind,
+                mouseover: handleMouseOverBind
             }
         });
         const ProfileImage = new Image({
@@ -111,16 +114,18 @@ class ProfileChangeDataPage extends Block<ChangeDataPageProps> {
         this.handleSubmit(event);
     }
 
+    handleMouseOver(event: MouseEvent) {
+        event.preventDefault();
+        const inputs = document.querySelectorAll(".input__element") as NodeListOf<HTMLInputElement>;
+        inputs.forEach(input => {
+            input.blur();
+        })
+    }
+
     handleSubmit(event: FocusEvent | MouseEvent) {
         event.preventDefault();
         const controller = new SettingsController();
         controller.changeProfile([ "profile-change-data-page__form", "profile-change-data-page__error-text", false, event.type ], event.type);
-
-        // const submit = new FormSubmit("profile-change-data-page__form", "profile-change-data-page__error-text", false, event.type);
-        // if (submit.validated && event.type === "click") {
-        //     submit.sendData("https://chats", "get");
-        //     switchPage(null, "settings");
-        // }
     }
 
     render() {

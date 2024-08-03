@@ -26,6 +26,8 @@ export default class LoginController {
         } catch (error) {
             if (String(error).includes("User already in system")) {
                 switchPage(null, "messenger");
+            } else if (String(error).includes("Login or password is incorrect")) {
+                alert("Неверно введены имя пользователя или пароль.");
             } else {
                 console.log(String(error));
             }
@@ -33,6 +35,6 @@ export default class LoginController {
         window.store.setState({ isLoading: false })
 
         // slash
-        // Mas42er92s
+        // Mas42er92s Login or password is incorrect
     }
 } 

@@ -24,14 +24,16 @@ export default class SettingsController {
 
                 window.store.setState({ isLoading: true });
                 const result = await api.changeUserData(submit.userData);
-                if (typeof result.responseText !== "string" || true) {
-                    throw new Error(result.responseText)
+                console.log(result);
+                if (result.status !== 200) {
+                    throw new Error(result.status);
                 }
 
                 switchPage(null, "settings");
             }
         } catch (error) {
-            console.log(error);
+            alert("Ошибка: ", error);
+            console.log("Error status: ", error);
         }
         // window.store.setState({ isLoading: false });
     }
