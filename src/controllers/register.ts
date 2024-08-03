@@ -18,8 +18,11 @@ export default class RegisterController {
                 switchPage(null, "messenger");            
             }
         } catch (error) {
+            if (String(error).includes("User already in system") || String(error).includes("Login already exists")) {
+                alert("Пользователь уже зарегистрирован.");
+            }
             console.log(error);
         }
         window.store.setState({ isLoading: false })
     }    
-} 
+}

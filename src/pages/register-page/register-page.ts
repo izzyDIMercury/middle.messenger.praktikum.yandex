@@ -10,7 +10,7 @@ import RegisterController from "../../controllers/register.ts";
 
 type RegisterPageProps = {};
 
-export default class RegisterPage extends Block<RegisterPageProps> {
+class RegisterPage extends Block<RegisterPageProps> {
     constructor(props: RegisterPageProps) {
         super({
             ...props
@@ -20,6 +20,7 @@ export default class RegisterPage extends Block<RegisterPageProps> {
     init() {
         const handleBlurBind = this.handleBlur.bind(this);
         const handleSubmitBind = this.handleSubmit.bind(this);
+        const handleMouseOverBind = this.handleMouseOver.bind(this);
 
         const Title = new PageTitle({
             className: "register-page__title",
@@ -30,7 +31,8 @@ export default class RegisterPage extends Block<RegisterPageProps> {
             text: "Зарегистрироваться",
             page: "messenger",
             events: {
-                click: handleSubmitBind
+                click: handleSubmitBind,
+                mouseover: handleMouseOverBind
             }
         });
         const RegisterLink = new Link({
@@ -115,6 +117,14 @@ export default class RegisterPage extends Block<RegisterPageProps> {
         this.handleSubmit(event);
     }
 
+    handleMouseOver(event: MouseEvent) {
+        event.preventDefault();
+        const inputs = document.querySelectorAll(".input__element") as NodeListOf<HTMLInputElement>;
+        inputs.forEach(input => {
+            input.blur();
+        })
+    }
+
     handleSubmit(event: FocusEvent) {
         event.preventDefault();
         const controller = new RegisterController();
@@ -148,3 +158,9 @@ export default class RegisterPage extends Block<RegisterPageProps> {
         );
     }
 }
+
+const mapStateToPropsShort = ({ isLoading }): object => {
+    return { isLoading }
+}
+
+export default connect(mapStateToPropsShort)(RegisterPage);

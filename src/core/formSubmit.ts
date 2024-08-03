@@ -96,7 +96,7 @@ export default class FormSubmit {
                 const { hasErrors, error, isEmpty } = this.checkLogin(element.value);
                 return { label: element.id, hasErrors, error, isEmpty, element };
             } if (element.type === "password") {
-                const { hasErrors, error, isEmpty } = this.checkPassword(element.value);
+                const { hasErrors, error, isEmpty } = this.checkPassword(element.value, element.id, inputs);
                 return { label: element.id, hasErrors, error, isEmpty, element };
             } if (element.name === "first_name" || element.name === "second_name") {
                 const { hasErrors, error, isEmpty } = this.checkName(element.value);
@@ -175,7 +175,8 @@ export default class FormSubmit {
         return { isEmpty: false, hasErrors: false, error: new Error() };
     }
 
-    private checkPassword(password: string = "") {
+    private checkPassword(password: string = "", id: string, inputs: HTMLInputElement[]) {
+
         if (password.length === 0) {
             return { isEmpty: true, hasErrors: true, error: new Error("Укажите пароль.") };
         }
@@ -191,6 +192,14 @@ export default class FormSubmit {
         const upperCaseLetters = password.split("").filter((character) => (character == character.toUpperCase()) && Number.isNaN(Number(character)));
         if (upperCaseLetters.length === 0) {
             return { isEmpty: false, hasErrors: true, error: new Error("Хотя бы одна буква в пароле должна быть заглавной.") };
+        }
+
+        if (id === "confirm_password") {
+            const passwordElements = inputs.filter((input: HTMLInputElement) => input.type === "password");
+            const values = passwordElements.map((element: HTMLInputElement) => element.value);
+            if (values[0] !== values[1]) {
+                return { isEmpty: false, hasErrors: true, error: new Error("Пароли не совпадают.") }; 
+            }
         }
 
         return { isEmpty: false, hasErrors: false, error: new Error() };
