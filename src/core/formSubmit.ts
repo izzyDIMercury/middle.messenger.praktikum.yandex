@@ -195,7 +195,7 @@ export default class FormSubmit {
         }
 
         if (id === "confirm_password") {
-            const passwordElements = inputs.filter((input: HTMLInputElement) => input.type === "password");
+            const passwordElements = inputs.filter((input: HTMLInputElement) => input.type === "password" && input.id !== "old_password");
             const values = passwordElements.map((element: HTMLInputElement) => element.value);
             if (values[0] !== values[1]) {
                 return { isEmpty: false, hasErrors: true, error: new Error("Пароли не совпадают.") }; 

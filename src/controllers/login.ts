@@ -35,6 +35,6 @@ export default class LoginController {
         window.store.setState({ isLoading: false })
 
         // slash
-        // Mas42er92s Login or password is incorrect
+        // Mas42er92s 
     }
 } 

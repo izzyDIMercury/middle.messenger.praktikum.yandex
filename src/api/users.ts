@@ -18,6 +18,16 @@ export default class UsersApi {
         })
     }
 
+    public async changeUserPassword(userData) {
+        return this.HTTP.put(`${this.host}/user/password`, {
+            data: userData,
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+    }
+
+
     public async userInfo() {
         return this.HTTP.get(`${this.host}/auth/user`, {});
     }

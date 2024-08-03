@@ -5,10 +5,13 @@ import Button from "../../components/button/button.ts";
 import Image from "../../components/image/image.ts";
 import FormSubmit from "../../core/formSubmit.ts";
 import { switchPage } from "../../core/utils.ts";
+import { connect } from "../../core/connect.ts";
+import SettingsController from "../../controllers/settings.ts";
+import Loading from "../../components/loading/loading.ts";
 
 type ChangePasswordPageProps = {};
 
-export default class ProfileChangePasswordPage extends Block<ChangePasswordPageProps> {
+class ProfileChangePasswordPage extends Block<ChangePasswordPageProps> {
     constructor(props: ChangePasswordPageProps) {
         super({
             ...props
@@ -18,6 +21,7 @@ export default class ProfileChangePasswordPage extends Block<ChangePasswordPageP
     init() {
         const handleBlurBind = this.handleBlur.bind(this);
         const handleSubmitBind = this.handleSubmit.bind(this);
+        const handleMouseOverBind = this.handleMouseOver.bind(this);
 
         const ButtonBack = new ReturnButton({
             events: {
@@ -59,7 +63,8 @@ export default class ProfileChangePasswordPage extends Block<ChangePasswordPageP
             page: "settings",
             text: "Сохранить",
             events: {
-                click: handleSubmitBind
+                click: handleSubmitBind,
+                mouseover: handleMouseOverBind
             }
         });
         const ProfileImage = new Image({
@@ -81,20 +86,28 @@ export default class ProfileChangePasswordPage extends Block<ChangePasswordPageP
         this.handleSubmit(event);
     }
 
+    handleMouseOver(event: MouseEvent) {
+        event.preventDefault();
+        const inputs = document.querySelectorAll(".input__element") as NodeListOf<HTMLInputElement>;
+        inputs.forEach(input => {
+            input.blur();
+        })
+    }
+
+
     handleSubmit(event: FocusEvent | MouseEvent) {
         event.preventDefault();
-
-        const submit = new FormSubmit("profile-change-password-page__form", "profile-change-password-page__error-text", false, event.type);
-        if (submit.validated && event.type === "click") {
-            submit.sendData("https://chats", "get");
-            switchPage(null, "settings");
-        }
+        const controller = new SettingsController();
+        controller.changePassword([ "profile-change-password-page__form", "profile-change-password-page__error-text", false, event.type ], event.type);
     }
 
     render() {
         return (
             `
                     <main class="profile-page">
+                        {{#if isLoading}}
+                            {{{ LoadingWindow }}}
+                        {{/if}}
                         {{{ ButtonBack }}}
                         <div class="profile-page__content">
                             <form class="profile-change-password-page__form">
@@ -110,3 +123,9 @@ export default class ProfileChangePasswordPage extends Block<ChangePasswordPageP
         );
     }
 }
+
+const mapStateToPropsShort = ({ isLoading }): object => {
+    return { isLoading }
+}
+
+export default connect(mapStateToPropsShort)(ProfileChangePasswordPage);
