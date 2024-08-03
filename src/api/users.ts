@@ -27,6 +27,14 @@ export default class UsersApi {
         })
     }
 
+    public async setUserAvatar(avatar) {
+        return this.HTTP.put(`${this.host}/user/profile/avatar`, {
+            data: avatar,
+            headers: {
+                "Content-Type": "multipart/form-data"
+            }
+        });
+    }
 
     public async userInfo() {
         return this.HTTP.get(`${this.host}/auth/user`, {});

@@ -15,6 +15,7 @@ export function connect(mapStateToProps, dispatch?) {
                 this.onStoreChange = () => {
                     const nextState = mapStateToProps(store.getState());
                     // console.log("fires");
+                    console.log(Component, nextState);
 
                     if (!isEqual(state, nextState)) {
                         this.setProps({ ...nextState });

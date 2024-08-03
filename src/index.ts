@@ -6,7 +6,8 @@ import { Store } from "./core/store.ts";
 
 const store = new Store({
     isLoading: false,
-    isError: false
+    isError: false,
+    imageLink: ""
 });
 window.store = store;
 

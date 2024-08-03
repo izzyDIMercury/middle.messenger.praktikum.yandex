@@ -16,8 +16,6 @@ export default class SettingsController {
     public async changeProfile(dataToValidate: Array<string | boolean>, eventType: string) {
         const submit = new FormSubmit(...dataToValidate);
         const api = new UsersApi();
-        // const res2 = await api.userInfo();
-        // console.log(res2);
 
         try {
             if (submit.validated && eventType === "click") {
@@ -63,5 +61,16 @@ export default class SettingsController {
 
         // Mas42er92s
         // mas42er92S
+    }
+
+    public async setAvatar(avatar) {
+        const api = new UsersApi();
+        const res = await api.userInfo();
+        console.log(res.responseText);
+    }
+
+    public async getUserInfo() {
+        const api = new UsersApi();
+        return api.userInfo();
     }
 } 

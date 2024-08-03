@@ -1,6 +1,6 @@
 
 
-type UserData = Record<string, string>;
+type UserData = Record<string, string | FormData >;
 
 type ComponentProps = {
     [key: string]: string | { [key: string]: Function };

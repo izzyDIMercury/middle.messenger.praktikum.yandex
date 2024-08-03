@@ -6,8 +6,7 @@ type Options = {
     },
     method?: string,
     timeout?: number,
-    data: UserData
-
+    data: UserData;
 };
 
 export default class HTTPTransport {
@@ -83,6 +82,8 @@ export default class HTTPTransport {
 
             if (!data) {
                 xhr.send();
+            } else if (headers["Content-Type"] === "multipart/form-data") {
+                xhr.send(data as unknown as FormData);
             } else {
                 xhr.send(JSON.stringify(data));
             }

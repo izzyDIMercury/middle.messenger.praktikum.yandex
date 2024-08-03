@@ -7,10 +7,14 @@ import Image from "../../components/image/image.ts";
 import { switchPage } from "../../core/utils.ts";
 import { connect } from "../../core/connect.ts";
 import SettingsController from "../../controllers/settings.ts";
+import FileSelector from "../../components/file-selector/file-selector.ts";
 
 type ProfilePageProps = {};
 
 class ProfilePage extends Block<ProfilePageProps> {
+
+    private imageLink: string = "";
+
     constructor(props: ProfilePageProps) {
         super({
             ...props
@@ -113,13 +117,52 @@ class ProfilePage extends Block<ProfilePageProps> {
             ]
         });
 
+        const handleFileBind = this.handleFile.bind(this);
+        const File = new FileSelector({
+            events: {
+                submit: handleFileBind
+            }
+        })
+
         this.children = {
             Title,
             ButtonBack,
             ProfileImage,
             Footer,
-            Form
+            Form,
+            File
         };
+    }
+
+    componentDidMount(): void {
+        const controller = new SettingsController();
+        controller.getUserInfo();
+
+        async function handleUserInfo() {
+            const controller = new SettingsController();
+            const response = await controller.getUserInfo();
+            const result = JSON.parse(response.response);
+            const title = document.querySelector(".profile-page__title") as HTMLTitleElement;
+            title.textContent = Object.entries(result).filter((prop) => prop[0] === "login")[0][1] as string;
+            Object.entries(result).forEach(([key, value]) => {
+                const element = document.querySelector(`p[name=${key}]`) as HTMLTitleElement;
+                if (element !== null) {
+                    element.textContent = value as string;
+                }
+            })
+            const image = Object.entries(result).filter((prop) => prop[0] === "avatar")[0][1];
+            const imageLink = "https://ya-praktikum.tech/api/v2/resources/" + image;
+            window.store.setState({ imageLink })
+        }
+
+        handleUserInfo();
+    }
+
+    handleFile(event) {
+        event.preventDefault();
+        const form = new FormData(event.target);
+        const controller = new SettingsController();
+        controller.setAvatar(form);
     }
 
     handleBlur(event: FocusEvent) {
@@ -138,6 +181,7 @@ class ProfilePage extends Block<ProfilePageProps> {
                     <main class="profile-page">
                         {{{ ButtonBack }}}
                         <div class="profile-page__content">
+                            {{{ File }}}
                             <form class="profile-page__form">
                                 {{{ ProfileImage }}}
                                 {{{ Title }}}
@@ -151,8 +195,8 @@ class ProfilePage extends Block<ProfilePageProps> {
     }
 }
 
-const mapStateToPropsShort = ({ isLoading }): object => {
-    return { isLoading }
+const mapStateToPropsShort = ({ isLoading, imageLink }): object => {
+    return { isLoading, imageLink }
 }
 
 export default connect(mapStateToPropsShort)(ProfilePage);

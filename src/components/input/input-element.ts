@@ -31,7 +31,11 @@ export default class InputElement extends Block<InputElementProps> {
                     was_focused="{{was_focused}}"
                 >
                 {{else}}
-                <div></div>
+                <p
+                    name="{{name}}"
+                    class="profile-imput-immutable"
+                >
+                </p>
                 {{/if}}
             `
         );

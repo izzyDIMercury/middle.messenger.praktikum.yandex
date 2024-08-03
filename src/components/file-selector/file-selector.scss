@@ -1,0 +1,32 @@
+@import "/variables";
+
+#avatar {
+    display: none;
+}
+
+.avatar {
+    position: absolute;
+    top: 12px;
+}
+
+.avatar__label {
+    color: $purple;
+    font-family: Inter, serif;
+    font-weight: 400;
+    font-size: 14px;
+    cursor: pointer;
+    margin-right: 30px;
+}
+
+#avatar-submit {
+    display: none;
+}
+
+.avatar-submit__label {
+    color: $purple;
+    font-family: Inter, serif;
+    font-weight: 400;
+    font-size: 14px;
+    cursor: pointer;
+}
+

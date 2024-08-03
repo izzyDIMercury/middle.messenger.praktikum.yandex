@@ -1,3 +1,4 @@
+
 .profile-page__form {
     position: relative;
     display: flex;
@@ -17,4 +18,13 @@
 .profile-page__title {
     margin-bottom: 30px;
     height: 25px;
+}
+
+.profile-form__input > p.profile-imput-immutable {
+    color: black;
+    left: auto;
+    bottom: 6px;
+    right: 0;
+    // font-weight: 500;
+    font-size: 13px;
 }
