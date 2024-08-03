@@ -65,8 +65,12 @@ export default class SettingsController {
 
     public async setAvatar(avatar) {
         const api = new UsersApi();
-        const res = await api.setUserAvatar(avatar);
-        console.log(avatar instanceof FormData);
+        const response = await api.setUserAvatar(avatar);
+        const result = JSON.parse(response.response);
+        const image = Object.entries(result).filter((prop) => prop[0] === "avatar")[0][1];
+        const imageLink = "https://ya-praktikum.tech/api/v2/resources/" + image;
+        window.store.setState({ imageLink })
+
         console.log(res.response);
     }
 
