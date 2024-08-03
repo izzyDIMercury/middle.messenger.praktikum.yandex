@@ -5,10 +5,13 @@ import Button from "../../components/button/button.ts";
 import Image from "../../components/image/image.ts";
 import FormSubmit from "../../core/formSubmit.ts";
 import { switchPage } from "../../core/utils.ts";
+import { connect } from "../../core/connect.ts";
+import SettingsController from "../../controllers/settings.ts";
+import Loading from "../../components/loading/loading.ts";
 
 type ChangeDataPageProps = {};
 
-export default class ProfileChangeDataPage extends Block<ChangeDataPageProps> {
+class ProfileChangeDataPage extends Block<ChangeDataPageProps> {
     constructor(props: ChangeDataPageProps) {
         super({
             ...props
@@ -71,9 +74,9 @@ export default class ProfileChangeDataPage extends Block<ChangeDataPageProps> {
                 {
                     className: "profile-form__input",
                     title: "Телефон",
-                    name: "tel",
-                    type: "tel",
-                    label: "tel",
+                    name: "phone",
+                    type: "phone",
+                    label: "phone",
                     blur: handleBlurBind
                 }
             ]
@@ -93,11 +96,14 @@ export default class ProfileChangeDataPage extends Block<ChangeDataPageProps> {
             path: ""
         });
 
+        const LoadingWindow = new Loading()
+
         this.children = {
             ButtonBack,
             Form,
             ProfileButton,
-            ProfileImage
+            ProfileImage,
+            LoadingWindow
         };
     }
 
@@ -107,18 +113,23 @@ export default class ProfileChangeDataPage extends Block<ChangeDataPageProps> {
 
     handleSubmit(event: FocusEvent | MouseEvent) {
         event.preventDefault();
+        const controller = new SettingsController();
+        controller.changeProfile([ "profile-change-data-page__form", "profile-change-data-page__error-text", false, event.type ], event.type);
 
-        const submit = new FormSubmit("profile-change-data-page__form", "profile-change-data-page__error-text", false, event.type);
-        if (submit.validated && event.type === "click") {
-            submit.sendData("https://chats", "get");
-            switchPage(null, "settings");
-        }
+        // const submit = new FormSubmit("profile-change-data-page__form", "profile-change-data-page__error-text", false, event.type);
+        // if (submit.validated && event.type === "click") {
+        //     submit.sendData("https://chats", "get");
+        //     switchPage(null, "settings");
+        // }
     }
 
     render() {
         return (
             `
                     <main class="profile-page">
+                        {{#if isLoading}}
+                            {{{ LoadingWindow }}}
+                        {{/if}}
                         {{{ ButtonBack }}}
                         <div class="profile-page__content">
                             <form class="profile-change-data-page__form">
@@ -134,3 +145,10 @@ export default class ProfileChangeDataPage extends Block<ChangeDataPageProps> {
         );
     }
 }
+
+const mapStateToPropsShort = ({ isLoading }): object => {
+    return { isLoading }
+}
+
+export default connect(mapStateToPropsShort)(ProfileChangeDataPage);
+

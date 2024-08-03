@@ -5,10 +5,12 @@ import ProfileFooter from "../../components/profile-footer/profile-footer.ts";
 import ProfileForm from "../../components/profile-form/profile-form.ts";
 import Image from "../../components/image/image.ts";
 import { switchPage } from "../../core/utils.ts";
+import { connect } from "../../core/connect.ts";
+import SettingsController from "../../controllers/settings.ts";
 
 type ProfilePageProps = {};
 
-export default class ProfilePage extends Block<ProfilePageProps> {
+class ProfilePage extends Block<ProfilePageProps> {
     constructor(props: ProfilePageProps) {
         super({
             ...props
@@ -31,6 +33,7 @@ export default class ProfilePage extends Block<ProfilePageProps> {
             alt: "Аватар пользователя",
             path: ""
         });
+        const handleLogout = this.handleLogout.bind(this);
         const Footer = new ProfileFooter({
             buttonsKeys: [],
             buttons: [
@@ -50,7 +53,7 @@ export default class ProfilePage extends Block<ProfilePageProps> {
                     classModifier: "profile-footer-button_red",
                     page: "settings",
                     text: "Выйти",
-                    switchPage: null
+                    switchPage: handleLogout
                 }
             ]
         });
@@ -103,7 +106,7 @@ export default class ProfilePage extends Block<ProfilePageProps> {
                     className: "profile-form__input",
                     title: "Телефон",
                     name: "phone",
-                    type: "tel",
+                    type: "phone",
                     label: "",
                     blur: handleBlurBind
                 }
@@ -121,6 +124,12 @@ export default class ProfilePage extends Block<ProfilePageProps> {
 
     handleBlur(event: FocusEvent) {
         return event;
+    }
+
+    handleLogout() {
+        console.log("LOGOUT");
+        const controller = new SettingsController();
+        controller.logout();
     }
 
     render() {
@@ -141,3 +150,9 @@ export default class ProfilePage extends Block<ProfilePageProps> {
         );
     }
 }
+
+const mapStateToPropsShort = ({ isLoading }): object => {
+    return { isLoading }
+}
+
+export default connect(mapStateToPropsShort)(ProfilePage);

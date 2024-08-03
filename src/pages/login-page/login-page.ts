@@ -91,6 +91,7 @@ class LoginPage extends Block<LoginPageProps> {
     }
 
     handleBlur(event: FocusEvent) {
+        event.preventDefault();
         this.handleSubmit(event);
     }
 

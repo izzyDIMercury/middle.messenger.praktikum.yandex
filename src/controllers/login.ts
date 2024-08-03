@@ -11,14 +11,16 @@ export default class LoginController {
         const api = new AuthApi();
         // const out = await api.logout();
         // const info = await api.userInfo();
-        // console.log(info);
+        // console.log("LOGIN: ", submit.validated, eventType);
 
         try {
             if (submit.validated && eventType === "click") {
+                // console.log("VALIDATED");
                 const result = await api.login(submit.userData);
                 if (result.responseText !== "OK") {
                     throw new Error(result.responseText)
                 }
+                console.log("Login: ", result.responseText);
                 switchPage(null, "messenger");
             }
         } catch (error) {

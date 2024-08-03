@@ -9,7 +9,6 @@ export function connect(mapStateToProps, dispatch?) {
             
             constructor(props) {
                 const store = window.store;
-                console.log(store.getState());
                 let state = mapStateToProps(store.getState());
                 super({ ...props, ...state });
 

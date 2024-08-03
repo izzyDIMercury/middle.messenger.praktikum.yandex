@@ -18,7 +18,6 @@ export default class Image extends Block<ImageProps> {
 
         const name = props.src.split(".").reverse()[1].split("/").reverse()[0];
         const path = images[name];
-        console.log(props);
         Handlebars.registerHelper(name, () => path);
 
         super({
