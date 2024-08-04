@@ -92,21 +92,31 @@ function infoPasswordPage(result) {
 
 
 export async function searchUsers(event: InputEvent): object[] {
+    event.preventDefault();
     const inputElement = event.target as unknown as HTMLInputElement;
     const controller = new Chat();
     const response = await controller.searchUsers(inputElement.value);
-    const users = JSON.parse(response.response);
-    console.log(users);
+    const result = JSON.parse(response.response);
+
+    window.store.setState({
+        userFound: result[0]
+    })
+
+
+
+
+    // const found: boolean = users.length === 0 ? false : true;
     // window.store.setState({
     //     searchUsers: {
     //         searchInput: inputElement.value,
     //         usersList: users,
-    //         usersFound: true
+    //         usersFound: found
     //     }
     // });
-    window.store.setState({ isLoading: true })
-    setTimeout(() => {
-        window.store.setState({ isLoading: false })
-    }, 1000);
+
+    // window.store.setState({ isLoading: true })
+    // setTimeout(() => {
+    //     window.store.setState({ isLoading: false })
+    // }, 1000);
     // console.log(users);
 }

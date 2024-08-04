@@ -1,11 +1,11 @@
 import Block from "../../core/block.ts";
 import Image from "../image/image.ts";
-import { connect } from "../../core/connect.ts";
 import { searchUsers } from "../../core/utils.ts";
+import DropDown from "../drop-down/drop-down.ts";
 
 type SearchProps = {};
 
-class Search extends Block<SearchProps> {
+export class Search extends Block<SearchProps> {
 
     public users: object[] = [];
     public usersKeys: string[] = [];
@@ -30,51 +30,30 @@ class Search extends Block<SearchProps> {
                 input: searchUsersBind
             }
         });
-
-        const UserField = new User({});
+        const UsersList = new DropDown({
+            users: []
+        });
 
         this.children = {
             SearchIcon,
             Input,
-            UserField
+            UsersList
         };
     }
 
-    // componentDidUpdate(): boolean {
-    //     let users;
-    //     if (this.props.usersList.length !== 0) {
-    //         users = this.props.usersList.reduce((acc: { [key: string]: InstanceType<typeof Block> }, current) => {
-    //             const user = new User({
-    //                 name: current.first_name
-    //             });
-    //             acc[user.id] = user;
-    //             return acc;
-    //         }, {});
-    //     }
-    //     this.users = users;
-    //     console.log(this.props.usersFound);
-    //     this.usersKeys = users && Object.keys(users);     
-    // }
-
     render() {
-        console.log("RENDER");
+        console.log("INPUTRENDER");
         return (
             `
                     <form class="search">
                         {{{ SearchIcon }}}
                         {{{ Input }}}
-                        <ul class="users-dropdown-list">
-                            {{#if isLoading}}
-                                {{{ UserField }}}
-                            {{/if }}                           
-                        </ul>
+                        {{{ UsersList }}}
                     </form>                
                 `
         );
     }
 }
-
-// ${this.usersKeys.map((key) => `{{{ ${key} }}}`).join("")}
 
 
 type SearchFieldProps = {};
@@ -96,16 +75,13 @@ class SearchField extends Block<SearchFieldProps> {
     }
 }
 
-type UserProps = {};
 
-class User extends Block<UserProps> {
-
-    constructor(props: UserProps) {
+export class UserInSearch extends Block {
+    constructor(props) {
         super({
             ...props
         })
     }
-
 
     render() {
         return (
@@ -115,21 +91,3 @@ class User extends Block<UserProps> {
         )
     }
 }
-
-// <ul class="left-column__users">
-//     ${container.usersKeys.map((key) => `{{{ ${key} }}}`).join("")}
-// </ul>
-
-// const mapStateToPropsShort = ({ searchUsers }): object => {
-//     return {
-//         searchInput: searchUsers.searchInput,
-//         usersList: searchUsers.usersList,
-//         usersFound: searchUsers.usersFound
-//     }
-// }
-
-const mapStateToPropsShort = ({ isLoading }): object => {
-    return { isLoading }
-}
-
-export default connect(mapStateToPropsShort)(Search);

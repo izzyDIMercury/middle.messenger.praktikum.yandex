@@ -1,6 +1,6 @@
 import Block from "../../core/block.ts";
 import ProfileButton from "../../components/profile-button/profile-button.ts";
-import Search from "../../components/search/search.ts";
+import { Search } from "../../components/search/search.ts";
 import Users from "../../components/users/users.ts";
 import ChatProfile from "../../components/chat-profile/chat-profile.ts";
 import MessagePanel from "../../components/message-panel/message-panel.ts";
@@ -89,7 +89,6 @@ class ChatPage extends Block<ChatPageProps> {
     }
 
     render() {
-        console.log("RERENDER");
         return (
             `
                     <main class="chat-page">

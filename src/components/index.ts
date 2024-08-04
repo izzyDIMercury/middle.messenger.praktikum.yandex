@@ -19,3 +19,4 @@ export { Loading } from "./loading";
 export { LoginForm } from "./login-form";
 export { FileSelector } from "./file-selector";
 export { ProfileImage } from "./profile-image";
+export { DropDown } from "./drop-down";

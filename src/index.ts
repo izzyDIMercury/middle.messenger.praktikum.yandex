@@ -8,13 +8,9 @@ const store = new Store({
     isLoading: false,
     isError: false,
     imageLink: "",
-    found: false,
-    searchUsers: {
-        searchInput: "",
-        usersList: [],
-        usersFound: false
-    }
+    userFound: {}
 });
+
 window.store = store;
 
 
