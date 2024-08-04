@@ -38,4 +38,10 @@ export default class LoginController {
         // slash
         // Mas42er92s 
     }
+
+    public async checkLoggedIn() {
+        const api = new AuthApi();
+        // await api.logout()
+        return api.userInfo();
+    }
 } 
