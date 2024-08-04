@@ -100,7 +100,7 @@ class ProfileChangePasswordPage extends Block<ChangePasswordPageProps> {
     }
 
     componentDidMount(): void {
-        
+        fillUserInfo("change-password")
     }
 
     render() {
