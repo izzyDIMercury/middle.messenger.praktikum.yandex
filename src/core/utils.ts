@@ -99,7 +99,7 @@ export async function searchUsers(event: InputEvent): object[] {
     const result = JSON.parse(response.response);
 
     window.store.setState({
-        userFound: result[0]
+        usersFound: result
     })
 
 

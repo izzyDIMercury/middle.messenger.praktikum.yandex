@@ -1,12 +1,12 @@
 import Block from "../../core/block.ts";
 import { connect } from "../../core/connect.ts";
+import UsersList from "./list.ts";
 
 type DropDownProps = {};
 
 class DropDown extends Block<DropDownProps> {
 
-    public array: [] = [];
-    public keys: [] = [];
+    // public usersFound: [] = [];
 
     constructor(props: DropDownProps) {
         super({
@@ -15,32 +15,35 @@ class DropDown extends Block<DropDownProps> {
     }
 
     init() {
-        const UserFound = new User({})
+        const UserFound = new UsersList({
+            
+        })
 
         this.children = {
             UserFound
         }
     }
 
-    componentDidMount(): void {
-        // console.log(this.props.first_name)
-    }
-
 
     render() {
-        console.log("DDREN")
+        // console.log("DDREN", this.props.usersFound)
         return (
             `   <div>
-                    {{{ first_name }}}
+                    {{{ UserFound }}}       
                 </div>
             `
         )
     }
 }
 
+// {{#if usersFound}}
+//     <p>s</p>
+//     {{{ UserFound }}}
+// {{/if}}
 
-const mapStateToPropsShort = ({ userFound }): object => {
-    return { ...userFound }
+
+const mapStateToPropsShort = ({ usersFound }): object => {
+    return { usersFound }
 }
 
 export default connect(mapStateToPropsShort)(DropDown);
