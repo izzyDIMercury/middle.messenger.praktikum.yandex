@@ -2,12 +2,10 @@ import Block from "../../core/block.ts";
 import ReturnButton from "../../components/return-button/return-button.ts";
 import ProfileForm from "../../components/profile-form/profile-form.ts";
 import Button from "../../components/button/button.ts";
-import Image from "../../components/image/image.ts";
-import FormSubmit from "../../core/formSubmit.ts";
-import { switchPage } from "../../core/utils.ts";
+import ProfileImage from "../../components/profile-image/profile-image.ts";
+import { switchPage, fillUserInfo } from "../../core/utils.ts";
 import { connect } from "../../core/connect.ts";
 import SettingsController from "../../controllers/settings.ts";
-import Loading from "../../components/loading/loading.ts";
 
 type ChangePasswordPageProps = {};
 
@@ -67,7 +65,7 @@ class ProfileChangePasswordPage extends Block<ChangePasswordPageProps> {
                 mouseover: handleMouseOverBind
             }
         });
-        const ProfileImage = new Image({
+        const Avatar = new ProfileImage({
             className: "profile-change-password-page__image",
             src: "/assets/profile-placeholder.png",
             alt: "Аватар пользователя",
@@ -78,7 +76,7 @@ class ProfileChangePasswordPage extends Block<ChangePasswordPageProps> {
             ButtonBack,
             Form,
             ProfileButton,
-            ProfileImage
+            Avatar
         };
     }
 
@@ -101,6 +99,10 @@ class ProfileChangePasswordPage extends Block<ChangePasswordPageProps> {
         controller.changePassword([ "profile-change-password-page__form", "profile-change-password-page__error-text", false, event.type ], event.type);
     }
 
+    componentDidMount(): void {
+        
+    }
+
     render() {
         return (
             `
@@ -112,7 +114,7 @@ class ProfileChangePasswordPage extends Block<ChangePasswordPageProps> {
                         <div class="profile-page__content">
                             <form class="profile-change-password-page__form">
                                 <div class="profile-change-password-page__form-data">
-                                    {{{ ProfileImage }}}
+                                    {{{ Avatar }}}
                                     {{{ Form }}}
                                 </div>
                                 {{{ ProfileButton }}}

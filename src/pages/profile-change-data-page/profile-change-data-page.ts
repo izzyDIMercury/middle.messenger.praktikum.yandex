@@ -3,10 +3,12 @@ import ReturnButton from "../../components/return-button/return-button.ts";
 import ProfileForm from "../../components/profile-form/profile-form.ts";
 import Button from "../../components/button/button.ts";
 import Image from "../../components/image/image.ts";
-import { switchPage } from "../../core/utils.ts";
+import ProfileImage from "../../components/profile-image/profile-image.ts";
+import { switchPage, fillUserInfo } from "../../core/utils.ts";
 import { connect } from "../../core/connect.ts";
 import SettingsController from "../../controllers/settings.ts";
 import Loading from "../../components/loading/loading.ts";
+import FileSelector from "../../components/file-selector/file-selector.ts";
 
 type ChangeDataPageProps = {};
 
@@ -91,22 +93,43 @@ class ProfileChangeDataPage extends Block<ChangeDataPageProps> {
                 mouseover: handleMouseOverBind
             }
         });
-        const ProfileImage = new Image({
+        // const ProfileImage = new Image({
+        //     className: "profile-change-data-page__image",
+        //     src: "/assets/profile-placeholder.png",
+        //     alt: "Аватар пользователя",
+        //     path: ""
+        // });
+        const Avatar = new ProfileImage({
             className: "profile-change-data-page__image",
             src: "/assets/profile-placeholder.png",
             alt: "Аватар пользователя",
             path: ""
         });
+        const handleFileBind = this.handleFile.bind(this);
+        const File = new FileSelector({
+            events: {
+                submit: handleFileBind
+            }
+        })
 
         const LoadingWindow = new Loading()
 
         this.children = {
             ButtonBack,
             Form,
+            File,
             ProfileButton,
-            ProfileImage,
+            Avatar,
             LoadingWindow
         };
+    }
+
+    handleFile(event) {
+        event.preventDefault();
+        const form = new FormData(event.target);
+        console.log(event);
+        const controller = new SettingsController();
+        controller.setAvatar(form);
     }
 
     handleBlur(event: FocusEvent) {
@@ -127,6 +150,10 @@ class ProfileChangeDataPage extends Block<ChangeDataPageProps> {
         controller.changeProfile([ "profile-change-data-page__form", "profile-change-data-page__error-text", false, event.type ], event.type);
     }
 
+    componentDidMount(): void {
+        fillUserInfo("change-profile");
+    }
+
     render() {
         return (
             `
@@ -135,10 +162,11 @@ class ProfileChangeDataPage extends Block<ChangeDataPageProps> {
                             {{{ LoadingWindow }}}
                         {{/if}}
                         {{{ ButtonBack }}}
+                        {{{ File }}}
                         <div class="profile-page__content">
                             <form class="profile-change-data-page__form">
                                 <div class="profile-change-data-page__form-data">
-                                    {{{ ProfileImage }}}
+                                    {{{ Avatar }}}
                                     {{{ Form }}}
                                 </div>
                                 {{{ ProfileButton }}}
@@ -150,8 +178,8 @@ class ProfileChangeDataPage extends Block<ChangeDataPageProps> {
     }
 }
 
-const mapStateToPropsShort = ({ isLoading }): object => {
-    return { isLoading }
+const mapStateToPropsShort = ({ isLoading, imageLink }): object => {
+    return { isLoading, imageLink }
 }
 
 export default connect(mapStateToPropsShort)(ProfileChangeDataPage);

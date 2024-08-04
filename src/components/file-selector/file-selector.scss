@@ -5,8 +5,13 @@
 }
 
 .avatar {
+    width: 100%;
     position: absolute;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
     top: 12px;
+    z-index: 3000;
 }
 
 .avatar__label {

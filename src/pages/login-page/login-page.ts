@@ -73,17 +73,17 @@ class LoginPage extends Block<LoginPageProps> {
         controller.login([ "login-page", "login-page__error-text", false, event.type ], event.type);
     }
 
-    componentDidMount(): void {
-        async function checkLoggedIn() {
-            const controller = new LoginController();
-            const response = await controller.checkLoggedIn();
-            if (response.status === 200) {
-                switchPage(null, "messenger");
-            }
-        }
+    // componentDidMount(): void {
+    //     async function checkLoggedIn() {
+    //         const controller = new LoginController();
+    //         const response = await controller.checkLoggedIn();
+    //         if (response.status === 200) {
+    //             switchPage(null, "messenger");
+    //         }
+    //     }
 
-        checkLoggedIn();
-    }
+    //     checkLoggedIn();
+    // }
 
     render() {
         return (`
