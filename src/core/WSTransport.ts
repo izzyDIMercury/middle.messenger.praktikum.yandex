@@ -63,7 +63,7 @@ export default class WSTransport extends EventBus {
         })
     }
 
-    private subscribe(socker: WebSocket) {
+    private subscribe(socket: WebSocket) {
 
         socket.addEventListener("open", () => {
             this.emit(WSTransportEvents.Connected);
@@ -77,7 +77,7 @@ export default class WSTransport extends EventBus {
             this.emit(WSTransportEvents.Error);
         });
 
-        socket.addEventListener("message", () => {
+        socket.addEventListener("message", (message) => {
             try {
                 const data = JSON.parse(message.data);
                 if (data.type === "pong" || data.type === "user connected") {

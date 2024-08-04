@@ -7,7 +7,13 @@ import { Store } from "./core/store.ts";
 const store = new Store({
     isLoading: false,
     isError: false,
-    imageLink: ""
+    imageLink: "",
+    found: false,
+    searchUsers: {
+        searchInput: "",
+        usersList: [],
+        usersFound: false
+    }
 });
 window.store = store;
 

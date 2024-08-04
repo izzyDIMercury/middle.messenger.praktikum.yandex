@@ -1,4 +1,5 @@
 import SettingsController from "../controllers/settings.ts";
+import Chat from "../controllers/chat.ts";
 
 export function switchPage(event: MouseEvent | null, page: string) {
     if (event instanceof MouseEvent) {
@@ -58,7 +59,7 @@ export async function fillUserInfo(page: string) {
 
 function infoSettingsPage(result) {
     const title = document.querySelector(".profile-page__title") as HTMLTitleElement;
-    title.textContent = Object.entries(result).filter((prop) => prop[0] === "login")[0][1] as string;
+    title.textContent = Object.entries(result).filter((prop) => prop[0] === "first_name")[0][1] as string;
     Object.entries(result).forEach(([key, value]) => {
         const element = document.querySelector(`p[name=${key}]`) as HTMLTitleElement;
         if (element !== null) {
@@ -87,4 +88,25 @@ function infoPasswordPage(result) {
     const image = Object.entries(result).filter((prop) => prop[0] === "avatar")[0][1];
     const imageLink = "https://ya-praktikum.tech/api/v2/resources/" + image;
     window.store.setState({ imageLink })
+}
+
+
+export async function searchUsers(event: InputEvent): object[] {
+    const inputElement = event.target as unknown as HTMLInputElement;
+    const controller = new Chat();
+    const response = await controller.searchUsers(inputElement.value);
+    const users = JSON.parse(response.response);
+    console.log(users);
+    // window.store.setState({
+    //     searchUsers: {
+    //         searchInput: inputElement.value,
+    //         usersList: users,
+    //         usersFound: true
+    //     }
+    // });
+    window.store.setState({ isLoading: true })
+    setTimeout(() => {
+        window.store.setState({ isLoading: false })
+    }, 1000);
+    // console.log(users);
 }

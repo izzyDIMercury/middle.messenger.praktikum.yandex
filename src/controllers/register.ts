@@ -9,6 +9,7 @@ export default class RegisterController {
         window.store.setState({ isLoading: true })
         const submit = new FormSubmit(...dataToValidate);
         const api = new AuthApi();
+        console.log(submit.userData);
         try {
             if (submit.validated && eventType === "click") {
                 const result = await api.register(submit.userData);
@@ -20,6 +21,7 @@ export default class RegisterController {
         } catch (error) {
             if (String(error).includes("User already in system") || String(error).includes("Login already exists")) {
                 alert("Пользователь уже зарегистрирован.");
+                switchPage(null, "messenger"); 
             }
             console.log(error);
         }

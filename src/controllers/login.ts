@@ -4,7 +4,6 @@ import { switchPage } from "../core/utils.ts";
 
 export default class LoginController {
 
-
     public async login(dataToValidate: Array<string | boolean>, eventType: string) {
         window.store.setState({ isLoading: true })
         const submit = new FormSubmit(...dataToValidate);

@@ -5,14 +5,18 @@ import Users from "../../components/users/users.ts";
 import ChatProfile from "../../components/chat-profile/chat-profile.ts";
 import MessagePanel from "../../components/message-panel/message-panel.ts";
 import { switchPage } from "../../core/utils.ts";
+import { connect } from "../../core/connect.ts";
+import Chat from "../../controllers/chat.ts";
+import Loading from "../../components/loading/loading.ts";
 
 type ChatPageProps = {};
 
-export default class ChatPage extends Block<ChatPageProps> {
+class ChatPage extends Block<ChatPageProps> {
     constructor(props: ChatPageProps) {
         super({
             ...props
         });
+        this.store = window.store;
     }
 
     init() {
@@ -54,19 +58,42 @@ export default class ChatPage extends Block<ChatPageProps> {
         const Profile = new ChatProfile({});
         const MessageBlock = new MessagePanel({});
 
+        const LoadingWindow = new Loading("")
+
         this.children = {
             MenuButton,
             MenuSearch,
             ChatUsers,
             Profile,
-            MessageBlock
+            MessageBlock,
+            LoadingWindow
         };
     }
 
+    componentDidMount(): void {
+        // async function test() {
+
+        //     const controller = new Chat();
+        //     // await controller.createChat({ title: "mychat2" });
+        //     // await controller.connectSocket();
+        // }
+
+        // test();
+        // console.log(window.store)
+        // window.store.setState({ isLoading: true })
+        // setTimeout(() => {
+        //     window.store.setState({ isLoading: false })
+        // }, 1000);
+        // console.log(window.store)
+        // this.store.setState({ isLoading: true })
+    }
+
     render() {
+        console.log("RERENDER");
         return (
             `
                     <main class="chat-page">
+                        
                         <div class="left-column chat-page__left-column">
                             <nav class="left-column__header">
                                 <div class="left-column__header-content">
@@ -79,9 +106,15 @@ export default class ChatPage extends Block<ChatPageProps> {
                         <div class="middle-column chat-page__middle-column">
                             {{{ Profile }}}
                             {{{ MessageBlock }}}
-                        </div>  
+                        </div>
                     </main>
                 `
         );
     }
 }
+
+const mapStateToPropsShort = ({ isLoading }): object => {
+    return { isLoading }
+}
+
+export default connect(mapStateToPropsShort)(ChatPage);
