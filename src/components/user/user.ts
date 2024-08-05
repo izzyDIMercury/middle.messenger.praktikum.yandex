@@ -17,19 +17,19 @@ export default class User extends Block<UserProps> {
         });
     }
 
-    init() {
-        const userData = this.props as UserProps;
-        const UserImagePlaceholder = new Image({
-            className: "user__image",
-            src: userData.image,
-            alt: "Фото пользователя",
-            path: ""
-        });
+    // init() {
+    //     const userData = this.props as UserProps;
+    //     const UserImagePlaceholder = new Image({
+    //         className: "user__image",
+    //         src: userData.image,
+    //         alt: "Фото пользователя",
+    //         path: ""
+    //     });
 
-        this.children = {
-            UserImagePlaceholder
-        };
-    }
+    //     this.children = {
+    //         UserImagePlaceholder
+    //     };
+    // }
 
     render() {
         return (
@@ -38,7 +38,7 @@ export default class User extends Block<UserProps> {
                         <div class="user__content">
                             {{{ UserImagePlaceholder }}}
                             <div class="user__data">
-                                <p class="user__name">{{ name }}</p>
+                                <p class="user__name">{{ first_name }} {{ second_name }}</p>
                                 <p class="user__message">{{ message }} </p>
                             </div>
                         </div>

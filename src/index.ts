@@ -9,7 +9,8 @@ const store = new Store({
     isError: false,
     imageLink: "",
     userFound: {},
-    chats: {}
+    chats: {},
+    chatListUpdated: false
 });
 
 window.store = store;

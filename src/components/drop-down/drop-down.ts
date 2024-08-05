@@ -6,8 +6,6 @@ type DropDownProps = {};
 
 class DropDown extends Block<DropDownProps> {
 
-    // public usersFound: [] = [];
-
     constructor(props: DropDownProps) {
         super({
             ...props

@@ -30,10 +30,13 @@ export default class Chat {
                 const user = JSON.parse(response.response).filter((user: object) => user.id !== currentUserID)[0];
                 const chats = window.store.getState().chats;
                 chats[chat.id] = { chat, user };
-                window.store.setState({ chats });
+                window.store.setState({ chats, chatListUpdated: true });
             })
         })
-        console.log("CHATS IN STATE: ", window.store.getState().chats);
+        setTimeout(() => {
+            window.store.setState({ chatListUpdated: false });
+        }, 1000);
+        // console.log("CHATS IN STATE: ", window.store.getState().chats);
     }
 
     // public async getChatUsers2(chatId: number) {

@@ -27,33 +27,7 @@ class ChatPage extends Block<ChatPageProps> {
         });
         const MenuSearch = new Search({});
         const ChatUsers = new Users({
-            usersKeys: [],
-            users: [
-                {
-                    name: "Илья",
-                    message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                    unread: "2",
-                    image: "/assets/cat.jpg",
-                    time: "10:49",
-                    selected: ""
-                },
-                {
-                    name: "Петр",
-                    message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                    unread: "",
-                    image: "/assets/icons/profile-placeholder-small.png",
-                    time: "Пн",
-                    selected: "selected"
-                },
-                {
-                    name: "Пользователь",
-                    message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                    unread: "",
-                    image: "/assets/icons/profile-placeholder-small.png",
-                    time: "Пн",
-                    selected: ""
-                }
-            ]
+            
         });
         const Profile = new ChatProfile({});
         const MessageBlock = new MessagePanel({});
@@ -77,8 +51,7 @@ class ChatPage extends Block<ChatPageProps> {
     render() {
         return (
             `
-                    <main class="chat-page">
-                        
+                    <main class="chat-page">                        
                         <div class="left-column chat-page__left-column">
                             <nav class="left-column__header">
                                 <div class="left-column__header-content">
@@ -103,3 +76,33 @@ const mapStateToPropsShort = ({ isLoading }): object => {
 }
 
 export default connect(mapStateToPropsShort)(ChatPage);
+
+
+
+// usersKeys: [],
+//             users: [
+//                 {
+//                     name: "Илья",
+//                     message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+//                     unread: "2",
+//                     image: "/assets/cat.jpg",
+//                     time: "10:49",
+//                     selected: ""
+//                 },
+//                 {
+//                     name: "Петр",
+//                     message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+//                     unread: "",
+//                     image: "/assets/icons/profile-placeholder-small.png",
+//                     time: "Пн",
+//                     selected: "selected"
+//                 },
+//                 {
+//                     name: "Пользователь",
+//                     message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+//                     unread: "",
+//                     image: "/assets/icons/profile-placeholder-small.png",
+//                     time: "Пн",
+//                     selected: ""
+//                 }
+//             ]
