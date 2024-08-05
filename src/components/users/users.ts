@@ -52,7 +52,7 @@ class Users extends Block<UserType> {
 
     componentDidMount() {
         const controller = new Chat();
-        controller.getChats();   
+        controller.getChats();
     }
 
     componentDidUpdate() {
@@ -72,7 +72,7 @@ class Users extends Block<UserType> {
             root.textContent = "";
             let counter: number = 0;
             elements.forEach(el => {
-                if (counter < 3) {
+                if (counter < 10) {
                     counter++;
                     root?.appendChild(el.getContent());
                 }
@@ -81,20 +81,21 @@ class Users extends Block<UserType> {
     }
 
     render() {
-        console.log("LEFT COLUMN RENDERS");
         return (
             `
                     <ul class="left-column__users">
-                        43
+                        
                     </ul>
                 `
         );
     }
 }
 
-const mapStateToPropsShort = ({ chats, chatListUpdated }): object => {
-    return { chats, chatListUpdated }
+const mapStateToPropsShort = ({ chats, length }): object => {
+    return { chats, length }
 }
+
+// length: Object.keys(chats).length chatListUpdated
 
 export default connect(mapStateToPropsShort)(Users);
 

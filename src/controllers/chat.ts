@@ -19,13 +19,18 @@ export default class Chat {
             chatId: chatId
         };
         console.log(request);
-        await api.addUser(request)
+        await api.addUser(request);
+        this.getChats();
 
-        // this.deleteChat({ chatId: 19733 });
 
-        const resp = await api.getChats(1672);
-        const myChats = JSON.parse(resp.response);
-        console.log(myChats);
+        // this.deleteChat({ chatId: 19752 });
+
+        // const resp = await api.getChats(1672);
+        // const myChats = JSON.parse(resp.response);
+        // console.log(myChats);
+
+        // const state = window.store.getState();
+        // console.log(state);
     }
 
     public async deleteChat(chatId: object) {
@@ -49,12 +54,15 @@ export default class Chat {
                 const user = JSON.parse(response.response).filter((user: object) => user.id !== currentUserID)[0];
                 const chats = window.store.getState().chats;
                 chats[chat.id] = { chat, user };
-                window.store.setState({ chats, chatListUpdated: true });
+                //
+                const length = Object.keys(chats).length;
+                //
+                window.store.setState({ chats, length });
             })
         })
-        setTimeout(() => {
-            window.store.setState({ chatListUpdated: false });
-        }, 1000);
+        // setTimeout(() => {
+        //     window.store.setState({ chatListUpdated: false });
+        // }, 1000);
     }
 
     public async getUserInfo() {

@@ -46,3 +46,20 @@
 .message-panel__send-icon {
     max-height: 24px;
 }
+
+.message-window {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    bottom: 100px;
+    width: 560px;
+    height: 100px;
+    background-color: white;
+    border-radius: 40px;
+}
+
+.message-text {
+    text-align: center;
+}

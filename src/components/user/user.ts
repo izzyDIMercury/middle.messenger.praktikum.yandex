@@ -1,5 +1,6 @@
 import Block from "../../core/block.ts";
 import Image from "../image/image.ts";
+import { connect } from "../../core/connect.ts";
 
 type UserProps = {
     name: string,
@@ -10,7 +11,7 @@ type UserProps = {
     image: string
 }
 
-export default class User extends Block<UserProps> {
+class User extends Block<UserProps> {
     constructor(props: UserProps) {
         super({
             ...props
@@ -55,3 +56,12 @@ export default class User extends Block<UserProps> {
         );
     }
 }
+
+
+const mapStateToPropsShort = ({ chats, length }): object => {
+    return { chats, length }
+}
+
+// length: Object.keys(chats).length chatListUpdated
+
+export default connect(mapStateToPropsShort)(User);

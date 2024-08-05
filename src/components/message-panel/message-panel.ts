@@ -6,6 +6,7 @@ import Chat from "../../controllers/chat.ts";
 import FormSubmit from "../../core/formSubmit.ts";
 import { connect } from "../../core/connect.ts";
 import WSTransport from "../../core/WSTransport.ts";
+import Messages from "./messages.ts";
 
 type MessagePanelProps = {};
 
@@ -27,8 +28,12 @@ class MessagePanel extends Block<MessagePanelProps> {
                 submit: handleSubmitBind
             }
         })
+        const MessageWindow = new Messages({
+            currentMessage: this.props.currentMessage
+        });
 
         this.children = {
+            MessageWindow,
             Form
         };
     }
@@ -36,7 +41,7 @@ class MessagePanel extends Block<MessagePanelProps> {
     public handleSubmit(event: FocusEvent | MouseEvent): void {
         event.preventDefault();
         const input = document.querySelector("#message").value;
-        // console.log(input);
+        console.log(input);
         this.socket.send({
             content: input,
             type: "message"
@@ -53,7 +58,8 @@ class MessagePanel extends Block<MessagePanelProps> {
             response.then((socket: WSTransport) => {
                 this.socket = socket;
                 socket.on("Message", (args) => {
-                    console.log("MESSAGE: ", args, this.props.chat);
+                    window.store.setState({ currentMessage: args.content });
+                    console.log("MESSAGE: ", args.content);
                 })
             })
         }
@@ -63,6 +69,7 @@ class MessagePanel extends Block<MessagePanelProps> {
         return (
             `
                     <div class="message-panel-container">
+                        {{{ MessageWindow }}}
                         {{{ Form }}}
                     </div>
                 `

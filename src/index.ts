@@ -10,11 +10,12 @@ const store = new Store({
     imageLink: "",
     userFound: {},
     chats: {},
-    chatListUpdated: false,
+    length: 0, //
     activeChat: {
         chat: {},
         isActive: false
-    }
+    },
+    currentMessage: ""
 });
 
 window.store = store;
@@ -49,8 +50,7 @@ document.addEventListener("switchPage", event => {
     const eventDetail = event as PageCustomEvent;
     let page = eventDetail.detail.page as string || "";
     if (page === "login") {
-        // change start page here
-        page = "messenger";
+        page = "";
     }
     router.go(`/${page}`);
 });
