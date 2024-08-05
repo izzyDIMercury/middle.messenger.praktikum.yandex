@@ -35,16 +35,12 @@ class Users extends Block<UsersArray> {
     }
 
     componentDidMount(): void {
-        // console.log(this.props.chats);
-        const controller = new Chat();
-        const response = controller.getChats();
-
-        async function getChats() {
-            const response = await controller.getChats();
-            console.log(response);
+        async function getChatsInfo() {
+            const controller = new Chat();
+            const response = controller.getChats();
         }
 
-        getChats();
+        getChatsInfo();
     }
 
     render() {

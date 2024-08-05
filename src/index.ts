@@ -9,7 +9,7 @@ const store = new Store({
     isError: false,
     imageLink: "",
     userFound: {},
-    chats: []
+    chats: {}
 });
 
 window.store = store;

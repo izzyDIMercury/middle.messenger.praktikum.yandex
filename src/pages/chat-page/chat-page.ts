@@ -71,18 +71,7 @@ class ChatPage extends Block<ChatPageProps> {
     }
 
     componentDidMount(): void {
-        const controller = new Chat();
-        controller.addUserToChat(19535, 1643);
-        controller.addUserToChat(19541, 1644);
 
-        // test();
-        // console.log(window.store)
-        // window.store.setState({ isLoading: true })
-        // setTimeout(() => {
-        //     window.store.setState({ isLoading: false })
-        // }, 1000);
-        // console.log(window.store)
-        // this.store.setState({ isLoading: true })
     }
 
     render() {
