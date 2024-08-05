@@ -3,19 +3,24 @@ import EventBus from "./eventBus";
 export enum StoreEvents {
     Updated = "Updated"
 }
-export class Store extends EventBus {
-    private state: Object;
 
-    constructor(defaultState, ...props) {
+interface StorageProps {
+    [key: string]: any,
+}
+
+export class Store extends EventBus {
+    private state: StorageProps;
+
+    constructor(defaultState: StorageProps, ...props: []) {
         super(...props);
         this.state = defaultState;
     }
 
-    public getState() {
+    public getState(): StorageProps {
         return this.state;
     }
 
-    public setState(nextState) {
+    public setState(nextState: StorageProps): void {
         const prevState = { ...this.state };
         this.state = { ...this.state, ...nextState };
         this.emit(StoreEvents.Updated, prevState, nextState);

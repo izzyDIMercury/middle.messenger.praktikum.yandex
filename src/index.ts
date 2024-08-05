@@ -18,7 +18,15 @@ const store = new Store({
     currentMessage: ""
 });
 
-window.store = store;
+interface WindowStore {
+    store: {
+        [key: string]: any
+    },
+    router: any
+}
+
+const windowStore = window as unknown as WindowStore;
+windowStore.store = store;
 
 
 Object.entries(Components).forEach(([ name, component ]) => {
@@ -27,16 +35,16 @@ Object.entries(Components).forEach(([ name, component ]) => {
 
 
 const router = new Router("#app");
-window.router = router;
+windowStore.router = router;
 
-router.use("/", Pages.LoginPage);
-router.use("/messenger", Pages.ChatPage);
-router.use("/sing-up", Pages.RegisterPage);
-router.use("/settings", Pages.ProfilePage);
-router.use("/profile-change-data", Pages.ProfileChangeDataPage);
-router.use("/profile-change-password", Pages.ProfileChangePasswordPage);
-router.use("/404", Pages.Page404);
-router.use("/500", Pages.Page500);
+router.use("/", Pages.LoginPage as any);
+router.use("/messenger", Pages.ChatPage as any);
+router.use("/sing-up", Pages.RegisterPage as any);
+router.use("/settings", Pages.ProfilePage as any);
+router.use("/profile-change-data", Pages.ProfileChangeDataPage as any);
+router.use("/profile-change-password", Pages.ProfileChangePasswordPage as any);
+router.use("/404", Pages.Page404 as any);
+router.use("/500", Pages.Page500 as any);
 router.start();
 
 
