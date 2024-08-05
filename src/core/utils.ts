@@ -103,3 +103,7 @@ export async function searchUsers(event: InputEvent): object[] {
         usersFound: result
     })
 }
+
+// export function sendMessage(input: text) {
+
+// }

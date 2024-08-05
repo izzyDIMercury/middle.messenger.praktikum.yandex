@@ -59,8 +59,9 @@ export default class Chat {
     public async getUserInfo() {
         const api = new Chats();
         const response = await api.userInfo();
-        const result = JSON.parse(response.response);
-        console.log("USER INFO: ", result);
+        // const result = JSON.parse(response.response);
+        // return result;
+        // console.log("USER INFO: ", result);
     }
 
     public searchUsers(input: string) {
@@ -71,25 +72,24 @@ export default class Chat {
         return api.searchUsers(userData);
     }
 
-    public async connectSocket() {
+    public async connectSocket(chatId: number) {
         const api = new Chats();
-        const response = await api.getToken(19535);
-        const token = JSON.parse(response.response).token;
-        console.log(token);
-        // const id = JSON.parse(responseInfo.response).id;
-        // console.log(id);
-        const userId = 1627;
-        const chatId = 19535;
+        const tokenResponse = await api.getToken(19535);
+        const token = JSON.parse(tokenResponse.response).token;
+        const infoResponse = await api.userInfo();
+        const userInfo = JSON.parse(infoResponse.response);
+        const userId = userInfo.id;
         const socket = new WSTransport(`wss://ya-praktikum.tech/ws/chats/${userId}/${chatId}/${token}`);
         await socket.connect();
-        socket.on("Message", (args) => {
-            console.log(args);
-        })
-        socket.send({
-            content: "my message",
-            type: "message"
-        });
-        socket.close();
+        return socket;
+        // socket.on("Message", (args) => {
+        //     console.log(args);
+        // })
+        // socket.send({
+        //     content: "my message",
+        //     type: "message"
+        // });
+        // socket.close();
         // console.log(socket);
 
     }   

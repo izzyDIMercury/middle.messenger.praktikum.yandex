@@ -38,7 +38,6 @@ class Users extends Block<UserType> {
             activeChat: activeChat,
             isActive: true
         })
-        console.log("Toggle: ", window.store.getState());
         
     }
 
@@ -82,7 +81,7 @@ class Users extends Block<UserType> {
     }
 
     render() {
-        console.log(this.props);
+        console.log("LEFT COLUMN RENDERS");
         return (
             `
                     <ul class="left-column__users">

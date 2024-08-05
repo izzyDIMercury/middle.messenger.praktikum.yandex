@@ -2,11 +2,17 @@ import Block from "../../core/block.ts";
 import Input from "../input/input.ts";
 import Image from "../image/image.ts";
 import MessageButton from "./message-button.ts";
+import Chat from "../../controllers/chat.ts";
 import FormSubmit from "../../core/formSubmit.ts";
+import { connect } from "../../core/connect.ts";
+import WSTransport from "../../core/WSTransport.ts";
 
 type MessagePanelProps = {};
 
-export default class MessagePanel extends Block<MessagePanelProps> {
+class MessagePanel extends Block<MessagePanelProps> {
+
+    public socket: WSTransport | null = null;
+
     constructor(props: MessagePanelProps) {
         super({
             props
@@ -14,8 +20,58 @@ export default class MessagePanel extends Block<MessagePanelProps> {
     }
 
     init() {
-        const handleBlurBind = this.handleBlur.bind(this);
         const handleSubmitBind = this.handleSubmit.bind(this);
+
+        const Form = new MessageForm({
+            events: {
+                submit: handleSubmitBind
+            }
+        })
+
+        this.children = {
+            Form
+        };
+    }
+
+    public handleSubmit(event: FocusEvent | MouseEvent): void {
+        event.preventDefault();
+        console.log(event);
+
+        // new FormSubmit("message-panel", "", true, event.type);
+    }
+
+    componentDidUpdate() {
+        const controller = new Chat();
+        if (this.props.chat && this.socket === null) {
+            const response = controller.connectSocket(this.props.chat.id);
+            response.then((socket: WSTransport) => {
+                this.socket = socket;
+            })
+        }
+
+
+    }
+
+    render() {
+        return (
+            `
+                    <div class="message-panel-container">
+                        {{{ Form }}}
+                    </div>
+                `
+        );
+    }
+}
+
+class MessageForm extends Block {
+    constructor(props) {
+        super({
+            ...props
+        })
+    }
+
+    init() {
+        const handleBlurBind = this.handleBlur.bind(this);
 
         const MessageInput = new Input({
             className: "message-panel__input",
@@ -32,11 +88,7 @@ export default class MessagePanel extends Block<MessagePanelProps> {
             alt: "Прикрепить",
             path: ""
         });
-        const Send = new MessageButton({
-            events: {
-                click: handleSubmitBind
-            }
-        });
+        const Send = new MessageButton({});
 
         this.children = {
             MessageInput,
@@ -46,14 +98,9 @@ export default class MessagePanel extends Block<MessagePanelProps> {
     }
 
     handleBlur(event: FocusEvent): void {
-        this.handleSubmit(event);
+        // this.handleSubmit(event);
     }
 
-    handleSubmit(event: FocusEvent | MouseEvent): void {
-        event.preventDefault();
-
-        new FormSubmit("message-panel", "", true, event.type);
-    }
 
     render() {
         return (
@@ -71,3 +118,12 @@ export default class MessagePanel extends Block<MessagePanelProps> {
         );
     }
 }
+
+const mapStateToPropsShort = ({ activeChat }): object => {
+    return {
+        isActive: activeChat.isActive,
+        chat: activeChat.chat
+    }
+}
+
+export default connect(mapStateToPropsShort)(MessagePanel);
