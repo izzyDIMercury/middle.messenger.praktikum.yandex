@@ -1,5 +1,6 @@
 import Block from "../../core/block.ts";
 import { connect } from "../../core/connect.ts";
+import ProfileImage from "../profile-image/profile-image.ts";
 
 class User extends Block {
 
@@ -10,10 +11,10 @@ class User extends Block {
     }
 
     render() {
-        // console.log("AND HERE ", this.props);
         return (
-            `
-                <p>{{ name }}</p>
+            `   <div class="found-user">
+                    <p class="found-user__name">{{ first_name }} {{ second_name }}</p>
+                </div>
             `
         )
     }

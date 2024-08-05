@@ -4,43 +4,34 @@ import User from "./item.ts";
 
 class UsersList extends Block {
     constructor(props) {
-        // console.log(props);
-        // const users = props.users.reduce((acc, current) => {
-        //     const user = new User({
-        //         name: current.first_name
-        //     });
-        //     acc[user.id] = user;
-        //     return acc;
-        // }, {});
-
-
-        // super({
-        //     ...props,
-        //     usersKeys: Object.keys(users),
-        //     ...users
-        // })
-
-        super({ ...props })
+        super({
+            ...props
+        })
     }
 
-    componentDidMount() {
+    componentDidUpdate() {
         if (this.props.usersFound) {
-            const users = this.props.usersFound.map(element => new User({ name: element.first_name }))
-            const root = document.querySelector(".found-users");
+            const users = this.props.usersFound.map(element => new User({ 
+                first_name: element.first_name,
+                second_name: element.second_name
+            }))
+            const root = document.querySelector(".found-users__list");
+            root.textContent = "";
+            let counter: number = 0;
             users.forEach(el => {
-                root?.appendChild(el.getContent());
+                if (counter < 3) {
+                    counter++;
+                    root?.appendChild(el.getContent());
+                }
             })
             console.log(root);
         }
     }
 
     render() {
-        // console.log("OVER HERE", this.props);
-        const container = this.props;
         return (
-            `   <div class="found-users">
-                   
-                </div>
+            `   <ul class="found-users__list">                   
+                </ul>
             `
         )
     }

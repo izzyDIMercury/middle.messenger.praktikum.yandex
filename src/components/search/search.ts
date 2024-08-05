@@ -25,9 +25,12 @@ export class Search extends Block<SearchProps> {
         });
 
         const searchUsersBind = searchUsers.bind(this);
+        const handleBlurBind = this.handleBlur.bind(this);
+
         const Input = new SearchField({
             events: {
-                input: searchUsersBind
+                input: searchUsersBind,
+                blur: handleBlurBind
             }
         });
         const UsersList = new DropDown({
@@ -39,6 +42,11 @@ export class Search extends Block<SearchProps> {
             Input,
             UsersList
         };
+    }
+
+    handleBlur() {
+        const root = document.querySelector(".found-users__list");
+        root.textContent = "";
     }
 
     render() {

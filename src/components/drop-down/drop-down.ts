@@ -26,9 +26,8 @@ class DropDown extends Block<DropDownProps> {
 
 
     render() {
-        // console.log("DDREN", this.props.usersFound)
         return (
-            `   <div>
+            `   <div class="found-users">
                     {{{ UserFound }}}       
                 </div>
             `
@@ -36,10 +35,6 @@ class DropDown extends Block<DropDownProps> {
     }
 }
 
-// {{#if usersFound}}
-//     <p>s</p>
-//     {{{ UserFound }}}
-// {{/if}}
 
 
 const mapStateToPropsShort = ({ usersFound }): object => {
