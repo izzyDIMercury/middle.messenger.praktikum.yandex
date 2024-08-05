@@ -113,7 +113,7 @@ class Block<Props> {
         });
     }
 
-    componentDidMount() {}
+    componentDidMount(): void {}
 
     private dispatchComponentDidMount(): void {
         this.eventBus().emit(Block.EVENTS.FLOW_CDM);
@@ -129,7 +129,7 @@ class Block<Props> {
         this._render();
     }
 
-    componentDidUpdate() {
+    componentDidUpdate(): boolean | void {
         return true;
     }
 

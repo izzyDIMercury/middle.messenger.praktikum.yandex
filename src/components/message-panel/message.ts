@@ -1,8 +1,11 @@
 import Block from "../../core/block.ts";
 import { connect } from "../../core/connect.ts";
+import type { StoreType } from "../../types.ts";
 
-class Message extends Block {
-    constructor(props) {
+type MessageProps = {};
+
+class Message extends Block<MessageProps> {
+    constructor(props: MessageProps) {
         super({
             props
         });
@@ -10,14 +13,14 @@ class Message extends Block {
 
     render() {
         return (
-           `<p class="message-text">{{ currentMessage }}</p>`
+            `<p class="message-text">{{ currentMessage }}</p>`
         )
     }
 }
 
-const mapStateToPropsShort = ({ currentMessage }): object => {
+const mapStateToPropsShort = (props: StoreType): object => {
     return {
-        currentMessage
+        currentMessage: props.currentMessage
     }
 }
 

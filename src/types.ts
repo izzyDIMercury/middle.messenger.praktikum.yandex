@@ -6,4 +6,24 @@ type ComponentProps = {
     [key: string]: string | { [key: string]: Function };
 };
 
-export type { ComponentProps, UserData };
+type User = {
+    id: number
+    first_name: string,
+    second_name: string,
+}
+
+type StoreType = {
+    isLoading: boolean,
+    isError: boolean,
+    imageLink: string,
+    usersFound: User[],
+    chats: object,
+    length: number,
+    activeChat: {
+        chat: object,
+        isActive: boolean
+    }
+    currentMessage: string
+}
+
+export type { ComponentProps, UserData, StoreType };

@@ -1,10 +1,13 @@
 import Block from "../../core/block.ts";
 import { connect } from "../../core/connect.ts";
-import ProfileImage from "../profile-image/profile-image.ts";
+// import ProfileImage from "../profile-image/profile-image.ts";
+import type { StoreType } from "../../types.ts";
 
-class User extends Block {
+type UserProps = {};
 
-    constructor(props) {
+class User extends Block<UserProps> {
+
+    constructor(props: UserProps) {
         super({
             ...props
         })
@@ -20,8 +23,10 @@ class User extends Block {
     }
 }
 
-const mapStateToPropsShort = ({ usersFound }): object => {
-    return { usersFound }
+const mapStateToPropsShort = (store: StoreType): object => {
+    return {
+        usersFound: store.usersFound
+    }
 }
 
 export default connect(mapStateToPropsShort)(User);

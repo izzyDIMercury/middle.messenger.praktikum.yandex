@@ -12,9 +12,6 @@
         "@typescript-eslint"
     ],
     "rules": {
-        "@typescript-eslint/quotes": [
-            "error", "double"
-        ],
         "@typescript-eslint/indent": [
             "error", 4
         ],

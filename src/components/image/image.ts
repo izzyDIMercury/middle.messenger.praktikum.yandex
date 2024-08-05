@@ -3,6 +3,11 @@ import Handlebars from "handlebars";
 import { connect } from "../../core/connect.ts";
 import { images } from "../../core/images.ts";
 
+import type { StoreType } from "../../types.ts";
+
+import { WindowStore } from "../../store.ts";
+
+
 type ImageProps = {
     className: string,
     src: string,
@@ -39,10 +44,11 @@ class Image extends Block<ImageProps> {
     }
 }
 
-const mapStateToPropsShort = ({ imageLink }): object => {
-    return { imageLink }
+const mapStateToPropsShort = (props: StoreType): object => {
+    return {
+        imageLink: props.imageLink
+    }
 }
 
 export default connect(mapStateToPropsShort)(Image);
 
-// <img class={{ className }} src="{{ src }}" alt="{{ alt }}" {{#if page}} page="{{ page }}" {{/if}}">

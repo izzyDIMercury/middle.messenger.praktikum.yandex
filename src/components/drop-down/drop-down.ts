@@ -1,6 +1,7 @@
 import Block from "../../core/block.ts";
 import { connect } from "../../core/connect.ts";
 import UsersList from "./list.ts";
+import type { StoreType } from "../../types.ts";
 
 type DropDownProps = {};
 
@@ -33,10 +34,10 @@ class DropDown extends Block<DropDownProps> {
     }
 }
 
-
-
-const mapStateToPropsShort = ({ usersFound }): object => {
-    return { usersFound }
+const mapStateToPropsShort = (store: StoreType): object => {
+    return {
+        usersFound: store.usersFound
+    }
 }
 
 export default connect(mapStateToPropsShort)(DropDown);

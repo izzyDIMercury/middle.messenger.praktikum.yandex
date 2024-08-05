@@ -3,12 +3,24 @@ import Input from "../input/input.ts";
 import Image from "../image/image.ts";
 import MessageButton from "./message-button.ts";
 import Chat from "../../controllers/chat.ts";
-import FormSubmit from "../../core/formSubmit.ts";
+// import FormSubmit from "../../core/formSubmit.ts";
 import { connect } from "../../core/connect.ts";
 import WSTransport from "../../core/WSTransport.ts";
 import Messages from "./messages.ts";
+import type { StoreType } from "../../types.ts";
+import { WindowStore } from "../../store.ts";
 
 type MessagePanelProps = {};
+
+type PropsMessage = {
+    chat: {
+        id: number
+    }
+}
+
+type SocketProps = {
+    content: "string"
+}
 
 class MessagePanel extends Block<MessagePanelProps> {
 
@@ -22,6 +34,7 @@ class MessagePanel extends Block<MessagePanelProps> {
 
     init() {
         const handleSubmitBind = this.handleSubmit.bind(this);
+        const propsMessage = this.props as Partial<StoreType>;
 
         const Form = new MessageForm({
             events: {
@@ -29,7 +42,7 @@ class MessagePanel extends Block<MessagePanelProps> {
             }
         })
         const MessageWindow = new Messages({
-            currentMessage: this.props.currentMessage
+            currentMessage: propsMessage.currentMessage
         });
 
         this.children = {
@@ -40,9 +53,10 @@ class MessagePanel extends Block<MessagePanelProps> {
 
     public handleSubmit(event: FocusEvent | MouseEvent): void {
         event.preventDefault();
-        const input = document.querySelector("#message").value;
+        const messageElement = document.querySelector("#message") as HTMLInputElement;
+        const input = messageElement.value;
         console.log(input);
-        this.socket.send({
+        this.socket && this.socket.send({
             content: input,
             type: "message"
         });
@@ -53,13 +67,14 @@ class MessagePanel extends Block<MessagePanelProps> {
 
     componentDidUpdate() {
         const controller = new Chat();
-        if (this.props.chat && this.socket === null) {
-            const response = controller.connectSocket(this.props.chat.id);
+        const propsMessage = this.props as PropsMessage;
+        if (propsMessage.chat && this.socket === null) {
+            const response = controller.connectSocket(propsMessage.chat.id);
             response.then((socket: WSTransport) => {
                 this.socket = socket;
-                socket.on("Message", (args) => {
-                    window.store.setState({ currentMessage: args.content });
-                    console.log("MESSAGE: ", args.content);
+                socket.on("Message", (args: SocketProps) => {
+                    WindowStore.setState({ currentMessage: args.content });
+                    // console.log("MESSAGE: ", args.content);
                 })
             })
         }
@@ -77,8 +92,10 @@ class MessagePanel extends Block<MessagePanelProps> {
     }
 }
 
-class MessageForm extends Block {
-    constructor(props) {
+type MessageFormProps = {};
+
+class MessageForm extends Block<MessageFormProps> {
+    constructor(props: MessageFormProps) {
         super({
             ...props
         })
@@ -113,6 +130,7 @@ class MessageForm extends Block {
 
     handleBlur(event: FocusEvent): void {
         // this.handleSubmit(event);
+        console.log(event);
     }
 
 
@@ -133,10 +151,10 @@ class MessageForm extends Block {
     }
 }
 
-const mapStateToPropsShort = ({ activeChat }): object => {
+const mapStateToPropsShort = (props: StoreType): object => {
     return {
-        isActive: activeChat.isActive,
-        chat: activeChat.chat
+        isActive: props.activeChat.isActive,
+        chat: props.activeChat.chat
     }
 }
 

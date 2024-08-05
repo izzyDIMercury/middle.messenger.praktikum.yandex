@@ -2,9 +2,12 @@ import Block from "../../core/block.ts";
 import { connect } from "../../core/connect.ts";
 import User from "./item.ts";
 import Chat from "../../controllers/chat.ts";
+import type { StoreType } from "../../types.ts";
 
-class UsersList extends Block {
-    constructor(props) {
+type UsersListProps = {};
+
+class UsersList extends Block<UsersListProps> {
+    constructor(props: UsersListProps) {
         super({
             ...props
         })
@@ -13,18 +16,22 @@ class UsersList extends Block {
     public handleSelect(event: MouseEvent) {
         const target = event.target as unknown as HTMLElement;
         const element = target.closest("div") as HTMLElement;
-        const userId = element.getAttribute("userid");
+        const userId = element.getAttribute("userid") as string;
 
         const controller = new Chat();
-        controller.createChatWithUser(userId);
+        controller.createChatWithUser(Number(userId));
 
         // console.log(element);
     }
 
-    componentDidUpdate() {
+    componentDidUpdate(): void {
         const handleSelectBind = this.handleSelect.bind(this);
-        if (this.props.usersFound) {
-            const users = this.props.usersFound.map(element => new User({ 
+
+        const store = this.props as StoreType;
+        if (store.usersFound) {
+            console.log(store)
+            const props = this.props as StoreType;
+            const users = props.usersFound.map(element => new User({ 
                 first_name: element.first_name,
                 second_name: element.second_name,
                 userId: element.id,
@@ -32,7 +39,7 @@ class UsersList extends Block {
                     mousedown: handleSelectBind
                 }
             }))
-            const root = document.querySelector(".found-users__list");
+            const root = document.querySelector(".found-users__list") as HTMLElement;
             root.textContent = "";
             let counter: number = 0;
             users.forEach(el => {
@@ -54,10 +61,11 @@ class UsersList extends Block {
 }
 
 
-const mapStateToPropsShort = ({ usersFound }): object => {
-    return { usersFound }
+const mapStateToPropsShort = (props: StoreType): object => {
+    return {
+        usersFound: props.usersFound
+    }
 }
 
 export default connect(mapStateToPropsShort)(UsersList);
 
-// ${container.usersKeys.map((key) => `{{{ ${key} }}}`).join("")}

@@ -18,15 +18,15 @@ const store = new Store({
     currentMessage: ""
 });
 
-interface WindowStore {
+interface WindowStoreType {
     store: {
         [key: string]: any
     },
     router: any
 }
 
-const windowStore = window as unknown as WindowStore;
-windowStore.store = store;
+const WindowStore = window as unknown as WindowStoreType;
+WindowStore.store = store;
 
 
 Object.entries(Components).forEach(([ name, component ]) => {
@@ -35,7 +35,7 @@ Object.entries(Components).forEach(([ name, component ]) => {
 
 
 const router = new Router("#app");
-windowStore.router = router;
+WindowStore.router = router;
 
 router.use("/", Pages.LoginPage as any);
 router.use("/messenger", Pages.ChatPage as any);
@@ -62,4 +62,6 @@ document.addEventListener("switchPage", event => {
     }
     router.go(`/${page}`);
 });
+
+// export { WindowStore };
 
