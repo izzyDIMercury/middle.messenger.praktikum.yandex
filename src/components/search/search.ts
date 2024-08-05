@@ -46,7 +46,7 @@ export class Search extends Block<SearchProps> {
 
     handleBlur(event: FocusEvent) {
         event.preventDefault();
-        const root = document.querySelector(".found-users__list");
+        const root = document.querySelector(".found-users__list") as HTMLElement;
         root.textContent = "";
     }
 
@@ -83,9 +83,10 @@ class SearchField extends Block<SearchFieldProps> {
     }
 }
 
+type UserInSearchProps = {};
 
-export class UserInSearch extends Block {
-    constructor(props) {
+export class UserInSearch extends Block<UserInSearchProps> {
+    constructor(props: UserInSearchProps) {
         super({
             ...props
         })

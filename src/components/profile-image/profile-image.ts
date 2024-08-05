@@ -2,6 +2,7 @@ import Block from "../../core/block.ts";
 import Handlebars from "handlebars";
 import { connect } from "../../core/connect.ts";
 import { images } from "../../core/images.ts";
+import type { StoreType } from "../../types.ts";
 
 type ProfileImageProps = {
     className: string,
@@ -35,8 +36,10 @@ class ProfileImage extends Block<ProfileImageProps> {
     }
 }
 
-const mapStateToPropsShort = ({ imageLink }): object => {
-    return { imageLink }
+const mapStateToPropsShort = (props: StoreType): object => {
+    return {
+        imageLink: props.imageLink
+    }
 }
 
 export default connect(mapStateToPropsShort)(ProfileImage);

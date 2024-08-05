@@ -1,17 +1,23 @@
 import Block from "../../core/block.ts";
 import { connect } from "../../core/connect.ts";
 import Message from "./message.ts";
+import type { StoreType } from "../../types.ts";
 
-class Messages extends Block {
-    constructor(props) {
+type MessagesType = {
+    currentMessage: string
+};
+
+class Messages extends Block<MessagesType> {
+    constructor(props: MessagesType) {
         super({
-            props
+            ...props
         });
     }
 
     init() {
+        const props = this.props as MessagesType
         const NewMessage = new Message({
-            currentMessage: this.props.currentMessage
+            currentMessage: props.currentMessage
         })
 
         this.children = {
@@ -42,9 +48,9 @@ class Messages extends Block {
 }
 
 
-const mapStateToPropsShort = ({ currentMessage }): object => {
+const mapStateToPropsShort = (props: StoreType): object => {
     return {
-        currentMessage
+        currentMessage: props.currentMessage
     }
 }
 

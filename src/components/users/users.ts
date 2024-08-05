@@ -2,22 +2,29 @@ import Block from "../../core/block.ts";
 import User from "../user/user.ts";
 import Chat from "../../controllers/chat.ts";
 import { connect } from "../../core/connect.ts";
+import { WindowStore } from "../../store.ts";
+import type { StoreType } from "../../types.ts";
 
-// type UserData = {
-//     image: string,
-//     message: string,
-//     name: string,
-//     selected: string,
-//     unread: string,
-//     time: string
-// }
-
-// type UsersArray = { 
-//     users: Array<UserData>,
-//     usersKeys: string[]
-// }
 
 type UserType = {};
+
+type CurrentType = {
+    [key: string]: {
+        [key: string]: {}
+    }
+}
+
+type ChatObject = {
+    chat: {
+        id: number
+    },
+    user: {
+        first_name: string,
+        second_name: string
+    }
+}
+
+type ObjectsList = ChatObject[]
 
 class Users extends Block<UserType> {
     constructor(props: UserType) {
@@ -32,9 +39,10 @@ class Users extends Block<UserType> {
 
         this.handleSelectColor(parentElement);
 
-        const chatId = parentElement.getAttribute("chatid");
-        const activeChat =  this.props.chats[chatId];
-        window.store.setState({
+        const chatId = parentElement.getAttribute("chatid") as string;
+        const props = this.props as CurrentType;
+        const activeChat =  props.chats[chatId];
+        WindowStore.setState({
             activeChat: activeChat,
             isActive: true
         })
@@ -43,8 +51,8 @@ class Users extends Block<UserType> {
 
     public handleSelectColor(element: HTMLElement) {
         const container = element.closest("ul") as HTMLElement;
-        const children = container.childNodes ;
-        children.forEach((child: HTMLElement) => {
+        const children = container.childNodes;
+        children.forEach((child: any) => {
             child.style.backgroundColor = "rgba(255, 255, 255, 0)";
         })
         element.style.backgroundColor = "rgba(171, 77, 204, 0.3)";
@@ -58,8 +66,10 @@ class Users extends Block<UserType> {
     componentDidUpdate() {
         const toggleActiveChatBind = this.toggleActiveChat.bind(this);
         
-        if (Object.keys(this.props.chats).length !== 0) {
-            const chats = Object.values(this.props.chats);
+        const props = this.props as CurrentType;
+        if (Object.keys(props.chats).length !== 0) {
+            const chats = Object.values(props.chats) as ObjectsList;
+            console.log(chats);
             const elements = chats.map(({ chat, user }) => new User({ 
                 first_name: user.first_name,
                 second_name: user.second_name,
@@ -68,7 +78,7 @@ class Users extends Block<UserType> {
                     click: toggleActiveChatBind
                 }
             }))
-            const root = document.querySelector(".left-column__users");
+            const root = document.querySelector(".left-column__users") as HTMLElement;
             root.textContent = "";
             let counter: number = 0;
             elements.forEach(el => {
@@ -91,11 +101,12 @@ class Users extends Block<UserType> {
     }
 }
 
-const mapStateToPropsShort = ({ chats, length }): object => {
-    return { chats, length }
+const mapStateToPropsShort = (props: StoreType): object => {
+    return {
+        chats: props.chats,
+        length: props.length
+    }
 }
-
-// length: Object.keys(chats).length chatListUpdated
 
 export default connect(mapStateToPropsShort)(Users);
 

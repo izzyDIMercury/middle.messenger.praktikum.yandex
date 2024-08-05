@@ -1,6 +1,7 @@
 import Block from "../../core/block.ts";
-import Image from "../image/image.ts";
+// import Image from "../image/image.ts";
 import { connect } from "../../core/connect.ts";
+import type { StoreType } from "../../types.ts";
 
 type UserProps = {
     name: string,
@@ -17,20 +18,6 @@ class User extends Block<UserProps> {
             ...props
         });
     }
-
-    // init() {
-    //     const userData = this.props as UserProps;
-    //     const UserImagePlaceholder = new Image({
-    //         className: "user__image",
-    //         src: userData.image,
-    //         alt: "Фото пользователя",
-    //         path: ""
-    //     });
-
-    //     this.children = {
-    //         UserImagePlaceholder
-    //     };
-    // }
 
     render() {
         return (
@@ -58,10 +45,11 @@ class User extends Block<UserProps> {
 }
 
 
-const mapStateToPropsShort = ({ chats, length }): object => {
-    return { chats, length }
+const mapStateToPropsShort = (props: StoreType): object => {
+    return {
+        chats: props.chats,
+        length: props.length
+    }
 }
-
-// length: Object.keys(chats).length chatListUpdated
 
 export default connect(mapStateToPropsShort)(User);
