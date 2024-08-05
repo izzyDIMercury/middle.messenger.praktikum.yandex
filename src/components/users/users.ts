@@ -26,22 +26,29 @@ class Users extends Block<UserType> {
         });
     }
 
+    public toggleActiveChat(event: MouseEvent) {
+        console.log("Toggle: ", event.target);
+        
+    }
+
     componentDidMount() {
         const controller = new Chat();
         controller.getChats();   
     }
 
     componentDidUpdate() {
-        // console.log("updated users");
+        const toggleActiveChatBind = this.toggleActiveChat.bind(this);
         
         if (Object.keys(this.props.chats).length !== 0) {
             const chats = Object.values(this.props.chats);
-            console.log(chats);
             const elements = chats.map(({ chat, user }) => new User({ 
                 first_name: user.first_name,
-                second_name: user.second_name
+                second_name: user.second_name,
+                chat: chat,
+                events: {
+                    click: toggleActiveChatBind
+                }
             }))
-            console.log(elements);
             const root = document.querySelector(".left-column__users");
             root.textContent = "";
             let counter: number = 0;

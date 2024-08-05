@@ -10,7 +10,11 @@ const store = new Store({
     imageLink: "",
     userFound: {},
     chats: {},
-    chatListUpdated: false
+    chatListUpdated: false,
+    activeChat: {
+        chat: {},
+        isActive: false
+    }
 });
 
 window.store = store;
