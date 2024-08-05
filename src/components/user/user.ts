@@ -34,7 +34,7 @@ export default class User extends Block<UserProps> {
     render() {
         return (
             `
-                    <li class="user {{#if selected}} {{ selected }} {{/if}}">
+                    <li chatId={{ chatId }} class="user {{#if selected}} {{ selected }} {{/if}}">
                         <div class="user__content">
                             {{{ UserImagePlaceholder }}}
                             <div class="user__data">

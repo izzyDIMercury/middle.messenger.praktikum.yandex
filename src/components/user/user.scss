@@ -12,6 +12,7 @@
     height: 71px;
     min-height: 71px;
     box-sizing: border-box;
+    z-index: 2;
 
     &.selected {
         background-color: rgb(171 77 204 / 30%);

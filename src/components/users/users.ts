@@ -27,8 +27,28 @@ class Users extends Block<UserType> {
     }
 
     public toggleActiveChat(event: MouseEvent) {
-        console.log("Toggle: ", event.target);
+        const targetElement = event.target as HTMLElement;
+        const parentElement = targetElement.closest("li") as HTMLElement;
+
+        this.handleSelectColor(parentElement);
+
+        const chatId = parentElement.getAttribute("chatid");
+        const activeChat =  this.props.chats[chatId];
+        window.store.setState({
+            activeChat: activeChat,
+            isActive: true
+        })
+        console.log("Toggle: ", window.store.getState());
         
+    }
+
+    public handleSelectColor(element: HTMLElement) {
+        const container = element.closest("ul") as HTMLElement;
+        const children = container.childNodes ;
+        children.forEach((child: HTMLElement) => {
+            child.style.backgroundColor = "rgba(255, 255, 255, 0)";
+        })
+        element.style.backgroundColor = "rgba(171, 77, 204, 0.3)";
     }
 
     componentDidMount() {
@@ -44,7 +64,7 @@ class Users extends Block<UserType> {
             const elements = chats.map(({ chat, user }) => new User({ 
                 first_name: user.first_name,
                 second_name: user.second_name,
-                chat: chat,
+                chatId: chat.id,
                 events: {
                     click: toggleActiveChatBind
                 }
