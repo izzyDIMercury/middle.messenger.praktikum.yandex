@@ -8,7 +8,7 @@ import { connect } from "../../core/connect.ts";
 import WSTransport from "../../core/WSTransport.ts";
 import Messages from "./messages.ts";
 import type { StoreType } from "../../types.ts";
-import { WindowStore } from "../../store.ts";
+import { GlobalStore } from "../../store.ts";
 
 type MessagePanelProps = {};
 
@@ -73,7 +73,7 @@ class MessagePanel extends Block<MessagePanelProps> {
             response.then((socket: WSTransport) => {
                 this.socket = socket;
                 socket.on("Message", (args: SocketProps) => {
-                    WindowStore.setState({ currentMessage: args.content });
+                    GlobalStore.setState({ currentMessage: args.content });
                     // console.log("MESSAGE: ", args.content);
                 })
             })

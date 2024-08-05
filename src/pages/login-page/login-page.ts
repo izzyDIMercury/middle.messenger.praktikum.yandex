@@ -5,6 +5,7 @@ import Loading from "../../components/loading/loading.ts";
 import { switchPage } from "../../core/utils.ts";
 import { connect } from "../../core/connect.ts";
 import LoginController from "../../controllers/login.ts";
+import type { StoreType } from "../../types.ts";
 
 type LoginPageProps = {};
 
@@ -70,7 +71,7 @@ class LoginPage extends Block<LoginPageProps> {
         console.log(event);
         event.preventDefault();
         const controller = new LoginController();
-        controller.login([ "login-page", "login-page__error-text", false, event.type ], event.type);
+        controller.login("login-page", "login-page__error-text", false, event.type);
     }
 
     render() {
@@ -94,8 +95,11 @@ class LoginPage extends Block<LoginPageProps> {
 }
 
 
-const mapStateToPropsShort = ({ isLoading }): object => {
-    return { isLoading }
+const mapStateToPropsShort = (props: StoreType): object => {
+    return {
+        isLoading: props.isLoading
+    }
 }
+
 
 export default connect(mapStateToPropsShort)(LoginPage);

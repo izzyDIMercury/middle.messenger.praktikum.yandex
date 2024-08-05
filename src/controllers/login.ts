@@ -1,12 +1,13 @@
 import FormSubmit from "../core/formSubmit.ts";
 import AuthApi from "../api/auth.ts";
 import { switchPage } from "../core/utils.ts";
+import { GlobalStore } from "../store.ts";
 
 export default class LoginController {
 
-    public async login(dataToValidate: Array<string | boolean>, eventType: string) {
-        window.store.setState({ isLoading: true })
-        const submit = new FormSubmit(...dataToValidate);
+    public async login(formClass: string, errorClass: string, isMessage?: boolean, eventType?: string) {
+        GlobalStore.setState({ isLoading: true });
+        const submit = new FormSubmit(formClass, errorClass, isMessage, eventType);
         const api = new AuthApi();
         // const out = await api.logout();
         // console.log(out);
@@ -32,15 +33,11 @@ export default class LoginController {
                 console.log(String(error));
             }
         }
-        window.store.setState({ isLoading: false })
-
-        // slash
-        // Mas42er92s 
+        GlobalStore.setState({ isLoading: false })
     }
 
     public async checkLoggedIn() {
         const api = new AuthApi();
-        // await api.logout()
         return api.userInfo();
     }
 } 

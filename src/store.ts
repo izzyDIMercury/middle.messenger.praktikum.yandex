@@ -1,6 +1,12 @@
 import { Store } from "./core/store.ts";
 
-const store = new Store({
+type GlobalStoreStype = {
+    getState: Function,
+    setState: Function,
+    on: Function
+}
+
+const GlobalStore: GlobalStoreStype = new Store({
     isLoading: false,
     isError: false,
     imageLink: "",
@@ -14,15 +20,5 @@ const store = new Store({
     currentMessage: ""
 });
 
-interface WindowStoreType {
-    store: {
-        [key: string]: any
-    },
-    router: any,
-    setState: Function
-}
 
-const WindowStore = window as unknown as WindowStoreType;
-WindowStore.store = store;
-
-export { WindowStore };
+export { GlobalStore };

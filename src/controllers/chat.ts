@@ -1,9 +1,14 @@
 import WSTransport from "../core/WSTransport.ts";
 import Chats from "../api/chats.ts";
+import { GlobalStore } from "../store.ts";
+
+type RequestData = {
+    [key: string]: string | number | object | [];
+}
 
 export default class Chat {
 
-    public async createChat(chatName: object) {
+    public async createChat(chatName: RequestData) {
         const api = new Chats();
         const response = await api.create(chatName); 19536
         console.log(response);
@@ -33,7 +38,7 @@ export default class Chat {
         // console.log(state);
     }
 
-    public async deleteChat(chatId: object) {
+    public async deleteChat(chatId: RequestData) {
         const api = new Chats();
         const res = await api.deleteChat(chatId);
         console.log("DELETE: ", res.response);
@@ -46,18 +51,18 @@ export default class Chat {
 
         const responseChats = await api.getChats();
         const dataChats = JSON.parse(responseChats.response);
-        dataChats.forEach((chat: object) => {
+        dataChats.forEach((chat: { id: number }) => {
     
             const responseUser = api.getChatUsers(chat.id);
 
-            responseUser.then((response: object) => {
-                const user = JSON.parse(response.response).filter((user: object) => user.id !== currentUserID)[0];
-                const chats = window.store.getState().chats;
+            responseUser.then((response: { response: string }) => {
+                const user = JSON.parse(response.response).filter((user: { id: number }) => user.id !== currentUserID)[0];
+                const chats = GlobalStore.getState().chats;
                 chats[chat.id] = { chat, user };
                 //
                 const length = Object.keys(chats).length;
                 //
-                window.store.setState({ chats, length });
+                GlobalStore.setState({ chats, length });
             })
         })
         // setTimeout(() => {

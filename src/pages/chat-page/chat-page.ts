@@ -6,17 +6,21 @@ import ChatProfile from "../../components/chat-profile/chat-profile.ts";
 import MessagePanel from "../../components/message-panel/message-panel.ts";
 import { switchPage } from "../../core/utils.ts";
 import { connect } from "../../core/connect.ts";
-import Chat from "../../controllers/chat.ts";
 import Loading from "../../components/loading/loading.ts";
+import { GlobalStore } from "../../store.ts";
+import type { StoreType } from "../../types.ts";
 
 type ChatPageProps = {};
 
 class ChatPage extends Block<ChatPageProps> {
+
+    store: typeof GlobalStore;
+
     constructor(props: ChatPageProps) {
         super({
             ...props
         });
-        this.store = window.store;
+        this.store = GlobalStore;
     }
 
     init() {
@@ -71,8 +75,10 @@ class ChatPage extends Block<ChatPageProps> {
     }
 }
 
-const mapStateToPropsShort = ({ isLoading }): object => {
-    return { isLoading }
+const mapStateToPropsShort = (props: StoreType): object => {
+    return {
+        isLoading: props.isLoading
+    }
 }
 
 export default connect(mapStateToPropsShort)(ChatPage);

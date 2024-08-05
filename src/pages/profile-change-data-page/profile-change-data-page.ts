@@ -2,13 +2,14 @@ import Block from "../../core/block.ts";
 import ReturnButton from "../../components/return-button/return-button.ts";
 import ProfileForm from "../../components/profile-form/profile-form.ts";
 import Button from "../../components/button/button.ts";
-import Image from "../../components/image/image.ts";
+// import Image from "../../components/image/image.ts";
 import ProfileImage from "../../components/profile-image/profile-image.ts";
 import { switchPage, fillUserInfo } from "../../core/utils.ts";
 import { connect } from "../../core/connect.ts";
 import SettingsController from "../../controllers/settings.ts";
 import Loading from "../../components/loading/loading.ts";
 import FileSelector from "../../components/file-selector/file-selector.ts";
+import type { StoreType } from "../../types.ts";
 
 type ChangeDataPageProps = {};
 
@@ -112,7 +113,7 @@ class ProfileChangeDataPage extends Block<ChangeDataPageProps> {
             }
         })
 
-        const LoadingWindow = new Loading()
+        const LoadingWindow = new Loading({})
 
         this.children = {
             ButtonBack,
@@ -124,10 +125,10 @@ class ProfileChangeDataPage extends Block<ChangeDataPageProps> {
         };
     }
 
-    handleFile(event) {
+    handleFile(event: SubmitEvent) {
         event.preventDefault();
-        const form = new FormData(event.target);
-        console.log(event);
+        const target = event.target as unknown as HTMLFormElement;
+        const form = new FormData(target);
         const controller = new SettingsController();
         controller.setAvatar(form);
     }
@@ -147,7 +148,7 @@ class ProfileChangeDataPage extends Block<ChangeDataPageProps> {
     handleSubmit(event: FocusEvent | MouseEvent) {
         event.preventDefault();
         const controller = new SettingsController();
-        controller.changeProfile([ "profile-change-data-page__form", "profile-change-data-page__error-text", false, event.type ], event.type);
+        controller.changeProfile("profile-change-data-page__form", "profile-change-data-page__error-text", false, event.type);
     }
 
     componentDidMount(): void {
@@ -178,8 +179,11 @@ class ProfileChangeDataPage extends Block<ChangeDataPageProps> {
     }
 }
 
-const mapStateToPropsShort = ({ isLoading, imageLink }): object => {
-    return { isLoading, imageLink }
+const mapStateToPropsShort = (props: StoreType): object => {
+    return {
+        isLoading: props.isLoading,
+        imageLink: props.imageLink
+    }
 }
 
 export default connect(mapStateToPropsShort)(ProfileChangeDataPage);

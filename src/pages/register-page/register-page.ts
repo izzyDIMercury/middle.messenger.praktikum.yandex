@@ -3,10 +3,11 @@ import PageTitle from "../../components/page-title/page-title.ts";
 import Button from "../../components/button/button.ts";
 import Link from "../../components/link/link.ts";
 import RegisterPageList from "../../components/register-page-list/register-page-list.ts";
-import FormSubmit from "../../core/formSubmit.ts";
+// import FormSubmit from "../../core/formSubmit.ts";
 import { switchPage } from "..//../core/utils.ts";
 import { connect } from "../../core/connect.ts";
 import RegisterController from "../../controllers/register.ts";
+import type { StoreType } from "../../types.ts";
 
 type RegisterPageProps = {};
 
@@ -159,8 +160,10 @@ class RegisterPage extends Block<RegisterPageProps> {
     }
 }
 
-const mapStateToPropsShort = ({ isLoading }): object => {
-    return { isLoading }
+const mapStateToPropsShort = (props: StoreType): object => {
+    return {
+        isLoading: props.isLoading
+    }
 }
 
 export default connect(mapStateToPropsShort)(RegisterPage);

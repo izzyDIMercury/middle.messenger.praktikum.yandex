@@ -6,6 +6,7 @@ import ProfileImage from "../../components/profile-image/profile-image.ts";
 import { switchPage, fillUserInfo } from "../../core/utils.ts";
 import { connect } from "../../core/connect.ts";
 import SettingsController from "../../controllers/settings.ts";
+import type { StoreType } from "../../types.ts";
 
 type ChangePasswordPageProps = {};
 
@@ -96,7 +97,7 @@ class ProfileChangePasswordPage extends Block<ChangePasswordPageProps> {
     handleSubmit(event: FocusEvent | MouseEvent) {
         event.preventDefault();
         const controller = new SettingsController();
-        controller.changePassword([ "profile-change-password-page__form", "profile-change-password-page__error-text", false, event.type ], event.type);
+        controller.changePassword("profile-change-password-page__form", "profile-change-password-page__error-text", false, event.type);
     }
 
     componentDidMount(): void {
@@ -126,8 +127,10 @@ class ProfileChangePasswordPage extends Block<ChangePasswordPageProps> {
     }
 }
 
-const mapStateToPropsShort = ({ isLoading }): object => {
-    return { isLoading }
+const mapStateToPropsShort = (props: StoreType): object => {
+    return {
+        isLoading: props.isLoading
+    }
 }
 
 export default connect(mapStateToPropsShort)(ProfileChangePasswordPage);

@@ -1,14 +1,15 @@
 import { StoreEvents } from "./store.ts";
 import { isEqual } from "./utils.ts";
+import { GlobalStore } from "../store.ts";
 
-export function connect(mapStateToProps, dispatch?) {
-    return function(Component) {
+export function connect(mapStateToProps: any) {
+    return function(Component: any) {
         return class extends Component {
 
             private onStoreChange: () => void;
             
-            constructor(props) {
-                const store = window.store;
+            constructor(props: any) {
+                const store = GlobalStore;
                 let state = mapStateToProps(store.getState());
                 super({ ...props, ...state });
 
@@ -24,7 +25,7 @@ export function connect(mapStateToProps, dispatch?) {
                     state = nextState;
                 }
 
-                store.on(StoreEvents.Updated, this.onStoreChange)
+                store.on(StoreEvents.Updated, this.onStoreChange);
             }
         }
     }

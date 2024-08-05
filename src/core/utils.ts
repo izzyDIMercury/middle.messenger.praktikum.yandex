@@ -1,5 +1,6 @@
 import SettingsController from "../controllers/settings.ts";
 import Chat from "../controllers/chat.ts";
+import { GlobalStore } from "../store.ts";
 
 export function switchPage(event: MouseEvent | null, page: string) {
     if (event instanceof MouseEvent) {
@@ -46,7 +47,7 @@ function isObject(object: any): boolean {
 
 export async function fillUserInfo(page: string) {
     const controller = new SettingsController();
-    const response = await controller.getUserInfo();
+    const response = await controller.getUserInfo() as { response: string };
     const result = JSON.parse(response.response);
     if (page === "settings") {
         infoSettingsPage(result);
@@ -57,7 +58,7 @@ export async function fillUserInfo(page: string) {
     }
 }
 
-function infoSettingsPage(result) {
+function infoSettingsPage(result: object) {
     const title = document.querySelector(".profile-page__title") as HTMLTitleElement;
     title.textContent = Object.entries(result).filter((prop) => prop[0] === "first_name")[0][1] as string;
     Object.entries(result).forEach(([key, value]) => {
@@ -68,37 +69,39 @@ function infoSettingsPage(result) {
     })
     const image = Object.entries(result).filter((prop) => prop[0] === "avatar")[0][1];
     const imageLink = "https://ya-praktikum.tech/api/v2/resources/" + image;
-    window.store.setState({ imageLink })
+    GlobalStore.setState({ imageLink })
 }
 
-function infoProfileDataPage(result) {
+function infoProfileDataPage(result: object) {
     Object.entries(result).forEach(([key, value]) => {
-        const element = document.querySelector(`input[name=${key}]`) as HTMLTitleElement;
-        if (element !== null && element.name !== "avatar") {
+        const element = document.querySelector(`input[name=${key}]`) as HTMLInputElement;
+        console.log(element);
+        // (element !== null && element.name !== "avatar")
+        if (element !== null) {
             // console.log(element, value);
             element.value = value as string;
         }
     })
     const image = Object.entries(result).filter((prop) => prop[0] === "avatar")[0][1];
     const imageLink = "https://ya-praktikum.tech/api/v2/resources/" + image;
-    window.store.setState({ imageLink })
+    GlobalStore.setState({ imageLink })
 }
 
-function infoPasswordPage(result) {
+function infoPasswordPage(result: object) {
     const image = Object.entries(result).filter((prop) => prop[0] === "avatar")[0][1];
     const imageLink = "https://ya-praktikum.tech/api/v2/resources/" + image;
-    window.store.setState({ imageLink })
+    GlobalStore.setState({ imageLink })
 }
 
 
-export async function searchUsers(event: InputEvent): object[] {
+export async function searchUsers(event: InputEvent): Promise<void> {
     event.preventDefault();
     const inputElement = event.target as unknown as HTMLInputElement;
     const controller = new Chat();
     const response = await controller.searchUsers(inputElement.value);
     const result = JSON.parse(response.response);
 
-    window.store.setState({
+    GlobalStore.setState({
         usersFound: result
     })
 }

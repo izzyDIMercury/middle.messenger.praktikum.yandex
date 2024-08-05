@@ -2,7 +2,7 @@ import Block from "../../core/block.ts";
 import User from "../user/user.ts";
 import Chat from "../../controllers/chat.ts";
 import { connect } from "../../core/connect.ts";
-import { WindowStore } from "../../store.ts";
+import { GlobalStore } from "../../store.ts";
 import type { StoreType } from "../../types.ts";
 
 
@@ -42,7 +42,7 @@ class Users extends Block<UserType> {
         const chatId = parentElement.getAttribute("chatid") as string;
         const props = this.props as CurrentType;
         const activeChat =  props.chats[chatId];
-        WindowStore.setState({
+        GlobalStore.setState({
             activeChat: activeChat,
             isActive: true
         })

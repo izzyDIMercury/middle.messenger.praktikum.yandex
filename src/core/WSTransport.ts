@@ -10,7 +10,7 @@ enum WSTransportEvents {
 export default class WSTransport extends EventBus {
 
     private socket?: WebSocket;
-    private pingInterval?: string;
+    private pingInterval?: number;
     private readonly pingIntervalTime = 30000;
     private url: string;
 
@@ -73,7 +73,7 @@ export default class WSTransport extends EventBus {
             this.emit(WSTransportEvents.Close);
         });
 
-        socket.addEventListener("error", (event) => {
+        socket.addEventListener("error", () => {
             this.emit(WSTransportEvents.Error);
         });
 

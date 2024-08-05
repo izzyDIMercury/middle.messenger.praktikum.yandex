@@ -5,7 +5,7 @@ export default class AuthApi {
     private host: string = "https://ya-praktikum.tech/api/v2";
     private HTTP: any = new HTTPTransport();
 
-    public async login(userData) {
+    public async login(userData: object) {
         return this.HTTP.post(`${this.host}/auth/signin`, {
             data: userData,
             headers: {
@@ -14,7 +14,7 @@ export default class AuthApi {
         });
     }
 
-    public async register(userData) {
+    public async register(userData: object) {
         return this.HTTP.post(`${this.host}/auth/signup`, {
             data: userData,
             headers: {

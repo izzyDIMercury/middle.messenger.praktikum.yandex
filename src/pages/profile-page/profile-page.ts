@@ -7,6 +7,7 @@ import ProfileImage from "../../components/profile-image/profile-image.ts";
 import { switchPage, fillUserInfo } from "../../core/utils.ts";
 import { connect } from "../../core/connect.ts";
 import SettingsController from "../../controllers/settings.ts";
+import type { StoreType } from "../../types.ts";
 
 type ProfilePageProps = {};
 
@@ -158,8 +159,11 @@ class ProfilePage extends Block<ProfilePageProps> {
     }
 }
 
-const mapStateToPropsShort = ({ isLoading, imageLink }): object => {
-    return { isLoading, imageLink }
+const mapStateToPropsShort = (props: StoreType): object => {
+    return {
+        isLoading: props.isLoading,
+        imageLink: props.imageLink
+    }
 }
 
 export default connect(mapStateToPropsShort)(ProfilePage);

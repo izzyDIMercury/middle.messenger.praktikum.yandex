@@ -1,13 +1,14 @@
 import FormSubmit from "../core/formSubmit.ts";
 import AuthApi from "../api/auth.ts";
 import { switchPage } from "../core/utils.ts";
+import { GlobalStore } from "../store.ts";
 
 export default class RegisterController {
 
 
-    public async register(dataToValidate: Array<string | boolean>, eventType: string) {
-        window.store.setState({ isLoading: true })
-        const submit = new FormSubmit(...dataToValidate);
+    public async register(formClass: string, errorClass: string, isMessage?: boolean, eventType?: string) {
+        GlobalStore.setState({ isLoading: true })
+        const submit = new FormSubmit(formClass, errorClass, isMessage, eventType);
         const api = new AuthApi();
         console.log(submit.userData);
         try {
@@ -25,6 +26,6 @@ export default class RegisterController {
             }
             console.log(error);
         }
-        window.store.setState({ isLoading: false })
+        GlobalStore.setState({ isLoading: false })
     }    
 }
