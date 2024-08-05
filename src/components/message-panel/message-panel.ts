@@ -35,7 +35,12 @@ class MessagePanel extends Block<MessagePanelProps> {
 
     public handleSubmit(event: FocusEvent | MouseEvent): void {
         event.preventDefault();
-        console.log(event);
+        const input = document.querySelector("#message").value;
+        // console.log(input);
+        this.socket.send({
+            content: input,
+            type: "message"
+        });
 
         // new FormSubmit("message-panel", "", true, event.type);
     }
@@ -46,10 +51,11 @@ class MessagePanel extends Block<MessagePanelProps> {
             const response = controller.connectSocket(this.props.chat.id);
             response.then((socket: WSTransport) => {
                 this.socket = socket;
+                socket.on("Message", (args) => {
+                    console.log("MESSAGE: ", args, this.props.chat);
+                })
             })
         }
-
-
     }
 
     render() {
