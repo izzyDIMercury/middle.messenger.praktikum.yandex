@@ -4,7 +4,6 @@ type RequestData = Record<string, any>
 
 export default class UsersApi {
 
-    private empty: undefined = undefined;
     private host: string = "https://ya-praktikum.tech/api/v2";
     private HTTP = new HTTPTransport();
 

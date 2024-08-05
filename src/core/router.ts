@@ -65,6 +65,7 @@ class Route {
 
     private block: any | null;
 
+    // @ts-expect-error ts seems to work here incorrectly
     constructor(private pathname: string, private blockClass: typeof Block, private props: {rootQuery: string}) {
         this.pathname = pathname;
         this.blockClass = blockClass;
@@ -98,3 +99,5 @@ class Route {
         return path1 === path2;
     }
 } 
+
+// (private pathname: string, private blockClass: typeof Block, private props: {rootQuery: string})

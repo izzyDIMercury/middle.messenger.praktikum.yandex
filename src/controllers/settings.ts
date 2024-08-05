@@ -64,7 +64,7 @@ export default class SettingsController {
         // mas42er92S
     }
 
-    public async setAvatar(avatar: string) {
+    public async setAvatar(avatar: object) {
         const api = new UsersApi();
         const response = await api.setUserAvatar(avatar) as { response: string };
         const result = JSON.parse(response.response);

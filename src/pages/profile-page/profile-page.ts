@@ -13,7 +13,7 @@ type ProfilePageProps = {};
 
 class ProfilePage extends Block<ProfilePageProps> {
 
-    private imageLink: string = "";
+    // private imageLink: string = "";
 
     constructor(props: ProfilePageProps) {
         super({

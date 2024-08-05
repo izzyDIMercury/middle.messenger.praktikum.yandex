@@ -129,7 +129,7 @@ class RegisterPage extends Block<RegisterPageProps> {
     handleSubmit(event: FocusEvent) {
         event.preventDefault();
         const controller = new RegisterController();
-        controller.register([ "register-page", "login-page__error-text", false, event.type ], event.type);
+        controller.register("register-page", "login-page__error-text", false, event.type);
         
         // slash
         // Mas42er92s

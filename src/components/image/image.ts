@@ -5,8 +5,6 @@ import { images } from "../../core/images.ts";
 
 import type { StoreType } from "../../types.ts";
 
-import { WindowStore } from "../../store.ts";
-
 
 type ImageProps = {
     className: string,
