@@ -22,6 +22,15 @@ export default class Chat {
         console.log("GET CHATS: ", data);
     }
 
+    public addUserToChat(chatId: number, userId: number): void {
+        const api = new Chats;
+        const userData = {
+            users: [ userId ],
+            chatId: chatId
+        }
+        api.addUser(userData);
+    }
+
     public async getUserInfo() {
         const api = new Chats();
         const response = await api.userInfo();

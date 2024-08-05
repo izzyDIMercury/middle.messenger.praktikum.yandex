@@ -71,12 +71,9 @@ class ChatPage extends Block<ChatPageProps> {
     }
 
     componentDidMount(): void {
-        // async function test() {
-
-        //     const controller = new Chat();
-        //     // await controller.createChat({ title: "mychat2" });
-        //     // await controller.connectSocket();
-        // }
+        const controller = new Chat();
+        controller.addUserToChat(19535, 1643);
+        controller.addUserToChat(19541, 1644);
 
         // test();
         // console.log(window.store)

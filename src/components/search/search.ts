@@ -50,7 +50,6 @@ export class Search extends Block<SearchProps> {
     }
 
     render() {
-        console.log("INPUTRENDER");
         return (
             `
                     <form class="search">

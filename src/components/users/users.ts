@@ -1,5 +1,7 @@
 import Block from "../../core/block.ts";
 import User from "../user/user.ts";
+import Chat from "../../controllers/chat.ts";
+import { connect } from "../../core/connect.ts";
 
 type UserData = {
     image: string,
@@ -15,7 +17,7 @@ type UsersArray = {
     usersKeys: string[]
 }
 
-export default class Users extends Block<UsersArray> {
+class Users extends Block<UsersArray> {
     constructor(props: UsersArray) {
         const users = props.users.reduce((acc: { [key: string]: InstanceType<typeof Block> }, current) => {
             const user = new User({
@@ -32,6 +34,19 @@ export default class Users extends Block<UsersArray> {
         });
     }
 
+    componentDidMount(): void {
+        // console.log(this.props.chats);
+        const controller = new Chat();
+        const response = controller.getChats();
+
+        async function getChats() {
+            const response = await controller.getChats();
+            console.log(response);
+        }
+
+        getChats();
+    }
+
     render() {
         const container = this.props as UsersArray;
         return (
@@ -43,3 +58,9 @@ export default class Users extends Block<UsersArray> {
         );
     }
 }
+
+const mapStateToPropsShort = ({ chats }): object => {
+    return { chats }
+}
+
+export default connect(mapStateToPropsShort)(Users);

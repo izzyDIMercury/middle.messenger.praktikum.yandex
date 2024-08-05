@@ -8,7 +8,8 @@ const store = new Store({
     isLoading: false,
     isError: false,
     imageLink: "",
-    userFound: {}
+    userFound: {},
+    chats: []
 });
 
 window.store = store;

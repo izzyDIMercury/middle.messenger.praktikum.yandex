@@ -54,4 +54,13 @@ export default class ChatsApi {
             }
         });
     }
+
+    public addUser(userData: object) {
+        return this.HTTP.put(`${this.host}/chats/users`, {
+            data: userData,
+            headers: {
+                ["content-type"]: "application/json"
+            }
+        });
+    }
 }

@@ -97,26 +97,9 @@ export async function searchUsers(event: InputEvent): object[] {
     const controller = new Chat();
     const response = await controller.searchUsers(inputElement.value);
     const result = JSON.parse(response.response);
+    console.log(result);
 
     window.store.setState({
         usersFound: result
     })
-
-
-
-
-    // const found: boolean = users.length === 0 ? false : true;
-    // window.store.setState({
-    //     searchUsers: {
-    //         searchInput: inputElement.value,
-    //         usersList: users,
-    //         usersFound: found
-    //     }
-    // });
-
-    // window.store.setState({ isLoading: true })
-    // setTimeout(() => {
-    //     window.store.setState({ isLoading: false })
-    // }, 1000);
-    // console.log(users);
 }

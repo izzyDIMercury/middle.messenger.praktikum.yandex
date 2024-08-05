@@ -24,7 +24,6 @@ class UsersList extends Block {
                     root?.appendChild(el.getContent());
                 }
             })
-            console.log(root);
         }
     }
 
