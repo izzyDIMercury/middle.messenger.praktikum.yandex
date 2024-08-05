@@ -49,7 +49,8 @@ document.addEventListener("switchPage", event => {
     const eventDetail = event as PageCustomEvent;
     let page = eventDetail.detail.page as string || "";
     if (page === "login") {
-        page = "";
+        // change start page here
+        page = "messenger";
     }
     router.go(`/${page}`);
 });

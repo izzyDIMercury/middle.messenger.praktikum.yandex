@@ -41,6 +41,7 @@ class MessagePanel extends Block<MessagePanelProps> {
             content: input,
             type: "message"
         });
+        
 
         // new FormSubmit("message-panel", "", true, event.type);
     }

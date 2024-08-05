@@ -96,23 +96,5 @@ const mapStateToPropsShort = ({ chats, chatListUpdated }): object => {
     return { chats, chatListUpdated }
 }
 
-// ${container.usersKeys.map((key) => `{{{ ${key} }}}`).join("")}
-
 export default connect(mapStateToPropsShort)(Users);
 
-
-// constructor(props: UsersArray) {
-//     const users = props.users.reduce((acc: { [key: string]: InstanceType<typeof Block> }, current) => {
-//         const user = new User({
-//             name: current.name, message: current.message, unread: current.unread, image: current.image, time: current.time, selected: current.selected
-//         });
-//         acc[user.id] = user;
-//         return acc;
-//     }, {});
-
-//     super({
-//         ...props,
-//         usersKeys: Object.keys(users),
-//         ...users
-//     });
-// }

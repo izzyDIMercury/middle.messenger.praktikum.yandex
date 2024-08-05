@@ -9,9 +9,28 @@ export default class Chat {
         console.log(response);
     }
 
+    public async createChatWithUser(userId: number) {
+        const api = new Chats();
+        const response = await api.create({ title: "mychat3" });
+        const chat = JSON.parse(response.response);
+        const chatId = chat.id;
+        const request = {
+            users: [ userId ],
+            chatId: chatId
+        };
+        console.log(request);
+        await api.addUser(request)
+
+        // this.deleteChat({ chatId: 19733 });
+
+        const resp = await api.getChats(1672);
+        const myChats = JSON.parse(resp.response);
+        console.log(myChats);
+    }
+
     public async deleteChat(chatId: object) {
         const api = new Chats();
-        const res = await api.delete(chatId);
+        const res = await api.deleteChat(chatId);
         console.log("DELETE: ", res.response);
     }
 
@@ -36,32 +55,11 @@ export default class Chat {
         setTimeout(() => {
             window.store.setState({ chatListUpdated: false });
         }, 1000);
-        // console.log("CHATS IN STATE: ", window.store.getState().chats);
     }
-
-    // public async getChatUsers2(chatId: number) {
-    //     const api = new Chats();
-    //     const response = await api.getChatUsers(chatId);
-    //     // const result = JSON.parse(response.response);
-    //     return response;
-    // }
-
-    // public addUserToChat(chatId: number): void {
-    //     const api = new Chats;
-    //     // const userData = {
-    //     //     users: [ userId ],
-    //     //     chatId: chatId
-    //     // }
-    //     // api.addUser(userData);
-    //     return api.getChatUsers(chatId);
-    // }
 
     public async getUserInfo() {
         const api = new Chats();
-        const response = await api.userInfo();
-        // const result = JSON.parse(response.response);
-        // return result;
-        // console.log("USER INFO: ", result);
+        await api.userInfo();
     }
 
     public searchUsers(input: string) {

@@ -12,7 +12,7 @@ class User extends Block {
 
     render() {
         return (
-            `   <div class="found-user">
+            `   <div userId={{ userId }} class="found-user">
                     <p class="found-user__name">{{ first_name }} {{ second_name }}</p>
                 </div>
             `

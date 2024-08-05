@@ -44,7 +44,8 @@ export class Search extends Block<SearchProps> {
         };
     }
 
-    handleBlur() {
+    handleBlur(event: FocusEvent) {
+        event.preventDefault();
         const root = document.querySelector(".found-users__list");
         root.textContent = "";
     }
