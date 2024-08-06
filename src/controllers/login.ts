@@ -14,6 +14,7 @@ export default class LoginController {
         // const info = await api.userInfo();
         // console.log("LOGIN: ", submit.validated, eventType);
 
+
         try {
             if (submit.validated && eventType === "submit") {
                 console.log("VALIDATED");

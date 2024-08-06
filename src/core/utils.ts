@@ -75,7 +75,7 @@ function infoSettingsPage(result: object) {
 function infoProfileDataPage(result: object) {
     Object.entries(result).forEach(([key, value]) => {
         const element = document.querySelector(`input[name=${key}]`) as HTMLInputElement;
-        console.log(element);
+        // console.log(element);
         // (element !== null && element.name !== "avatar")
         if (element !== null) {
             // console.log(element, value);

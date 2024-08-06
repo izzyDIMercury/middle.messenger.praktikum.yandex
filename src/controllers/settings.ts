@@ -9,9 +9,10 @@ export default class SettingsController {
         GlobalStore.setState({ isLoading: true })
         const api = new UsersApi();
         const result: { response: string } = await api.logout() as { response: string };
-        console.log(result.response);
+        console.log("LOGOUT: ", result.response);
         switchPage(null, "");
         GlobalStore.setState({ isLoading: false })
+        location.reload();
     }
 
     public async changeProfile(formClass: string, errorClass: string, isMessage?: boolean, eventType?: string) {

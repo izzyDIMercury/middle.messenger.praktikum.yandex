@@ -9,7 +9,9 @@ export default class UsersApi {
 
     public async logout() {
         // @ts-expect-error something
-        return this.HTTP.post(`${this.host}/auth/logout`, {});
+        return this.HTTP.post(`${this.host}/auth/logout`, {
+            handler: "settings logout"
+        });
     }
 
     public async changeUserData(userData: RequestData) {
@@ -34,6 +36,7 @@ export default class UsersApi {
     }
 
     public async userInfo() {
+        // @ts-expect-error something
         return this.HTTP.get(`${this.host}/auth/user`, {});
     }
 }

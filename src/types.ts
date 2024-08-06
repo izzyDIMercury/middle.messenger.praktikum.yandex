@@ -23,7 +23,8 @@ type StoreType = {
         chat: object,
         isActive: boolean
     }
-    currentMessage: string
+    currentMessage: string,
+    doFillProps: boolean
 }
 
 export type { ComponentProps, UserData, StoreType };

@@ -17,7 +17,8 @@ const GlobalStore: GlobalStoreStype = new Store({
         chat: {},
         isActive: false
     },
-    currentMessage: ""
+    currentMessage: "",
+    doFillProps: true
 });
 
 

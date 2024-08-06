@@ -6,6 +6,7 @@ type Options = {
     },
     method?: string,
     timeout?: number,
+    handler?: string,
     data: UserData;
 };
 
@@ -46,6 +47,10 @@ export default class HTTPTransport {
     public request(url: string, options: Options, timeout = 3000) {
         const { headers = {}, method, data } = options;
         const self = this;
+        
+        if (options.handler) {
+            console.log("OPTIONS HANDLER: ", options.handler);
+        }
 
         return new Promise((resolve, reject) => {
             if (!method) {

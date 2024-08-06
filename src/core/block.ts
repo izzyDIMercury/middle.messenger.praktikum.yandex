@@ -13,6 +13,7 @@ class Block<Props> {
         INIT: "init",
         FLOW_CDM: "flow:component-did-mount",
         FLOW_CDU: "flow:component-did-update",
+        FLOW_CWU: "flow:component-will-unmount",
         FLOW_RENDER: "flow:render"
     };
 
@@ -44,6 +45,7 @@ class Block<Props> {
         eventBus.on(Block.EVENTS.INIT, this._init.bind(this));
         eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
         eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
+        eventBus.on(Block.EVENTS.FLOW_CWU, this._componentWillUnmount.bind(this));
         eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
     }
 
@@ -105,6 +107,7 @@ class Block<Props> {
     // CDM:
 
     private _componentDidMount(): void {
+        this.checkInDom();
         this.componentDidMount();
 
         Object.values(this.children).forEach((child) => {
@@ -131,6 +134,24 @@ class Block<Props> {
 
     componentDidUpdate(): boolean | void {
         return true;
+    }
+
+    // CWU:
+
+    private checkInDom() {
+        const elementInDOM = document.body.contains(this.element);
+
+        if (!elementInDOM) {
+            this.eventBus().emit(Block.EVENTS.FLOW_CWU, this.props);
+        }
+    }
+
+    _componentWillUnmount(): void {
+        this.componentWillUnmount();
+    }
+
+    componentWillUnmount(): void {
+
     }
 
     // Render:

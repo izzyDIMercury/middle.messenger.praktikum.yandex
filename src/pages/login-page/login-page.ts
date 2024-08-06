@@ -67,11 +67,12 @@ class LoginPage extends Block<LoginPageProps> {
         })
     }
 
-    handleSubmit(event: FocusEvent | MouseEvent) {
+    handleSubmit(event: FocusEvent | MouseEvent, externalEvent?: FocusEvent) {
         console.log(event);
         event.preventDefault();
         const controller = new LoginController();
-        controller.login("login-page", "login-page__error-text", false, event.type);
+        const eventProp = externalEvent ? externalEvent : event;
+        controller.login("login-page", "login-page__error-text", false, eventProp.type);
     }
 
     render() {

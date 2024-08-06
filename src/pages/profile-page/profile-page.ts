@@ -8,17 +8,20 @@ import { switchPage, fillUserInfo } from "../../core/utils.ts";
 import { connect } from "../../core/connect.ts";
 import SettingsController from "../../controllers/settings.ts";
 import type { StoreType } from "../../types.ts";
+import { GlobalStore } from "../../store.ts";
 
-type ProfilePageProps = {};
+type ProfilePageProps = {
+    doFillProps: boolean
+};
 
 class ProfilePage extends Block<ProfilePageProps> {
-
-    // private imageLink: string = "";
 
     constructor(props: ProfilePageProps) {
         super({
             ...props
         });
+        fillUserInfo("settings");
+        console.log("CONSTRUCTOR");
     }
 
     init() {
@@ -127,17 +130,31 @@ class ProfilePage extends Block<ProfilePageProps> {
     }
 
     componentDidMount(): void {
-        fillUserInfo("settings");
+        
+        // console.log("COMPONENT DID MOUNT");
+        // const props = this.props as ProfilePageProps;
+        // console.log(props.doFillProps);
+        // const doLogout = this.props.doLogout as boolean
+        // if (props.doFillProps) {
+        //     fillUserInfo("settings");
+        // }
+        // fillUserInfo("settings");
     }
+
+    // componentWillUnmount(): void {
+    //     console.log("Will UNMOUNT");
+    // }
 
     handleBlur(event: FocusEvent) {
         return event;
     }
 
     handleLogout() {
-        console.log("LOGOUT");
+        GlobalStore.setState({ doFillInfo: false });
+        console.log("LOGOUT IN COMPONENT");
         const controller = new SettingsController();
         controller.logout();
+        GlobalStore.setState({ doFillInfo: false });
     }
 
     render() {
@@ -161,9 +178,12 @@ class ProfilePage extends Block<ProfilePageProps> {
 
 const mapStateToPropsShort = (props: StoreType): object => {
     return {
-        isLoading: props.isLoading,
-        imageLink: props.imageLink
+        isLoading: props.isLoading
     }
 }
+
+// isLoading: props.isLoading,
+// imageLink: props.imageLink,
+// doFillProps: props.doFillProps
 
 export default connect(mapStateToPropsShort)(ProfilePage);

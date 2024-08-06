@@ -69,7 +69,7 @@ class Users extends Block<UserType> {
         const props = this.props as CurrentType;
         if (Object.keys(props.chats).length !== 0) {
             const chats = Object.values(props.chats) as ObjectsList;
-            console.log(chats);
+            // console.log(chats);
             const elements = chats.map(({ chat, user }) => new User({ 
                 first_name: user.first_name,
                 second_name: user.second_name,
