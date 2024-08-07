@@ -78,8 +78,10 @@ function infoProfileDataPage(result: object) {
         // console.log(element);
         // (element !== null && element.name !== "avatar")
         if (element !== null) {
-            // console.log(element, value);
-            element.value = value as string;
+            console.log(element.id, value);
+            if (element.id !== "avatar") {
+                element.value = value as string;
+            }
         }
     })
     const image = Object.entries(result).filter((prop) => prop[0] === "avatar")[0][1];
