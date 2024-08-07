@@ -8,8 +8,7 @@ export default class SettingsController {
     public async logout() {
         GlobalStore.setState({ isLoading: true })
         const api = new UsersApi();
-        const result: { response: string } = await api.logout() as { response: string };
-        console.log("LOGOUT: ", result.response);
+        await api.logout() as { response: string };
         switchPage(null, "");
         GlobalStore.setState({ isLoading: false })
         location.reload();

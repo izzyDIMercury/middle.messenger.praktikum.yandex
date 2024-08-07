@@ -2,7 +2,7 @@ import Block from "../../core/block.ts";
 import LoginForm from "../../components/login-form/login-form.ts";
 import Link from "../../components/link/link.ts";
 import Loading from "../../components/loading/loading.ts";
-import { switchPage } from "../../core/utils.ts";
+import { switchPage, checkLoggedIn } from "../../core/utils.ts";
 import { connect } from "../../core/connect.ts";
 import LoginController from "../../controllers/login.ts";
 import type { StoreType } from "../../types.ts";
@@ -68,11 +68,15 @@ class LoginPage extends Block<LoginPageProps> {
     }
 
     handleSubmit(event: FocusEvent | MouseEvent, externalEvent?: FocusEvent) {
-        console.log(event);
+        // console.log(event);
         event.preventDefault();
         const controller = new LoginController();
         const eventProp = externalEvent ? externalEvent : event;
         controller.login("login-page", "login-page__error-text", false, eventProp.type);
+    }
+
+    componentDidMount(): void {
+        checkLoggedIn();
     }
 
     render() {
