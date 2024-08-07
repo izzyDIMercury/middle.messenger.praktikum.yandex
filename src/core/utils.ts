@@ -1,5 +1,4 @@
 import SettingsController from "../controllers/settings.ts";
-import LoginController from "../controllers/login.ts";
 import Chat from "../controllers/chat.ts";
 import { GlobalStore } from "../store.ts";
 
@@ -106,20 +105,3 @@ export async function searchUsers(event: InputEvent): Promise<void> {
         usersFound: result
     })
 }
-
-export async function checkLoggedIn() {
-    const controller = new LoginController();
-
-    const response = await controller.checkLoggedIn();
-    const result = JSON.parse(response.response);
-    if ("id" in result) {
-        console.log("User is logged in system.");
-        switchPage(null, "messenger");
-    } else {
-        console.log("No user is logged.");
-    }
-}
-
-// export function sendMessage(input: text) {
-
-// }

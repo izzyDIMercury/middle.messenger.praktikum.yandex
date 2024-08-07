@@ -2,7 +2,7 @@ import Block from "../../core/block.ts";
 import LoginForm from "../../components/login-form/login-form.ts";
 import Link from "../../components/link/link.ts";
 import Loading from "../../components/loading/loading.ts";
-import { switchPage, checkLoggedIn } from "../../core/utils.ts";
+import { switchPage } from "../../core/utils.ts";
 import { connect } from "../../core/connect.ts";
 import LoginController from "../../controllers/login.ts";
 import type { StoreType } from "../../types.ts";
@@ -10,6 +10,8 @@ import type { StoreType } from "../../types.ts";
 type LoginPageProps = {};
 
 class LoginPage extends Block<LoginPageProps> {
+
+    private loggedIn: boolean | null = null;
 
     constructor(props: LoginPageProps) {
         super({
@@ -75,8 +77,24 @@ class LoginPage extends Block<LoginPageProps> {
         controller.login("login-page", "login-page__error-text", false, eventProp.type);
     }
 
+    async checkLoggedIn() {
+        const controller = new LoginController();
+        const response = await controller.checkLoggedIn();
+        const result = JSON.parse(response.response);
+        if ("id" in result) {
+            console.log("User is logged in system.");
+            this.loggedIn = true;
+            switchPage(null, "messenger");
+        } else {
+            console.log("No user is logged.");
+            this.loggedIn = false;
+        }
+    }
+
     componentDidMount(): void {
-        checkLoggedIn();
+        if (typeof this.loggedIn !== "boolean") {
+            this.checkLoggedIn();
+        }
     }
 
     render() {
