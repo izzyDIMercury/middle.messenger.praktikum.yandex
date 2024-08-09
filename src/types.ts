@@ -23,7 +23,7 @@ type UserInfo = {
     second_name: string | null
 }
 
-type MessageType = { id: number, messeges: string[] }
+type MessageType = { messeges: string[] }
 
 type StoreType = {
     isLoading: boolean,
@@ -36,11 +36,12 @@ type StoreType = {
         chat: object,
         isActive: boolean
     }
-    communication: MessageType[],
+    communication: Record<string, MessageType>,
     currentMessage: string,
     doFillProps: boolean,
     userInfo: UserInfo,
-    defaultChatSelected: boolean
+    defaultChatSelected: boolean,
+    messagesCount: number
 }
 
 export type { ComponentProps, UserData, StoreType, UserInfo };

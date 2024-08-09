@@ -55,21 +55,42 @@ class MessagePanel extends Block<MessagePanelProps> {
         event.preventDefault();
         const messageElement = document.querySelector("#message") as HTMLInputElement;
         const input = messageElement.value;
-        console.log(input);
         this.socket && this.socket.send({
             content: input,
             type: "message"
         });
-        // this.saveMessage(input);
+        this.handleMyMessage(input);
         
 
         // new FormSubmit("message-panel", "", true, event.type);
     }
 
-    public saveMessage(message: string) {
+    public async handleMyMessage(input: string) {
+        const controller = new Chat();
+        const response = await controller.getUserInfo();
+        const userId = JSON.parse(response.response).id;
+        this.saveMessage(input, userId)
+    }
+
+    public saveMessage(message: string, userId: number) {
+        const props = this.props as { messagesCount: number };
+        const count = ++props.messagesCount;
+        const componentProps = this.props as { chat: {id: "number"}}
         const communication = GlobalStore.getState().communication;
-        const id = this.props.chat;
-        console.log(id);
+        const id = componentProps.chat.id as unknown as number;
+        
+        const messages = communication[id] ? communication[id] : [];
+        messages.push({
+            userId: userId,
+            content: message
+        });
+        communication[id] = messages;
+        GlobalStore.setState({ communication, messagesCount: count })
+        // console.log(communication);
+    }
+
+    componentDidMount(): void {
+        
     }
 
     componentDidUpdate() {
@@ -81,7 +102,6 @@ class MessagePanel extends Block<MessagePanelProps> {
                 this.socket = socket;
                 socket.on("Message", (args: SocketProps) => {
                     GlobalStore.setState({ currentMessage: args.content });
-                    // console.log("MESSAGE: ", args.content);
                 })
             })
         }
@@ -137,7 +157,7 @@ class MessageForm extends Block<MessageFormProps> {
 
     handleBlur(event: FocusEvent): void {
         // this.handleSubmit(event);
-        console.log(event);
+        // console.log(event);
     }
 
 
@@ -161,7 +181,10 @@ class MessageForm extends Block<MessageFormProps> {
 const mapStateToPropsShort = (props: StoreType): object => {
     return {
         isActive: props.activeChat.isActive,
-        chat: props.activeChat.chat
+        chat: props.activeChat.chat,
+        communication: props.communication,
+        chatId: props.activeChat.chat.id,
+        messagesCount: props.messagesCount
     }
 }
 

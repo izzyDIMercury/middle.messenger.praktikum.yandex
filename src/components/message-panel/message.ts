@@ -13,14 +13,20 @@ class Message extends Block<MessageProps> {
 
     render() {
         return (
-            `<p class="message-text">{{ currentMessage }}</p>`
+            `<div class="message">
+                <p class="message-text">{{ message }}</p>
+            </div>
+            `
         )
     }
 }
 
 const mapStateToPropsShort = (props: StoreType): object => {
     return {
-        currentMessage: props.currentMessage
+        currentMessage: props.currentMessage,
+        communication: props.communication,
+        chatId: props.activeChat.chat.id,
+        messagesCount: props.messagesCount
     }
 }
 

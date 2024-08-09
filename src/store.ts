@@ -17,7 +17,22 @@ const GlobalStore: GlobalStoreStype = new Store({
         chat: {},
         isActive: false
     },
-    communication: [],
+    communication: {
+        20379: [
+            {
+                id: 1627,
+                content: "first message"
+            },
+            {
+                id: 1627,
+                content: "second message"
+            },
+            {
+                id: 1627,
+                content: "third message"
+            }
+        ]
+    },
     currentMessage: "",
     doFillProps: true,
     userInfo: {
@@ -30,7 +45,8 @@ const GlobalStore: GlobalStoreStype = new Store({
         phone: null,
         second_name: null
     },
-    defaultChatSelected: false
+    defaultChatSelected: false,
+    messagesCount: 0
 });
 
 

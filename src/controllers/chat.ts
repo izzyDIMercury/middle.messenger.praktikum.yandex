@@ -8,6 +8,11 @@ type RequestData = {
 
 export default class Chat {
 
+    public async getUserInfo() {
+        const api = new Chats();
+        return api.userInfo();
+    }
+
     public async createChat(chatName: RequestData) {
         const api = new Chats();
         const response = await api.create(chatName); 19536
@@ -74,7 +79,7 @@ export default class Chat {
                 //
                 //
                 const length = Object.keys(myChats).length;
-                console.log(myChats)
+                // console.log(myChats)
                 GlobalStore.setState({ chats: myChats, length });
 
                 const container = document.querySelector(".left-column__users");
@@ -104,7 +109,7 @@ export default class Chat {
 
     public async connectSocket(chatId: number) {
         const api = new Chats();
-        const tokenResponse = await api.getToken(19535);
+        const tokenResponse = await api.getToken(chatId);
         const token = JSON.parse(tokenResponse.response).token;
         const infoResponse = await api.userInfo();
         const userInfo = JSON.parse(infoResponse.response);
