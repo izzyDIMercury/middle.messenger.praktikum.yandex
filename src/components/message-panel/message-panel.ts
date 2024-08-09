@@ -9,6 +9,7 @@ import WSTransport from "../../core/WSTransport.ts";
 import Messages from "./messages.ts";
 import type { StoreType } from "../../types.ts";
 import { GlobalStore } from "../../store.ts";
+import MessageController from "./message-controller.ts";
 
 type MessagePanelProps = {};
 
@@ -59,46 +60,10 @@ class MessagePanel extends Block<MessagePanelProps> {
             content: input,
             type: "message"
         });
-        // this.handleMyMessage(input);
-        
-
-        // new FormSubmit("message-panel", "", true, event.type);
-    }
-
-    public async handleMessage(input: string, id: number) {
-        const controller = new Chat();
-        const response = await controller.getUserInfo();
-        const userId = JSON.parse(response.response).id;
-        const myMessage: boolean = userId === id;
-        this.saveMessage(input, id, myMessage)
-    }
-
-    // public handleOtherUserMessage(input: string) {
-    //     this.saveMessage(input, 0);
-    // }
-
-    public saveMessage(message: string, userId: number, myMessage: boolean) {
-        const props = this.props as { messagesCount: number };
-        const count = ++props.messagesCount;
-        const componentProps = this.props as { chat: {id: "number"}}
-        const communication = GlobalStore.getState().communication;
-        const id = componentProps.chat.id as unknown as number;
-        
-        const messages = communication[id] ? communication[id] : [];
-        messages.push({
-            userId: userId,
-            content: message,
-            myMessage: myMessage
-        });
-        communication[id] = messages;
-        GlobalStore.setState({ communication, messagesCount: count })
-    }
-
-    componentDidMount(): void {
-        
     }
 
     componentDidUpdate() {
+        const messageController = new MessageController();
         const controller = new Chat();
         const propsMessage = this.props as PropsMessage;
         if (propsMessage.chat && this.socket === null) {
@@ -107,7 +72,7 @@ class MessagePanel extends Block<MessagePanelProps> {
                 this.socket = socket;
                 socket.on("Message", (args: SocketProps) => {
                     GlobalStore.setState({ currentMessage: args.content });
-                    this.handleMessage(args.content, args.user_id);
+                    messageController.handleMessage(args.content, args.user_id);
                 })
             })
         }
@@ -186,12 +151,16 @@ class MessageForm extends Block<MessageFormProps> {
 
 const mapStateToPropsShort = (props: StoreType): object => {
     return {
-        isActive: props.activeChat.isActive,
         chat: props.activeChat.chat,
         communication: props.communication,
-        chatId: props.activeChat.chat.id,
-        messagesCount: props.messagesCount
+        chatId: props.activeChat.chat.id
     }
 }
+
+// isActive: props.activeChat.isActive,
+//         chat: props.activeChat.chat,
+//         communication: props.communication,
+//         chatId: props.activeChat.chat.id,
+//         messagesCount: props.messagesCount
 
 export default connect(mapStateToPropsShort)(MessagePanel);
