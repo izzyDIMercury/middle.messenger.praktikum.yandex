@@ -17,22 +17,7 @@ const GlobalStore: GlobalStoreStype = new Store({
         chat: {},
         isActive: false
     },
-    communication: {
-        20379: [
-            {
-                id: 1627,
-                content: "first message"
-            },
-            {
-                id: 1627,
-                content: "second message"
-            },
-            {
-                id: 1627,
-                content: "third message"
-            }
-        ]
-    },
+    communication: {},
     currentMessage: "",
     doFillProps: true,
     userInfo: {
