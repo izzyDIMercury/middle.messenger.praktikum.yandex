@@ -38,10 +38,17 @@ export default class Chat {
         // console.log(state);
     }
 
-    public async deleteChat(chatId: RequestData) {
+    public async deleteChat(chatId: number) {
         const api = new Chats();
-        const res = await api.deleteChat(chatId);
+        const res = await api.deleteChat({ chatId });
         console.log("DELETE: ", res.response);
+        // const chatsResp = await api.getChats();
+        // const result = JSON.parse(chatsResp.response);
+        // console.log(result);
+        this.getChats();
+        // GlobalStore.setState({
+        //     defaultChatSelected: false
+        // })
     }
 
     public async getChats() {
@@ -52,18 +59,29 @@ export default class Chat {
 
         const responseChats = await api.getChats();
         const dataChats = JSON.parse(responseChats.response);
+        // console.log(dataChats);
+        const myChats: Record<number, {}> = {}
         dataChats.forEach((chat: { id: number }) => {
     
             const responseUser = api.getChatUsers(chat.id);
 
             responseUser.then((response: { response: string }) => {
                 const user = JSON.parse(response.response).filter((user: { id: number }) => user.id !== currentUserID)[0];
-                const chats = GlobalStore.getState().chats;
-                chats[chat.id] = { chat, user };
+                // const chats = GlobalStore.getState().chats;
+                const id = chat.id;
+                myChats[id] = { chat, user }
+                // chats[chat.id] = { chat, user };
                 //
-                const length = Object.keys(chats).length;
                 //
-                GlobalStore.setState({ chats, length });
+                const length = Object.keys(myChats).length;
+                console.log(myChats)
+                GlobalStore.setState({ chats: myChats, length });
+
+                const container = document.querySelector(".left-column__users");
+                const child = container?.firstChild;
+                if (child instanceof HTMLElement) {
+                    child.click();
+                }
             })
         })
         // setTimeout(() => {

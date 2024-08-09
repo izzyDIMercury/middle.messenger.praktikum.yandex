@@ -1,10 +1,11 @@
 import Block from "../../core/block.ts";
-import { switchPage } from "../../core/utils.ts";
+// import { switchPage } from "../../core/utils.ts";
 import Image from "../image/image.ts";
 import ProfileImage from "../profile-image/profile-image.ts";
 import type { StoreType } from "../../types.ts";
 import { connect } from "../../core/connect.ts";
 import { UserInfo } from "../../types.ts";
+import Chat from "../../controllers/chat.ts";
 
 type ChatProfileProps = object;
 
@@ -16,6 +17,8 @@ class ChatProfile extends Block<ChatProfileProps> {
     }
 
     init() {
+        const deleteChatBind = this.deleteChat.bind(this);
+
         const Profile = new ProfileImage({
             className: "chat-profile__user-image",
             src: "/assets/profile-placeholder-small.png",
@@ -28,7 +31,7 @@ class ChatProfile extends Block<ChatProfileProps> {
             alt: "Аватар пользователся",
             page: "login",
             events: {
-                click: switchPage
+                click: deleteChatBind
             },
             path: ""
         });
@@ -37,6 +40,13 @@ class ChatProfile extends Block<ChatProfileProps> {
             SettingsIcon,
             Profile
         };
+    }
+
+    deleteChat() {
+        const chatProps = this.props as { activeChat: { chat: { id: number }}};
+        const chatId = chatProps.activeChat.chat.id;
+        const controller = new Chat();
+        controller.deleteChat(chatId);
     }
 
     private handleActiveChat(chat: object, user: UserInfo) {

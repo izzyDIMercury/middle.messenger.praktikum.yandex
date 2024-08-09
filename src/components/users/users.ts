@@ -37,20 +37,20 @@ class Users extends Block<UserType> {
         });
     }
 
-    init() {
-        const interval = setInterval(() => {
-            const container = document.querySelector(".left-column__users");
-            const child = container?.firstChild;
-            if (child instanceof HTMLElement) {
-                child.click();
-                clearInterval(interval);
-            }
-        }, 50);
+    // init() {
+    //     const interval = setInterval(() => {
+    //         const container = document.querySelector(".left-column__users");
+    //         const child = container?.firstChild;
+    //         if (child instanceof HTMLElement) {
+    //             child.click();
+    //             clearInterval(interval);
+    //         }
+    //     }, 50);
 
-        setTimeout(() => {
-            clearInterval(interval);
-        }, 5000)
-    }
+    //     setTimeout(() => {
+    //         clearInterval(interval);
+    //     }, 5000)
+    // }
 
     public toggleActiveChat(event: MouseEvent) {
         const targetElement = event.target as HTMLElement;
@@ -85,6 +85,7 @@ class Users extends Block<UserType> {
     }
 
     componentDidUpdate() {
+        console.log("USERS UPDATED");
         const toggleActiveChatBind = this.toggleActiveChat.bind(this);
         const props = this.props as CurrentType;
         if (Object.keys(props.chats).length !== 0) {
