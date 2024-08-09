@@ -1,5 +1,5 @@
 import Block from "../../core/block.ts";
-// import Image from "../image/image.ts";
+import Image from "../image/image.ts";
 import { connect } from "../../core/connect.ts";
 import type { StoreType } from "../../types.ts";
 
@@ -9,7 +9,8 @@ type UserProps = {
     unread: string,
     time: string,
     selected: string,
-    image: string
+    avatar: string,
+    image?: string
 }
 
 class User extends Block<UserProps> {
@@ -19,12 +20,27 @@ class User extends Block<UserProps> {
         });
     }
 
+    init() {
+        // console.log(this.props.avatar)
+        const props = this.props as { avatar: string };
+        const Avatar = new Image({
+            className: "user__image",
+            src: "/assets/icons/profile-placeholder-small.png",
+            avatar: props.avatar,
+            alt: "Аватар пользователя"
+        });
+
+        this.children = {
+            Avatar
+        }
+    }
+
     render() {
         return (
             `
                     <li chatId={{ chatId }} class="user {{#if selected}} {{ selected }} {{/if}}">
                         <div class="user__content">
-                            {{{ UserImagePlaceholder }}}
+                            {{{ Avatar }}}
                             <div class="user__data">
                                 <p class="user__name">{{ first_name }} {{ second_name }}</p>
                                 <p class="user__message">{{ message }} </p>

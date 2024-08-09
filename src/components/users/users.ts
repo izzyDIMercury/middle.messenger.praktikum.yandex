@@ -20,7 +20,8 @@ type ChatObject = {
     },
     user: {
         first_name: string,
-        second_name: string
+        second_name: string,
+        avatar: string
     }
 }
 
@@ -65,19 +66,32 @@ class Users extends Block<UserType> {
 
     componentDidUpdate() {
         const toggleActiveChatBind = this.toggleActiveChat.bind(this);
-        
+        //     const avatar = "https://ya-praktikum.tech/api/v2/resources" + user.avatar;
         const props = this.props as CurrentType;
         if (Object.keys(props.chats).length !== 0) {
             const chats = Object.values(props.chats) as ObjectsList;
             // console.log(chats);
-            const elements = chats.map(({ chat, user }) => new User({ 
-                first_name: user.first_name,
-                second_name: user.second_name,
-                chatId: chat.id,
-                events: {
-                    click: toggleActiveChatBind
-                }
-            }))
+            const elements = chats.map(({chat, user}) => {
+                const avatar = "https://ya-praktikum.tech/api/v2/resources" + user.avatar;
+                return new User({
+                    first_name: user.first_name,
+                    second_name: user.second_name,
+                    chatId: chat.id,
+                    avatar: avatar,
+                    events: {
+                        click: toggleActiveChatBind
+                    }
+                })
+            })
+
+            // const elements = chats.map(({ chat, user }) => new User({ 
+            //     first_name: user.first_name,
+            //     second_name: user.second_name,
+            //     chatId: chat.id,
+            //     events: {
+            //         click: toggleActiveChatBind
+            //     }
+            // }))
             const root = document.querySelector(".left-column__users") as HTMLElement;
             root.textContent = "";
             let counter: number = 0;

@@ -21,7 +21,9 @@ class Image extends Block<ImageProps> {
     constructor(props: ImageProps) {
 
         const name = props.src.split(".").reverse()[1].split("/").reverse()[0];
+        console.log(props);
         const path = images[name];
+        // const avatar = props.avatar;
         Handlebars.registerHelper(name, () => path);
 
         super({
@@ -35,7 +37,7 @@ class Image extends Block<ImageProps> {
     render() {
         return (
             `    
-                <img class={{ className }} src="{{{ path }}}" alt="{{ alt }}" {{#if page}} page="{{ page }}" {{/if}}">
+                <img class={{ className }} src="{{#if avatar}} {{{avatar}}} {{else}} {{{ path }}} {{/if}}" alt="{{ alt }}" {{#if page}} page="{{ page }}" {{/if}}">
                                             
                 ` 
         );
@@ -47,6 +49,8 @@ const mapStateToPropsShort = (props: StoreType): object => {
         imageLink: props.imageLink
     }
 }
+
+// {{#if avatar}} {{{avatar}}} {{else}} {{{ path }}} {{/if}}
 
 export default connect(mapStateToPropsShort)(Image);
 

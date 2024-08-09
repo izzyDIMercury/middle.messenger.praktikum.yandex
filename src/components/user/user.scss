@@ -24,15 +24,15 @@
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
     width: 250px;
     height: 48px
 }
 
 .user__image {
     border-radius: 50%;
-    width: 47px;
-    height: 47px;
+    width: 50px;
+    height: 50px;
 }
 
 .user__data {
@@ -40,6 +40,7 @@
     flex-flow: column nowrap;
     justify-content: space-between;
     height: 48px;
+    margin-left: 10px;
     max-width: 190px;
 }
 
