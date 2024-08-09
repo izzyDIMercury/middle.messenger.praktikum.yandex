@@ -4,6 +4,7 @@ import Image from "../image/image.ts";
 import ProfileImage from "../profile-image/profile-image.ts";
 import type { StoreType } from "../../types.ts";
 import { connect } from "../../core/connect.ts";
+import { UserInfo } from "../../types.ts";
 
 type ChatProfileProps = object;
 
@@ -38,7 +39,7 @@ class ChatProfile extends Block<ChatProfileProps> {
         };
     }
 
-    private handleActiveChat(chat: object, user: object) {
+    private handleActiveChat(chat: object, user: UserInfo) {
         const image = document.querySelector(".chat-profile__user-image") as HTMLImageElement;
         const link = "https://ya-praktikum.tech/api/v2/resources" + user.avatar;
         image.src = link;
@@ -50,8 +51,9 @@ class ChatProfile extends Block<ChatProfileProps> {
     }
 
     componentDidUpdate(): boolean | void {
-        if (this.props.activeChat.isActive) {
-            this.handleActiveChat(this.props.activeChat.chat, this.props.activeChat.user);
+        const propsClone = this.props as { activeChat: { chat: object, user: UserInfo, isActive: boolean }};
+        if (propsClone.activeChat.isActive) {
+            this.handleActiveChat(propsClone.activeChat.chat, propsClone.activeChat.user);
         }
     }
     render() {

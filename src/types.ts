@@ -40,4 +40,4 @@ type StoreType = {
     defaultChatSelected: boolean
 }
 
-export type { ComponentProps, UserData, StoreType };
+export type { ComponentProps, UserData, StoreType, UserInfo };
