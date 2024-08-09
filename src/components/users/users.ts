@@ -35,12 +35,6 @@ class Users extends Block<UserType> {
         super({
             ...props
         });
-
-        // const interval = setInterval(() => {
-        //     const container = document.querySelector("left-column__users");
-        //     const child = container?.firstChild;
-        //     console.log(child);
-        // }, 500);
     }
 
     init() {
@@ -52,6 +46,10 @@ class Users extends Block<UserType> {
                 clearInterval(interval);
             }
         }, 50);
+
+        setTimeout(() => {
+            clearInterval(interval);
+        }, 5000)
     }
 
     public toggleActiveChat(event: MouseEvent) {
@@ -84,9 +82,6 @@ class Users extends Block<UserType> {
     componentDidMount() {
         const controller = new Chat();
         controller.getChats();
-        // console.log(this.props.chats)
-        // this.toggleActiveChat();
-        // console.log("mount");
     }
 
     componentDidUpdate() {

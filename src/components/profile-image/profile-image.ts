@@ -37,15 +37,9 @@ class ProfileImage extends Block<ProfileImageProps> {
 const mapStateToPropsShort = (props: StoreType): object => {
     return {
         avatar: props.userInfo.avatar,
-        imageLink: props.imageLink
+        imageLink: props.imageLink,
+        defaultChatSelected: props.defaultChatSelected
     }
 }
 
-// avatar: props.userInfo.avatar,
-
 export default connect(mapStateToPropsShort)(ProfileImage);
-
-// <img class={{ className }} src="{{#if ${this.hasAvatar}}} {{{ imageLink }}} {{else}} {{{ path }}} {{/if}}" alt="{{ alt }}" {{#if page}} page="{{ page }}" {{/if}}">
-
-
-// imageLink: props.imageLink

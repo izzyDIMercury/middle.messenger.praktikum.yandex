@@ -46,8 +46,6 @@ class ChatProfile extends Block<ChatProfileProps> {
 
         const userName = document.querySelector(".chat-profile__user-name") as HTMLParagraphElement;
         userName.textContent = user.first_name;
-
-        console.log(chat, user)
     }
 
     componentDidUpdate(): boolean | void {
@@ -56,6 +54,7 @@ class ChatProfile extends Block<ChatProfileProps> {
             this.handleActiveChat(propsClone.activeChat.chat, propsClone.activeChat.user);
         }
     }
+
     render() {
         return (
             `
