@@ -59,20 +59,25 @@ class MessagePanel extends Block<MessagePanelProps> {
             content: input,
             type: "message"
         });
-        this.handleMyMessage(input);
+        // this.handleMyMessage(input);
         
 
         // new FormSubmit("message-panel", "", true, event.type);
     }
 
-    public async handleMyMessage(input: string) {
+    public async handleMessage(input: string, id: number) {
         const controller = new Chat();
         const response = await controller.getUserInfo();
         const userId = JSON.parse(response.response).id;
-        this.saveMessage(input, userId)
+        const myMessage: boolean = userId === id;
+        this.saveMessage(input, id, myMessage)
     }
 
-    public saveMessage(message: string, userId: number) {
+    // public handleOtherUserMessage(input: string) {
+    //     this.saveMessage(input, 0);
+    // }
+
+    public saveMessage(message: string, userId: number, myMessage: boolean) {
         const props = this.props as { messagesCount: number };
         const count = ++props.messagesCount;
         const componentProps = this.props as { chat: {id: "number"}}
@@ -82,11 +87,11 @@ class MessagePanel extends Block<MessagePanelProps> {
         const messages = communication[id] ? communication[id] : [];
         messages.push({
             userId: userId,
-            content: message
+            content: message,
+            myMessage: myMessage
         });
         communication[id] = messages;
         GlobalStore.setState({ communication, messagesCount: count })
-        // console.log(communication);
     }
 
     componentDidMount(): void {
@@ -102,6 +107,7 @@ class MessagePanel extends Block<MessagePanelProps> {
                 this.socket = socket;
                 socket.on("Message", (args: SocketProps) => {
                     GlobalStore.setState({ currentMessage: args.content });
+                    this.handleMessage(args.content, args.user_id);
                 })
             })
         }

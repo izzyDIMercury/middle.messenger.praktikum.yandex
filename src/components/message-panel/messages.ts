@@ -40,7 +40,8 @@ class Messages extends Block<MessagesType> {
                 return {
                     node: new Message({}),
                     message: message.content,
-                    userId: message.userId
+                    userId: message.userId,
+                    myMessage: message.myMessage
                 }
             })
             const container = document.querySelector(".message-window") as HTMLElement;
@@ -48,12 +49,17 @@ class Messages extends Block<MessagesType> {
             messages.forEach((el) => {
                 const node = el.node;
                 const element = node.getContent();
-                element.setAttribute("userId", el.userId);
                 const child = element.firstElementChild;
+                // child.setAttribute("userId", el.userId);
+                if (el.myMessage) {
+                    child.style.backgroundColor = "rgb(198,234,178)";
+                    child.style.float = "right";
+                }
                 child.textContent = el.message;
-                // console.log(node);
                 container?.appendChild(element);
             })
+            const inputElement = document.querySelector("#message") as HTMLInputElement;
+            inputElement.value = "";
         }
     }
 
