@@ -49,13 +49,22 @@ export async function fillUserInfo(page: string) {
     const controller = new SettingsController();
     const response = await controller.getUserInfo() as { response: string };
     const result = JSON.parse(response.response);
+    GlobalStore.setState({ userInfo: result });
+    setImageLink(result);
     if (page === "settings") {
         infoSettingsPage(result);
     } else if (page === "change-profile") {
         infoProfileDataPage(result);
-    } else if (page === "change-password") {
-        infoPasswordPage(result);
     }
+    // else if (page === "change-password") {
+    //     infoPasswordPage(result);
+    // }
+}
+
+function setImageLink(result: object) {
+    const image = Object.entries(result).filter((prop) => prop[0] === "avatar")[0][1];
+    const imageLink = "https://ya-praktikum.tech/api/v2/resources/" + image;
+    GlobalStore.setState({ imageLink })
 }
 
 function infoSettingsPage(result: object) {
@@ -67,9 +76,9 @@ function infoSettingsPage(result: object) {
             element.textContent = value as string;
         }
     })
-    const image = Object.entries(result).filter((prop) => prop[0] === "avatar")[0][1];
-    const imageLink = "https://ya-praktikum.tech/api/v2/resources/" + image;
-    GlobalStore.setState({ imageLink })
+    // const image = Object.entries(result).filter((prop) => prop[0] === "avatar")[0][1];
+    // const imageLink = "https://ya-praktikum.tech/api/v2/resources/" + image;
+    // GlobalStore.setState({ imageLink })
 }
 
 function infoProfileDataPage(result: object) {
@@ -78,22 +87,21 @@ function infoProfileDataPage(result: object) {
         // console.log(element);
         // (element !== null && element.name !== "avatar")
         if (element !== null) {
-            console.log(element.id, value);
             if (element.id !== "avatar") {
                 element.value = value as string;
             }
         }
     })
-    const image = Object.entries(result).filter((prop) => prop[0] === "avatar")[0][1];
-    const imageLink = "https://ya-praktikum.tech/api/v2/resources/" + image;
-    GlobalStore.setState({ imageLink })
+    // const image = Object.entries(result).filter((prop) => prop[0] === "avatar")[0][1];
+    // const imageLink = "https://ya-praktikum.tech/api/v2/resources/" + image;
+    // GlobalStore.setState({ imageLink })
 }
 
-function infoPasswordPage(result: object) {
-    const image = Object.entries(result).filter((prop) => prop[0] === "avatar")[0][1];
-    const imageLink = "https://ya-praktikum.tech/api/v2/resources/" + image;
-    GlobalStore.setState({ imageLink })
-}
+// function infoPasswordPage(result: object) {
+//     const image = Object.entries(result).filter((prop) => prop[0] === "avatar")[0][1];
+//     const imageLink = "https://ya-praktikum.tech/api/v2/resources/" + image;
+//     GlobalStore.setState({ imageLink })
+// }
 
 
 export async function searchUsers(event: InputEvent): Promise<void> {

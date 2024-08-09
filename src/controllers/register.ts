@@ -10,7 +10,7 @@ export default class RegisterController {
         GlobalStore.setState({ isLoading: true })
         const submit = new FormSubmit(formClass, errorClass, isMessage, eventType);
         const api = new AuthApi();
-        console.log(submit.userData);
+        console.log(submit.userData, eventType);
         try {
             if (submit.validated && eventType === "click") {
                 const result = await api.register(submit.userData);
@@ -22,7 +22,7 @@ export default class RegisterController {
         } catch (error) {
             if (String(error).includes("User already in system") || String(error).includes("Login already exists")) {
                 alert("Пользователь уже зарегистрирован.");
-                switchPage(null, "messenger"); 
+                switchPage(null, "messenger"); // Mas42er92s
             }
             console.log(error);
         }

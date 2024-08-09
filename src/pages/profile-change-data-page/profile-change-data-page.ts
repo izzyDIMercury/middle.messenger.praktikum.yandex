@@ -153,6 +153,7 @@ class ProfileChangeDataPage extends Block<ChangeDataPageProps> {
 
     componentDidMount(): void {
         fillUserInfo("change-profile");
+        console.log("CDM PCDP", this.props.imageLink);
     }
 
     render() {

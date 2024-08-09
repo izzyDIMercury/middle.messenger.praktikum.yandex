@@ -12,6 +12,17 @@ type User = {
     second_name: string,
 }
 
+type UserInfo = {
+    avatar: string | null,
+    display_name: string | null,
+    email: string | null,
+    first_name: string | null,
+    id: number | null,
+    login: string | null,
+    phone: string | null,
+    second_name: string | null
+}
+
 type StoreType = {
     isLoading: boolean,
     isError: boolean,
@@ -24,7 +35,8 @@ type StoreType = {
         isActive: boolean
     }
     currentMessage: string,
-    doFillProps: boolean
+    doFillProps: boolean,
+    userInfo: UserInfo
 }
 
 export type { ComponentProps, UserData, StoreType };

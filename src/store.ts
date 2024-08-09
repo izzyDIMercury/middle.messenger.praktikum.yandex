@@ -5,7 +5,7 @@ type GlobalStoreStype = {
     setState: Function,
     on: Function
 }
-
+ 
 const GlobalStore: GlobalStoreStype = new Store({
     isLoading: false,
     isError: false,
@@ -18,7 +18,17 @@ const GlobalStore: GlobalStoreStype = new Store({
         isActive: false
     },
     currentMessage: "",
-    doFillProps: true
+    doFillProps: true,
+    userInfo: {
+        avatar: null,
+        display_name: null,
+        email: null,
+        first_name: null,
+        id: null,
+        login: null,
+        phone: null,
+        second_name: null
+    }
 });
 
 

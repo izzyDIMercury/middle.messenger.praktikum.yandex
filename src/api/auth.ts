@@ -15,6 +15,7 @@ export default class AuthApi {
     }
 
     public async register(userData: object) {
+        console.log(userData);
         return this.HTTP.post(`${this.host}/auth/signup`, {
             data: userData,
             headers: {

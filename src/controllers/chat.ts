@@ -70,10 +70,10 @@ export default class Chat {
         // }, 1000);
     }
 
-    public async getUserInfo() {
-        const api = new Chats();
-        await api.userInfo();
-    }
+    // public async getUserInfo() {
+    //     const api = new Chats();
+    //     return api.userInfo();
+    // }
 
     public searchUsers(input: string) {
         const api = new Chats();
@@ -103,7 +103,18 @@ export default class Chat {
         // socket.close();
         // console.log(socket);
 
-    }   
+    }
+
+    public async setGlobalUserInfo() {
+        const api = new Chats();
+        const response = await api.userInfo();
+        const info = JSON.parse(response.response);
+        GlobalStore.setState({ userInfo: info })
+        // setTimeout(() => {
+        //     console.log("SET INFO: ", GlobalStore.getState());
+        // }, 1000);
+        // console.log("USER INFO: ", info)
+    } 
 }
 
 

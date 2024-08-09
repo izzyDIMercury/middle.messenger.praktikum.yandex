@@ -21,7 +21,6 @@ class ProfilePage extends Block<ProfilePageProps> {
             ...props
         });
         fillUserInfo("settings");
-        console.log("CONSTRUCTOR");
     }
 
     init() {
@@ -129,22 +128,6 @@ class ProfilePage extends Block<ProfilePageProps> {
         };
     }
 
-    componentDidMount(): void {
-        
-        // console.log("COMPONENT DID MOUNT");
-        // const props = this.props as ProfilePageProps;
-        // console.log(props.doFillProps);
-        // const doLogout = this.props.doLogout as boolean
-        // if (props.doFillProps) {
-        //     fillUserInfo("settings");
-        // }
-        // fillUserInfo("settings");
-    }
-
-    // componentWillUnmount(): void {
-    //     console.log("Will UNMOUNT");
-    // }
-
     handleBlur(event: FocusEvent) {
         return event;
     }
@@ -155,6 +138,13 @@ class ProfilePage extends Block<ProfilePageProps> {
         const controller = new SettingsController();
         controller.logout();
         GlobalStore.setState({ doFillInfo: false });
+    }
+
+    componentDidMount(): void {
+        // console.log("CDM PP", this.props.imageLink);
+        setTimeout(() => {
+            console.log(GlobalStore.getState());
+        }, 1000)
     }
 
     render() {

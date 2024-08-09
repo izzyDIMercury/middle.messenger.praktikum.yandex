@@ -4,26 +4,28 @@ import { Search } from "../../components/search/search.ts";
 import Users from "../../components/users/users.ts";
 import ChatProfile from "../../components/chat-profile/chat-profile.ts";
 import MessagePanel from "../../components/message-panel/message-panel.ts";
-import { switchPage } from "../../core/utils.ts";
+import { switchPage, fillUserInfo } from "../../core/utils.ts";
 import { connect } from "../../core/connect.ts";
 import Loading from "../../components/loading/loading.ts";
-import { GlobalStore } from "../../store.ts";
+// import { GlobalStore } from "../../store.ts";
 import type { StoreType } from "../../types.ts";
+// import Chat from "../../controllers/chat.ts";
 
 type ChatPageProps = {};
 
 class ChatPage extends Block<ChatPageProps> {
 
-    store: typeof GlobalStore;
-
     constructor(props: ChatPageProps) {
         super({
             ...props
         });
-        this.store = GlobalStore;
+        fillUserInfo("chat");
     }
 
     init() {
+        // const controller = new Chat();
+        // controller.setGlobalUserInfo();
+
         const MenuButton = new ProfileButton({
             events: {
                 click: switchPage
