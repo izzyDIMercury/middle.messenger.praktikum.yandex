@@ -29,28 +29,11 @@ type ObjectsList = ChatObject[]
 
 class Users extends Block<UserType> {
 
-    private firstUserSelected: boolean = false;
-
     constructor(props: UserType) {
         super({
             ...props
         });
     }
-
-    // init() {
-    //     const interval = setInterval(() => {
-    //         const container = document.querySelector(".left-column__users");
-    //         const child = container?.firstChild;
-    //         if (child instanceof HTMLElement) {
-    //             child.click();
-    //             clearInterval(interval);
-    //         }
-    //     }, 50);
-
-    //     setTimeout(() => {
-    //         clearInterval(interval);
-    //     }, 5000)
-    // }
 
     public toggleActiveChat(event: MouseEvent) {
         const targetElement = event.target as HTMLElement;

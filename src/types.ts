@@ -23,6 +23,8 @@ type UserInfo = {
     second_name: string | null
 }
 
+type MessageType = { id: number, messeges: string[] }
+
 type StoreType = {
     isLoading: boolean,
     isError: boolean,
@@ -34,6 +36,7 @@ type StoreType = {
         chat: object,
         isActive: boolean
     }
+    communication: MessageType[],
     currentMessage: string,
     doFillProps: boolean,
     userInfo: UserInfo,

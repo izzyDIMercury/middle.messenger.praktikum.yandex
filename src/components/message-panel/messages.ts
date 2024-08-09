@@ -25,11 +25,6 @@ class Messages extends Block<MessagesType> {
         }
     }
 
-    componentDidUpdate() {
-        // const container = document.querySelector(".message-text");
-        // console.log(container, this.props.currentMessage);
-        // container.textContent = this.props.currentMessage;
-    }
 
     render() {
         console.log("rendered");

@@ -60,9 +60,16 @@ class MessagePanel extends Block<MessagePanelProps> {
             content: input,
             type: "message"
         });
+        // this.saveMessage(input);
         
 
         // new FormSubmit("message-panel", "", true, event.type);
+    }
+
+    public saveMessage(message: string) {
+        const communication = GlobalStore.getState().communication;
+        const id = this.props.chat;
+        console.log(id);
     }
 
     componentDidUpdate() {
