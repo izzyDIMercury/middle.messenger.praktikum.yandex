@@ -20,7 +20,8 @@ type PropsMessage = {
 }
 
 type SocketProps = {
-    content: "string"
+    content: "string",
+    user_id: number
 }
 
 class MessagePanel extends Block<MessagePanelProps> {
@@ -128,7 +129,7 @@ class MessageForm extends Block<MessageFormProps> {
 
     handleBlur(event: FocusEvent): void {
         // this.handleSubmit(event);
-        // console.log(event);
+        console.log(event);
     }
 
 

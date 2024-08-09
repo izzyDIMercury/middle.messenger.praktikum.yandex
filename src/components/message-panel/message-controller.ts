@@ -1,7 +1,24 @@
 import { GlobalStore } from "../../store";
 import Message from "./message.ts";
 import Chat from "../../controllers/chat.ts";
-// import type { StoreType } from "../../types.ts";
+
+type MessageType = {
+    content: string,
+    userId: number,
+    myMessage: boolean
+}
+
+type Node = {
+    getContent: Function
+}
+
+type Element = {
+    node: Node,
+    message: string,
+    userId: number,
+    myMessage: boolean
+
+}
 
 export default class MessageController {
 
@@ -40,7 +57,7 @@ export default class MessageController {
 
         if (chatId && communication[chatId] && communication[chatId].length !== 0) {
             
-            const messages = communication[chatId].map((message: object) => {
+            const messages = communication[chatId].map((message: MessageType) => {
                 return {
                     node: new Message({}),
                     message: message.content,
@@ -50,14 +67,14 @@ export default class MessageController {
             })
             const container = document.querySelector(".message-window") as HTMLElement;
             container.textContent = "";
-            messages.forEach((el) => {
+            messages.forEach((el: Element) => {
                 const node = el.node;
                 const element = node.getContent();
                 const child = element.firstElementChild;
-                // child.setAttribute("userId", el.userId);
                 if (el.myMessage) {
                     child.style.backgroundColor = "rgb(198,234,178)";
                     child.style.float = "right";
+                    child.style.textAlign = "right"
                 }
                 child.textContent = el.message;
                 container?.appendChild(element);

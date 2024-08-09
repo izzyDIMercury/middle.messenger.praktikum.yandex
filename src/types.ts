@@ -33,7 +33,9 @@ type StoreType = {
     chats: object,
     length: number,
     activeChat: {
-        chat: object,
+        chat: {
+            id: number
+        },
         isActive: boolean
     }
     communication: Record<string, MessageType>,

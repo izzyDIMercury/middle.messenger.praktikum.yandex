@@ -49,7 +49,8 @@ class Users extends Block<UserType> {
                 isActive: true
             }
         })
-        
+        const messagesContainer = document.querySelector(".message-window") as HTMLElement;
+        messagesContainer.textContent = "";
     }
 
     public handleSelectColor(element: HTMLElement) {

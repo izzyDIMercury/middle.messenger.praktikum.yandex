@@ -1,6 +1,5 @@
 import Block from "../../core/block.ts";
 import { connect } from "../../core/connect.ts";
-import Message from "./message.ts";
 import type { StoreType } from "../../types.ts";
 
 type MessagesType = {
@@ -8,6 +7,7 @@ type MessagesType = {
 };
 
 class Messages extends Block<MessagesType> {
+
     constructor(props: MessagesType) {
         super({
             ...props
