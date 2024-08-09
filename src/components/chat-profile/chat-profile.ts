@@ -1,6 +1,6 @@
 import Block from "../../core/block.ts";
 // import { switchPage } from "../../core/utils.ts";
-import Image from "../image/image.ts";
+// import Image from "../image/image.ts";
 import ProfileImage from "../profile-image/profile-image.ts";
 import type { StoreType } from "../../types.ts";
 import { connect } from "../../core/connect.ts";
@@ -25,19 +25,25 @@ class ChatProfile extends Block<ChatProfileProps> {
             alt: "Аватар пользователся",
             path: ""
         })
-        const SettingsIcon = new Image({
-            className: "chat-profile__settings-icon",
-            src: "/assets/icons/settings.png",
-            alt: "Аватар пользователся",
-            page: "login",
+
+        const Button = new DeleteButton({
             events: {
                 click: deleteChatBind
-            },
-            path: ""
-        });
+            }
+        })
+        // const SettingsIcon = new Image({
+        //     className: "chat-profile__settings-icon",
+        //     src: "/assets/icons/settings.png",
+        //     alt: "Аватар пользователся",
+        //     page: "login",
+        //     events: {
+        //         click: deleteChatBind
+        //     },
+        //     path: ""
+        // });
 
         this.children = {
-            SettingsIcon,
+            Button,
             Profile
         };
     }
@@ -74,11 +80,30 @@ class ChatProfile extends Block<ChatProfileProps> {
                             <p class="chat-profile__user-name">Илья</p>
                         </div>
                         <div class="chat-profile__settings-button" page="{{ login }}">
-                            {{{ SettingsIcon }}}
+                            {{{ Button }}}
                         </div>
                     </nav>
                 `
         );
+    }
+}
+
+type DeleteButtonProps = object;
+
+class DeleteButton extends Block<DeleteButtonProps> {
+
+    constructor(props: DeleteButtonProps) {
+        super({
+            ...props
+        })
+    }
+
+    render() {
+        return (
+            `
+                <div class="chat-profile__delete-chat">Удалить чат</div>
+            `
+        )
     }
 }
 

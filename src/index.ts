@@ -18,15 +18,16 @@ const store = new Store({
     currentMessage: ""
 });
 
-interface WindowStoreType {
-    store: {
-        [key: string]: any
-    },
-    router: any
-}
+// interface WindowStoreType {
+//     store: {
+//         [key: string]: any
+//     },
+//     router: any
+// }
 
-const WindowStore = window as unknown as WindowStoreType;
-WindowStore.store = store;
+
+//@ts-expect-error can't properly type window.store
+window.store = store;
 
 
 Object.entries(Components).forEach(([ name, component ]) => {
@@ -35,7 +36,8 @@ Object.entries(Components).forEach(([ name, component ]) => {
 
 
 const router = new Router("#app");
-WindowStore.router = router;
+//@ts-expect-error can't properly type window.store
+window.router = router;
 
 router.use("/", Pages.LoginPage as any);
 router.use("/messenger", Pages.ChatPage as any);

@@ -1,11 +1,7 @@
 import Block from "../../core/block.ts";
 import Image from "../image/image.ts";
 
-type MessageButtonProps = {
-    // events: {
-    //     click: Function
-    // }
-};
+type MessageButtonProps = {};
 
 export default class MessageButton extends Block<MessageButtonProps> {
     constructor(props: MessageButtonProps) {

@@ -44,11 +44,19 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    width: 10px;
-    height: 20px;
+    // width: 120px;
+    // height: 30px;
     cursor: pointer;
 }
 
 .chat-profile__settings-icon {
     height: 18px;
+}
+
+.chat-profile__delete-chat {
+    margin-right: 20px;
+    width: 120px;
+    height: 30px;
+    font-family: "Inter", "Arial";
+    font-style: 16px;
 }
