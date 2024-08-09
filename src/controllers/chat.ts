@@ -1,12 +1,17 @@
 import WSTransport from "../core/WSTransport.ts";
 import Chats from "../api/chats.ts";
-import { GlobalStore } from "../store.ts";
+// import { GlobalStore } from "../store.ts";
 
 type RequestData = {
     [key: string]: string | number | object | [];
 }
 
 export default class Chat {
+
+    public getLastMessage() {
+        const api = new Chats();
+        return api.getChats();
+    }
 
     public async getUserInfo() {
         const api = new Chats();
@@ -31,29 +36,13 @@ export default class Chat {
         console.log(request);
         await api.addUser(request);
         this.getChats();
-
-
-        // this.deleteChat({ chatId: 19752 });
-
-        // const resp = await api.getChats(1672);
-        // const myChats = JSON.parse(resp.response);
-        // console.log(myChats);
-
-        // const state = window.store.getState();
-        // console.log(state);
     }
 
     public async deleteChat(chatId: number) {
         const api = new Chats();
-        const res = await api.deleteChat({ chatId });
-        console.log("DELETE: ", res.response);
-        // const chatsResp = await api.getChats();
-        // const result = JSON.parse(chatsResp.response);
-        // console.log(result);
+        await api.deleteChat({ chatId });
+        // console.log("DELETE: ", res.response);
         this.getChats();
-        // GlobalStore.setState({
-        //     defaultChatSelected: false
-        // })
     }
 
     public async getChats() {
@@ -66,21 +55,17 @@ export default class Chat {
         const dataChats = JSON.parse(responseChats.response);
         // console.log(dataChats);
         const myChats: Record<number, {}> = {}
-        dataChats.forEach((chat: { id: number }) => {
+        dataChats.forEach((chat: { id: number, last_message: object }) => {
     
             const responseUser = api.getChatUsers(chat.id);
 
             responseUser.then((response: { response: string }) => {
                 const user = JSON.parse(response.response).filter((user: { id: number }) => user.id !== currentUserID)[0];
-                // const chats = GlobalStore.getState().chats;
                 const id = chat.id;
-                myChats[id] = { chat, user }
-                // chats[chat.id] = { chat, user };
-                //
-                //
+                myChats[id] = { chat, user, lastMessage: chat.last_message  }
                 const length = Object.keys(myChats).length;
-                // console.log(myChats)
-                GlobalStore.setState({ chats: myChats, length });
+                //@ts-expect-error can't properly type window.store
+                window.store.setState({ chats: myChats, length });
 
                 const container = document.querySelector(".left-column__users");
                 const child = container?.firstChild;
@@ -89,15 +74,7 @@ export default class Chat {
                 }
             })
         })
-        // setTimeout(() => {
-        //     window.store.setState({ chatListUpdated: false });
-        // }, 1000);
     }
-
-    // public async getUserInfo() {
-    //     const api = new Chats();
-    //     return api.userInfo();
-    // }
 
     public searchUsers(input: string) {
         const api = new Chats();
@@ -117,15 +94,6 @@ export default class Chat {
         const socket = new WSTransport(`wss://ya-praktikum.tech/ws/chats/${userId}/${chatId}/${token}`);
         await socket.connect();
         return socket;
-        // socket.on("Message", (args) => {
-        //     console.log(args);
-        // })
-        // socket.send({
-        //     content: "my message",
-        //     type: "message"
-        // });
-        // socket.close();
-        // console.log(socket);
 
     }
 
@@ -133,11 +101,8 @@ export default class Chat {
         const api = new Chats();
         const response = await api.userInfo();
         const info = JSON.parse(response.response);
-        GlobalStore.setState({ userInfo: info })
-        // setTimeout(() => {
-        //     console.log("SET INFO: ", GlobalStore.getState());
-        // }, 1000);
-        // console.log("USER INFO: ", info)
+        //@ts-expect-error can't properly type window.store
+        window.store.setState({ userInfo: info })
     } 
 }
 

@@ -2,7 +2,7 @@ import Block from "../../core/block.ts";
 import User from "../user/user.ts";
 import Chat from "../../controllers/chat.ts";
 import { connect } from "../../core/connect.ts";
-import { GlobalStore } from "../../store.ts";
+// import { GlobalStore } from "../../store.ts";
 import type { StoreType } from "../../types.ts";
 
 
@@ -43,11 +43,13 @@ class Users extends Block<UserType> {
         const chatId = parentElement.getAttribute("chatid") as string;
         const props = this.props as CurrentType;
         const activeChat =  props.chats[chatId];
-        GlobalStore.setState({
+        //@ts-expect-error can't properly type window.store
+        window.store.setState({
             activeChat: {
                 ...activeChat,
                 isActive: true
-            }
+            },
+            activeChatId: chatId
         })
         const messagesContainer = document.querySelector(".message-window") as HTMLElement;
         messagesContainer.textContent = "";

@@ -2,32 +2,12 @@ import Handlebars from "handlebars";
 import * as Components from "./components";
 import * as Pages from "./pages";
 import Router from "./core/router.ts";
-import { Store } from "./core/store.ts";
-
-const store = new Store({
-    isLoading: false,
-    isError: false,
-    imageLink: "",
-    userFound: {},
-    chats: {},
-    length: 0, //
-    activeChat: {
-        chat: {},
-        isActive: false
-    },
-    currentMessage: ""
-});
-
-// interface WindowStoreType {
-//     store: {
-//         [key: string]: any
-//     },
-//     router: any
-// }
+// import { Store } from "./core/store.ts";
+import { globalStore } from "./store.ts";
 
 
 //@ts-expect-error can't properly type window.store
-window.store = store;
+window.store = globalStore;
 
 
 Object.entries(Components).forEach(([ name, component ]) => {

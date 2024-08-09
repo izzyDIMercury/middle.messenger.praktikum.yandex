@@ -6,7 +6,7 @@ type GlobalStoreStype = {
     on: Function
 }
  
-const GlobalStore: GlobalStoreStype = new Store({
+const globalStore: GlobalStoreStype = new Store({
     isLoading: false,
     isError: false,
     imageLink: "",
@@ -31,8 +31,9 @@ const GlobalStore: GlobalStoreStype = new Store({
         second_name: null
     },
     defaultChatSelected: false,
-    messagesCount: 0
+    messagesCount: 0,
+    activeChatId: 0
 });
 
 
-export { GlobalStore };
+export { globalStore };

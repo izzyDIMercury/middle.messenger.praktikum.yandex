@@ -1,13 +1,14 @@
 import FormSubmit from "../core/formSubmit.ts";
 import AuthApi from "../api/auth.ts";
 import { switchPage } from "../core/utils.ts";
-import { GlobalStore } from "../store.ts";
+// import { GlobalStore } from "../store.ts";
 
 export default class RegisterController {
 
 
     public async register(formClass: string, errorClass: string, isMessage?: boolean, eventType?: string) {
-        GlobalStore.setState({ isLoading: true })
+        //@ts-expect-error can't properly type window.store
+        window.store.setState({ isLoading: true })
         const submit = new FormSubmit(formClass, errorClass, isMessage, eventType);
         const api = new AuthApi();
         console.log(submit.userData, eventType);
@@ -26,6 +27,7 @@ export default class RegisterController {
             }
             console.log(error);
         }
-        GlobalStore.setState({ isLoading: false })
+        //@ts-expect-error can't properly type window.store
+        window.store.setState({ isLoading: false })
     }    
 }

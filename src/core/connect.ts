@@ -1,6 +1,6 @@
 import { StoreEvents } from "./store.ts";
 import { isEqual } from "./utils.ts";
-import { GlobalStore } from "../store.ts";
+// import { GlobalStore } from "../store.ts";
 
 export function connect(mapStateToProps: any) {
     return function(Component: any) {
@@ -9,7 +9,8 @@ export function connect(mapStateToProps: any) {
             private onStoreChange: () => void;
             
             constructor(props: any) {
-                const store = GlobalStore;
+                //@ts-expect-error can't properly type window.store
+                const store = window.store;
                 let state = mapStateToProps(store.getState());
                 super({ ...props, ...state });
 

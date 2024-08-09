@@ -8,14 +8,22 @@ import { connect } from "../../core/connect.ts";
 import WSTransport from "../../core/WSTransport.ts";
 import Messages from "./messages.ts";
 import type { StoreType } from "../../types.ts";
-import { GlobalStore } from "../../store.ts";
+// import { GlobalStore } from "../../store.ts";
 import MessageController from "./message-controller.ts";
 
 type MessagePanelProps = {};
 
-type PropsMessage = {
-    chat: {
-        id: number
+type Props= {
+    activeChat: {
+        chat: {
+            id: number
+        },
+        lastMessage: {
+            content: string,
+            user: {
+                login: string
+            }
+        }
     }
 }
 
@@ -65,15 +73,19 @@ class MessagePanel extends Block<MessagePanelProps> {
 
     componentDidUpdate() {
         const messageController = new MessageController();
+        const props = this.props as Props;
+        const activeChat = props.activeChat;
+        messageController.handleLastMessage(activeChat.lastMessage.content, activeChat.lastMessage.user.login);
+
         const controller = new Chat();
-        const propsMessage = this.props as PropsMessage;
-        if (propsMessage.chat && this.socket === null) {
-            const response = controller.connectSocket(propsMessage.chat.id);
+        if (activeChat.chat && this.socket === null) {
+            const response = controller.connectSocket(activeChat.chat.id);
             response.then((socket: WSTransport) => {
                 this.socket = socket;
                 socket.on("Message", (args: SocketProps) => {
-                    GlobalStore.setState({ currentMessage: args.content });
-                    messageController.handleMessage(args.content, args.user_id);
+                    //@ts-expect-error can't properly type window.store
+                    window.store.setState({ currentMessage: args.content });
+                    messageController.handleMessage(args.content, args.user_id, false);
                 })
             })
         }
@@ -152,9 +164,8 @@ class MessageForm extends Block<MessageFormProps> {
 
 const mapStateToPropsShort = (props: StoreType): object => {
     return {
-        chat: props.activeChat.chat,
-        communication: props.communication,
-        chatId: props.activeChat.chat.id
+        activeChat: props.activeChat,
+        activeChatId: props.activeChatId
     }
 }
 

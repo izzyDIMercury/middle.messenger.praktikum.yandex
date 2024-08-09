@@ -14,7 +14,6 @@ class Messages extends Block<MessagesType> {
         });
     }
 
-
     render() {
         return (
             `

@@ -8,7 +8,7 @@ import { switchPage, fillUserInfo } from "../../core/utils.ts";
 import { connect } from "../../core/connect.ts";
 import SettingsController from "../../controllers/settings.ts";
 import type { StoreType } from "../../types.ts";
-import { GlobalStore } from "../../store.ts";
+// import { GlobalStore } from "../../store.ts";
 
 type ProfilePageProps = {
     doFillProps: boolean
@@ -133,17 +133,20 @@ class ProfilePage extends Block<ProfilePageProps> {
     }
 
     handleLogout() {
-        GlobalStore.setState({ doFillInfo: false });
+        //@ts-expect-error can't properly type window.store
+        window.store.setState({ doFillInfo: false });
         console.log("LOGOUT IN COMPONENT");
         const controller = new SettingsController();
         controller.logout();
-        GlobalStore.setState({ doFillInfo: false });
+        //@ts-expect-error can't properly type window.store
+        window.store.setState({ doFillInfo: false });
     }
 
     componentDidMount(): void {
         // console.log("CDM PP", this.props.imageLink);
         setTimeout(() => {
-            console.log(GlobalStore.getState());
+            //@ts-expect-error can't properly type window.store
+            console.log(window.store.getState());
         }, 1000)
     }
 

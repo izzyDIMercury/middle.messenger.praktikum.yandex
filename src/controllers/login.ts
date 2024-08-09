@@ -1,18 +1,15 @@
 import FormSubmit from "../core/formSubmit.ts";
 import AuthApi from "../api/auth.ts";
 import { switchPage } from "../core/utils.ts";
-import { GlobalStore } from "../store.ts";
+// import { GlobalStore } from "../store.ts";
 
 export default class LoginController {
 
     public async login(formClass: string, errorClass: string, isMessage?: boolean, eventType?: string) {
-        GlobalStore.setState({ isLoading: true });
+        //@ts-expect-error can't properly type window.store
+        window.store.setState({ isLoading: true });
         const submit = new FormSubmit(formClass, errorClass, isMessage, eventType);
         const api = new AuthApi();
-        // const out = await api.logout();
-        // console.log(out);
-        // const info = await api.userInfo();
-        // console.log("LOGIN: ", submit.validated, eventType);
 
 
         try {
@@ -34,7 +31,8 @@ export default class LoginController {
                 console.log(String(error));
             }
         }
-        GlobalStore.setState({ isLoading: false })
+        //@ts-expect-error can't properly type window.store
+        window.store.setState({ isLoading: false })
     }
 
     public async checkLoggedIn() {

@@ -1,16 +1,18 @@
 import FormSubmit from "../core/formSubmit.ts";
 import UsersApi from "../api/users.ts";
 import { switchPage } from "../core/utils.ts";
-import { GlobalStore } from "../store.ts";
+// import { GlobalStore } from "../store.ts";
 
 export default class SettingsController {
 
     public async logout() {
-        GlobalStore.setState({ isLoading: true })
+        //@ts-expect-error can't properly type window.store
+        window.store.setState({ isLoading: true })
         const api = new UsersApi();
         await api.logout() as { response: string };
         switchPage(null, "");
-        GlobalStore.setState({ isLoading: false })
+        //@ts-expect-error can't properly type window.store
+        window.store.setState({ isLoading: false })
         location.reload();
     }
 
@@ -20,8 +22,8 @@ export default class SettingsController {
 
         try {
             if (submit.validated && eventType === "click") {
-
-                GlobalStore.setState({ isLoading: true });
+                //@ts-expect-error can't properly type window.store
+                window.store.setState({ isLoading: true });
                 const result = await api.changeUserData(submit.userData) as { status: number };
 
                 if (result.status !== 200) {
@@ -34,7 +36,8 @@ export default class SettingsController {
             alert(error);
             console.log("Error status: ", error);
         }
-        GlobalStore.setState({ isLoading: false });
+        //@ts-expect-error can't properly type window.store
+        window.store.setState({ isLoading: false });
     }
 
     public async changePassword(formClass: string, errorClass: string, isMessage?: boolean, eventType?: string) {
@@ -44,7 +47,8 @@ export default class SettingsController {
 
         try {
             if (submit.validated && eventType === "click") {
-                GlobalStore.setState({ isLoading: true });
+                //@ts-expect-error can't properly type window.store
+                window.store.setState({ isLoading: true });
                 const result = await api.changeUserPassword(submit.userData) as { status: number };
                 
                 if (result.status !== 200) {
@@ -57,8 +61,8 @@ export default class SettingsController {
             alert(error);
             console.log(error);
         }
-
-        GlobalStore.setState({ isLoading: false });
+        //@ts-expect-error can't properly type window.store
+        window.store.setState({ isLoading: false });
 
         // Mas42er92s
         // mas42er92S
@@ -70,7 +74,8 @@ export default class SettingsController {
         const result = JSON.parse(response.response);
         const image = Object.entries(result).filter((prop) => prop[0] === "avatar")[0][1];
         const imageLink = "https://ya-praktikum.tech/api/v2/resources/" + image;
-        GlobalStore.setState({ imageLink })
+        //@ts-expect-error can't properly type window.store
+        window.store.setState({ imageLink })
     }
 
     public async getUserInfo() {

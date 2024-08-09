@@ -1,4 +1,4 @@
-import { GlobalStore } from "../../store";
+// import { GlobalStore } from "../../store";
 import Message from "./message.ts";
 import Chat from "../../controllers/chat.ts";
 
@@ -20,38 +20,74 @@ type Element = {
 
 }
 
+type User = {
+    id: number
+}
+
 export default class MessageController {
 
-    public async handleMessage(input: string, id: number) {
+    public async handleLastMessage(input: string, login: string) {
+
+        const controller = new Chat();
+        const response = await controller.searchUsers(login);
+        const result = JSON.parse(response.response) as User[];
+        if (result.length === 0) {
+            //@ts-expect-error can't properly type window.store
+            const id = window.store.getState().userInfo.id;
+            this.handleMessage(input, id, true);
+            return;
+        } else {
+            this.handleMessage(input, result[0].id, true);
+        }
+    }
+
+
+    public async handleMessage(input: string, id: number, isLast: boolean) {
         const controller = new Chat();
         const response = await controller.getUserInfo();
         const userId = JSON.parse(response.response).id;
         const myMessage: boolean = userId === id;
-        this.saveMessage(input, id, myMessage)
+        this.saveMessage(input, id, myMessage, isLast)
     }
 
-    public saveMessage(message: string, userId: number, myMessage: boolean) {
-        const props = GlobalStore.getState();
+    public saveMessage(message: string, userId: number, myMessage: boolean, isLast: boolean) {
+        //@ts-expect-error can't properly type window.store
+        const props = window.store.getState();
         const count = ++props.messagesCount;
         // const componentProps = this.props as { chat: {id: "number"}}
         const communication = props.communication;
         const id = props.activeChat.chat.id as unknown as number;
         
         const messages = communication[id] ? communication[id] : [];
-        messages.push({
-            userId: userId,
-            content: message,
-            myMessage: myMessage
-        });
+        if (isLast) {
+            messages[0] = {
+                userId: userId,
+                content: message,
+                myMessage: myMessage
+            }
+        } else {
+            messages.push({
+                userId: userId,
+                content: message,
+                myMessage: myMessage
+            });
+        }
+        // messages.push({
+        //     userId: userId,
+        //     content: message,
+        //     myMessage: myMessage
+        // });
         communication[id] = messages;
-        GlobalStore.setState({ communication, messagesCount: count })
+        //@ts-expect-error can't properly type window.store
+        window.store.setState({ communication, messagesCount: count })
 
         const controller = new MessageController();
         controller.drawMessages();
     }
 
     drawMessages() {
-        const props = GlobalStore.getState();
+        //@ts-expect-error can't properly type window.store
+        const props = window.store.getState();
         const chatId = props.activeChat.chat.id;
         const communication = props.communication;
 

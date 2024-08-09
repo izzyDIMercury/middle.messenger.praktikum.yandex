@@ -32,7 +32,6 @@ export default class ChatsApi {
     }
 
     public searchUsers(userData: RequestData) {
-        console.log(userData)
         return this.HTTP.post(`${this.host}/user/search`, {
             data: userData,
             headers: {
