@@ -47,7 +47,8 @@ export default class Chat {
     public async getChats() {
         const api = new Chats();
         const responseInfo = await api.userInfo();
-        const currentUserID = JSON.parse(responseInfo.response).id;
+        const userInfo = JSON.parse(responseInfo.response);
+        const currentUserID = userInfo.id;
 
         const responseChats = await api.getChats();
         const dataChats = JSON.parse(responseChats.response);

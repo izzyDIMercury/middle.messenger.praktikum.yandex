@@ -64,7 +64,8 @@ class User extends Block<UserProps> {
 const mapStateToPropsShort = (props: StoreType): object => {
     return {
         chats: props.chats,
-        length: props.length
+        length: props.length,
+        defaultChatSelected: props.defaultChatSelected
     }
 }
 

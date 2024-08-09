@@ -15,12 +15,6 @@ class ChatProfile extends Block<ChatProfileProps> {
     }
 
     init() {
-        // const Cat = new Image({
-        //     className: "chat-profile__user-image",
-        //     src: "/assets/cat.jpg",
-        //     alt: "Аватар пользователся",
-        //     path: ""
-        // });
         const Profile = new ProfileImage({
             className: "chat-profile__user-image",
             src: "/assets/profile-placeholder-small.png",
@@ -39,12 +33,27 @@ class ChatProfile extends Block<ChatProfileProps> {
         });
 
         this.children = {
-            // Cat,
             SettingsIcon,
             Profile
         };
     }
 
+    private handleActiveChat(chat: object, user: object) {
+        const image = document.querySelector(".chat-profile__user-image") as HTMLImageElement;
+        const link = "https://ya-praktikum.tech/api/v2/resources" + user.avatar;
+        image.src = link;
+
+        const userName = document.querySelector(".chat-profile__user-name") as HTMLParagraphElement;
+        userName.textContent = user.first_name;
+
+        console.log(chat, user)
+    }
+
+    componentDidUpdate(): boolean | void {
+        if (this.props.activeChat.isActive) {
+            this.handleActiveChat(this.props.activeChat.chat, this.props.activeChat.user);
+        }
+    }
     render() {
         return (
             `
@@ -65,7 +74,7 @@ class ChatProfile extends Block<ChatProfileProps> {
 const mapStateToPropsShort = (props: StoreType): object => {
     return {
         avatar: props.userInfo.avatar,
-        imageLink: props.imageLink
+        activeChat: props.activeChat
     }
 }
 

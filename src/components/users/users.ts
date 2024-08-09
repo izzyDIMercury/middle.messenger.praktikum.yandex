@@ -28,24 +28,45 @@ type ChatObject = {
 type ObjectsList = ChatObject[]
 
 class Users extends Block<UserType> {
+
+    private firstUserSelected: boolean = false;
+
     constructor(props: UserType) {
         super({
             ...props
         });
+
+        // const interval = setInterval(() => {
+        //     const container = document.querySelector("left-column__users");
+        //     const child = container?.firstChild;
+        //     console.log(child);
+        // }, 500);
+    }
+
+    init() {
+        const interval = setInterval(() => {
+            const container = document.querySelector(".left-column__users");
+            const child = container?.firstChild;
+            if (child instanceof HTMLElement) {
+                child.click();
+                clearInterval(interval);
+            }
+        }, 50);
     }
 
     public toggleActiveChat(event: MouseEvent) {
         const targetElement = event.target as HTMLElement;
         const parentElement = targetElement.closest("li") as HTMLElement;
-
         this.handleSelectColor(parentElement);
 
         const chatId = parentElement.getAttribute("chatid") as string;
         const props = this.props as CurrentType;
         const activeChat =  props.chats[chatId];
         GlobalStore.setState({
-            activeChat: activeChat,
-            isActive: true
+            activeChat: {
+                ...activeChat,
+                isActive: true
+            }
         })
         
     }
@@ -59,18 +80,20 @@ class Users extends Block<UserType> {
         element.style.backgroundColor = "rgba(171, 77, 204, 0.3)";
     }
 
+
     componentDidMount() {
         const controller = new Chat();
         controller.getChats();
+        // console.log(this.props.chats)
+        // this.toggleActiveChat();
+        // console.log("mount");
     }
 
     componentDidUpdate() {
         const toggleActiveChatBind = this.toggleActiveChat.bind(this);
-        //     const avatar = "https://ya-praktikum.tech/api/v2/resources" + user.avatar;
         const props = this.props as CurrentType;
         if (Object.keys(props.chats).length !== 0) {
             const chats = Object.values(props.chats) as ObjectsList;
-            // console.log(chats);
             const elements = chats.map(({chat, user}) => {
                 const avatar = "https://ya-praktikum.tech/api/v2/resources" + user.avatar;
                 return new User({
@@ -83,15 +106,6 @@ class Users extends Block<UserType> {
                     }
                 })
             })
-
-            // const elements = chats.map(({ chat, user }) => new User({ 
-            //     first_name: user.first_name,
-            //     second_name: user.second_name,
-            //     chatId: chat.id,
-            //     events: {
-            //         click: toggleActiveChatBind
-            //     }
-            // }))
             const root = document.querySelector(".left-column__users") as HTMLElement;
             root.textContent = "";
             let counter: number = 0;

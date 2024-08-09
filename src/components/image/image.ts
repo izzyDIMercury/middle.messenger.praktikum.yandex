@@ -21,17 +21,13 @@ class Image extends Block<ImageProps> {
     constructor(props: ImageProps) {
 
         const name = props.src.split(".").reverse()[1].split("/").reverse()[0];
-        console.log(props);
         const path = images[name];
-        // const avatar = props.avatar;
         Handlebars.registerHelper(name, () => path);
 
         super({
             ...props,
             path: path
         });
-
-        // console.log(this.props);
     }
 
     render() {

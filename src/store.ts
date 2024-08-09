@@ -28,7 +28,8 @@ const GlobalStore: GlobalStoreStype = new Store({
         login: null,
         phone: null,
         second_name: null
-    }
+    },
+    defaultChatSelected: false
 });
 
 
