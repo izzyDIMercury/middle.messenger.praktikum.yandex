@@ -84,7 +84,9 @@ class LoginPage extends Block<LoginPageProps> {
         if ("id" in result) {
             console.log("User is logged in system.");
             this.loggedIn = true;
-            switchPage(null, "messenger");
+
+            // вкл/выкл редирект на страницу чата, если пользователь уже залогинен
+            // switchPage(null, "messenger");
         } else {
             console.log("No user is logged.");
             this.loggedIn = false;
