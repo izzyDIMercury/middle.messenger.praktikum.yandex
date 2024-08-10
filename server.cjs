@@ -2,7 +2,9 @@ const express = require("express");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.use(express.static("./dist"), { "dotfiles": "allow" });
+app.use(express.static("./dist"), { "redirect": "false" });
+
+// { "dotfiles": "allow" }
 
 app.get("/", (req, res) => {
     res.status(200);
