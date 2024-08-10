@@ -30,10 +30,10 @@
     .input__element {
         width: 450px;
         height: 20px;
+        font-family: Inter, Arial, serif;
         font-weight: 500;
         font-size: 14px;
         color: black;
-        font-family: "Inter", "Arial";
     }
 }
 
@@ -50,38 +50,31 @@
 }
 
 .message-window {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: start;
     position: absolute;
     bottom: 90px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: flex-end;
+    overflow-y: hidden;
     width: 560px;
     height: 700px;
     background-color: transparent;
-    overflow-y: hidden;
 }
 
 .message {
     width: 100%;
 }
 
-// .message-text[userId="0"] {
-//     float: right;
-//     background-color: rgb(198,234,178);
-//     text-align: left;
-// }
-
 .message-text {
     float: inline-start;
-    padding: 4px 12px;
-    background-color: white;
-    border-radius: 12px;
     margin-top: 8px;
-    text-align: center;
-    font-family: "Inter", "Arial";
+    border-radius: 12px;
+    padding: 4px 12px;
+    max-width: 560px !important;
+    font-family: Inter, Arial, serif;
     font-size: 14px;
     line-height: 17px;
     text-align: left;
-    max-width: 560px !important;
+    background-color: white;
 }
