@@ -18,16 +18,24 @@ Object.entries(Components).forEach(([ name, component ]) => {
 const router = new Router("#app");
 //@ts-expect-error can't properly type window.store
 window.router = router;
-
-router.use("/", Pages.LoginPage as any);
-router.use("/messenger", Pages.ChatPage as any);
-router.use("/sign-up", Pages.RegisterPage as any);
-router.use("/settings", Pages.ProfilePage as any);
-router.use("/profile-change-data", Pages.ProfileChangeDataPage as any);
-router.use("/profile-change-password", Pages.ProfileChangePasswordPage as any);
-router.use("/404", Pages.Page404 as any);
-router.use("/500", Pages.Page500 as any);
-router.start();
+//@ts-expect-error can't properly type window.store
+window.router.use("/", Pages.LoginPage as any);
+//@ts-expect-error can't properly type window.store
+window.router.use("/messenger", Pages.ChatPage as any);
+//@ts-expect-error can't properly type window.store
+window.router.use("/sign-up", Pages.RegisterPage as any);
+//@ts-expect-error can't properly type window.store
+window.router.use("/settings", Pages.ProfilePage as any);
+//@ts-expect-error can't properly type window.store
+window.router.use("/profile-change-data", Pages.ProfileChangeDataPage as any);
+//@ts-expect-error can't properly type window.store
+window.router.use("/profile-change-password", Pages.ProfileChangePasswordPage as any);
+//@ts-expect-error can't properly type window.store
+window.router.use("/404", Pages.Page404 as any);
+//@ts-expect-error can't properly type window.store
+window.router.use("/500", Pages.Page500 as any);
+//@ts-expect-error can't properly type window.store
+window.router.start();
 console.log("here")
 
 
@@ -43,7 +51,8 @@ document.addEventListener("switchPage", event => {
     if (page === "login") {
         page = "";
     }
-    router.go(`/${page}`);
+    //@ts-expect-error can't properly type window.store
+    window.router.go(`/${page}`);
 });
 
 // export { WindowStore };
