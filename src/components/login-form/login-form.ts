@@ -60,7 +60,7 @@ export default class LoginForm extends Block<LoginFormProps> {
         const LoginLink = new Link({
             className: "login-page__link",
             text: "Нет аккаунта?",
-            page: "sing-up",
+            page: "sign-up",
             events: {
                 click: switchPage
             }

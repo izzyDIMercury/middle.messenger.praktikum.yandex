@@ -21,7 +21,7 @@ window.router = router;
 
 router.use("/", Pages.LoginPage as any);
 router.use("/messenger", Pages.ChatPage as any);
-router.use("/sing-up", Pages.RegisterPage as any);
+router.use("/sign-up", Pages.RegisterPage as any);
 router.use("/settings", Pages.ProfilePage as any);
 router.use("/profile-change-data", Pages.ProfileChangeDataPage as any);
 router.use("/profile-change-password", Pages.ProfileChangePasswordPage as any);
