@@ -47,6 +47,7 @@ export default class Router {
     }
 
     public go(pathname: string): void {
+        console.log(this.routes)
         this.history.pushState({}, "", pathname);
         this.onRoute(pathname);
     }

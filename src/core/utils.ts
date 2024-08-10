@@ -13,6 +13,7 @@ export function switchPage(event: MouseEvent | null, page: string) {
             }
         }));
     } else {
+
         document.dispatchEvent(new CustomEvent("switchPage", {
             detail: {
                 page: page

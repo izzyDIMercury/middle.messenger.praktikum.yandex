@@ -28,6 +28,7 @@ router.use("/profile-change-password", Pages.ProfileChangePasswordPage as any);
 router.use("/404", Pages.Page404 as any);
 router.use("/500", Pages.Page500 as any);
 router.start();
+console.log("here")
 
 
 interface PageCustomEvent extends CustomEvent {
