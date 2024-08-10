@@ -80,13 +80,20 @@ class MessagePanel extends Block<MessagePanelProps> {
         const controller = new Chat();
         if (activeChat.chat && this.socket === null) {
             const response = controller.connectSocket(activeChat.chat.id);
-            response.then((socket: WSTransport) => {
-                this.socket = socket;
-                socket.on("Message", (args: SocketProps) => {
-                    //@ts-expect-error can't properly type window.store
-                    window.store.setState({ currentMessage: args.content });
-                    messageController.handleMessage(args.content, args.user_id, false);
-                })
+            response.then((socket) => {
+                this.socket = socket as WSTransport;
+                if (socket) {
+                    socket.on("Message", (args: SocketProps) => {
+                        //@ts-expect-error can't properly type window.store
+                        window.store.setState({ currentMessage: args.content });
+                        messageController.handleMessage(args.content, args.user_id, false);
+                    })
+                }
+                // socket.on("Message", (args: SocketProps) => {
+                //     //@ts-expect-error can't properly type window.store
+                //     window.store.setState({ currentMessage: args.content });
+                //     messageController.handleMessage(args.content, args.user_id, false);
+                // })
             })
         }
     }

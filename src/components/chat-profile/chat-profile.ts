@@ -55,6 +55,7 @@ class ChatProfile extends Block<ChatProfileProps> {
         controller.deleteChat(chatId);
     }
 
+    //@ts-expect-error no other way around unused variable
     private handleActiveChat(chat: object, user: UserInfo) {
         const image = document.querySelector(".chat-profile__user-image") as HTMLImageElement;
         const link = "https://ya-praktikum.tech/api/v2/resources" + user.avatar;
