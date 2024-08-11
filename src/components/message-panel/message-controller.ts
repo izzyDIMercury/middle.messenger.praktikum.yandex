@@ -56,7 +56,7 @@ export default class MessageController {
         const count = ++props.messagesCount;
         // const componentProps = this.props as { chat: {id: "number"}}
         const communication = props.communication;
-        const id = props.activeChat.chat.id as unknown as number;
+        const id = props.activeChat.id as unknown as number;
         
         const messages = communication[id] ? communication[id] : [];
         if (isLast) {
@@ -88,7 +88,7 @@ export default class MessageController {
     drawMessages() {
         //@ts-expect-error can't properly type window.store
         const props = window.store.getState();
-        const chatId = props.activeChat.chat.id;
+        const chatId = props.activeChat.id;
         const communication = props.communication;
 
         if (chatId && communication[chatId] && communication[chatId].length !== 0) {

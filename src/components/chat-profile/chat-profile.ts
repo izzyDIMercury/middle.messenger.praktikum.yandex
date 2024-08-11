@@ -1,13 +1,16 @@
 import Block from "../../core/block.ts";
-// import { switchPage } from "../../core/utils.ts";
 import Image from "../image/image.ts";
-import ProfileImage from "../profile-image/profile-image.ts";
 import type { StoreType } from "../../types.ts";
 import { connect } from "../../core/connect.ts";
-import { UserInfo } from "../../types.ts";
 import Chat from "../../controllers/chat.ts";
 
 type ChatProfileProps = object;
+
+type ChatType = {
+    title: string,
+    id: number,
+    avatar: string | null
+}
 
 class ChatProfile extends Block<ChatProfileProps> {
     constructor(props: ChatProfileProps) {
@@ -19,23 +22,18 @@ class ChatProfile extends Block<ChatProfileProps> {
     init() {
         const deleteChatBind = this.deleteChat.bind(this);
 
-        const Profile = new ProfileImage({
+        const Profile = new Image({
             className: "chat-profile__user-image",
             src: "/assets/profile-placeholder-small.png",
             alt: "Аватар пользователся",
-            path: ""
+            page: "chat"
         })
 
-        // const Button = new DeleteButton({
-        //     events: {
-        //         click: deleteChatBind
-        //     }
-        // })
         const Button = new Image({
             className: "chat-profile__settings-icon",
             src: "/assets/icons/settings.png",
             alt: "Аватар пользователся",
-            page: "login",
+            page: "chat",
             events: {
                 click: deleteChatBind
             }
@@ -54,21 +52,22 @@ class ChatProfile extends Block<ChatProfileProps> {
         controller.deleteChat(chatId);
     }
 
-    //@ts-expect-error no other way around unused variable
-    private handleActiveChat(chat: object, user: UserInfo) {
-        const image = document.querySelector(".chat-profile__user-image") as HTMLImageElement;
-        const link = "https://ya-praktikum.tech/api/v2/resources" + user.avatar;
-        image.src = link;
-
+    private handleActiveChat(chat: ChatType) {
         const userName = document.querySelector(".chat-profile__user-name") as HTMLParagraphElement;
-        userName.textContent = user.first_name;
+        userName.textContent = chat.title;
+        console.log(chat.title)
+
+        if (!chat.avatar) {
+            return;
+        }
+        const image = document.querySelector(".chat-profile__user-image") as HTMLImageElement;
+        const link = "https://ya-praktikum.tech/api/v2/resources" + chat.avatar;
+        image.src = link;
     }
 
     componentDidUpdate(): boolean | void {
-        const propsClone = this.props as { activeChat: { chat: object, user: UserInfo, isActive: boolean }};
-        if (propsClone.activeChat.isActive) {
-            this.handleActiveChat(propsClone.activeChat.chat, propsClone.activeChat.user);
-        }
+        const propsClone = this.props as { activeChat: ChatType };
+        this.handleActiveChat(propsClone.activeChat);
     }
 
     render() {
@@ -88,30 +87,12 @@ class ChatProfile extends Block<ChatProfileProps> {
     }
 }
 
-// type DeleteButtonProps = object;
-
-// class DeleteButton extends Block<DeleteButtonProps> {
-
-//     constructor(props: DeleteButtonProps) {
-//         super({
-//             ...props
-//         })
-//     }
-
-//     render() {
-//         return (
-//             `
-//                 <div class="chat-profile__delete-chat">Удалить чат</div>
-//             `
-//         )
-//     }
-// }
-
 const mapStateToPropsShort = (props: StoreType): object => {
     return {
-        avatar: props.userInfo.avatar,
         activeChat: props.activeChat
     }
 }
+
+// avatar: props.userInfo.avatar,
 
 export default connect(mapStateToPropsShort)(ChatProfile);
