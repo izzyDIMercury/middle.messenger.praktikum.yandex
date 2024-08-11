@@ -31,8 +31,7 @@ class Image extends Block<ImageProps> {
     }
 
     componentDidUpdate(): boolean | void {
-        // console.log(this.props.activeChat);
-        // return true;
+        return true;
     }
 
     render() {

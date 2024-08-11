@@ -4,8 +4,7 @@ import { connect } from "../../core/connect.ts";
 import Image from "../image/image.ts";
 import Chat from "../../controllers/chat.ts";
 import FileSelector from "./file-selector.ts";
-import { Search } from "../search/search.ts";
-import Image from "../image/image.ts"; 
+import { Search } from "../search/search.ts"; 
 
 type ChatSettingsProps = {};
 type UsersListProps = {};
@@ -25,8 +24,7 @@ class ChatSettings extends Block<ChatSettingsProps> {
         const ChatImage = new Image({
             className: "chat-settings__chat-image",
             src: "/assets/profile-placeholder-small.png",
-            alt: "Аватар пользователся",
-            page: "chat"
+            alt: "Аватар чата"
         })
         const Close = new Image({
             className: "chat-settings__close-button",
@@ -94,8 +92,10 @@ class ChatSettings extends Block<ChatSettingsProps> {
 
     componentDidUpdate(): boolean | void {
         const props = this.props as { activeChat: { avatar: string }, chatSettingsOpened: boolean}
-        const image = document.querySelector(".chat-settings__chat-image") as HTMLImageElement;
-        image.src = "https://ya-praktikum.tech/api/v2/resources" + props.activeChat.avatar;
+        if (props.activeChat.avatar) {
+            const image = document.querySelector(".chat-settings__chat-image") as HTMLImageElement;
+            image.src = "https://ya-praktikum.tech/api/v2/resources" + props.activeChat.avatar;
+        } 
         this.showUsers();
         // if (props.chatSettingsOpened) {
         //     const image = document.querySelector(".chat-settings__chat-image") as HTMLImageElement;
