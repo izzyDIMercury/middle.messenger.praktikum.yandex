@@ -22,10 +22,17 @@ export default class Chat {
 
     public async uploadChatAvatar(form: FormData) {
         const api = new Chats();
-        const response = await api.uploadChatAvatar(form);
-        if (response.status === 200) {
-            this.getChats();
-        }
+
+        try {
+            const response = await api.uploadChatAvatar(form);
+            if (response.status === 200) {
+                this.getChats();
+            } else {
+                throw new Error(response);
+            }
+        } catch (error) {
+            console.log("Upload avatar error: ", error);
+        } 
     }
 
     public getLastMessage() {
@@ -64,7 +71,6 @@ export default class Chat {
             chatId: chatId
         };
 
-        console.log(users);
         let found: boolean = false;
         users.forEach((user: UserType) => {
             if (userId === user.id) {
@@ -72,9 +78,16 @@ export default class Chat {
             }
         })
 
-        if (!found) {
-            await api.addUser(requestData);
-            this.getChats();
+        try {
+            if (!found) {
+                const response = await api.addUser(requestData);
+                if (response.status !== 200) {
+                    throw new Error(response)
+                }
+                this.getChats();
+            }
+        } catch (error) {
+            console.log("Add user to chat error: ", error);
         }
     }
 
@@ -86,8 +99,15 @@ export default class Chat {
             users: [ userId ],
             chatId: chatId
         };
-        await api.deleteUserFromChat(requestData);
-        this.getChats();
+        try {
+            const response = await api.deleteUserFromChat(requestData);
+            if (response.status !== 200) {
+                throw new Error(response);
+            }
+            this.getChats();
+        } catch (error) {
+            console.log("Delete user error: ", error);
+        }
     }
 
     public async deleteChat(chatId: number) {
