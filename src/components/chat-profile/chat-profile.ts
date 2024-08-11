@@ -1,6 +1,6 @@
 import Block from "../../core/block.ts";
 // import { switchPage } from "../../core/utils.ts";
-// import Image from "../image/image.ts";
+import Image from "../image/image.ts";
 import ProfileImage from "../profile-image/profile-image.ts";
 import type { StoreType } from "../../types.ts";
 import { connect } from "../../core/connect.ts";
@@ -26,21 +26,20 @@ class ChatProfile extends Block<ChatProfileProps> {
             path: ""
         })
 
-        const Button = new DeleteButton({
+        // const Button = new DeleteButton({
+        //     events: {
+        //         click: deleteChatBind
+        //     }
+        // })
+        const Button = new Image({
+            className: "chat-profile__settings-icon",
+            src: "/assets/icons/settings.png",
+            alt: "Аватар пользователся",
+            page: "login",
             events: {
                 click: deleteChatBind
             }
-        })
-        // const SettingsIcon = new Image({
-        //     className: "chat-profile__settings-icon",
-        //     src: "/assets/icons/settings.png",
-        //     alt: "Аватар пользователся",
-        //     page: "login",
-        //     events: {
-        //         click: deleteChatBind
-        //     },
-        //     path: ""
-        // });
+        });
 
         this.children = {
             Button,
@@ -89,24 +88,24 @@ class ChatProfile extends Block<ChatProfileProps> {
     }
 }
 
-type DeleteButtonProps = object;
+// type DeleteButtonProps = object;
 
-class DeleteButton extends Block<DeleteButtonProps> {
+// class DeleteButton extends Block<DeleteButtonProps> {
 
-    constructor(props: DeleteButtonProps) {
-        super({
-            ...props
-        })
-    }
+//     constructor(props: DeleteButtonProps) {
+//         super({
+//             ...props
+//         })
+//     }
 
-    render() {
-        return (
-            `
-                <div class="chat-profile__delete-chat">Удалить чат</div>
-            `
-        )
-    }
-}
+//     render() {
+//         return (
+//             `
+//                 <div class="chat-profile__delete-chat">Удалить чат</div>
+//             `
+//         )
+//     }
+// }
 
 const mapStateToPropsShort = (props: StoreType): object => {
     return {

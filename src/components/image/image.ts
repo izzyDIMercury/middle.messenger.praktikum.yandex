@@ -46,7 +46,7 @@ const mapStateToPropsShort = (props: StoreType): object => {
     }
 }
 
-// {{#if avatar}} {{{avatar}}} {{else}} {{{ path }}} {{/if}}
+// <img class={{ className }} src="{{#if avatar}} {{{avatar}}} {{else}} {{{ path }}} {{/if}}" alt="{{ alt }}" {{#if page}} page="{{ page }}" {{/if}}">
 
 export default connect(mapStateToPropsShort)(Image);
 

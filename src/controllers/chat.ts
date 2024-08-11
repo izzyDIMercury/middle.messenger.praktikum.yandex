@@ -11,6 +11,13 @@ type Response = {
     response: string
 }
 
+type ChatType = {
+    avatar: string | null,
+    id: number,
+    title: string,
+    last_message: object
+}
+
 export default class Chat {
 
     public getLastMessage() {
@@ -73,38 +80,40 @@ export default class Chat {
         const api = new Chats();
 
         try {
-            const responseInfo = await api.userInfo();
-            const userInfo = JSON.parse(responseInfo.response);
-            if (responseInfo.status !== 200) {
-                throw new Error(userInfo);
-            }
-            const currentUserID = userInfo.id;
-
             const responseChats = await api.getChats();
             const dataChats = JSON.parse(responseChats.response);
-            console.log("chats: ", dataChats)
             if (responseChats.status !== 200) {
                 throw new Error(dataChats);
             }
-            const myChats: Record<number, {}> = {}
-            dataChats.forEach((chat: { id: number, last_message: object }) => {
-        
-                const responseUser = api.getChatUsers(chat.id);
-
-                responseUser.then((response: { response: string }) => {
-                    const user = JSON.parse(response.response).filter((user: { id: number }) => user.id !== currentUserID)[0];
-                    const id = chat.id;
-                    myChats[id] = { chat, user, lastMessage: chat.last_message  }
-                    const length = Object.keys(myChats).length;
-                    //@ts-expect-error can't properly type window.store
-                    window.store.setState({ chats: myChats, length });
-
-                    const container = document.querySelector(".left-column__users");
-                    const child = container?.firstChild;
-                    if (child instanceof HTMLElement) {
-                        child.click();
-                    }
+            const promises = dataChats.map((chat: ChatType) => {
+                return new Promise((resolve) => {
+                    const response = api.getChatUsers(chat.id);
+                    response.then(result => {
+                        const users = JSON.parse(result.response);
+                        const finalChat = {
+                            id: chat.id,
+                            title: chat.title,
+                            avatar: chat.avatar,
+                            lastMessage: chat.last_message,
+                            users: users
+                        }
+                        resolve(finalChat);
+                    })
                 })
+            })
+            Promise.all(promises).then(values => {
+                const chats: Record<number, ChatType> = {};
+                values.forEach(value => {
+                    chats[value.id] = value;
+                })
+                //@ts-expect-error window behavior
+                window.store.setState({ chats });
+
+                const container = document.querySelector(".left-column__users");
+                const child = container?.firstChild;
+                if (child instanceof HTMLElement) {
+                    child.click();
+                }
             })
         } catch (error) {
             console.log("Get chats error: ", error);
@@ -161,35 +170,3 @@ export default class Chat {
 // chat: 19535, 19541, id: 1627
 
 
-// public async getChats() {
-//     const api = new Chats();
-//     const responseInfo = await api.userInfo();
-//     const userInfo = JSON.parse(responseInfo.response);
-
-
-//     const currentUserID = userInfo.id;
-
-//     const responseChats = await api.getChats();
-//     const dataChats = JSON.parse(responseChats.response);
-//     // console.log(dataChats);
-//     const myChats: Record<number, {}> = {}
-//     dataChats.forEach((chat: { id: number, last_message: object }) => {
-
-//         const responseUser = api.getChatUsers(chat.id);
-
-//         responseUser.then((response: { response: string }) => {
-//             const user = JSON.parse(response.response).filter((user: { id: number }) => user.id !== currentUserID)[0];
-//             const id = chat.id;
-//             myChats[id] = { chat, user, lastMessage: chat.last_message  }
-//             const length = Object.keys(myChats).length;
-//             //@ts-expect-error can't properly type window.store
-//             window.store.setState({ chats: myChats, length });
-
-//             const container = document.querySelector(".left-column__users");
-//             const child = container?.firstChild;
-//             if (child instanceof HTMLElement) {
-//                 child.click();
-//             }
-//         })
-//     })
-// }

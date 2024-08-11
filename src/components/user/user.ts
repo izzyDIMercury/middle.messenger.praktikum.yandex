@@ -42,7 +42,7 @@ class User extends Block<UserProps> {
                         <div class="user__content">
                             {{{ Avatar }}}
                             <div class="user__data">
-                                <p class="user__name">{{ first_name }} {{ second_name }}</p>
+                                <p class="user__name">{{ title}}</p>
                                 <p class="user__message">{{ message }} </p>
                             </div>
                         </div>

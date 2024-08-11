@@ -65,7 +65,7 @@ export default class ChatsApi {
         });
     }
 
-    public getChatUsers(chatId: number) {
-        return this.HTTP.get(`${this.host}/chats/${chatId}/users`, {});
+    public async getChatUsers(chatId: number) {
+        return await this.HTTP.get(`${this.host}/chats/${chatId}/users`, {});
     }
 }

@@ -15,14 +15,9 @@ type CurrentType = {
 }
 
 type ChatObject = {
-    chat: {
-        id: number
-    },
-    user: {
-        first_name: string,
-        second_name: string,
-        avatar: string
-    }
+    id: number,
+    title: string,
+    avatar: string
 }
 
 type ObjectsList = ChatObject[]
@@ -71,16 +66,16 @@ class Users extends Block<UserType> {
     }
 
     componentDidUpdate() {
-    //     console.log("USERS UPDATED");
+        console.log("USERS UPDATED");
         const toggleActiveChatBind = this.toggleActiveChat.bind(this);
         const props = this.props as CurrentType;
+
         if (Object.keys(props.chats).length !== 0) {
             const chats = Object.values(props.chats) as ObjectsList;
-            const elements = chats.map(({chat, user}) => {
-                const avatar = "https://ya-praktikum.tech/api/v2/resources" + user.avatar;
+            const elements = chats.map((chat: ChatObject) => {
+                const avatar = chat.avatar ? "https://ya-praktikum.tech/api/v2/resources" + chat.avatar : undefined;
                 return new User({
-                    first_name: user.first_name,
-                    second_name: user.second_name,
+                    title: chat.title,
                     chatId: chat.id,
                     avatar: avatar,
                     events: {
@@ -113,10 +108,11 @@ class Users extends Block<UserType> {
 
 const mapStateToPropsShort = (props: StoreType): object => {
     return {
-        chats: props.chats,
-        length: props.length
+        chats: props.chats
     }
 }
+
+// length: props.length
 
 export default connect(mapStateToPropsShort)(Users);
 
