@@ -55,6 +55,8 @@ class ChatPage extends Block<ChatPageProps> {
 
     }
 
+    // {{{ MenuButton }}}
+
     render() {
         return (
             `
@@ -63,7 +65,6 @@ class ChatPage extends Block<ChatPageProps> {
                             <nav class="left-column__header">
                                 <div class="left-column__header-content">
                                     {{{ MenuButton }}}
-                                    {{{ MenuSearch }}}
                                 </div>
                             </nav>
                             {{{ ChatUsers }}}

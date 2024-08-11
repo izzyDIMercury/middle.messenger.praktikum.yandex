@@ -90,3 +90,67 @@
     color: $purple;
     cursor: pointer;
 }
+
+// users list
+
+.chat-settings__users-list {
+    margin-top: 16px;
+    width: 600px;
+}
+
+.chat-settings__users-list-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+}
+
+.chat-settings__users-list-title {
+    font-family: Inter, Arial, serif;
+    font-size: 14px;
+}
+
+.chat-settings__users-list-user {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 2px 0;
+    width: 300px;
+    height: 24px;
+    padding: 0 0 0 10px;
+    border: 1px solid $light-grey;
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.chat-settings__delete-user-button {
+    height: 24px;
+    padding: 0 8px 0 4px;
+    color: white;
+    background-color: $purple;
+    border: none;
+    cursor: pointer;
+}
+
+.chat-settings__users-name {
+    font-family: Inter, Arial, serif;
+    font-size: 13px;
+}
+
+// add user
+
+.chat-settings__add-container {
+    position: relative;
+    display: flex;
+    font-display: row;
+    justify-content: start;
+    align-items: center;
+    margin-top: 16px;
+    width: 600px;
+}
+
+.chat-settings__add-title {
+    font-family: Inter, Arial, serif;
+    font-size: 14px;
+    padding-right: 100px;
+}

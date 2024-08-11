@@ -19,7 +19,7 @@ class UsersList extends Block<UsersListProps> {
         const userId = element.getAttribute("userid") as string;
 
         const controller = new Chat();
-        controller.createChatWithUser(Number(userId));
+        controller.addUserToChat(Number(userId));
 
         // console.log(element);
     }
@@ -29,7 +29,6 @@ class UsersList extends Block<UsersListProps> {
 
         const store = this.props as StoreType;
         if (store.usersFound) {
-            console.log(store)
             const props = this.props as StoreType;
             const users = props.usersFound.map(element => new User({ 
                 first_name: element.first_name,

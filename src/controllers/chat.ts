@@ -50,25 +50,29 @@ export default class Chat {
         }
     }
 
-    public async createChatWithUser(userId: number) {
+    public async addUserToChat(userId: number) {
         const api = new Chats();
-        try {
-            const response = await api.create({ title: "mychat3" });
-            const chat = JSON.parse(response.response);
-            if (response.status !== 200) {
-                throw new Error(chat)
-            }
-            const chatId = chat.id;
-            const request = {
-                users: [ userId ],
-                chatId: chatId
-            };
-            console.log(request);
-            await api.addUser(request);
-            this.getChats();
-        } catch (error) {
-            console.log("Create 2 users chat error: ", error);
-        }
+        //@ts-expect-error window problem
+        const chatId = window.store.getState().activeChat.id;
+        // console.log(chatId);
+        const requestData = {
+            users: [ userId ],
+            chatId: chatId
+        };
+        const response = await api.addUser(requestData);
+        console.log(response);
+    }
+
+    public async deleteUserFromChat(userId: number) {
+        const api = new Chats();
+        //@ts-expect-error window problem
+        const chatId = window.store.getState().activeChat.id;
+        const requestData = {
+            users: [ userId ],
+            chatId: chatId
+        };
+        const response = await api.deleteUserFromChat(requestData);
+        console.log(response);
     }
 
     public async deleteChat(chatId: number) {

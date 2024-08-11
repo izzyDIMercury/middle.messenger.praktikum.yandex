@@ -22,6 +22,15 @@ export default class ChatsApi {
         })
     }
 
+    public async deleteUserFromChat(chatData: RequestData) {
+        return this.HTTP.delete(`${this.host}/chats/users`, {
+            data: chatData,
+            headers: {
+                ["content-type"]: "application/json"
+            }
+        });
+    }
+
     public async deleteChat(chatData: RequestData) {
         return this.HTTP.delete(`${this.host}/chats`, {
             data: chatData,
