@@ -38,13 +38,17 @@ export default class Chat {
         return api.userInfo();
     }
 
-    public async createChat(chatName: RequestData) {
+    public async createChat(chatName: string) {
         const api = new Chats();
         try {
-            const response = await api.create(chatName);
+            const requestData = {
+                title: chatName
+            }
+            const response = await api.create(requestData);
             if (response.status !== 200) {
                 throw new Error(JSON.parse(response.response));
             }
+            this.getChats();
         } catch (error) {
             console.log("Create char error: ", error);
         }

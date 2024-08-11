@@ -75,7 +75,11 @@ class MessagePanel extends Block<MessagePanelProps> {
         const messageController = new MessageController();
         const props = this.props as Props;
         const activeChat = props.activeChat;
-        messageController.handleLastMessage(activeChat.lastMessage.content, activeChat.lastMessage.user.login);
+        const lastMessage = activeChat.lastMessage;
+        if (lastMessage !== null) {
+            messageController.handleLastMessage(lastMessage.content, lastMessage.user.login);
+        }
+
 
         const controller = new Chat();
         if (activeChat.chat && this.socket === null) {

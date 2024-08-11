@@ -105,10 +105,6 @@ class ChatSettings extends Block<ChatSettingsProps> {
         // return true;
     }
 
-    componentDidMount(): void {
-        console.log("MOUNT")
-    }
-
     render() {
         return (
             `

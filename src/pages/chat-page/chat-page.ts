@@ -9,6 +9,7 @@ import { connect } from "../../core/connect.ts";
 import Loading from "../../components/loading/loading.ts";
 import type { StoreType } from "../../types.ts";
 import ChatSettings from "../../components/chat-settings/chat-settings.ts";
+import CreateChat from "../../components/create-chat/create-chat.ts";
 
 type ChatPageProps = {};
 
@@ -39,6 +40,7 @@ class ChatPage extends Block<ChatPageProps> {
 
         const LoadingWindow = new Loading("");
         const Settings = new ChatSettings({});
+        const Create = new CreateChat({});
 
         this.children = {
             MenuButton,
@@ -47,7 +49,8 @@ class ChatPage extends Block<ChatPageProps> {
             Profile,
             MessageBlock,
             LoadingWindow,
-            Settings
+            Settings,
+            Create
         };
     }
 
@@ -69,6 +72,7 @@ class ChatPage extends Block<ChatPageProps> {
                             <nav class="left-column__header">
                                 <div class="left-column__header-content">
                                     {{{ MenuButton }}}
+                                    {{{ Create }}}
                                 </div>
                             </nav>
                             {{{ ChatUsers }}}

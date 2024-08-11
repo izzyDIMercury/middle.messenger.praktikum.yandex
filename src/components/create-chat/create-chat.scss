@@ -1,0 +1,41 @@
+@import "/variables";
+
+.create-chat {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    width: 240px;
+    height: 30px;
+    border: 1px solid $light-grey;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.create-chat__input {
+    box-sizing: border-box;
+    padding-left: 10px;
+    width: 150px;
+    height: 30px;
+    border: none;
+    font-family: Inter, Arial, serif;
+    font-size: 13px;
+    background-color: $light-grey;
+}
+
+
+.create-chat__input:focus {
+    outline: none;
+}
+
+.create-chat__button {
+    box-sizing: border-box;
+    width: 90px;
+    height: 30px;
+    padding: 0 5px;
+    border: none;
+    font-family: Inter, Arial, serif;
+    font-size: 13px;
+    color: white;
+    background-color: $purple;
+    cursor: pointer;
+}
