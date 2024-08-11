@@ -86,13 +86,13 @@ export default class Chat {
             if (response.status !== 200) {
                 throw new Error(JSON.parse(response.response))
             }
-            this.getChats();
+            this.getChats(true);
         } catch (error) {
             console.log("Delete chat error: ", error);
         }
     }
 
-    public async getChats() {
+    public async getChats(clickFirstChild?: boolean) {
         const api = new Chats();
 
         try {
@@ -124,11 +124,18 @@ export default class Chat {
                 })
                 //@ts-expect-error window behavior
                 window.store.setState({ chats });
-
-                const container = document.querySelector(".left-column__users");
-                const child = container?.firstChild;
-                if (child instanceof HTMLElement) {
+                //@ts-expect-error window behavior
+                const activeChatId = window.store.getState().activeChat.id;
+                const child = document.querySelector(`li[chatId="${activeChatId}"]`)
+                console.log(child, activeChatId);
+                if (child instanceof HTMLElement && child !== null && !clickFirstChild) {
                     child.click();
+                } else {
+                    const container = document.querySelector(".left-column__users");
+                    const element = container?.firstChild;
+                    if (element instanceof HTMLElement) {
+                        element.click();
+                    }
                 }
             })
         } catch (error) {

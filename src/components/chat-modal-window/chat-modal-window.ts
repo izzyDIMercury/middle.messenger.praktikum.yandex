@@ -1,11 +1,13 @@
 import Block from "../../core/block.ts";
 import Chat from "../../controllers/chat.ts";
+import { connect } from "../../core/connect.ts";
+import type { StoreType } from "../../types.ts";
 
 type ChatModalWindowProps = {};
 type DeleteChatProps = {};
 type OpenChatSettingsProps = {};
 
-export default class ChatModalWindow extends Block<ChatModalWindowProps> {
+class ChatModalWindow extends Block<ChatModalWindowProps> {
     constructor(props: ChatModalWindowProps) {
         super({
             ...props
@@ -33,17 +35,16 @@ export default class ChatModalWindow extends Block<ChatModalWindowProps> {
 
     openSettings(event: MouseEvent) {
         event.preventDefault();
-        //@ts-expect-error window problem
-        console.log("OPEN");
+        //@ts-expect-error widnow behavior
         window.store.setState({ chatSettingsOpened: true });
     }
 
     deleteChat() {
         console.log("DELETE");
-        // const chatProps = this.props as { activeChat: { id: number }};
-        // const chatId = chatProps.activeChat.id;
-        // const controller = new Chat();
-        // controller.deleteChat(chatId);
+        const chatProps = this.props as { activeChat: { id: number }};
+        const chatId = chatProps.activeChat.id;
+        const controller = new Chat();
+        controller.deleteChat(chatId);
     }
 
     render() {
@@ -92,3 +93,14 @@ class OpenChatSettings extends Block<OpenChatSettingsProps> {
         )
     }
 }
+
+const mapStateToPropsShort = (props: StoreType): object => {
+    return {
+        activeChat: props.activeChat
+    }
+}
+
+// avatar: props.userInfo.avatar,
+
+export default connect(mapStateToPropsShort)(ChatModalWindow);
+

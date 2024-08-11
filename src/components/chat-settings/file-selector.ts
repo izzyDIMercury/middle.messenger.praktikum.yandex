@@ -1,4 +1,6 @@
 import Block from "../../core/block.ts";
+import type { StoreType } from "../../types.ts";
+import { connect } from "../../core/connect.ts";
 
 type FileSelectorProps = {
     events: {
@@ -6,7 +8,7 @@ type FileSelectorProps = {
     }
 };
 
-export default class FileSelector extends Block<FileSelectorProps> {
+class FileSelector extends Block<FileSelectorProps> {
     constructor(props: FileSelectorProps) {
         super({
             ...props
@@ -20,9 +22,18 @@ export default class FileSelector extends Block<FileSelectorProps> {
                     <input id="chat-image" type="file" name="avatar" accept="image/*">
                     <label for="chat-image-submit" class="chat-image-submit__label">Изменить картинку</label>
                     <input id="chat-image-submit" type="submit">
-                    <input id="chatId" name="chatId" type="number" value="20379">
+                    <input id="chatId" name="chatId" type="number" value="{{ activeChatId }}">
                 </form> 
             `
         );
     }
 }
+
+
+const mapStateToPropsShort = (props: StoreType): object => {
+    return {
+        activeChatId: props.activeChat.id
+    }
+}
+
+export default connect(mapStateToPropsShort)(FileSelector);

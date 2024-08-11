@@ -81,12 +81,6 @@ class ChatSettings extends Block<ChatSettingsProps> {
             elements.forEach(el => {
                 container?.appendChild(el.getContent());
             })
-            // if (container) {
-            //     container.textContent = "";
-            //     elements.forEach(el => {
-            //         container?.appendChild(el.getContent());
-            //     })
-            // 
         }
     }
 
@@ -97,12 +91,6 @@ class ChatSettings extends Block<ChatSettingsProps> {
             image.src = "https://ya-praktikum.tech/api/v2/resources" + props.activeChat.avatar;
         } 
         this.showUsers();
-        // if (props.chatSettingsOpened) {
-        //     const image = document.querySelector(".chat-settings__chat-image") as HTMLImageElement;
-        //     image.src = "https://ya-praktikum.tech/api/v2/resources" + props.activeChat.avatar;
-        //     this.showUsers();
-        // }
-        // return true;
     }
 
     render() {
@@ -225,7 +213,5 @@ const mapStateToPropsShort = (props: StoreType): object => {
         activeChat: props.activeChat
     }
 }
-
-// // avatar: props.userInfo.avatar,
 
 export default connect(mapStateToPropsShort)(ChatSettings);
