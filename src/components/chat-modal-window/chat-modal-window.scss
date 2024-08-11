@@ -1,6 +1,36 @@
 .modal-window {
-    display: none;
-    width: 100px;
-    height: 400px;
-    background-color: blue;
+    position: absolute;
+    top: 36px;
+    right: 4px;
+    display: flex;
+    flex-direction: column;
+    width: 130px;
+    height: 80px;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.modal-window__delete-button {
+    width: 130px;
+    height: 40px;
+    border: none;
+    border-bottom: 1px solid black;
+    background-color: white;
+    cursor: pointer;
+    font-family: Inter, Arial, serif;
+    font-size: 14px;
+    line-height: 17px;
+}
+
+.modal-window__setting-button {
+    width: 130px;
+    height: 40px;
+    border: none;
+    background-color: white;
+    cursor: pointer;
+    font-family: Inter, Arial, serif;
+    font-size: 14px;
+    line-height: 17px;
 }

@@ -2,7 +2,6 @@ import Block from "../../core/block.ts";
 import Image from "../image/image.ts";
 import type { StoreType } from "../../types.ts";
 import { connect } from "../../core/connect.ts";
-import Chat from "../../controllers/chat.ts";
 import ChatModalWindow from "../chat-modal-window/chat-modal-window.ts";
 
 type ChatProfileProps = object;
@@ -21,8 +20,6 @@ class ChatProfile extends Block<ChatProfileProps> {
     }
 
     init() {
-        const handleModalBind = this.handleModal.bind(this);
-
         const Profile = new Image({
             className: "chat-profile__user-image",
             src: "/assets/profile-placeholder-small.png",
@@ -52,20 +49,17 @@ class ChatProfile extends Block<ChatProfileProps> {
     }
 
     handleModal(event: MouseEvent) {
-        const className = event.target.getAttribute("class");
+        event.preventDefault();
+        const target = event.target as HTMLElement;
+        const className = target.getAttribute("class");
         if (className === "chat-profile__settings-icon") {
+            //@ts-expect-error window problem            
             window.store.setState({ modalOpened: true });
         } else {
+            //@ts-expect-error window problem  
             window.store.setState({ modalOpened: false });
         }
 
-    }
-
-    deleteChat() {
-        const chatProps = this.props as { activeChat: { id: number }};
-        const chatId = chatProps.activeChat.id;
-        const controller = new Chat();
-        controller.deleteChat(chatId);
     }
 
     private handleActiveChat(chat: ChatType) {
@@ -83,14 +77,7 @@ class ChatProfile extends Block<ChatProfileProps> {
     componentDidUpdate(): boolean | void {
         const propsClone = this.props as { activeChat: ChatType, modalOpened: boolean };
         this.handleActiveChat(propsClone.activeChat);
-
-        if (propsClone.modalOpened === true) {
-            const modal = document.querySelector(".modal-window") as HTMLElement;
-            modal.setAttribute("style", `display: block`);
-        } else if (propsClone.modalOpened === false) {
-            const modal = document.querySelector(".modal-window") as HTMLElement;
-            modal.setAttribute("style", `display: none`);
-        }
+        return true;
     }
 
     componentWillUnmount(): void {
@@ -106,7 +93,9 @@ class ChatProfile extends Block<ChatProfileProps> {
                             <p class="chat-profile__user-name">Илья</p>
                         </div>
                         <div class="chat-profile__settings-button" page="{{ login }}">
-                            {{{ Modal }}}
+                            {{#if modalOpened}}
+                                {{{ Modal }}}
+                            {{/if}}
                             {{{ Button }}}
                         </div>
                     </nav>
