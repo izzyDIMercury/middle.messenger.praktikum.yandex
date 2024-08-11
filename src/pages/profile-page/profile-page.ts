@@ -142,12 +142,8 @@ class ProfilePage extends Block<ProfilePageProps> {
         window.store.setState({ doFillInfo: false });
     }
 
-    componentDidMount(): void {
-        // console.log("CDM PP", this.props.imageLink);
-        // setTimeout(() => {
-        //     //@ts-expect-error can't properly type window.store
-        //     console.log(window.store.getState());
-        // }, 1000)
+    componentDidUpdate(): boolean | void {
+        return true;
     }
 
     render() {
@@ -171,12 +167,9 @@ class ProfilePage extends Block<ProfilePageProps> {
 
 const mapStateToPropsShort = (props: StoreType): object => {
     return {
-        isLoading: props.isLoading
+        isLoading: props.isLoading,
+        userInfo: props.userInfo
     }
 }
-
-// isLoading: props.isLoading,
-// imageLink: props.imageLink,
-// doFillProps: props.doFillProps
 
 export default connect(mapStateToPropsShort)(ProfilePage);

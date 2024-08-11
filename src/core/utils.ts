@@ -58,9 +58,6 @@ export async function fillUserInfo(page: string) {
     } else if (page === "change-profile") {
         infoProfileDataPage(result);
     }
-    // else if (page === "change-password") {
-    //     infoPasswordPage(result);
-    // }
 }
 
 function setImageLink(result: object) {
@@ -79,32 +76,19 @@ function infoSettingsPage(result: object) {
             element.textContent = value as string;
         }
     })
-    // const image = Object.entries(result).filter((prop) => prop[0] === "avatar")[0][1];
-    // const imageLink = "https://ya-praktikum.tech/api/v2/resources/" + image;
-    // GlobalStore.setState({ imageLink })
 }
 
 function infoProfileDataPage(result: object) {
     Object.entries(result).forEach(([key, value]) => {
         const element = document.querySelector(`input[name=${key}]`) as HTMLInputElement;
-        // console.log(element);
-        // (element !== null && element.name !== "avatar")
         if (element !== null) {
             if (element.name !== "avatar") {
                 element.value = value as string;
             }
         }
     })
-    // const image = Object.entries(result).filter((prop) => prop[0] === "avatar")[0][1];
-    // const imageLink = "https://ya-praktikum.tech/api/v2/resources/" + image;
-    // GlobalStore.setState({ imageLink })
 }
 
-// function infoPasswordPage(result: object) {
-//     const image = Object.entries(result).filter((prop) => prop[0] === "avatar")[0][1];
-//     const imageLink = "https://ya-praktikum.tech/api/v2/resources/" + image;
-//     GlobalStore.setState({ imageLink })
-// }
 
 
 export async function searchUsers(event: InputEvent): Promise<void> {

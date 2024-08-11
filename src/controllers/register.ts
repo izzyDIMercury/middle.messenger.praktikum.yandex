@@ -15,7 +15,7 @@ export default class RegisterController {
         try {
             if (submit.validated && eventType === "click") {
                 const result = await api.register(submit.userData);
-                if (result.responseText !== "OK") {
+                if (result.status !== 200) {
                     throw new Error(result.responseText);
                 }
                 switchPage(null, "messenger");            

@@ -103,7 +103,6 @@ class ProfileChangeDataPage extends Block<ChangeDataPageProps> {
         const handleFileBind = this.handleFile.bind(this);
 
         const File = new FileSelector({
-            className: "avatar",
             events: {
                 submit: handleFileBind
             }

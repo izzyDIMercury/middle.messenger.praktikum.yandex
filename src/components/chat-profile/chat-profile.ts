@@ -69,8 +69,6 @@ class ChatProfile extends Block<ChatProfileProps> {
     }
 
     private handleActiveChat(chat: ChatType) {
-        const userName = document.querySelector(".chat-profile__user-name") as HTMLParagraphElement;
-        userName.textContent = chat.title;
 
         if (!chat.avatar) {
             return;
@@ -93,7 +91,7 @@ class ChatProfile extends Block<ChatProfileProps> {
                     <nav class="chat-profile">
                         <div class="chat-profile__user">
                             {{{ Profile }}}
-                            <p class="chat-profile__user-name">Илья</p>
+                            <p class="chat-profile__user-name">{{ title }}</p>
                         </div>
                         <div class="chat-profile__settings-button" page="{{ login }}">
                             {{{ Button }}}
@@ -110,7 +108,8 @@ class ChatProfile extends Block<ChatProfileProps> {
 const mapStateToPropsShort = (props: StoreType): object => {
     return {
         activeChat: props.activeChat,
-        modalOpened: props.modalOpened
+        modalOpened: props.modalOpened,
+        title: props.activeChat.title
     }
 }
 

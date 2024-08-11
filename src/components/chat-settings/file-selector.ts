@@ -22,7 +22,7 @@ class FileSelector extends Block<FileSelectorProps> {
                     <input id="chat-image" type="file" name="avatar" accept="image/*">
                     <label for="chat-image-submit" class="chat-image-submit__label">Изменить картинку</label>
                     <input id="chat-image-submit" type="submit">
-                    <input id="chatId" name="chatId" type="number" value="{{ activeChatId }}">
+                    <input id="chat-id" name="chatId" type="number" value="{{ activeChatId }}">
                 </form> 
             `
         );

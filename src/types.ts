@@ -39,7 +39,8 @@ type StoreType = {
         },
         isActive: boolean,
         id: number,
-        users: UserType[]
+        users: UserType[],
+        title: string
     }
     communication: Record<string, MessageType>,
     currentMessage: string,
