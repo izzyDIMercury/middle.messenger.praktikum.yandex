@@ -82,6 +82,7 @@ export default class Chat {
 
             const responseChats = await api.getChats();
             const dataChats = JSON.parse(responseChats.response);
+            console.log("chats: ", dataChats)
             if (responseChats.status !== 200) {
                 throw new Error(dataChats);
             }
