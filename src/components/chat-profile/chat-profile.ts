@@ -20,7 +20,7 @@ class ChatProfile extends Block<ChatProfileProps> {
     }
 
     init() {
-        const handleModalBind = this.handleModal.bind(this);
+        // const handleModalBind = this.handleModal.bind(this);
         const Profile = new Image({
             className: "chat-profile__user-image",
             src: "/assets/profile-placeholder-small.png",
@@ -34,7 +34,7 @@ class ChatProfile extends Block<ChatProfileProps> {
             alt: "Аватар пользователся",
             page: "chat",
             events: {
-                click: handleModalBind
+                click: () => {}
             }
         });
 
@@ -46,24 +46,23 @@ class ChatProfile extends Block<ChatProfileProps> {
             Modal
         };
 
-        // document.addEventListener("click", this.handleModal);
+        document.addEventListener("mouseup", this.handleModal);
     }
 
     handleModal(event: MouseEvent) {
-        console.log(event);
+        // console.log(event);
         event.preventDefault();
         const target = event.target as HTMLElement;
         const className = target.getAttribute("class");
         if (className === "chat-profile__settings-icon") {
             //@ts-expect-error window problem            
             window.store.setState({ modalOpened: true });
+        } else {
             setTimeout(() => {
                 //@ts-expect-error window problem   
                 window.store.setState({ modalOpened: false });
-            }, 5000)
-        } else {
-            //@ts-expect-error window problem  
-            window.store.setState({ modalOpened: false });
+                console.log("CLICK OTHER PLACE")
+            }, 100)
         }
 
     }

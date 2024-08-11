@@ -20,7 +20,7 @@ class ProfilePage extends Block<ProfilePageProps> {
         super({
             ...props
         });
-        fillUserInfo("settings");
+        // fillUserInfo("settings");
     }
 
     init() {
@@ -142,8 +142,9 @@ class ProfilePage extends Block<ProfilePageProps> {
         window.store.setState({ doFillInfo: false });
     }
 
-    componentDidUpdate(): boolean | void {
-        return true;
+    componentDidMount(): void {
+        fillUserInfo("settings");
+        console.log("PROFILE MOUNT");
     }
 
     render() {

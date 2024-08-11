@@ -148,6 +148,7 @@ class ProfileChangeDataPage extends Block<ChangeDataPageProps> {
 
     componentDidMount(): void {
         fillUserInfo("change-profile");
+        console.log("CHANGE MOUNT");
     }
 
     render() {

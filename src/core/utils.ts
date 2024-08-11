@@ -69,7 +69,9 @@ function setImageLink(result: object) {
 
 function infoSettingsPage(result: object) {
     const title = document.querySelector(".profile-page__title") as HTMLTitleElement;
-    title.textContent = Object.entries(result).filter((prop) => prop[0] === "first_name")[0][1] as string;
+    if (title) {
+        title.textContent = Object.entries(result).filter((prop) => prop[0] === "first_name")[0][1] as string;
+    }
     Object.entries(result).forEach(([key, value]) => {
         const element = document.querySelector(`p[name=${key}]`) as HTMLTitleElement;
         if (element !== null) {
