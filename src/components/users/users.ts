@@ -66,7 +66,6 @@ class Users extends Block<UserType> {
     }
 
     componentDidUpdate() {
-        console.log("USERS UPDATED");
         const toggleActiveChatBind = this.toggleActiveChat.bind(this);
         const props = this.props as CurrentType;
 

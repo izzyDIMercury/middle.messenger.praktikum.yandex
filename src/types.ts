@@ -44,7 +44,8 @@ type StoreType = {
     userInfo: UserInfo,
     defaultChatSelected: boolean,
     messagesCount: number,
-    activeChatId: number
+    activeChatId: number,
+    modalOpened: boolean
 }
 
 export type { ComponentProps, UserData, StoreType, UserInfo };

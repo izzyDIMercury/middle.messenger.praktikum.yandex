@@ -3,6 +3,7 @@ import Image from "../image/image.ts";
 import type { StoreType } from "../../types.ts";
 import { connect } from "../../core/connect.ts";
 import Chat from "../../controllers/chat.ts";
+import ChatModalWindow from "../chat-modal-window/chat-modal-window.ts";
 
 type ChatProfileProps = object;
 
@@ -20,7 +21,7 @@ class ChatProfile extends Block<ChatProfileProps> {
     }
 
     init() {
-        const deleteChatBind = this.deleteChat.bind(this);
+        const handleModalBind = this.handleModal.bind(this);
 
         const Profile = new Image({
             className: "chat-profile__user-image",
@@ -35,19 +36,34 @@ class ChatProfile extends Block<ChatProfileProps> {
             alt: "Аватар пользователся",
             page: "chat",
             events: {
-                click: deleteChatBind
+                click: () => {}
             }
         });
 
+        const Modal = new ChatModalWindow({});
+
         this.children = {
             Button,
-            Profile
+            Profile,
+            Modal
         };
+
+        document.addEventListener("click", this.handleModal);
+    }
+
+    handleModal(event: MouseEvent) {
+        const className = event.target.getAttribute("class");
+        if (className === "chat-profile__settings-icon") {
+            window.store.setState({ modalOpened: true });
+        } else {
+            window.store.setState({ modalOpened: false });
+        }
+
     }
 
     deleteChat() {
-        const chatProps = this.props as { activeChat: { chat: { id: number }}};
-        const chatId = chatProps.activeChat.chat.id;
+        const chatProps = this.props as { activeChat: { id: number }};
+        const chatId = chatProps.activeChat.id;
         const controller = new Chat();
         controller.deleteChat(chatId);
     }
@@ -55,7 +71,6 @@ class ChatProfile extends Block<ChatProfileProps> {
     private handleActiveChat(chat: ChatType) {
         const userName = document.querySelector(".chat-profile__user-name") as HTMLParagraphElement;
         userName.textContent = chat.title;
-        console.log(chat.title)
 
         if (!chat.avatar) {
             return;
@@ -66,8 +81,20 @@ class ChatProfile extends Block<ChatProfileProps> {
     }
 
     componentDidUpdate(): boolean | void {
-        const propsClone = this.props as { activeChat: ChatType };
+        const propsClone = this.props as { activeChat: ChatType, modalOpened: boolean };
         this.handleActiveChat(propsClone.activeChat);
+
+        if (propsClone.modalOpened === true) {
+            const modal = document.querySelector(".modal-window") as HTMLElement;
+            modal.setAttribute("style", `display: block`);
+        } else if (propsClone.modalOpened === false) {
+            const modal = document.querySelector(".modal-window") as HTMLElement;
+            modal.setAttribute("style", `display: none`);
+        }
+    }
+
+    componentWillUnmount(): void {
+        
     }
 
     render() {
@@ -79,6 +106,7 @@ class ChatProfile extends Block<ChatProfileProps> {
                             <p class="chat-profile__user-name">Илья</p>
                         </div>
                         <div class="chat-profile__settings-button" page="{{ login }}">
+                            {{{ Modal }}}
                             {{{ Button }}}
                         </div>
                     </nav>
@@ -89,7 +117,8 @@ class ChatProfile extends Block<ChatProfileProps> {
 
 const mapStateToPropsShort = (props: StoreType): object => {
     return {
-        activeChat: props.activeChat
+        activeChat: props.activeChat,
+        modalOpened: props.modalOpened
     }
 }
 

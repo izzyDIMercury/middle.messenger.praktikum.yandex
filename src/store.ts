@@ -32,7 +32,8 @@ const globalStore: GlobalStoreStype = new Store({
     },
     defaultChatSelected: false,
     messagesCount: 0,
-    activeChatId: 0
+    activeChatId: 0,
+    modalOpened: false
 });
 
 

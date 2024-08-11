@@ -20,3 +20,4 @@ export { LoginForm } from "./login-form";
 export { FileSelector } from "./file-selector";
 export { ProfileImage } from "./profile-image";
 export { DropDown } from "./drop-down";
+export { ChatModalWindow } from "./chat-modal-window";
