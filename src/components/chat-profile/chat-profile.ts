@@ -86,9 +86,6 @@ class ChatProfile extends Block<ChatProfileProps> {
         return true;
     }
 
-    componentWillUnmount(): void {
-        
-    }
 
     render() {
         return (
@@ -99,10 +96,10 @@ class ChatProfile extends Block<ChatProfileProps> {
                             <p class="chat-profile__user-name">Илья</p>
                         </div>
                         <div class="chat-profile__settings-button" page="{{ login }}">
+                            {{{ Button }}}
                             {{#if modalOpened}}
                                 {{{ Modal }}}
                             {{/if}}
-                            {{{ Button }}}
                         </div>
                     </nav>
                 `

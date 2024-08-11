@@ -17,6 +17,8 @@ class UsersList extends Block<UsersListProps> {
         const target = event.target as unknown as HTMLElement;
         const element = target.closest("div") as HTMLElement;
         const userId = element.getAttribute("userid") as string;
+        const input = document.querySelector(".search__input") as HTMLInputElement;
+        input.value = "";
 
         const controller = new Chat();
         controller.addUserToChat(Number(userId));

@@ -9,6 +9,7 @@ import Settings from "/assets/icons/settings.png";
 import ProfilePlaceholder from "/assets/profile-placeholder.png";
 import ProfilePlaceholderSmall from "/assets/icons/profile-placeholder-small.png";
 import Loading from "/assets/icons/loading.gif";
+import Close from "/assets/icons/close.png";
 
 export const images: Record<string, any> = {
     "cat": Cat,
@@ -21,6 +22,7 @@ export const images: Record<string, any> = {
     "settings": Settings,
     "profile-placeholder": ProfilePlaceholder,
     "profile-placeholder-small": ProfilePlaceholderSmall,
-    "loading": Loading
+    "loading": Loading,
+    "close": Close
 }
 

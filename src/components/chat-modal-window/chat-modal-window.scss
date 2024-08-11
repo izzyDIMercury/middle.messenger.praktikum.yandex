@@ -13,6 +13,7 @@
 }
 
 .modal-window__delete-button {
+    z-index: 4000;
     width: 130px;
     height: 40px;
     border: none;
@@ -25,6 +26,7 @@
 }
 
 .modal-window__setting-button {
+    z-index: 4000;
     width: 130px;
     height: 40px;
     border: none;

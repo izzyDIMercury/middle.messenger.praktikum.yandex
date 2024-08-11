@@ -16,13 +16,13 @@ export default class ChatModalWindow extends Block<ChatModalWindowProps> {
         const openSettingsBind = this.openSettings.bind(this);
         const deleteChatBind = this.deleteChat.bind(this);
         const DeleteButton = new DeleteChat({
-            event: {
-                mousedown: deleteChatBind
+            events: {
+                click: deleteChatBind
             }
         });
         const SettingsButton = new OpenChatSettings({
-            event: {
-                mousedown: openSettingsBind
+            events: {
+                click: openSettingsBind
             }
         })
         this.children = {
@@ -31,15 +31,19 @@ export default class ChatModalWindow extends Block<ChatModalWindowProps> {
         }
     }
 
-    openSettings() {
-
+    openSettings(event: MouseEvent) {
+        event.preventDefault();
+        //@ts-expect-error window problem
+        console.log("OPEN");
+        window.store.setState({ chatSettingsOpened: true });
     }
 
     deleteChat() {
-        const chatProps = this.props as { activeChat: { id: number }};
-        const chatId = chatProps.activeChat.id;
-        const controller = new Chat();
-        controller.deleteChat(chatId);
+        console.log("DELETE");
+        // const chatProps = this.props as { activeChat: { id: number }};
+        // const chatId = chatProps.activeChat.id;
+        // const controller = new Chat();
+        // controller.deleteChat(chatId);
     }
 
     render() {

@@ -51,11 +51,15 @@ class ChatPage extends Block<ChatPageProps> {
         };
     }
 
-    componentDidMount(): void {
-
+    componentDidUpdate() {
+        const container = document.querySelector(".chat-settings-container");
+        const props = this.props as { chatSettingsOpened: boolean }
+        if (props.chatSettingsOpened) {
+            container?.setAttribute("style", "display: flex")
+        } else {
+            container?.setAttribute("style", "display: none")
+        }
     }
-
-    // {{{ MenuButton }}}
 
     render() {
         return (
@@ -82,7 +86,8 @@ class ChatPage extends Block<ChatPageProps> {
 
 const mapStateToPropsShort = (props: StoreType): object => {
     return {
-        isLoading: props.isLoading
+        isLoading: props.isLoading,
+        chatSettingsOpened: props.chatSettingsOpened
     }
 }
 
