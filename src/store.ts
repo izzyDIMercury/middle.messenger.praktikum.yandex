@@ -1,4 +1,4 @@
-import chatSettings from "./components/chat-settings/chat-settings.ts";
+
 import { Store } from "./core/store.ts";
 
 type GlobalStoreStype = {
