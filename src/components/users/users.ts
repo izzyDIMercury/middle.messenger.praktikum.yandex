@@ -17,8 +17,11 @@ type CurrentType = {
 type ChatObject = {
     id: number,
     title: string,
-    avatar: string
+    avatar: string,
+    lastMessage: LastMessage
 }
+
+type LastMessage = { content: string } | null;
 
 type ObjectsList = ChatObject[]
 
@@ -59,6 +62,21 @@ class Users extends Block<UserType> {
         element.style.backgroundColor = "rgba(171, 77, 204, 0.3)";
     }
 
+    private handleLastMessage(lastMessage: LastMessage) {
+        const content = lastMessage ? lastMessage.content : "";
+        if (content.length > 25) {
+            const array: string[] = content.split("");
+            const newArray: string[] = [];
+            for (let i = 0; i < 25; i++) {
+                newArray.push(array[i]);
+            }
+            newArray.push("...");
+            const message: string = newArray.join("");
+            return message; 
+        }
+        return content;
+    }
+
 
     componentDidMount() {
         const controller = new Chat();
@@ -72,11 +90,13 @@ class Users extends Block<UserType> {
         if (Object.keys(props.chats).length !== 0) {
             const chats = Object.values(props.chats) as ObjectsList;
             const elements = chats.map((chat: ChatObject) => {
+                const lastMessage = this.handleLastMessage(chat.lastMessage);
                 const avatar = chat.avatar ? "https://ya-praktikum.tech/api/v2/resources" + chat.avatar : undefined;
                 return new User({
                     title: chat.title,
                     chatId: chat.id,
                     avatar: avatar,
+                    lastMessage: lastMessage,
                     events: {
                         click: toggleActiveChatBind
                     }

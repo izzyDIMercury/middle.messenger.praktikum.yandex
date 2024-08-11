@@ -2,7 +2,7 @@ import Block from "../../core/block.ts";
 import { connect } from "../../core/connect.ts";
 import User from "./item.ts";
 import Chat from "../../controllers/chat.ts";
-import type { StoreType } from "../../types.ts";
+import type { StoreType, UserType } from "../../types.ts";
 
 type UsersListProps = {};
 
@@ -14,6 +14,7 @@ class UsersList extends Block<UsersListProps> {
     }
 
     public handleSelect(event: MouseEvent) {
+        const props = this.props as { activeChatUsers: UserType[] }
         const target = event.target as unknown as HTMLElement;
         const element = target.closest("div") as HTMLElement;
         const userId = element.getAttribute("userid") as string;
@@ -21,7 +22,7 @@ class UsersList extends Block<UsersListProps> {
         input.value = "";
 
         const controller = new Chat();
-        controller.addUserToChat(Number(userId));
+        controller.addUserToChat(Number(userId), props.activeChatUsers);
 
         // console.log(element);
     }
@@ -64,7 +65,8 @@ class UsersList extends Block<UsersListProps> {
 
 const mapStateToPropsShort = (props: StoreType): object => {
     return {
-        usersFound: props.usersFound
+        usersFound: props.usersFound,
+        activeChatUsers: props.activeChat.users
     }
 }
 

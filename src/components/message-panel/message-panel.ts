@@ -15,9 +15,7 @@ type MessagePanelProps = {};
 
 type Props= {
     activeChat: {
-        chat: {
-            id: number
-        },
+        id: number,
         lastMessage: {
             content: string,
             user: {
@@ -65,6 +63,7 @@ class MessagePanel extends Block<MessagePanelProps> {
         event.preventDefault();
         const messageElement = document.querySelector("#message") as HTMLInputElement;
         const input = messageElement.value;
+        console.log(input);
         this.socket && this.socket.send({
             content: input,
             type: "message"
@@ -82,8 +81,8 @@ class MessagePanel extends Block<MessagePanelProps> {
 
 
         const controller = new Chat();
-        if (activeChat.chat && this.socket === null) {
-            const response = controller.connectSocket(activeChat.chat.id);
+        if (activeChat && this.socket === null) {
+            const response = controller.connectSocket(activeChat.id);
             response.then((socket) => {
                 this.socket = socket as WSTransport;
                 if (socket) {

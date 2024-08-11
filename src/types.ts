@@ -6,8 +6,9 @@ type ComponentProps = {
     [key: string]: string | { [key: string]: Function };
 };
 
-type User = {
-    id: number
+type UserType = {
+    id: number,
+    login: string,
     first_name: string,
     second_name: string,
 }
@@ -29,7 +30,7 @@ type StoreType = {
     isLoading: boolean,
     isError: boolean,
     imageLink: string,
-    usersFound: User[],
+    usersFound: UserType[],
     chats: object,
     length: number,
     activeChat: {
@@ -37,7 +38,8 @@ type StoreType = {
             id: number
         },
         isActive: boolean,
-        id: number
+        id: number,
+        users: UserType[]
     }
     communication: Record<string, MessageType>,
     currentMessage: string,
@@ -50,4 +52,4 @@ type StoreType = {
     chatSettingsOpened: boolean
 }
 
-export type { ComponentProps, UserData, StoreType, UserInfo };
+export type { ComponentProps, UserData, StoreType, UserInfo, UserType };

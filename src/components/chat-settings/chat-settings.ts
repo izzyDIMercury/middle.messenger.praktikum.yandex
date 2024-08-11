@@ -1,5 +1,5 @@
 import Block from "../../core/block.ts";
-import type { StoreType } from "../../types.ts";
+import type { StoreType, UserType } from "../../types.ts";
 import { connect } from "../../core/connect.ts";
 import Image from "../image/image.ts";
 import Chat from "../../controllers/chat.ts";
@@ -68,7 +68,7 @@ class ChatSettings extends Block<ChatSettingsProps> {
         const users = props.activeChat.users;
 
         if (users && users.length !== 0) {
-            const elements = users.map((user) => {
+            const elements = users.map((user: UserType) => {
                 return new User({
                     first_name: user.first_name,
                     second_name: user.second_name,
@@ -192,21 +192,6 @@ class DeleteButton extends Block<DeleteButtonProps> {
     }
 }
 
-class CloseButton extends Block<DeleteButtonProps> {
-    constructor(props: DeleteButtonProps) {
-        super({
-            ...props
-        })
-    }
-    render() {
-        return (
-            `
-                <img />
-
-            `
-        )
-    }
-}
 
 const mapStateToPropsShort = (props: StoreType): object => {
     return {

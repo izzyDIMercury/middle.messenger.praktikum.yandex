@@ -43,7 +43,7 @@ class User extends Block<UserProps> {
                             {{{ Avatar }}}
                             <div class="user__data">
                                 <p class="user__name">{{ title}}</p>
-                                <p class="user__message">{{ message }} </p>
+                                <p class="user__message">{{ lastMessage }} </p>
                             </div>
                         </div>
                         <div class="user__status">

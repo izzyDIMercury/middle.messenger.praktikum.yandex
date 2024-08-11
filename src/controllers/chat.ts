@@ -1,10 +1,10 @@
 import WSTransport from "../core/WSTransport.ts";
 import Chats from "../api/chats.ts";
-// import { GlobalStore } from "../store.ts";
+import { UserType } from "../types.ts";
 
-type RequestData = {
-    [key: string]: string | number | object | [];
-}
+// type RequestData = {
+//     [key: string]: string | number | object | [];
+// }
 
 type Response = {
     status: number,
@@ -54,7 +54,7 @@ export default class Chat {
         }
     }
 
-    public async addUserToChat(userId: number) {
+    public async addUserToChat(userId: number, users: UserType[]) {
         const api = new Chats();
         //@ts-expect-error window problem
         const chatId = window.store.getState().activeChat.id;
@@ -63,8 +63,19 @@ export default class Chat {
             users: [ userId ],
             chatId: chatId
         };
-        const response = await api.addUser(requestData);
-        this.getChats();
+
+        console.log(users);
+        let found: boolean = false;
+        users.forEach((user: UserType) => {
+            if (userId === user.id) {
+                found = true;
+            }
+        })
+
+        if (!found) {
+            await api.addUser(requestData);
+            this.getChats();
+        }
     }
 
     public async deleteUserFromChat(userId: number) {
@@ -75,7 +86,7 @@ export default class Chat {
             users: [ userId ],
             chatId: chatId
         };
-        const response = await api.deleteUserFromChat(requestData);
+        await api.deleteUserFromChat(requestData);
         this.getChats();
     }
 
@@ -127,7 +138,6 @@ export default class Chat {
                 //@ts-expect-error window behavior
                 const activeChatId = window.store.getState().activeChat.id;
                 const child = document.querySelector(`li[chatId="${activeChatId}"]`)
-                console.log(child, activeChatId);
                 if (child instanceof HTMLElement && child !== null && !clickFirstChild) {
                     child.click();
                 } else {

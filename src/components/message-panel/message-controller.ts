@@ -72,11 +72,6 @@ export default class MessageController {
                 myMessage: myMessage
             });
         }
-        // messages.push({
-        //     userId: userId,
-        //     content: message,
-        //     myMessage: myMessage
-        // });
         communication[id] = messages;
         //@ts-expect-error can't properly type window.store
         window.store.setState({ communication, messagesCount: count })
