@@ -21,3 +21,4 @@ export { FileSelector } from "./file-selector";
 export { ProfileImage } from "./profile-image";
 export { DropDown } from "./drop-down";
 export { ChatModalWindow } from "./chat-modal-window";
+export { ChatSettings } from "./chat-settings";

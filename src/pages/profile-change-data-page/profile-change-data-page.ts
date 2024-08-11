@@ -94,12 +94,6 @@ class ProfileChangeDataPage extends Block<ChangeDataPageProps> {
                 mouseover: handleMouseOverBind
             }
         });
-        // const ProfileImage = new Image({
-        //     className: "profile-change-data-page__image",
-        //     src: "/assets/profile-placeholder.png",
-        //     alt: "Аватар пользователя",
-        //     path: ""
-        // });
         const Avatar = new ProfileImage({
             className: "profile-change-data-page__image",
             src: "/assets/profile-placeholder.png",
@@ -107,7 +101,9 @@ class ProfileChangeDataPage extends Block<ChangeDataPageProps> {
             path: ""
         });
         const handleFileBind = this.handleFile.bind(this);
+
         const File = new FileSelector({
+            className: "avatar",
             events: {
                 submit: handleFileBind
             }

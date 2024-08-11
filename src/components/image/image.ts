@@ -30,6 +30,11 @@ class Image extends Block<ImageProps> {
         });
     }
 
+    componentDidUpdate(): boolean | void {
+        // console.log(this.props.activeChat);
+        // return true;
+    }
+
     render() {
         return (
             `    
@@ -42,7 +47,8 @@ class Image extends Block<ImageProps> {
 
 const mapStateToPropsShort = (props: StoreType): object => {
     return {
-        imageLink: props.imageLink
+        imageLink: props.imageLink,
+        activeChat: props.activeChat
     }
 }
 

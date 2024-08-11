@@ -68,4 +68,10 @@ export default class ChatsApi {
     public async getChatUsers(chatId: number) {
         return await this.HTTP.get(`${this.host}/chats/${chatId}/users`, {});
     }
+
+    public async uploadChatAvatar(form: FormData) {
+        return await this.HTTP.put(`${this.host}/chats/avatar`, {
+            data: form
+        });
+    }
 }

@@ -98,7 +98,6 @@ class Users extends Block<UserType> {
         return (
             `
                     <ul class="left-column__users">
-                        
                     </ul>
                 `
         );
@@ -114,4 +113,5 @@ const mapStateToPropsShort = (props: StoreType): object => {
 // length: props.length
 
 export default connect(mapStateToPropsShort)(Users);
+
 

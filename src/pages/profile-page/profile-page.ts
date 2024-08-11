@@ -144,10 +144,10 @@ class ProfilePage extends Block<ProfilePageProps> {
 
     componentDidMount(): void {
         // console.log("CDM PP", this.props.imageLink);
-        setTimeout(() => {
-            //@ts-expect-error can't properly type window.store
-            console.log(window.store.getState());
-        }, 1000)
+        // setTimeout(() => {
+        //     //@ts-expect-error can't properly type window.store
+        //     console.log(window.store.getState());
+        // }, 1000)
     }
 
     render() {

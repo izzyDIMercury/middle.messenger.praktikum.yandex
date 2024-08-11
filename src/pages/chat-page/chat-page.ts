@@ -7,9 +7,8 @@ import MessagePanel from "../../components/message-panel/message-panel.ts";
 import { switchPage, fillUserInfo } from "../../core/utils.ts";
 import { connect } from "../../core/connect.ts";
 import Loading from "../../components/loading/loading.ts";
-// import { GlobalStore } from "../../store.ts";
 import type { StoreType } from "../../types.ts";
-// import Chat from "../../controllers/chat.ts";
+import ChatSettings from "../../components/chat-settings/chat-settings.ts";
 
 type ChatPageProps = {};
 
@@ -38,7 +37,8 @@ class ChatPage extends Block<ChatPageProps> {
         const Profile = new ChatProfile({});
         const MessageBlock = new MessagePanel({});
 
-        const LoadingWindow = new Loading("")
+        const LoadingWindow = new Loading("");
+        const Settings = new ChatSettings({});
 
         this.children = {
             MenuButton,
@@ -46,7 +46,8 @@ class ChatPage extends Block<ChatPageProps> {
             ChatUsers,
             Profile,
             MessageBlock,
-            LoadingWindow
+            LoadingWindow,
+            Settings
         };
     }
 
@@ -71,6 +72,7 @@ class ChatPage extends Block<ChatPageProps> {
                             {{{ Profile }}}
                             {{{ MessageBlock }}}
                         </div>
+                        {{{ Settings }}}
                     </main>
                 `
         );

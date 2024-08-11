@@ -20,6 +20,14 @@ type ChatType = {
 
 export default class Chat {
 
+    public async uploadChatAvatar(form: FormData) {
+        const api = new Chats();
+        const response = await api.uploadChatAvatar(form);
+        if (response.status === 200) {
+            this.getChats();
+        }
+    }
+
     public getLastMessage() {
         const api = new Chats();
         return api.getChats();

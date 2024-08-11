@@ -90,7 +90,7 @@ function infoProfileDataPage(result: object) {
         // console.log(element);
         // (element !== null && element.name !== "avatar")
         if (element !== null) {
-            if (element.id !== "avatar") {
+            if (element.name !== "avatar") {
                 element.value = value as string;
             }
         }

@@ -18,7 +18,7 @@ export default class FileSelector extends Block<FileSelectorProps> {
                 <form id="myUserForm" class="avatar">
                     <label for="avatar" class="avatar__label">Выбрать файл</label>
                     <input id="avatar" type="file" name="avatar" accept="image/*">
-                    <label for="avatar-submit" class="avatar-submit__label">Изменить аватарку</label>
+                    <label for="avatar-submit" class="avatar-submit__label">Изменить картинку</label>
                     <input id="avatar-submit" type="submit">
                 </form> 
             `
