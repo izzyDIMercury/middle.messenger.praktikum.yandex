@@ -60,7 +60,7 @@ export default class Chat {
             chatId: chatId
         };
         const response = await api.addUser(requestData);
-        console.log(response);
+        this.getChats();
     }
 
     public async deleteUserFromChat(userId: number) {
@@ -72,7 +72,7 @@ export default class Chat {
             chatId: chatId
         };
         const response = await api.deleteUserFromChat(requestData);
-        console.log(response);
+        this.getChats();
     }
 
     public async deleteChat(chatId: number) {

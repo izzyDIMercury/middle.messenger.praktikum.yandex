@@ -53,6 +53,8 @@ class ChatSettings extends Block<ChatSettingsProps> {
         const props = this.props as { activeChat: { users: [] }}
         const users = props.activeChat.users;
 
+        // console.log("UPDATE: ", props.activeChat.users);
+
         if (users && users.length !== 0) {
             const elements = users.map((user) => {
                 return new User({
@@ -68,13 +70,18 @@ class ChatSettings extends Block<ChatSettingsProps> {
                 container?.appendChild(el.getContent());
             })
         }
-        console.log(users);
+        // console.log(users);
     }
 
     componentDidUpdate(): boolean | void {
         const props = this.props as { activeChat: { avatar: string }}
         const image = document.querySelector(".chat-settings__chat-image") as HTMLImageElement;
         image.src = "https://ya-praktikum.tech/api/v2/resources" + props.activeChat.avatar;
+
+
+        // setTimeout(() => {
+        //     console.log("UPDATE: ", this.props.activeChatUsers);
+        // }, 3000)
 
         this.showUsers();
         return true;
