@@ -74,31 +74,35 @@ class MessagePanel extends Block<MessagePanelProps> {
         const messageController = new MessageController();
         const props = this.props as Props;
         const activeChat = props.activeChat;
-        const lastMessage = activeChat.lastMessage;
-        if (lastMessage !== null) {
-            messageController.handleLastMessage(lastMessage.content, lastMessage.user.login);
-        }
+        // const lastMessage = activeChat.lastMessage;
+        // if (lastMessage !== null) {
+        //     messageController.handleLastMessage(lastMessage.content, lastMessage.user.login);
+        // }
+        console.log("update")
+        // (activeChat && this.socket === null)
 
 
         const controller = new Chat();
-        if (activeChat && this.socket === null) {
-            const response = controller.connectSocket(activeChat.id);
-            response.then((socket) => {
-                this.socket = socket as WSTransport;
-                if (socket) {
-                    socket.on("Message", (args: SocketProps) => {
+        const response = controller.connectSocket(activeChat.id);
+        response.then((socket) => {
+            this.socket = socket as WSTransport;
+            if (socket) {
+                socket.send({
+                    content: 0,
+                    type: "get old"
+                });
+                socket.on("Message", (args: SocketProps) => {
+                    if (args instanceof Array) {
+                        messageController.handleMessages(args);
+                    } else {
                         //@ts-expect-error can't properly type window.store
                         window.store.setState({ currentMessage: args.content });
                         messageController.handleMessage(args.content, args.user_id, false);
-                    })
-                }
-                // socket.on("Message", (args: SocketProps) => {
-                //     //@ts-expect-error can't properly type window.store
-                //     window.store.setState({ currentMessage: args.content });
-                //     messageController.handleMessage(args.content, args.user_id, false);
-                // })
-            })
-        }
+                    }
+                })
+            }
+            // console.log(socket);
+        })
     }
 
     render() {

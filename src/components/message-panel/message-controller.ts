@@ -1,6 +1,7 @@
 // import { GlobalStore } from "../../store";
 import Message from "./message.ts";
 import Chat from "../../controllers/chat.ts";
+import type { UserMessage } from "../../types.ts";
 
 type MessageType = {
     content: string,
@@ -25,6 +26,48 @@ type User = {
 }
 
 export default class MessageController {
+
+
+    public async handleMessages(messages: UserMessage[]) {
+        const controller = new Chat();
+        const response = await controller.getUserInfo();
+        const myId = JSON.parse(response.response).id;
+        let lastMessages: UserMessage[] = messages;
+        if (messages.length > 30) {
+            const result: UserMessage[] | [] = [];
+            for (let i = 0; i < 30; i++) {
+                //@ts-expect-error unexpected behavior
+                result.push(messages[i]);
+            }
+            lastMessages = result;
+        }
+        lastMessages.reverse();
+        this.saveMessages(lastMessages, myId)
+    }
+
+    public saveMessages(messages: UserMessage[], myId: number) {
+        const processedMessages = messages.map((message: UserMessage) => {
+            const myMessage: boolean = myId === message.user_id;
+            return {
+                myMessage,
+                userId: message.user_id,
+                content: message.content
+            }
+        })
+        //@ts-expect-error can't properly type window.store
+        const props = window.store.getState();
+        const count = ++props.messagesCount;
+        const communication = props.communication;
+        const chatId = props.activeChat.id as unknown as number;
+        communication[chatId] = processedMessages;
+        // console.log(communication)
+
+        //@ts-expect-error can't properly type window.store
+        window.store.setState({ communication, messagesCount: count })
+
+        // const controller = new MessageController();
+        this.drawMessages();
+    }
 
     public async handleLastMessage(input: string, login: string) {
 
@@ -98,6 +141,8 @@ export default class MessageController {
             })
             const container = document.querySelector(".message-window") as HTMLElement;
             container.textContent = "";
+            const block = document.createElement("div");
+            block.setAttribute("class", "message-block");
             messages.forEach((el: Element) => {
                 const node = el.node;
                 const element = node.getContent();
@@ -108,8 +153,9 @@ export default class MessageController {
                     child.style.textAlign = "right"
                 }
                 child.textContent = el.message;
-                container?.appendChild(element);
+                block?.appendChild(element);
             })
+            container?.appendChild(block);
             const inputElement = document.querySelector("#message") as HTMLInputElement;
             inputElement.value = "";
         }

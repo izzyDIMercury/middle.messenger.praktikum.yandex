@@ -26,6 +26,11 @@ type UserInfo = {
 
 type MessageType = { messeges: string[] }
 
+type UserMessage = {
+    user_id: number,
+    content: string
+}
+
 type StoreType = {
     isLoading: boolean,
     isError: boolean,
@@ -40,7 +45,8 @@ type StoreType = {
         isActive: boolean,
         id: number,
         users: UserType[],
-        title: string
+        title: string,
+        messages: UserMessage[]
     }
     communication: Record<string, MessageType>,
     currentMessage: string,
@@ -53,4 +59,4 @@ type StoreType = {
     chatSettingsOpened: boolean
 }
 
-export type { ComponentProps, UserData, StoreType, UserInfo, UserType };
+export type { ComponentProps, UserData, StoreType, UserInfo, UserType, UserMessage };

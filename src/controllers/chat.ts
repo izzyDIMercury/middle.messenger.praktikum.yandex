@@ -35,10 +35,20 @@ export default class Chat {
         } 
     }
 
-    public getLastMessage() {
+    public async getLastMessage() {
         const api = new Chats();
         return api.getChats();
     }
+
+    // public async archived() {
+    //     const api = new Chats();
+    //     const response = await api.archiveChat({
+    //         chatId: 20379,
+    //         messages: ["one, two"]
+    //     })
+    //     const resp2 = await api.getArchivedChats();
+    //     console.log(JSON.parse(resp2.response))
+    // }
 
     public async getUserInfo() {
         const api = new Chats();
@@ -133,6 +143,7 @@ export default class Chat {
                 throw new Error(dataChats);
             }
             const promises = dataChats.map((chat: ChatType) => {
+                // console.log("CHAT: ", chat);
                 return new Promise((resolve) => {
                     const response = api.getChatUsers(chat.id);
                     response.then(result => {
@@ -171,6 +182,8 @@ export default class Chat {
         } catch (error) {
             console.log("Get chats error: ", error);
         }
+
+        // this.archived();
     }
 
     public searchUsers(input: string) {

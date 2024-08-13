@@ -52,13 +52,26 @@
 .message-window {
     position: absolute;
     bottom: 90px;
+    // display: flex;
+    // flex-direction: column;
+    // align-items: start;
+    // justify-content: flex-end;
+    overflow-y: scroll;
+    width: 560px;
+    max-height: 530px !important;
+    background-color: transparent;
+}
+
+.message-window::-webkit-scrollbar {
+    display: none;
+}
+
+.message-block {
     display: flex;
     flex-direction: column;
     align-items: start;
     justify-content: flex-end;
-    overflow-y: hidden;
     width: 560px;
-    height: 700px;
     background-color: transparent;
 }
 

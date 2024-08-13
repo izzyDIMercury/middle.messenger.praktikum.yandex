@@ -13,6 +13,19 @@ export default class ChatsApi {
     //     return this.HTTP.post(`${this.host}/token`)
     // }
 
+    public archiveChat(chatData: object) {
+        return this.HTTP.post(`${this.host}/chats/archive`, {
+            data: chatData,
+            headers: {
+                ["content-type"]: "application/json"
+            }
+        })
+    }
+
+    public getArchivedChats() {
+        return this.HTTP.get(`${this.host}/chats/archive`, {})
+    }
+
     public async create(userData: object) {
         return this.HTTP.post(`${this.host}/chats`, {
             data: userData,
