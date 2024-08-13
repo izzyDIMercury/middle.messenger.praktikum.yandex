@@ -8,7 +8,6 @@ export default class UsersApi {
     private HTTP = new HTTPTransport();
 
     public async logout() {
-        // @ts-expect-error something
         return this.HTTP.post(`${this.host}/auth/logout`, {
             handler: "settings logout"
         });
@@ -36,7 +35,6 @@ export default class UsersApi {
     }
 
     public async userInfo() {
-        // @ts-expect-error something
         return this.HTTP.get(`${this.host}/auth/user`, {});
     }
 }

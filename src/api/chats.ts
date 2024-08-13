@@ -1,19 +1,20 @@
 import HTTPTransport from "../core/request.ts";
+import type { HTTP, UserData } from "../types.ts";
 
-type RequestData = {
-    [key: string]: string | number | object | [];
-}
+// type RequestData = {
+//     [key: string]: string | number | object | [];
+// }
 
 export default class ChatsApi {
 
     private host: string = "https://ya-praktikum.tech/api/v2";
-    private HTTP: any = new HTTPTransport();
+    private HTTP: HTTP = new HTTPTransport();
 
     // public async connect(userData: RequestData) {
     //     return this.HTTP.post(`${this.host}/token`)
     // }
 
-    public archiveChat(chatData: object) {
+    public archiveChat(chatData: UserData) {
         return this.HTTP.post(`${this.host}/chats/archive`, {
             data: chatData,
             headers: {
@@ -26,7 +27,7 @@ export default class ChatsApi {
         return this.HTTP.get(`${this.host}/chats/archive`, {})
     }
 
-    public async create(userData: object) {
+    public async create(userData: UserData) {
         return this.HTTP.post(`${this.host}/chats`, {
             data: userData,
             headers: {
@@ -35,7 +36,7 @@ export default class ChatsApi {
         })
     }
 
-    public async deleteUserFromChat(chatData: RequestData) {
+    public async deleteUserFromChat(chatData: UserData) {
         return this.HTTP.delete(`${this.host}/chats/users`, {
             data: chatData,
             headers: {
@@ -44,7 +45,7 @@ export default class ChatsApi {
         });
     }
 
-    public async deleteChat(chatData: RequestData) {
+    public async deleteChat(chatData: UserData) {
         return this.HTTP.delete(`${this.host}/chats`, {
             data: chatData,
             headers: {
@@ -53,7 +54,7 @@ export default class ChatsApi {
         })
     }
 
-    public searchUsers(userData: RequestData) {
+    public searchUsers(userData: UserData) {
         return this.HTTP.post(`${this.host}/user/search`, {
             data: userData,
             headers: {
@@ -78,7 +79,7 @@ export default class ChatsApi {
         });
     }
 
-    public addUser(userData: object) {
+    public addUser(userData: UserData) {
         return this.HTTP.put(`${this.host}/chats/users`, {
             data: userData,
             headers: {
@@ -91,7 +92,7 @@ export default class ChatsApi {
         return await this.HTTP.get(`${this.host}/chats/${chatId}/users`, {});
     }
 
-    public async uploadChatAvatar(form: FormData) {
+    public async uploadChatAvatar(form: UserData) {
         return await this.HTTP.put(`${this.host}/chats/avatar`, {
             data: form
         });

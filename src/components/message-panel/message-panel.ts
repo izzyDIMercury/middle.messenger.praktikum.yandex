@@ -63,7 +63,10 @@ class MessagePanel extends Block<MessagePanelProps> {
         event.preventDefault();
         const messageElement = document.querySelector("#message") as HTMLInputElement;
         const input = messageElement.value;
-        console.log(input);
+        if (input.length === 0) {
+            console.log("Message is empty.");
+            return;
+        }
         this.socket && this.socket.send({
             content: input,
             type: "message"
@@ -74,12 +77,6 @@ class MessagePanel extends Block<MessagePanelProps> {
         const messageController = new MessageController();
         const props = this.props as Props;
         const activeChat = props.activeChat;
-        // const lastMessage = activeChat.lastMessage;
-        // if (lastMessage !== null) {
-        //     messageController.handleLastMessage(lastMessage.content, lastMessage.user.login);
-        // }
-        console.log("update")
-        // (activeChat && this.socket === null)
 
 
         const controller = new Chat();

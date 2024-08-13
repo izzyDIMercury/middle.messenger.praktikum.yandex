@@ -6,6 +6,23 @@ type ComponentProps = {
     [key: string]: string | { [key: string]: Function };
 };
 
+type Options = {
+    headers?: {
+        [key: string]: string
+    },
+    method?: string,
+    timeout?: number,
+    handler?: string,
+    data?: UserData;
+}
+
+type HTTP = {
+    post: (url: string, options: Options) => Promise<XMLHttpRequest>;
+    put: (url: string, options: Options) => Promise<XMLHttpRequest>
+    get: (url: string, options: Options) => Promise<XMLHttpRequest>
+    delete: (url: string, options: Options) => Promise<XMLHttpRequest>
+};
+
 type UserType = {
     id: number,
     login: string,
@@ -59,4 +76,4 @@ type StoreType = {
     chatSettingsOpened: boolean
 }
 
-export type { ComponentProps, UserData, StoreType, UserInfo, UserType, UserMessage };
+export type { ComponentProps, UserData, StoreType, UserInfo, UserType, UserMessage, HTTP };

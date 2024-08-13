@@ -61,7 +61,7 @@ class ChatProfile extends Block<ChatProfileProps> {
             setTimeout(() => {
                 //@ts-expect-error window problem   
                 window.store.setState({ modalOpened: false });
-                console.log("CLICK OTHER PLACE")
+                // console.log("CLICK OTHER PLACE")
             }, 100)
         }
 

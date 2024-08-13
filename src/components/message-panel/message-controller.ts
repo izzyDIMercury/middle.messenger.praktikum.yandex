@@ -158,6 +158,8 @@ export default class MessageController {
             container?.appendChild(block);
             const inputElement = document.querySelector("#message") as HTMLInputElement;
             inputElement.value = "";
+
+            container.scrollTop = container.scrollHeight;
         }
     }
 }
