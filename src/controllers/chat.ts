@@ -28,10 +28,10 @@ export default class Chat {
             if (response.status === 200) {
                 this.getChats();
             } else {
-                throw new Error(response);
+                throw new Error("Upload avatar error");
             }
         } catch (error) {
-            console.log("Upload avatar error: ", error);
+            console.log(error);
         } 
     }
 
@@ -92,12 +92,12 @@ export default class Chat {
             if (!found) {
                 const response = await api.addUser(requestData);
                 if (response.status !== 200) {
-                    throw new Error(response)
+                    throw new Error("Upload avatar error")
                 }
                 this.getChats();
             }
         } catch (error) {
-            console.log("Add user to chat error: ", error);
+            console.log(error);
         }
     }
 
@@ -112,11 +112,11 @@ export default class Chat {
         try {
             const response = await api.deleteUserFromChat(requestData);
             if (response.status !== 200) {
-                throw new Error(response);
+                throw new Error("Delete user error");
             }
             this.getChats();
         } catch (error) {
-            console.log("Delete user error: ", error);
+            console.log(error);
         }
     }
 
