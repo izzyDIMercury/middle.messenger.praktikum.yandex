@@ -4,7 +4,8 @@ import { connect } from "../../core/connect.ts";
 import Image from "../image/image.ts";
 import Chat from "../../controllers/chat.ts";
 import FileSelector from "./file-selector.ts";
-import { Search } from "../search/search.ts"; 
+import { Search } from "../search/search.ts";
+import { BASE_URL } from "../../constants.ts";
 
 type ChatSettingsProps = {};
 type UsersListProps = {};
@@ -88,7 +89,7 @@ class ChatSettings extends Block<ChatSettingsProps> {
         const props = this.props as { activeChat: { avatar: string }, chatSettingsOpened: boolean}
         if (props.activeChat.avatar) {
             const image = document.querySelector(".chat-settings__chat-image") as HTMLImageElement;
-            image.src = "https://ya-praktikum.tech/api/v2/resources" + props.activeChat.avatar;
+            image.src = `${BASE_URL}/resources` + props.activeChat.avatar;
         } 
         this.showUsers();
     }

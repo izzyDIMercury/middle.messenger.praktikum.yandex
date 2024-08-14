@@ -8,8 +8,7 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "lint": "eslint ./src --ext .ts & stylelint src/**/*.scss",
-    "start": "npm run build && node server.cjs",
-    "test": "mocha"
+    "start": "npm run build && node server.cjs"
   },
   "devDependencies": {
     "@types/chai": "^4.3.17",

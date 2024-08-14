@@ -4,6 +4,7 @@ import Chat from "../../controllers/chat.ts";
 import { connect } from "../../core/connect.ts";
 // import { GlobalStore } from "../../store.ts";
 import type { StoreType } from "../../types.ts";
+import { BASE_URL } from "../../constants.ts";
 
 
 type UserType = {};
@@ -91,7 +92,7 @@ class Users extends Block<UserType> {
             const chats = Object.values(props.chats) as ObjectsList;
             const elements = chats.map((chat: ChatObject) => {
                 const lastMessage = this.handleLastMessage(chat.lastMessage);
-                const avatar = chat.avatar ? "https://ya-praktikum.tech/api/v2/resources" + chat.avatar : undefined;
+                const avatar = chat.avatar ? `${BASE_URL}/resources` + chat.avatar : undefined;
                 return new User({
                     title: chat.title,
                     chatId: chat.id,

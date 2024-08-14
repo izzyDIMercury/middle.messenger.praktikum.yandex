@@ -1,7 +1,7 @@
 import FormSubmit from "../core/formSubmit.ts";
 import UsersApi from "../api/users.ts";
 import { switchPage } from "../core/utils.ts";
-// import { GlobalStore } from "../store.ts";
+import { BASE_URL } from "../constants.ts";
 
 type Response = {
     status: number,
@@ -90,7 +90,7 @@ export default class SettingsController {
                 throw new Error(result);
             }
             const image = Object.entries(result).filter((prop) => prop[0] === "avatar")[0][1];
-            const imageLink = "https://ya-praktikum.tech/api/v2/resources/" + image;
+            const imageLink = `${BASE_URL}/resources/` + image;
             //@ts-expect-error can't properly type window.store
             window.store.setState({ imageLink })
         } catch (error) {

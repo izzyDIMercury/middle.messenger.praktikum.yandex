@@ -1,13 +1,13 @@
 import HTTPTransport from "../core/request.ts";
 import type { HTTP, UserData } from "../types.ts";
+import { BASE_URL } from "../constants.ts";
 
 export default class AuthApi {
 
-    private host: string = "https://ya-praktikum.tech/api/v2";
     private HTTP: HTTP = new HTTPTransport();
 
     public async login(userData: UserData) {
-        return this.HTTP.post(`${this.host}/auth/signin`, {
+        return this.HTTP.post(`${BASE_URL}/auth/signin`, {
             data: userData,
             headers: {
                 ["content-type"]: "application/json"
@@ -17,7 +17,7 @@ export default class AuthApi {
 
     public async register(userData: UserData) {
         console.log(userData);
-        return this.HTTP.post(`${this.host}/auth/signup`, {
+        return this.HTTP.post(`${BASE_URL}/auth/signup`, {
             data: userData,
             headers: {
                 ["content-type"]: "application/json"
@@ -26,10 +26,10 @@ export default class AuthApi {
     }
 
     public async logout() {
-        return this.HTTP.post(`${this.host}/auth/logout`, {});
+        return this.HTTP.post(`${BASE_URL}/auth/logout`, {});
     }
 
     public async userInfo() {
-        return this.HTTP.get(`${this.host}/auth/user`, {});
+        return this.HTTP.get(`${BASE_URL}/auth/user`, {});
     }
 }
