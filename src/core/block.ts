@@ -17,7 +17,7 @@ class Block<Props> {
         FLOW_RENDER: "flow:render"
     };
 
-    private element: Element | null = null;
+    public element: Element | null = null;
 
     id: number | string;
 

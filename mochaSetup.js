@@ -1,10 +1,14 @@
-import { JSDOM } from 'jsdom'
+import { JSDOM } from 'jsdom';
 import * as Components from './src/components';
 import Handlebars from "handlebars";
 
 Object.entries(Components).forEach(([ name, component ]) => {
     Handlebars.registerPartial(name, component);
 })
+
+// Object.entries(images).forEach(([ name, path ]) => {
+//     Handlebars.registerHelper(name, () => path);
+// })
 
 const jsdom = new JSDOM(`<body></body>`);
 
