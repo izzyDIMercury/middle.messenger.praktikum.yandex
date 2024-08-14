@@ -3,6 +3,7 @@ import Image from "../image/image.ts";
 import type { StoreType } from "../../types.ts";
 import { connect } from "../../core/connect.ts";
 import ChatModalWindow from "../chat-modal-window/chat-modal-window.ts";
+import { BASE_URL } from "../../constants.ts";
 
 type ChatProfileProps = object;
 
@@ -73,7 +74,7 @@ class ChatProfile extends Block<ChatProfileProps> {
             return;
         }
         const image = document.querySelector(".chat-profile__user-image") as HTMLImageElement;
-        const link = "https://ya-praktikum.tech/api/v2/resources" + chat.avatar;
+        const link = `${BASE_URL}/resources` + chat.avatar;
         image.src = link;
     }
 

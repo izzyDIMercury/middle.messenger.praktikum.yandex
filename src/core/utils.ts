@@ -1,6 +1,6 @@
 import SettingsController from "../controllers/settings.ts";
 import Chat from "../controllers/chat.ts";
-// import { GlobalStore } from "../store.ts";
+import { BASE_URL } from "../constants.ts";
 
 export function switchPage(event: MouseEvent | null, page: string) {
     if (event instanceof MouseEvent) {
@@ -62,7 +62,7 @@ export async function fillUserInfo(page: string) {
 
 function setImageLink(result: object) {
     const image = Object.entries(result).filter((prop) => prop[0] === "avatar")[0][1];
-    const imageLink = "https://ya-praktikum.tech/api/v2/resources/" + image;
+    const imageLink = `${BASE_URL}/resources/` + image;
     //@ts-expect-error can't properly type window.store
     window.store.setState({ imageLink })
 }
