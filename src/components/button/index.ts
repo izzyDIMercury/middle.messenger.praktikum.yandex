@@ -1,2 +1,4 @@
+import Button from "./button.ts";
 import "./button.scss";
-export { default as Button } from "./button.hbs?raw";
+
+export { Button };

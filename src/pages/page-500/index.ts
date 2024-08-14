@@ -1,2 +1,4 @@
 import "./page-500.scss";
-export { default as Page500 } from "./page-500.hbs?raw";
+import Page500 from "./page-500.ts";
+
+export { Page500 };

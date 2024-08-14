@@ -1,0 +1,186 @@
+import Block from "../../core/block.ts";
+import ReturnButton from "../../components/return-button/return-button.ts";
+import ProfileForm from "../../components/profile-form/profile-form.ts";
+import Button from "../../components/button/button.ts";
+// import Image from "../../components/image/image.ts";
+import ProfileImage from "../../components/profile-image/profile-image.ts";
+import { switchPage, fillUserInfo } from "../../core/utils.ts";
+import { connect } from "../../core/connect.ts";
+import SettingsController from "../../controllers/settings.ts";
+import Loading from "../../components/loading/loading.ts";
+import FileSelector from "../../components/file-selector/file-selector.ts";
+import type { StoreType } from "../../types.ts";
+
+type ChangeDataPageProps = {};
+
+class ProfileChangeDataPage extends Block<ChangeDataPageProps> {
+    constructor(props: ChangeDataPageProps) {
+        super({
+            ...props
+        });
+    }
+
+    init() {
+        const handleBlurBind = this.handleBlur.bind(this);
+        const handleSubmitBind = this.handleSubmit.bind(this);
+        const handleMouseOverBind = this.handleMouseOver.bind(this);
+
+
+        const ButtonBack = new ReturnButton({
+            events: {
+                click: switchPage
+            }
+        });
+        const Form = new ProfileForm({
+            formItemsKeys: [],
+            formEnabled: true,
+            formData: [
+                {
+                    className: "profile-form__input",
+                    title: "Почта",
+                    name: "email",
+                    type: "email",
+                    label: "email",
+                    blur: handleBlurBind
+                },
+                {
+                    className: "profile-form__input",
+                    title: "Логин",
+                    name: "login",
+                    type: "text",
+                    label: "login",
+                    blur: handleBlurBind
+                },
+                {
+                    className: "profile-form__input",
+                    title: "Имя",
+                    name: "first_name",
+                    type: "text",
+                    label: "first_name",
+                    blur: handleBlurBind
+                },
+                {
+                    className: "profile-form__input",
+                    title: "Фамилия",
+                    name: "second_name",
+                    type: "text",
+                    label: "second_name",
+                    blur: handleBlurBind
+                },
+                {
+                    className: "profile-form__input",
+                    title: "Имя в чате",
+                    name: "display_name",
+                    type: "text",
+                    label: "display_name",
+                    blur: handleBlurBind
+                },
+                {
+                    className: "profile-form__input",
+                    title: "Телефон",
+                    name: "phone",
+                    type: "phone",
+                    label: "phone",
+                    blur: handleBlurBind
+                }
+            ]
+        });
+        const ProfileButton = new Button({
+            className: "profile-change-data-page",
+            page: "settings",
+            text: "Сохранить",
+            events: {
+                click: handleSubmitBind,
+                mouseover: handleMouseOverBind
+            }
+        });
+        const Avatar = new ProfileImage({
+            className: "profile-change-data-page__image",
+            src: "/assets/profile-placeholder.png",
+            alt: "Аватар пользователя",
+            path: ""
+        });
+        const handleFileBind = this.handleFile.bind(this);
+
+        const File = new FileSelector({
+            events: {
+                submit: handleFileBind
+            }
+        })
+
+        const LoadingWindow = new Loading({})
+
+        this.children = {
+            ButtonBack,
+            Form,
+            File,
+            ProfileButton,
+            Avatar,
+            LoadingWindow
+        };
+    }
+
+    handleFile(event: SubmitEvent) {
+        event.preventDefault();
+        const target = event.target as unknown as HTMLFormElement;
+        const form = new FormData(target);
+        const controller = new SettingsController();
+        controller.setAvatar(form);
+    }
+
+    handleBlur(event: FocusEvent) {
+        this.handleSubmit(event);
+    }
+
+    handleMouseOver(event: MouseEvent) {
+        event.preventDefault();
+        const inputs = document.querySelectorAll(".input__element") as NodeListOf<HTMLInputElement>;
+        inputs.forEach(input => {
+            input.blur();
+        })
+    }
+
+    handleSubmit(event: FocusEvent | MouseEvent) {
+        event.preventDefault();
+        const controller = new SettingsController();
+        controller.changeProfile("profile-change-data-page__form", "profile-change-data-page__error-text", false, event.type);
+    }
+
+    componentDidMount(): void {
+        fillUserInfo("change-profile");
+        console.log("CHANGE MOUNT");
+    }
+
+    render() {
+        return (
+            `
+                    <main class="profile-page">
+                        {{#if isLoading}}
+                            {{{ LoadingWindow }}}
+                        {{/if}}
+                        {{{ ButtonBack }}}
+                        {{{ File }}}
+                        <div class="profile-page__content">
+                            <form class="profile-change-data-page__form">
+                                <div class="profile-change-data-page__form-data">
+                                    {{{ Avatar }}}
+                                    {{{ Form }}}
+                                </div>
+                                {{{ ProfileButton }}}
+                            </form>
+                        </div>
+                    </main>
+                `
+        );
+    }
+}
+
+const mapStateToPropsShort = (props: StoreType): object => {
+    return {
+        isLoading: props.isLoading,
+        imageLink: props.imageLink
+    }
+}
+
+export default connect(mapStateToPropsShort)(ProfileChangeDataPage);
+

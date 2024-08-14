@@ -1,2 +1,4 @@
+import Link from "./link.ts";
 import "./link.scss";
-export { default as Link } from "./link.hbs?raw";
+
+export { Link };

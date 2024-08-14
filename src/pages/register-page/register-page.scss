@@ -1,30 +1,39 @@
 .register-page {
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    position: relative;
-    box-sizing: border-box;
-    width: 280px;
-    height: 615px;
-    padding-top: 50px;
+    padding-top: 30px;
     padding-bottom: 30px;
+    width: 340px;
+    height: 615px;
+    box-sizing: border-box;
 }
 
 .register-page__title {
-    padding-bottom: 24px;
+    padding-bottom: 16px;
 }
 
 .register-page__footer {
+    position: relative;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     align-items: center;
-    position: relative;
+    justify-content: space-between;
     height: 62px;
 }
 
 .register-page__input.input-field {
-    width: 280px;
+    margin-bottom: 10px;
+    width: 340px;
+    height: 52px;
+}
+
+.register-page__input.input-field p {
+    position: absolute;
+    left: 0;
+    bottom: -13px;
+    padding: 0;
 }
 
 .register-page__button.button {
