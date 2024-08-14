@@ -61,7 +61,6 @@ class ChatProfile extends Block<ChatProfileProps> {
             setTimeout(() => {
                 //@ts-expect-error window problem   
                 window.store.setState({ modalOpened: false });
-                // console.log("CLICK OTHER PLACE")
             }, 100)
         }
 
@@ -82,6 +81,7 @@ class ChatProfile extends Block<ChatProfileProps> {
         this.handleActiveChat(propsClone.activeChat);
         return true;
     }
+    
 
 
     render() {
@@ -90,7 +90,7 @@ class ChatProfile extends Block<ChatProfileProps> {
                     <nav class="chat-profile">
                         <div class="chat-profile__user">
                             {{{ Profile }}}
-                            <p class="chat-profile__user-name">{{ title }}</p>
+                            <p class="chat-profile__user-name">{{ activeChat.title }}</p>
                         </div>
                         <div class="chat-profile__settings-button" page="{{ login }}">
                             {{{ Button }}}
@@ -107,11 +107,14 @@ class ChatProfile extends Block<ChatProfileProps> {
 const mapStateToPropsShort = (props: StoreType): object => {
     return {
         activeChat: props.activeChat,
-        modalOpened: props.modalOpened,
-        title: props.activeChat.title
+        modalOpened: props.modalOpened
     }
 }
 
-// avatar: props.userInfo.avatar,
+// return {
+//     activeChat: props.activeChat,
+//     modalOpened: props.modalOpened,
+//     title: props.activeChat.title
+// }
 
 export default connect(mapStateToPropsShort)(ChatProfile);

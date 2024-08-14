@@ -40,12 +40,20 @@ class ChatModalWindow extends Block<ChatModalWindowProps> {
     }
 
     deleteChat() {
-        console.log("DELETE");
         const chatProps = this.props as { activeChat: { id: number }};
         const chatId = chatProps.activeChat.id;
         const controller = new Chat();
         controller.deleteChat(chatId);
     }
+
+    // componentDidMount(): void {
+    //     console.log("MODAL MOUNTED");
+    //     console.log(this.props.activeChat);
+    // }
+
+    // componentDidUpdate(): boolean | void {
+    //     console.log("MODAL UPDATED");
+    // }
 
     render() {
         return (

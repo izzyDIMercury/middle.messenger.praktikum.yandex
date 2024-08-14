@@ -23,9 +23,6 @@ class ChatPage extends Block<ChatPageProps> {
     }
 
     init() {
-        // const controller = new Chat();
-        // controller.setGlobalUserInfo();
-
         const MenuButton = new ProfileButton({
             events: {
                 click: switchPage
@@ -90,7 +87,6 @@ class ChatPage extends Block<ChatPageProps> {
 
 const mapStateToPropsShort = (props: StoreType): object => {
     return {
-        isLoading: props.isLoading,
         chatSettingsOpened: props.chatSettingsOpened
     }
 }

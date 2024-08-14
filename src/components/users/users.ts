@@ -17,7 +17,7 @@ type CurrentType = {
 type ChatObject = {
     id: number,
     title: string,
-    avatar: string,
+    avatar: string | undefined,
     lastMessage: LastMessage
 }
 
@@ -129,8 +129,6 @@ const mapStateToPropsShort = (props: StoreType): object => {
         chats: props.chats
     }
 }
-
-// length: props.length
 
 export default connect(mapStateToPropsShort)(Users);
 

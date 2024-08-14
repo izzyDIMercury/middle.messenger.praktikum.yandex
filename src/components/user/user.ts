@@ -1,19 +1,19 @@
 import Block from "../../core/block.ts";
 import Image from "../image/image.ts";
-import { connect } from "../../core/connect.ts";
-import type { StoreType } from "../../types.ts";
+// import { connect } from "../../core/connect.ts";
+// import type { StoreType } from "../../types.ts";
 
 type UserProps = {
-    name: string,
-    message: string,
-    unread: string,
-    time: string,
-    selected: string,
-    avatar: string,
-    image?: string
+    lastMessage: string,
+    avatar: string | undefined,
+    title: string,
+    chatId: number,
+    events: {
+        click: (event: MouseEvent) => void
+    }
 }
 
-class User extends Block<UserProps> {
+export default class User extends Block<UserProps> {
     constructor(props: UserProps) {
         super({
             ...props
@@ -61,12 +61,16 @@ class User extends Block<UserProps> {
 }
 
 
-const mapStateToPropsShort = (props: StoreType): object => {
-    return {
-        chats: props.chats,
-        length: props.length,
-        defaultChatSelected: props.defaultChatSelected
-    }
-}
+// const mapStateToPropsShort = (props: StoreType): object => {
+//     return {
+//         length: props.length
+//     }
+// }
 
-export default connect(mapStateToPropsShort)(User);
+// export default connect(mapStateToPropsShort)(User);
+
+// return {
+//     chats: props.chats,
+//     length: props.length,
+//     defaultChatSelected: props.defaultChatSelected
+// }
