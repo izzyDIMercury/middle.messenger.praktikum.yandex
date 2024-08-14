@@ -53,6 +53,7 @@ export default class WSTransport extends EventBus {
     }
 
     private setupPing() {
+        // @ts-expect-error unexpected error
         this.pingInterval = setInterval(() => {
             this.send({ type: "ping" })
         }, this.pingIntervalTime);
