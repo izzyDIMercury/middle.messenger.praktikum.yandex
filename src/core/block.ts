@@ -182,7 +182,7 @@ class Block<Props> {
         });
     }
 
-    private removeEvents(): void {
+    removeEvents(): void {
         const { events = {} } = this.props as unknown as { events: { [key: string]: any } };
         Object.keys(events).forEach((eventName) => {
             this.element?.removeEventListener(eventName, events[eventName as keyof typeof events]);
