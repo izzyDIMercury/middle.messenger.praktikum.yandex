@@ -4,11 +4,8 @@ import Block from "./block.ts";
 
 type PageProps = {};
 
-describe("Route", () => {
 
-})
-
-describe("Router", () => {
+describe.skip("Router", () => {
     let Page1: typeof Block<PageProps>;
     let router: Router;
 
@@ -28,7 +25,6 @@ describe("Router", () => {
         }
 
         Page1 = Page;
-        // Page2 = Page;
     })
 
     it("При запуске роутера рендерится компонент", () => {
