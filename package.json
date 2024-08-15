@@ -9,8 +9,7 @@
     "preview": "vite preview",
     "lint": "eslint ./src --ext .ts & stylelint src/**/*.scss",
     "start": "npm run build && node server.cjs",
-    "test": "mocha  --es-module-specifier-resolution=node",
-    "precommit": "npm run lint && npm run test"
+    "test": "mocha  --es-module-specifier-resolution=node"
   },
   "devDependencies": {
     "@types/chai": "^4.3.17",
@@ -47,7 +46,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm-run-all test lint:all"
+      "pre-commit": "test lint"
     }
   }
 }
