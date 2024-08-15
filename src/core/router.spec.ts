@@ -4,10 +4,12 @@ import Block from "./block.ts";
 
 type PageProps = {};
 
+describe("Route", () => {
+
+})
+
 describe("Router", () => {
-    // let RouterClass: typeof Router;
     let Page1: typeof Block<PageProps>;
-    // let Page2: typeof Block<PageProps>;
     let router: Router;
 
     before(() => {
@@ -32,13 +34,25 @@ describe("Router", () => {
     it("При запуске роутера рендерится компонент", () => {
         const text = "sometext";
         router.use("/", Page1 as typeof Block);
-        router.use("/messenger", Page1 as typeof Block);
-        router.use("/settings", Page1 as typeof Block);
         router.start();
 
         const elementText = document.querySelector(".text-class")?.innerHTML;
         expect(elementText).to.be.eq(text);
 
+    })
+
+    it("Метод use() добавляет роут в массив роутов", () => {
+        const text = "/messenger";
+
+        router.use("/messenger", Page1 as typeof Block);
+
+        //@ts-expect-error check private property
+        const routes = router.routes as Route[];
+        const route = routes[routes.length - 1];
+        //@ts-expect-error check private property
+        const pathname = route.pathname;
+
+        expect(pathname).to.be.eq(text);
     })
 
     it("Должен выполняться переход на страницу", () => {
@@ -52,32 +66,14 @@ describe("Router", () => {
         expect(page).to.be.eq(text);
     })
 
-    // it("Проверка возврата на предыдущую страницу", () => {
-    //     const text = "messenger";
-
-    //     router = new Router("#app");
-    //     router.use("/", Page1 as typeof Block);
-    //     router.use("/messenger", Page1 as typeof Block);
-    //     router.use("/settings", Page2 as typeof Block);
-    //     router.start();
-    //     router.go("/messenger");
-    //     router.go("/settings");
-    //     router.back();
-
-    //     const location: string = window.location.href;
-    //     const page = location.split("/").reverse()[0];
-    //     console.log("PAGE: ", window.history.state);
-
-    //     expect(page).to.be.eq(text);
-    // })
-
-    // it("Проверка перехода на следующую страницу", () => {
-    //     const text = "settings";
-    //     router.forward();
-
-    //     const location: string = window.location.href;
-    //     const page = location.split("/").reverse()[0];
-
-    //     expect(page).to.be.eq(text);
-    // })
+    it("Метод match() корректно находит совпадающий роут", () => {
+        const text = "/messenger";
+        //@ts-expect-error check private property
+        const routes = router.routes as Route[];
+        const result = routes.find(route => route.match(text));
+        //@ts-expect-error check private property
+        const pathname = result.pathname;
+        
+        expect(pathname).to.be.eq(text);
+    })
 })
