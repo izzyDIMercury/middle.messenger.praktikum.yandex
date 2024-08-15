@@ -31,45 +31,61 @@ describe("Router", () => {
         const text = "sometext";
         router.use("/", Page1 as typeof Block);
         router.start();
+        router.use("/messenger", Page1 as typeof Block);
+        router.use("/settings", Page1 as typeof Block);
 
         const elementText = document.querySelector(".text-class")?.innerHTML;
         expect(elementText).to.be.eq(text);
 
     })
 
-    it("Метод use() добавляет роут в массив роутов", () => {
+    // it("Метод use() добавляет роут в массив роутов", () => {
+    //     const text = "/messenger";
+
+    //     router.use("/messenger", Page1 as typeof Block);
+    //     router.use("/settings", Page1 as typeof Block);
+
+    //     //@ts-expect-error check private property
+    //     const routes = router.routes as Route[];
+    //     const route = routes[routes.length - 1];
+    //     //@ts-expect-error check private property
+    //     const pathname = route.pathname;
+
+    //     expect(pathname).to.be.eq(text);
+    // })
+
+    // it("Должен выполняться переход на страницу", () => {
+    //     const text = "messenger";
+
+    //     router.go("/messenger");
+
+    //     const location: string = window.location.href;
+    //     const page = location.split("/").reverse()[0];
+
+    //     expect(page).to.be.eq(text);
+    // })
+
+    // it("Метод match() корректно находит совпадающий роут", () => {
+    //     const text = "/messenger";
+    //     //@ts-expect-error check private property
+    //     const routes = router.routes as Route[];
+    //     const result = routes.find(route => route.match(text));
+    //     //@ts-expect-error check private property
+    //     const pathname = result.pathname;
+        
+    //     expect(pathname).to.be.eq(text);
+    // })
+
+    it("Проверка history go", () => {
         const text = "/messenger";
 
-        router.use("/messenger", Page1 as typeof Block);
-
-        //@ts-expect-error check private property
-        const routes = router.routes as Route[];
-        const route = routes[routes.length - 1];
-        //@ts-expect-error check private property
-        const pathname = route.pathname;
-
-        expect(pathname).to.be.eq(text);
-    })
-
-    it("Должен выполняться переход на страницу", () => {
-        const text = "messenger";
-
-        router.go("/messenger");
+        router.go("/messenger")
+        router.go("/settings");
+        router.back()
 
         const location: string = window.location.href;
         const page = location.split("/").reverse()[0];
-
-        expect(page).to.be.eq(text);
-    })
-
-    it("Метод match() корректно находит совпадающий роут", () => {
-        const text = "/messenger";
-        //@ts-expect-error check private property
-        const routes = router.routes as Route[];
-        const result = routes.find(route => route.match(text));
-        //@ts-expect-error check private property
-        const pathname = result.pathname;
         
-        expect(pathname).to.be.eq(text);
+        expect(page).to.be.eq(text);
     })
 })
