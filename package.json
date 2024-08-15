@@ -23,7 +23,6 @@
     "chai": "^5.1.1",
     "eslint": "^8.57.0",
     "globals": "^15.3.0",
-    "husky": "^9.1.4",
     "i": "^0.3.7",
     "jsdom": "^24.1.1",
     "mocha": "^10.7.3",
@@ -43,6 +42,10 @@
   "dependencies": {
     "express": "^4.18.3",
     "handlebars": "^4.7.8",
+    "husky": "^8.0.3",
     "uuid": "^9.0.1"
+  },
+  "husky": {
+    "pre-commit": "npm run lint && npm run test"
   }
 }
