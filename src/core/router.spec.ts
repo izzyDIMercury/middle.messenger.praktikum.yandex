@@ -1,6 +1,7 @@
 import { expect } from "chai";
 import { Router, Route } from "./router";
 import Block from "./block.ts";
+import sinon from 'sinon';
 
 type PageProps = {};
 
@@ -71,5 +72,21 @@ describe("Router", () => {
         const pathname = result.pathname;
         
         expect(pathname).to.be.eq(text);
+    })
+
+    it("Проверка history.back()", () => {
+        const spyBack = sinon.spy(router, "back");
+
+        router.back()
+        
+        expect(spyBack.calledOnce).to.be.true;
+    })
+
+    it("Проверка history.forward()", () => {
+        const spyBack = sinon.spy(router, "forward");
+        
+        router.forward()
+        
+        expect(spyBack.calledOnce).to.be.true;
     })
 })
