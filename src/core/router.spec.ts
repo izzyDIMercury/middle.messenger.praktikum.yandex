@@ -5,7 +5,7 @@ import Block from "./block.ts";
 type PageProps = {};
 
 
-describe.skip("Router", () => {
+describe("Router", () => {
     let Page1: typeof Block<PageProps>;
     let router: Router;
 

@@ -7,7 +7,7 @@ interface PageProps {
     events?: Record<string, () => void>
 }
 
-describe.skip("Block", () => {
+describe("Block", () => {
     let PageClass: typeof Block<PageProps>;
 
     before(() => {

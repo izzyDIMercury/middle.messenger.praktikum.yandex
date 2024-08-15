@@ -8,10 +8,11 @@ describe("HTTPTransport", () => {
     const sandbox = sinon.createSandbox();
     let HTTP: HTTPTransport;
     let request: any;
+    const xhr = sinon.useFakeXMLHttpRequest() as unknown as XMLHttpRequest;
 
     beforeEach(() => {
         HTTP = new HTTPTransport();
-        request = sandbox.stub(HTTP, "request" as keyof typeof HTTP).callsFake(() => Promise.resolve())
+        request = sandbox.stub(HTTP, "request" as keyof typeof HTTP).callsFake(() => Promise.resolve(xhr))
     })
 
     afterEach(() => {
