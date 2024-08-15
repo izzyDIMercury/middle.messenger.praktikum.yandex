@@ -6,11 +6,8 @@ Object.entries(Components).forEach(([ name, component ]) => {
     Handlebars.registerPartial(name, component);
 })
 
-// Object.entries(images).forEach(([ name, path ]) => {
-//     Handlebars.registerHelper(name, () => path);
-// })
 
-const jsdom = new JSDOM(`<body></body>`);
+const jsdom = new JSDOM(`<div id="app"></div>`);
 
 global.window = jsdom.window;
 global.document = jsdom.window.document;

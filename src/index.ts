@@ -1,7 +1,7 @@
 import Handlebars from "handlebars";
 import * as Components from "./components";
 import * as Pages from "./pages";
-import Router from "./core/router.ts";
+import { Router } from "./core/router.ts";
 // import { Store } from "./core/store.ts";
 import { globalStore } from "./store.ts";
 

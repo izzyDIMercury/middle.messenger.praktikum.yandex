@@ -1,6 +1,6 @@
 import Block from "./block";
 
-export default class Router {
+export class Router {
 
     private routes!: Array<Route>;
     private history!: History;
@@ -15,6 +15,7 @@ export default class Router {
     }
 
     public use(pathname: string, block: typeof Block) {
+        console.log(pathname, this.rootQuery)
         const route = new Route(pathname, block, {rootQuery: this.rootQuery});
         this.routes.push(route);
         return this;
@@ -61,7 +62,7 @@ export default class Router {
 } 
 
 
-class Route {
+export class Route {
 
     private block: any | null;
 
