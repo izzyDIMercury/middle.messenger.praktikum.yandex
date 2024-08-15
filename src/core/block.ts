@@ -88,12 +88,12 @@ class Block<Props> {
 
     // Initialization:
 
-    _init(): void {
+    private _init(): void {
         this.init();
         this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
     }
 
-    init(): void {
+    public init(): void {
 
     }
 
@@ -116,7 +116,7 @@ class Block<Props> {
         });
     }
 
-    componentDidMount(): void {}
+    public componentDidMount(): void {}
 
     private dispatchComponentDidMount(): void {
         this.eventBus().emit(Block.EVENTS.FLOW_CDM);
@@ -124,7 +124,7 @@ class Block<Props> {
 
     // CDU:
 
-    _componentDidUpdate() {
+    private  _componentDidUpdate() {
         const response = this.componentDidUpdate();
         if (!response) {
             return;
@@ -132,7 +132,7 @@ class Block<Props> {
         this._render();
     }
 
-    componentDidUpdate(): boolean | void {
+    public componentDidUpdate(): boolean | void {
         return true;
     }
 
@@ -146,17 +146,17 @@ class Block<Props> {
         }
     }
 
-    _componentWillUnmount(): void {
+    private _componentWillUnmount(): void {
         this.componentWillUnmount();
     }
 
-    componentWillUnmount(): void {
+    public componentWillUnmount(): void {
 
     }
 
     // Render:
 
-    _render(): void {
+    private _render(): void {
         const newElement = this.compile(this.props) as HTMLElement;
 
         if (this.element) {
@@ -169,20 +169,20 @@ class Block<Props> {
         this.dispatchComponentDidMount();
     }
 
-    render() {
+    protected render() {
 
     }
 
     // Events:
 
-    addEvents(): void {
+    private addEvents(): void {
         const { events = {} } = this.props as unknown as { events: { [key: string]: any } };
         Object.keys(events).forEach((eventName) => {
             this.element?.addEventListener(eventName, events[eventName as keyof typeof events]);
         });
     }
 
-    removeEvents(): void {
+    private removeEvents(): void {
         const { events = {} } = this.props as unknown as { events: { [key: string]: any } };
         Object.keys(events).forEach((eventName) => {
             this.element?.removeEventListener(eventName, events[eventName as keyof typeof events]);
@@ -191,12 +191,12 @@ class Block<Props> {
 
     // Other:
 
-    getContent(): Element {
+    public getContent(): Element {
         const element = this.element as Element;
         return element;
     }
 
-    setProps(newProps: Props): void {
+    public setProps(newProps: Props): void {
         if (!newProps) {
             return;
         }
@@ -204,7 +204,7 @@ class Block<Props> {
         Object.assign(this.props, newProps);
     }
 
-    compile(props: Partial<Props>) {
+    private compile(props: Partial<Props>) {
         const propsAndStubs: Record<string, any> = { ...props };
 
         Object.entries(this.children).forEach(([key, child]) => {
