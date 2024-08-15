@@ -45,7 +45,9 @@
     "husky": "^8.0.3",
     "uuid": "^9.0.1"
   },
-  "hooks": {
-    "pre-commit": "npm run test && npm run lint"
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run test && npm run lint"
+    }
   }
 }
