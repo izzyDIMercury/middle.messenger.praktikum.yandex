@@ -12,6 +12,11 @@
     "test": "mocha  --es-module-specifier-resolution=node",
     "prepare": "husky"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm test"
+    }
+  },
   "devDependencies": {
     "@types/chai": "^4.3.17",
     "@types/mocha": "^10.0.7",
@@ -44,10 +49,5 @@
     "handlebars": "^4.7.8",
     "husky": "^8.0.3",
     "uuid": "^9.0.1"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm test"
-    }
   }
 }
