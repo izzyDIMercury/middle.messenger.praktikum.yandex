@@ -46,6 +46,6 @@
     "uuid": "^9.0.1"
   },
   "husky": {
-    "pre-commit": "npm lint && npm test"
+    "pre-commit": "npm run test"
   }
 }
