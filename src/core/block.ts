@@ -156,7 +156,7 @@ class Block<Props> {
 
     // Render:
 
-    private _render(): void {
+    public _render(): void {
         const newElement = this.compile(this.props) as HTMLElement;
 
         if (this.element) {
@@ -169,7 +169,7 @@ class Block<Props> {
         this.dispatchComponentDidMount();
     }
 
-    protected render() {
+    public render() {
 
     }
 

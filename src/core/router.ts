@@ -15,7 +15,6 @@ export class Router {
     }
 
     public use(pathname: string, block: typeof Block) {
-        console.log(pathname, this.rootQuery)
         const route = new Route(pathname, block, {rootQuery: this.rootQuery});
         this.routes.push(route);
         return this;
@@ -48,7 +47,8 @@ export class Router {
     }
 
     public go(pathname: string): void {
-        this.history.pushState({}, "", pathname);
+        // console.log("PATHNAME: ", pathname);
+        this.history.pushState({ path: pathname }, "", pathname);
         this.onRoute(pathname);
     }
 

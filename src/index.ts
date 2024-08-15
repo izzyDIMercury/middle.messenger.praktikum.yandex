@@ -9,6 +9,7 @@ import { globalStore } from "./store.ts";
 //@ts-expect-error can't properly type window.store
 window.store = globalStore;
 
+
 Object.entries(Components).forEach(([ name, component ]) => {
     Handlebars.registerPartial(name, component as any);
 })
@@ -42,6 +43,10 @@ document.addEventListener("switchPage", event => {
     }
     router.go(`/${page}`);
 });
+
+// setInterval(() => {
+//     console.log(router.back())
+// }, 10000)
 
 // export { WindowStore };
 
