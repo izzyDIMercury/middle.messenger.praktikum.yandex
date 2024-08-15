@@ -9,6 +9,7 @@ npm run build `- сборка прокета,`
 npm run start `- запуск локального Express-сервера с раздачей статики.`
 npm run lint `- запуск линтеров eslint и stylelint`
 npm run test `- запуск тестов`
+npm run precommit `- запуск линтеров и тестов`
 
 ### Ссылка на домен в Netlify:
 
