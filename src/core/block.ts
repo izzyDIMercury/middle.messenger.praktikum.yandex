@@ -124,7 +124,7 @@ class Block<Props> {
 
     // CDU:
 
-    private  _componentDidUpdate() {
+    private _componentDidUpdate() {
         const response = this.componentDidUpdate();
         if (!response) {
             return;
@@ -140,6 +140,11 @@ class Block<Props> {
 
     private checkInDom() {
         const elementInDOM = document.body.contains(this.element);
+
+        if (elementInDOM) {
+            setTimeout(() => this.checkInDom(), 1000);
+            return;
+        }
 
         if (!elementInDOM) {
             this.eventBus().emit(Block.EVENTS.FLOW_CWU, this.props);
@@ -166,7 +171,6 @@ class Block<Props> {
         this.element = newElement;
 
         this.addEvents();
-        this.dispatchComponentDidMount();
     }
 
     public render() {
@@ -192,6 +196,15 @@ class Block<Props> {
     // Other:
 
     public getContent(): Element {
+        if (this.element?.parentNode?.nodeType === Node.DOCUMENT_FRAGMENT_NODE) {
+            setTimeout(() => {
+                if (
+                    this.element?.parentNode?.nodeType !== Node.DOCUMENT_FRAGMENT_NODE
+                ) {
+                    this.dispatchComponentDidMount();
+                }
+            }, 100);
+        }
         const element = this.element as Element;
         return element;
     }

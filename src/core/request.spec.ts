@@ -22,7 +22,6 @@ describe("HTTPTransport", () => {
     it("Проверка преобразования параметров регистрации", () => {
         //@ts-expect-error private method
         const string = HTTP.stringify({ first_name: "Джон", second_name: "До", login: "izzy", email: "izzy@gmail.com", phone: "89612175654" });
-        console.log(string);
 
         expect(string).to.be.eq("?first_name=Джон&second_name=До&login=izzy&email=izzy@gmail.com&phone=89612175654");
     })

@@ -31,6 +31,13 @@ export class Router {
         this.onRoute(window.location.pathname);
     }
 
+    // private handleRoute(event: Event) {
+    //     const target = event.currentTarget as Window;
+    //     if (target !== null) {
+    //         this.onRoute(target.location.pathname);
+    //     }
+    // }
+
     private onRoute(pathname: string) {
         const route = this.getRoute(pathname) as Route;
 

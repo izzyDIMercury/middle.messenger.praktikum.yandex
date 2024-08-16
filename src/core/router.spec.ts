@@ -28,9 +28,16 @@ describe("Router", () => {
         Page1 = Page;
     })
 
+    after(() => {
+        const clock = sinon.useFakeTimers();
+        clock.next();
+        clock.next();
+    })
+
     it("При запуске роутера рендерится компонент", () => {
         const text = "sometext";
         router.use("/", Page1 as typeof Block);
+        router.use("/messenger", Page1 as typeof Block);
         router.start();
 
         const elementText = document.querySelector(".text-class")?.innerHTML;
@@ -40,8 +47,6 @@ describe("Router", () => {
 
     it("Метод use() добавляет роут в массив роутов", () => {
         const text = "/messenger";
-
-        router.use("/messenger", Page1 as typeof Block);
 
         //@ts-expect-error check private property
         const routes = router.routes as Route[];
@@ -74,6 +79,7 @@ describe("Router", () => {
         expect(pathname).to.be.eq(text);
     })
 
+    // JSDOM не поддерживает history.back() и .forward(), можно проверить только факт вызова этих методов
     it("Проверка history.back()", () => {
         const spyBack = sinon.spy(router, "back");
 

@@ -8,7 +8,9 @@ interface PageProps {
 }
 
 describe("Block", () => {
+    const sandbox = sinon.createSandbox();
     let PageClass: typeof Block<PageProps>;
+    let clock: any;
 
     before(() => {
         class Page extends Block<PageProps> {
@@ -26,6 +28,14 @@ describe("Block", () => {
         }
 
         PageClass = Page;
+    })
+
+    beforeEach(() => {
+        clock = sandbox.useFakeTimers();
+    })
+
+    afterEach(() => {
+        sandbox.restore();
     })
 
     it("Должен создать компонент с состоянием из конструктора", () => {
@@ -69,9 +79,12 @@ describe("Block", () => {
     })
 
     it("Проверить вызов метода componentDidMount() при иницилизации компонента", () => {
-        const stub = sinon.stub(PageClass.prototype, "componentDidMount");
-        new PageClass({ text: "text" });
-        expect(stub.calledOnce).to.be.true;
+        const pageComponent = new PageClass({text: "text" });
+        const spyMount = sinon.spy(pageComponent, "componentDidMount");
+        const root = document.querySelector("#app") as HTMLElement;
+        root.appendChild(pageComponent.getContent());
+        clock.next();
+        expect(spyMount.calledOnce).to.be.true;
     })
 
     it("Проверить вызов метода componentDidUpdate() при изменении свойства компонента", () => {
@@ -81,5 +94,16 @@ describe("Block", () => {
         const stub = sinon.stub(pageComponent, "componentDidUpdate");
         pageComponent.setProps({ text })
         expect(stub.calledOnce).to.be.true;
+    })
+
+    it("Проверить вызов метода componentWillUnmount() при удалении компонента из DOM", () => {
+        const pageComponent = new PageClass({text: "Initial value" });
+
+        const spyUnmount = sinon.spy(pageComponent, "componentWillUnmount");
+        const root = document.querySelector("#app") as HTMLElement;
+        root.appendChild(pageComponent.getContent());
+        root.innerHTML = "";
+        clock.next();
+        expect(spyUnmount.calledOnce).to.be.true;
     })
 })

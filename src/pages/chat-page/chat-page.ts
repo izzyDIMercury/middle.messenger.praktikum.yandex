@@ -62,6 +62,15 @@ class ChatPage extends Block<ChatPageProps> {
         }
     }
 
+    public componentDidMount(): void {
+        console.log("MOUNTED");
+    }
+
+    // public componentWillUnmount(): void {
+    //     console.log("UNMOUNTED");
+    //     alert("UNMOUNT");
+    // }
+
     render() {
         return (
             `
