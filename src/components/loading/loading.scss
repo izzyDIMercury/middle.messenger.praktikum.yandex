@@ -1,0 +1,15 @@
+.loading-window {
+    position: absolute;
+    z-index: 2000;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.loading-icon {
+    width: 100px;
+    height: 100px;
+}

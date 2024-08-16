@@ -1,9 +1,4 @@
 import "./return-button.scss";
-export { default as ReturnButton } from "./return-button.hbs?raw";
+import ReturnButton from "./return-button.ts";
 
-import Handlebars from "handlebars";
-import ArrowLeft from "/assets/icons/arrow-left.png";
-
-Handlebars.registerHelper("arrowLeft", () => {
-    return ArrowLeft
-})
+export { ReturnButton };

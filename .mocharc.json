@@ -1,0 +1,12 @@
+{
+    "extension": ["ts"],
+    "spec": "src/**/*.spec.ts",
+    "require": ["mochaSetup.js"],
+    "loader": [
+        "ts-node/esm", 
+        "./loaders/loader-scss.js",
+        "./loaders/loader-jpg.js",
+        "./loaders/loader-png.js",
+        "./loaders/loader-gif.js"
+    ]
+}

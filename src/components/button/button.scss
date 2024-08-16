@@ -1,11 +1,11 @@
-@import "/variables.scss";
+@import "/variables";
 
 .button {
-    box-sizing: border-box;
-    height: 38px;
-    background-color: $purple;
-    border-radius: 20px;
     border: none;
+    border-radius: 20px;
+    height: 38px;
+    box-sizing: border-box;
+    background-color: $purple;
 }
 
 .button:hover {
@@ -13,9 +13,9 @@
 }
 
 .button__text {
-    font-family: "Inter", "Arial";
+    font-family: Inter, serif;
     font-weight: 400;
-    color: $white;
     font-size: 13px;
     line-height: 13px;
+    color: $white;
 }

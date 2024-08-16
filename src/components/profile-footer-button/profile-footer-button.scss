@@ -1,13 +1,13 @@
-@import "/variables.scss";
+@import "/variables";
 
 .profile-footer-button {
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    box-sizing: border-box;
-    position: relative;
-    height: 33px;
     border-bottom: 2px solid $light-grey;
+    height: 33px;
+    box-sizing: border-box;
 
     .link__text {
         font-size: 13px;
