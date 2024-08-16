@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import sinon from 'sinon';
+import sinon from "sinon";
 import Block from "./block";
 
 interface PageProps {
@@ -62,19 +62,19 @@ describe("Block", () => {
         expect(spyRender.calledOnce).to.be.true;
     })
 
-    it("Проверить вызов метода init() при создании компонента", () => {
+    it("Проверить вызов метода init() при иницилизации компонента", () => {
         const stub = sinon.stub(PageClass.prototype, "init");
         new PageClass({ text: "text" });
         expect(stub.calledOnce).to.be.true;
     })
 
-    it("Проверить вызов метода componentDidMount() при создании компонента", () => {
+    it("Проверить вызов метода componentDidMount() при иницилизации компонента", () => {
         const stub = sinon.stub(PageClass.prototype, "componentDidMount");
         new PageClass({ text: "text" });
         expect(stub.calledOnce).to.be.true;
     })
 
-    it("Проверить вызов метода componentDidUpdate() при изменении свойства", () => {
+    it("Проверить вызов метода componentDidUpdate() при изменении свойства компонента", () => {
         const text = "New value";
         const pageComponent = new PageClass({text: "Initial value" });
 
