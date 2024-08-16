@@ -21,7 +21,6 @@ describe("Block", () => {
             render(): string {
                 return `<div>
                     <span id="test-text">{{text}}</span>
-                    <button>{{text-button}}</button>
                 </div>`
             }
         }
@@ -61,5 +60,26 @@ describe("Block", () => {
         const spyRender = sinon.spy(pageComponent, "_render");
         pageComponent.setProps({ text });
         expect(spyRender.calledOnce).to.be.true;
+    })
+
+    it("Проверить вызов метода init() при создании компонента", () => {
+        const stub = sinon.stub(PageClass.prototype, "init");
+        new PageClass({ text: "text" });
+        expect(stub.calledOnce).to.be.true;
+    })
+
+    it("Проверить вызов метода componentDidMount() при создании компонента", () => {
+        const stub = sinon.stub(PageClass.prototype, "componentDidMount");
+        new PageClass({ text: "text" });
+        expect(stub.calledOnce).to.be.true;
+    })
+
+    it("Проверить вызов метода componentDidUpdate() при изменении свойства", () => {
+        const text = "New value";
+        const pageComponent = new PageClass({text: "Initial value" });
+
+        const stub = sinon.stub(pageComponent, "componentDidUpdate");
+        pageComponent.setProps({ text })
+        expect(stub.calledOnce).to.be.true;
     })
 })
